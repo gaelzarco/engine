@@ -14,7 +14,7 @@ int main(int argc, const char* argv[]) {
     obj_data test;
 
     std::cin >> test;
-    std::cout << test;
+    // std::cout << test;
 
     return 0;
 }

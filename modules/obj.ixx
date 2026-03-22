@@ -13,11 +13,13 @@ public:
     struct texture { float u{}, v{}, w{}; };
     struct normal  { float x{}, y{}, z{}; };
     struct param   { float u{}, v{}, w{}; };
+    struct face    { float v{}, vt{}, vn{}; };
 
     using vertices      = std::vector<vertex>;
     using vert_textures = std::vector<texture>;
     using vert_normals  = std::vector<normal>;
     using vert_params   = std::vector<param>;
+    using face_elements = std::vector<face>;
 
     constexpr explicit obj_data(vertices v = {}, vert_textures vt = {},
     vert_normals vn = {}, vert_params vp = {}) : v_(std::move(v)),
@@ -27,11 +29,13 @@ public:
     constexpr inline void vt_push_back(texture& t) { vt_.push_back(t); }
     constexpr inline void vn_push_back(normal& n) { vn_.push_back(n); }
     constexpr inline void vp_push_back(param& p) { vp_.push_back(p); }
+    constexpr inline void f_push_back(face& f) { f_.push_back(f); }
 
     constexpr inline vertices& get_v() noexcept { return v_; }
     constexpr inline vert_textures& get_vt() noexcept { return vt_; }
     constexpr inline vert_normals& get_vn() noexcept { return vn_; }
     constexpr inline vert_params& get_vp() noexcept { return vp_; }
+    constexpr inline face_elements& get_f() noexcept { return f_; }
 
     friend std::istream& operator>>(std::istream& in, obj_data& obj);
     friend std::ostream& operator<<(std::ostream& os, obj_data& obj);
@@ -41,6 +45,7 @@ private:
     vert_textures vt_;
     vert_normals  vn_;
     vert_params   vp_;
+    face_elements f_;
 };
 
 std::istream& operator>>(std::istream& in, obj_data& obj) {
@@ -49,6 +54,7 @@ std::istream& operator>>(std::istream& in, obj_data& obj) {
     obj_data::texture vt;
     obj_data::normal vn;
     obj_data::param vp;
+    obj_data::face f;
 
     while (std::getline(in, line)) {
         if (!line.empty() && line.back() == '\r') [[likely]] line.pop_back();
@@ -59,22 +65,37 @@ std::istream& operator>>(std::istream& in, obj_data& obj) {
         if (!(ss >> temp) || temp == "#") continue;
 
         if (temp == "v") {
+            // x, y, z vertex values
             ss >> v.x >> v.y >> v.z;
             v.w = (ss >> v.w) ? v.w : 1.f;
             obj.v_push_back(v);
         } else if (temp == "vt") {
+            // u, v, w texture values
             vt.v = 0.f;
             vt.w = 0.f;
             ss >> vt.u >> vt.v >> vt.w;
             obj.vt_push_back(vt);
         } else if (temp == "vn") {
+            // x, y, z normal values
             ss >> vn.x >> vn.y >> vn.z;
             obj.vn_push_back(vn);
         } else if (temp == "vp") {
+            // u, v, w parameter space vertex values
             vp.v = 0.f;
             vp.w = 0.f;
             ss >> vp.u >> vp.v >> vp.w;
             obj.vp_push_back(vp);
+        } else if (temp == "f") {
+            // TODO
+            // std::string f_temp{};
+            // std::string curr;
+            // while (ss >> f_temp) {
+            //     while (std::getline(ss, curr, '/')) {
+            //         ss >> 
+            //     }
+            //     std::cout << f_temp << ' ';
+            // }
+            // std::cout << '\n';
         }
     }
 
