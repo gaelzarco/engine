@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.28)
+
+set(LLVM_PREFIX "$ENV{HOMEBREW_PREFIX}/opt/llvm")
+set(CMAKE_C_COMPILER   "${LLVM_PREFIX}/bin/clang"   CACHE PATH "")
+set(CMAKE_CXX_COMPILER "${LLVM_PREFIX}/bin/clang++" CACHE PATH "")
+
+project(engine)
+
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_CXX_SCAN_FOR_MODULES ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+add_subdirectory(modules/minifb)
+
+add_executable(engine engine.cpp)
+target_sources(engine
+    PUBLIC FILE_SET CXX_MODULES FILES
+    modules/obj.cppm
+)
+target_link_libraries(engine PRIVATE minifb)
