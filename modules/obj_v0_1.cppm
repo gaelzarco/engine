@@ -27,38 +27,39 @@ public:
     using face_elements = std::vector<face>;
     using line = std::vector<line_vertex>;
 
-    constexpr explicit obj_(vertices v = {}, vert_textures vt = {},
-    vert_normals vn = {}, vert_params vp = {}, line l = {}) : v_(std::move(v)),
-    vt_(std::move(vt)), vn_(std::move(vn)), vp_(std::move(vp)), l_(std::move(l))
-    {
-        v_.reserve(5000);
-        vt_.reserve(5000);
-        vn_.reserve(5000);
-        vp_.reserve(5000);
-        f_.reserve(5000);
-        l_.reserve(1000);
+    obj_() = delete;
+
+    static auto make() -> obj_ {
+        obj_ o{{}, {}, {}, {}, {}};
+        o.v_.reserve(5000);
+        o.vt_.reserve(5000);
+        o.vn_.reserve(5000);
+        o.vp_.reserve(5000);
+        o.f_.reserve(5000);
+        o.l_.reserve(1000);
+        return o;
     }
 
-    constexpr inline void v_push_back(vertex& v) { v_.push_back(v); }
-    constexpr inline void vt_push_back(texture& t) { vt_.push_back(t); }
-    constexpr inline void vn_push_back(normal& n) { vn_.push_back(n); }
-    constexpr inline void vp_push_back(param& p) { vp_.push_back(p); }
-    constexpr inline void f_push_back(face& f) { f_.push_back(f); }
-    constexpr inline void l_push_back(line_vertex& lv) { l_.push_back(lv); }
+    inline auto v_push_back(vertex& v) -> void { v_.push_back(v); }
+    inline auto vt_push_back(texture& t) -> void { vt_.push_back(t); }
+    inline auto vn_push_back(normal& n) -> void { vn_.push_back(n); }
+    inline auto vp_push_back(param& p) -> void { vp_.push_back(p); }
+    inline auto f_push_back(face& f) -> void { f_.push_back(f); }
+    inline auto l_push_back(line_vertex& lv) -> void { l_.push_back(lv); }
 
-    constexpr inline vertices& get_v() noexcept { return v_; }
-    constexpr inline vert_textures& get_vt() noexcept { return vt_; }
-    constexpr inline vert_normals& get_vn() noexcept { return vn_; }
-    constexpr inline vert_params& get_vp() noexcept { return vp_; }
-    constexpr inline face_elements& get_f() noexcept { return f_; }
-    constexpr inline line& get_l() noexcept { return l_; }
+    inline auto get_v() noexcept -> vertices& { return v_; }
+    inline auto get_vt() noexcept -> vert_textures& { return vt_; }
+    inline auto get_vn() noexcept -> vert_normals& { return vn_; }
+    inline auto get_vp() noexcept -> vert_params& { return vp_; }
+    inline auto get_f() noexcept -> face_elements& { return f_; }
+    inline auto get_l() noexcept -> line& { return l_; }
 
-    constexpr inline void read(const std::string& file_name);
-    constexpr std::string format() const noexcept;
-    constexpr void print() const noexcept;
+    inline auto read(const std::string& file_name) -> void;
+    [[nodiscard]] auto format() const -> std::string;
+    auto print() const -> void;
 
-    friend std::istream& operator>>(std::istream& in, obj_& obj);
-    friend std::ostream& operator<<(std::ostream& os, obj_& obj);
+    friend auto operator>>(std::istream& in, obj_& obj) -> std::istream&;
+    friend auto operator<<(std::ostream& os, obj_& obj) -> std::ostream&;
 
 private:
     vertices      v_;
@@ -67,9 +68,12 @@ private:
     vert_params   vp_;
     face_elements f_;
     line l_;
+
+    explicit obj_(vertices v, vert_textures vt, vert_normals vn, vert_params vp, line l) :
+    v_(std::move(v)), vt_(std::move(vt)), vn_(std::move(vn)), vp_(std::move(vp)), l_(std::move(l)){}
 };
 
-constexpr inline void obj_::read(const std::string& file_name) {
+inline auto obj_::read(const std::string& file_name) -> void {
     std::ifstream file(file_name);
     if (!file.is_open()) throw std::runtime_error("[ERR] Could not open file");
 
@@ -79,30 +83,30 @@ constexpr inline void obj_::read(const std::string& file_name) {
     const char* p   = buf.data();
     const char* end = p + buf.size();
 
-    auto skip_ws = [](const char* p, const char* end) constexpr noexcept {
+    auto skip_ws = [](const char* p, const char* end) noexcept ->  const char* {
         while (p < end && (*p == ' ' || *p == '\t')) ++p;
         return p;
     };
 
-    auto skip_line = [](const char* p, const char* end) constexpr noexcept {
+    auto skip_line = [](const char* p, const char* end) noexcept -> const char* {
         while (p < end && *p != '\n') ++p;
         return p < end ? p + 1 : p;
     };
 
-    auto read_float = [](const char* p, const char* end, float& out) noexcept {
+    auto read_float = [](const char* p, const char* end, float& out) noexcept -> const char* {
         p += (*p == ' ' || *p == '\t'); // single ws skip is enough post-keyword
         while (p < end && (*p == ' ' || *p == '\t')) ++p;
         auto [ptr, _] = std::from_chars(p, end, out);
         return ptr;
     };
 
-    auto read_int = [](const char* p, const char* end, int& out) noexcept {
+    auto read_int = [](const char* p, const char* end, int& out) noexcept -> const char* {
         while (p < end && (*p == ' ' || *p == '\t')) ++p;
         auto [ptr, _] = std::from_chars(p, end, out);
         return ptr;
     };
 
-    auto read_face_token = [&](const char* p, const char* end, face& f) noexcept {
+    auto read_face_token = [&](const char* p, const char* end, face& f) noexcept -> const char* {
         p = skip_ws(p, end);
         auto [p1, _1] = std::from_chars(p, end, f.v);   p = p1;
         if (p < end && *p == '/') {
@@ -127,7 +131,7 @@ constexpr inline void obj_::read(const std::string& file_name) {
         while (p < end && *p != ' ' && *p != '\t' && *p != '\n' && *p != '\r') ++p;
         const auto tlen = static_cast<std::size_t>(p - tok);
 
-        auto kw = [&](std::string_view s) constexpr noexcept {
+        auto kw = [&](std::string_view s) noexcept -> bool {
             return std::string_view{ tok, tlen } == s;
         };
 
@@ -179,7 +183,7 @@ constexpr inline void obj_::read(const std::string& file_name) {
     }
 }
 
-constexpr std::string obj_::format() const noexcept{
+[[nodiscard]] auto obj_::format() const -> std::string {
     std::string out;
     out.reserve(4096);
 
@@ -187,13 +191,13 @@ constexpr std::string obj_::format() const noexcept{
         std::format_to(std::back_inserter(out), "Vertex: {{ x: {}", v.x);
         std::format_to(std::back_inserter(out), ", y: {}", v.y);
         std::format_to(std::back_inserter(out), ", z: {}", v.z);
-        if (v.w) std::format_to(std::back_inserter(out), ", w: {}", v.w);
+        if (v.w != 0.f) std::format_to(std::back_inserter(out), ", w: {}", v.w);
         out += " }\n";
     }
     for (auto& vt : vt_) {
         std::format_to(std::back_inserter(out), "Vertex Texture: {{ u: {}", vt.u);
-        if (vt.v) std::format_to(std::back_inserter(out), ", v: {}", vt.v);
-        if (vt.w) std::format_to(std::back_inserter(out), ", w: {}", vt.w);
+        if (vt.v != 0.f) std::format_to(std::back_inserter(out), ", v: {}", vt.v);
+        if (vt.w != 0.f) std::format_to(std::back_inserter(out), ", w: {}", vt.w);
         out += " }\n";
     }
     for (auto& vn : vn_) {
@@ -204,14 +208,14 @@ constexpr std::string obj_::format() const noexcept{
     }
     for (auto& vp : vp_) {
         std::format_to(std::back_inserter(out), "Parameter Space Vertex: {{ u: {}", vp.u);
-        if (vp.v) std::format_to(std::back_inserter(out), ", v: {}", vp.v);
-        if (vp.w) std::format_to(std::back_inserter(out), ", w: {}", vp.w);
+        if (vp.v != 0.f) std::format_to(std::back_inserter(out), ", v: {}", vp.v);
+        if (vp.w != 0.f) std::format_to(std::back_inserter(out), ", w: {}", vp.w);
         out += " }\n";
     }
     for (auto& f : f_) {
         std::format_to(std::back_inserter(out), "Face: {{ v: {}", f.v);
-        if (f.vt) std::format_to(std::back_inserter(out), ", vt: {}", f.vt);
-        if (f.vn) std::format_to(std::back_inserter(out), ", vn: {}", f.vn);
+        if (f.vt != 0) std::format_to(std::back_inserter(out), ", vt: {}", f.vt);
+        if (f.vn != 0) std::format_to(std::back_inserter(out), ", vn: {}", f.vn);
         out += " }\n";
     }
     if (!l_.empty()) {
@@ -224,11 +228,11 @@ constexpr std::string obj_::format() const noexcept{
     return out;
 }
 
-constexpr void obj_::print() const noexcept {
+auto obj_::print() const -> void {
     std::print("{}", format());
 }
 
-[[deprecated]] std::istream& operator>>(std::istream& in, obj_& obj) {
+[[deprecated]] auto operator>>(std::istream& in, obj_& obj) -> std::istream& {
     std::string line;
     obj_::vertex v;
     obj_::texture vt;
@@ -273,7 +277,7 @@ constexpr void obj_::print() const noexcept {
                 std::istringstream face(f_temp);
                 std::string curr_value;
 
-                auto f_push = [&face, &curr_value](int& f_value) mutable {
+                auto f_push = [&face, &curr_value](int& f_value) mutable -> void {
                     std::getline(face, curr_value, '/');
                     f_value = curr_value.empty() ? 0 : std::stoi(curr_value);
                 };
@@ -294,16 +298,16 @@ constexpr void obj_::print() const noexcept {
     return in;
 }
 
-[[deprecated]] std::ostream& operator<<(std::ostream& os, obj_& obj) {
+[[deprecated]] auto operator<<(std::ostream& os, obj_& obj) -> std::ostream& {
     for (auto& v : obj.get_v()) {
         os << "Vertex: { x: " << v.x << ", y: " << v.y << ", z: " << v.z;
-        if (v.w) os << ", w: " << v.w;
+        if (v.w != 0.f) os << ", w: " << v.w;
         os << " }\n";
     }
     for (auto& vt : obj.get_vt()) {
         os << "Vertex Texture: { u: " << vt.u;
-        if (vt.v) os << ", v: " << vt.v;
-        if (vt.w) os << ", w: " << vt.w;
+        if (vt.v != 0.f) os << ", v: " << vt.v;
+        if (vt.w != 0.f) os << ", w: " << vt.w;
         os << " }\n";
     }
     for (auto& vn : obj.get_vn()) {
@@ -312,14 +316,14 @@ constexpr void obj_::print() const noexcept {
     }
     for (auto& vp : obj.get_vp()) {
         os << "Parameter Space Vertex: { u: " << vp.u;
-        if (vp.v) os << ", v: " << vp.v;
-        if (vp.w) os << ", w: " << vp.w;
+        if (vp.v != 0.f) os << ", v: " << vp.v;
+        if (vp.w != 0.f) os << ", w: " << vp.w;
         os << " }\n";
     }
     for (auto& f : obj.get_f()) {
         os << "Face values: { v: " << f.v;
-        if (f.vt) os << ", vt: " << f.vt;
-        if (f.vn) os << ", vn: " << f.vn;
+        if (f.vt != 0) os << ", vt: " << f.vt;
+        if (f.vn != 0) os << ", vn: " << f.vn;
         os << " }\n";
     }
     if (!obj.get_l().empty()) {

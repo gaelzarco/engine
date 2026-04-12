@@ -5,8 +5,6 @@ if(APPLE)
     set(CMAKE_C_COMPILER   "${LLVM_PREFIX}/bin/clang"   CACHE PATH "")
     set(CMAKE_CXX_COMPILER "${LLVM_PREFIX}/bin/clang++" CACHE PATH "")
 endif()
-# On Arch, clang is already the system clang — just invoke:
-# cmake -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 
 set(CMAKE_BUILD_TYPE Release)
 project(engine)
@@ -15,9 +13,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 add_subdirectory(modules/minifb)
+
+set(CMAKE_CXX_CLANG_TIDY clang-tidy)
+set_target_properties(minifb PROPERTIES CXX_CLANG_TIDY "")
+
 add_executable(engine engine.cpp)
+
 target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES
     modules/obj_v0_1.cppm

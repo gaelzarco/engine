@@ -1,0 +1,3 @@
+Checks: 'modernize-*,bugprone-*,performance-*,-bugprone-exception-escape'
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*/engine/(?!modules/minifb).*'
