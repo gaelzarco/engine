@@ -8,7 +8,7 @@ module;
 #include <print>
 #include <exception>
 
-export module obj;
+export module obj_v0;
 
 export class obj_ {
 public:
@@ -52,7 +52,7 @@ public:
     constexpr inline face_elements& get_f() noexcept { return f_; }
     constexpr inline line& get_l() noexcept { return l_; }
 
-    constexpr void read_from_file(const std::string& file_name);
+    constexpr void read(const std::string& file_name);
     void print() noexcept;
 
     friend std::istream& operator>>(std::istream& in, obj_& obj);
@@ -67,7 +67,7 @@ private:
     line l_;
 };
 
-constexpr void obj_::read_from_file(const std::string& file_name) {
+constexpr void obj_::read(const std::string& file_name) {
     std::ifstream file(file_name);
 
     if (!file.is_open()) {

@@ -2,7 +2,7 @@
 #include <print>
 #include "modules/minifb/include/MiniFB_cpp.h"
 
-import obj;
+import obj_v0_1;
 
 int main(int argc, const char* argv[]) {
     if (argc < 2) {
@@ -11,7 +11,7 @@ int main(int argc, const char* argv[]) {
     }
 
     obj_ test;
-    test.read_from_file(argv[1]);
+    test.read(argv[1]);
     test.print();
 
     struct mfb_window *window = mfb_open_ex("CXX Rasterizer", 800, 600,
