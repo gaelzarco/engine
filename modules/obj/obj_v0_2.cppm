@@ -57,9 +57,9 @@ public:
     inline auto get_f() noexcept -> face_elements& { return f_; }
     inline auto get_l() noexcept -> line& { return l_; }
 
-    inline auto read(const std::string& file_name) -> void;
+    auto read(const std::string& file_name) -> void;
     [[nodiscard]] auto format() const -> std::string;
-    auto print() const -> void;
+    inline auto print() const -> void;
 
 private:
     vertices      v_;
