@@ -22,7 +22,7 @@ add_executable(engine engine.cpp)
 
 target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES
-    modules/obj_v0_1.cppm
+    modules/obj_v0_2.cppm
 )
 target_link_libraries(engine PRIVATE minifb)
 target_compile_options(engine PRIVATE -O3 -flto -march=native)

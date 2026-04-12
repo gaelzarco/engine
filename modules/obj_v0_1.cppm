@@ -13,6 +13,9 @@ export module obj_v0_1;
 
 export class obj_ {
 public:
+    static constexpr std::size_t K_RESERVE      = 5000;
+    static constexpr std::size_t K_LINE_RESERVE = 1000;
+
     struct vertex      { float x{}, y{}, z{}, w{}; };
     struct texture     { float u{}, v{}, w{}; };
     struct normal      { float x{}, y{}, z{}; };
@@ -31,12 +34,12 @@ public:
 
     static auto make() -> obj_ {
         obj_ o{{}, {}, {}, {}, {}};
-        o.v_.reserve(5000);
-        o.vt_.reserve(5000);
-        o.vn_.reserve(5000);
-        o.vp_.reserve(5000);
-        o.f_.reserve(5000);
-        o.l_.reserve(1000);
+        o.v_.reserve(K_RESERVE);
+        o.vt_.reserve(K_RESERVE);
+        o.vn_.reserve(K_RESERVE);
+        o.vp_.reserve(K_RESERVE);
+        o.f_.reserve(K_RESERVE);
+        o.l_.reserve(K_LINE_RESERVE);
         return o;
     }
 
@@ -95,12 +98,6 @@ inline auto obj_::read(const std::string& file_name) -> void {
 
     auto read_float = [](const char* p, const char* end, float& out) noexcept -> const char* {
         p += (*p == ' ' || *p == '\t'); // single ws skip is enough post-keyword
-        while (p < end && (*p == ' ' || *p == '\t')) ++p;
-        auto [ptr, _] = std::from_chars(p, end, out);
-        return ptr;
-    };
-
-    auto read_int = [](const char* p, const char* end, int& out) noexcept -> const char* {
         while (p < end && (*p == ' ' || *p == '\t')) ++p;
         auto [ptr, _] = std::from_chars(p, end, out);
         return ptr;

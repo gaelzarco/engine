@@ -4,7 +4,7 @@
 #include <chrono>
 #include "modules/minifb/include/MiniFB_cpp.h"
 
-import obj_v0_1;
+import obj_v0_2;
 
 auto main(int argc, const char* argv[]) -> int {
     if (argc < 2) {
@@ -17,6 +17,7 @@ auto main(int argc, const char* argv[]) -> int {
 
     auto start = std::chrono::high_resolution_clock::now();
     obj.read(file_path);
+    // obj.print();
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
     std::println("[LOG] .obj read duration: {} ms", duration.count());
