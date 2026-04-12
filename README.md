@@ -25,9 +25,8 @@ Be sure to update CMake file to reflect target file version to include:
 ```cmake
 target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES
-    modules/obj_v0_1.cppm    # update this
+    modules/obj_v0_1.cppm # update this
 )
-// OR
 ```
 
 ## Build
