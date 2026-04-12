@@ -1,5 +1,6 @@
 # Engine
-A C++23 3D engine built with MiniFB as single dependency. Small and fast.
+A C++23 3D engine built with MiniFB as single dependency. Targets Unix
+environments.
 
 ## Features
 - OBJ file parsing via C++23 named modules (`import obj`) built from scratch.
@@ -33,8 +34,10 @@ target_sources(engine
 Requires Clang 22+ and CMake with Ninja.
 ```bash
 cmake -B build -G Ninja
+ln -sf build/compile_commands.json .
 cmake --build build
 ```
+Or run `chmod +x ./build.sh` on root directory, then `./build.sh`
 
 ## Usage
 ```bash

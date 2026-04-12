@@ -71,8 +71,7 @@ private:
 
 constexpr inline void obj_::read(const std::string& file_name) {
     std::ifstream file(file_name);
-    if (!file.is_open())
-        throw std::runtime_error("[ERR] Could not open file");
+    if (!file.is_open()) throw std::runtime_error("[ERR] Could not open file");
 
     std::string buf{ std::istreambuf_iterator<char>(file),
                      std::istreambuf_iterator<char>() };
@@ -139,28 +138,24 @@ constexpr inline void obj_::read(const std::string& file_name) {
             p = read_float(p, end, vx.z);
             p = read_float(p, end, vx.w);
             v_.push_back(vx);
-
         } else if (kw("vt")) {
             texture tx{};
             p = read_float(p, end, tx.u);
             p = read_float(p, end, tx.v);
             p = read_float(p, end, tx.w);
             vt_.push_back(tx);
-
         } else if (kw("vn")) {
             normal nm{};
             p = read_float(p, end, nm.x);
             p = read_float(p, end, nm.y);
             p = read_float(p, end, nm.z);
             vn_.push_back(nm);
-
         } else if (kw("vp")) {
             param pm{};
             p = read_float(p, end, pm.u);
             p = read_float(p, end, pm.v);
             p = read_float(p, end, pm.w);
             vp_.push_back(pm);
-
         } else if (kw("f")) {
             p = skip_ws(p, end);
             while (p < end && *p != '\n' && *p != '\r') {
@@ -169,7 +164,6 @@ constexpr inline void obj_::read(const std::string& file_name) {
                 f_.push_back(f);
                 p = skip_ws(p, end);
             }
-
         } else if (kw("l")) {
             p = skip_ws(p, end);
             while (p < end && *p != '\n' && *p != '\r') {
