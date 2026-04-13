@@ -17,13 +17,19 @@ auto main(int argc, const char* argv[]) -> int {
 
     auto start = std::chrono::high_resolution_clock::now();
     obj.read(file_path);
-    // obj.print();
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
     std::println("[LOG] .obj read duration: {} ms", duration.count());
 
-    struct mfb_window *window = mfb_open_ex("CXX Rasterizer", 800, 600,
-        MFB_WF_RESIZABLE);
+    std::size_t total = obj.get_v().capacity()  * sizeof(obj_::vertex)
+                      + obj.get_vt().capacity() * sizeof(obj_::texture)
+                      + obj.get_vn().capacity() * sizeof(obj_::normal)
+                      + obj.get_vp().capacity() * sizeof(obj_::param)
+                      + obj.get_f().capacity()  * sizeof(obj_::face)
+                      + obj.get_l().capacity()  * sizeof(obj_::line);
+    std::println("[LOG] Total memory allocated: {} bytes ({} MB)", total, total / 1024 / 1024);
+
+    struct mfb_window *window = mfb_open_ex("CXX Rasterizer", 800, 600, MFB_WF_RESIZABLE);
 
     if (window == nullptr) {
         std::println("[ERR] Failed to create window");
