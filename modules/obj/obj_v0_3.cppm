@@ -5,70 +5,54 @@ module;
 #include <string>
 #include <fstream>
 #include <print>
-#include <exception>
+#include <expected>
 
-export module obj_v0_2;
+export module obj_v0_3;
 
-export class obj_ {
+export class obj {
 public:
-    static constexpr std::size_t K_RESERVE      = 5000;
-    static constexpr std::size_t K_LINE_RESERVE = 1000;
+    struct _vertex      { float x{}, y{}, z{}, w{ 1.f }; };
+    struct _texture_coordinate     { float u{}, v{}, w{}; };
+    struct _vertex_normal      { float x{}, y{}, z{}; };
+    struct _parameter_space_vertex   { float u{}, v{}, w{}; };
+    struct _face_vertex { int v{}, vt{}, vn{}; };
+    using  _face        = std::vector<_face_vertex>;
+    using  _line_vertex = int;
+    using  _line        = std::vector<_line_vertex>;
 
-    struct vertex      { float x{}, y{}, z{}, w{ 1.f }; };
-    struct texture     { float u{}, v{}, w{}; };
-    struct normal      { float x{}, y{}, z{}; };
-    struct param       { float u{}, v{}, w{}; };
-    struct face_vertex { int v{}, vt{}, vn{}; };
-    using  face        = std::vector<face_vertex>;
-    using  line_vertex = int;
-    using  line        = std::vector<line_vertex>;
+    using _vertices                 = std::vector<_vertex>;
+    using _texture_coordinates      = std::vector<_texture_coordinate>;
+    using _vertex_normals           = std::vector<_vertex_normal>;
+    using _parameter_space_vertices = std::vector<_parameter_space_vertex>;
+    using _faces                    = std::vector<_face>;
+    using _lines                    = std::vector<_line>;
 
-    using vertices      = std::vector<vertex>;
-    using vert_textures = std::vector<texture>;
-    using vert_normals  = std::vector<normal>;
-    using vert_params   = std::vector<param>;
-    using faces = std::vector<face>;
-    using lines = std::vector<line>;
+    explicit obj(_vertices v = {}, _texture_coordinates vt = {}, _vertex_normals vn = {},
+    _parameter_space_vertices vp = {}, _faces f = {}, _lines l = {}) : _v(std::move(v)),
+    _vt(std::move(vt)), _vn(std::move(vn)), _vp(std::move(vp)), _f(std::move(f)), _l(std::move(l)){}
 
-    explicit obj_(vertices v, vert_textures vt, vert_normals vn, vert_params vp, lines l) :
-    v_(std::move(v)), vt_(std::move(vt)), vn_(std::move(vn)), vp_(std::move(vp)), l_(std::move(l)){
-        v_.reserve(K_RESERVE);
-        vt_.reserve(K_RESERVE);
-        vn_.reserve(K_RESERVE);
-        vp_.reserve(K_RESERVE);
-        f_.reserve(K_RESERVE);
-        l_.reserve(K_LINE_RESERVE);
-    }
-
-    auto v_push_back(vertex& v) -> void { v_.push_back(v); }
-    auto vt_push_back(texture& t) -> void { vt_.push_back(t); }
-    auto vn_push_back(normal& n) -> void { vn_.push_back(n); }
-    auto vp_push_back(param& p) -> void { vp_.push_back(p); }
-    auto f_push_back(face& f) -> void { f_.push_back(f); }
-    auto l_push_back(line& lv) -> void { l_.push_back(lv); }
-
-    auto get_v() noexcept -> vertices& { return v_; }
-    auto get_vt() noexcept -> vert_textures& { return vt_; }
-    auto get_vn() noexcept -> vert_normals& { return vn_; }
-    auto get_vp() noexcept -> vert_params& { return vp_; }
-    auto get_f() noexcept -> faces& { return f_; }
-    auto get_l() noexcept -> lines& { return l_; }
+    auto vertices() noexcept -> _vertices& { return _v; }
+    auto texture_coordinates() noexcept -> _texture_coordinates& { return _vt; }
+    auto vertex_normals() noexcept -> _vertex_normals& { return _vn; }
+    auto parameter_space_vertices() noexcept -> _parameter_space_vertices& { return _vp; }
+    auto faces() noexcept -> _faces& { return _f; }
+    auto lines() noexcept -> _lines& { return _l; }
 
     auto read(const std::string& file_name) -> void;
-    [[nodiscard]] auto format() const -> std::string;
+    [[nodiscard]] auto format_output() const -> std::string;
     inline auto print() const -> void;
 
 private:
-    vertices      v_;
-    vert_textures vt_;
-    vert_normals  vn_;
-    vert_params   vp_;
-    faces         f_;
-    lines         l_;
+    _vertices                 _v;
+    _texture_coordinates      _vt;
+    _vertex_normals           _vn;
+    _parameter_space_vertices _vp;
+    _faces                    _f;
+    _lines                    _l;
 
 };
 
-auto obj_::read(const std::string& file_name) -> void {
+auto obj::read(const std::string& file_name) -> void {
     std::ifstream file(file_name);
     if (!file.is_open()) throw std::runtime_error("[ERR] Could not open file");
 
@@ -93,7 +77,7 @@ auto obj_::read(const std::string& file_name) -> void {
         return ptr;
     };
 
-    auto read_face_token = [&](const char* p, face_vertex& fv) noexcept -> const char* {
+    auto read_face_token = [&](const char* p, _face_vertex& fv) noexcept -> const char* {
         p = skip_ws(p, end);
         auto [p1, _1] = std::from_chars(p, end, fv.v); p = p1;
         if (p < end && *p == '/') {
@@ -114,69 +98,69 @@ auto obj_::read(const std::string& file_name) -> void {
         const std::string_view kw{ tok, static_cast<std::size_t>(p - tok) };
 
         if (kw == "v") {
-            vertex vx{};
-            p = read_float(p, vx.x);
-            p = read_float(p, vx.y);
-            p = read_float(p, vx.z);
-            p = read_float(p, vx.w);
-            v_.push_back(vx);
+            _vertex v{};
+            p = read_float(p, v.x);
+            p = read_float(p, v.y);
+            p = read_float(p, v.z);
+            p = read_float(p, v.w);
+            _v.push_back(v);
         } else if (kw == "vt") {
-            texture tx{};
-            p = read_float(p, tx.u);
-            p = read_float(p, tx.v);
-            p = read_float(p, tx.w);
-            vt_.push_back(tx);
+            _texture_coordinate vt{};
+            p = read_float(p, vt.u);
+            p = read_float(p, vt.v);
+            p = read_float(p, vt.w);
+            _vt.push_back(vt);
         } else if (kw == "vn") {
-            normal nm{};
-            p = read_float(p, nm.x);
-            p = read_float(p, nm.y);
-            p = read_float(p, nm.z);
-            vn_.push_back(nm);
+            _vertex_normal vn{};
+            p = read_float(p, vn.x);
+            p = read_float(p, vn.y);
+            p = read_float(p, vn.z);
+            _vn.push_back(vn);
         } else if (kw == "vp") {
-            param pm{};
-            p = read_float(p, pm.u);
-            p = read_float(p, pm.v);
-            p = read_float(p, pm.w);
-            vp_.push_back(pm);
+            _parameter_space_vertex vp{};
+            p = read_float(p, vp.u);
+            p = read_float(p, vp.v);
+            p = read_float(p, vp.w);
+            _vp.push_back(vp);
         } else if (kw == "f") {
-            face f{};
+            _face f{};
             p = skip_ws(p, end);
             while (p < end && *p != '\n' && *p != '\r') {
-                face_vertex fv{};
+                _face_vertex fv{};
                 p = read_face_token(p, fv);
                 f.push_back(fv);
                 p = skip_ws(p, end);
             }
-            f_.push_back(f);
+            _f.push_back(f);
         } else if (kw == "l") {
-            line l{};
+            _line l{};
             p = skip_ws(p, end);
             while (p < end && *p != '\n' && *p != '\r') {
-                line_vertex lv{};
+                _line_vertex lv{};
                 auto [ptr, _] = std::from_chars(p, end, lv);
                 p = ptr;
                 l.push_back(lv);
                 p = skip_ws(p, end);
             }
-            l_.push_back(l);
+            _l.push_back(l);
         }
 
         p = skip_line(p, end);
     }
 }
 
-[[nodiscard]] auto obj_::format() const -> std::string {
+[[nodiscard]] auto obj::format_output() const -> std::string {
     std::string out;
     out.reserve(4096);
 
-    for (auto& v : v_) {
+    for (auto& v : _v) {
         if (v.w != 0.f) {
             out += std::format("Vertex: {{ x: {}, y: {}, z: {}, w: {} }}\n", v.x, v.y, v.z, v.w);
         } else {
             out += std::format("Vertex: {{ x: {}, y: {}, z: {} }}\n", v.x, v.y, v.z);
         }
     }
-    for (auto& vt : vt_) {
+    for (auto& vt : _vt) {
         if (vt.v != 0.f && vt.w != 0.f) {
             out += std::format("Vertex Texture: {{ u: {}, v: {}, w: {} }}\n", vt.u, vt.v, vt.w);
         } else if (vt.v != 0.f) {
@@ -185,10 +169,10 @@ auto obj_::read(const std::string& file_name) -> void {
             out += std::format("Vertex Texture: {{ u: {} }}\n", vt.u);
         }
     }
-    for (auto& vn : vn_)
+    for (auto& vn : _vn)
         out += std::format("Vertex Normal: {{ x: {}, y: {}, z: {} }}\n", vn.x, vn.y, vn.z);
 
-    for (auto& vp : vp_) {
+    for (auto& vp : _vp) {
         if (vp.v != 0.f && vp.w != 0.f) {
             out += std::format("Parameter Space Vertex: {{ u: {}, v: {}, w: {} }}\n", vp.u, vp.v, vp.w);
         } else if (vp.v != 0.f) {
@@ -197,7 +181,7 @@ auto obj_::read(const std::string& file_name) -> void {
             out += std::format("Parameter Space Vertex: {{ u: {} }}\n", vp.u);
         }
     }
-    for (auto& f : f_) {
+    for (auto& f : _f) {
         out += "Face: {";
         for (auto& fv : f) {
             if (fv.vt != 0 && fv.vn != 0) {
@@ -211,7 +195,7 @@ auto obj_::read(const std::string& file_name) -> void {
         out += " }\n";
     }
 
-    for (auto& l : l_) {
+    for (auto& l : _l) {
         out += "Line: { ";
         for (auto& lv : l) out += std::format("{}, ", lv);
         out += "}\n";
@@ -220,6 +204,6 @@ auto obj_::read(const std::string& file_name) -> void {
     return out;
 }
 
-auto obj_::print() const -> void {
-    std::print("{}", format());
+auto obj::print() const -> void {
+    std::print("{}", format_output());
 }

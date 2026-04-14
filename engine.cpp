@@ -4,7 +4,7 @@
 #include <chrono>
 #include "modules/minifb/include/MiniFB_cpp.h"
 
-import obj_v0_2;
+import obj_v0_3;
 
 auto main(int argc, const char* argv[]) -> int {
     if (argc < 2) {
@@ -13,20 +13,20 @@ auto main(int argc, const char* argv[]) -> int {
     }
     
     std::string file_path = argv[1];
-    auto obj = obj_::make();
+    obj file{};
 
     auto start = std::chrono::high_resolution_clock::now();
-    obj.read(file_path);
+    file.read(file_path);
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
     std::println("[LOG] .obj read duration: {} ms", duration.count());
 
-    std::size_t total = obj.get_v().capacity()  * sizeof(obj_::vertex)
-                      + obj.get_vt().capacity() * sizeof(obj_::texture)
-                      + obj.get_vn().capacity() * sizeof(obj_::normal)
-                      + obj.get_vp().capacity() * sizeof(obj_::param)
-                      + obj.get_f().capacity()  * sizeof(obj_::face)
-                      + obj.get_l().capacity()  * sizeof(obj_::line);
+    std::size_t total = file.vertices().capacity() * sizeof(obj::_vertex)
+    + file.texture_coordinates().capacity() * sizeof(obj::_texture_coordinate)
+    + file.vertex_normals().capacity() * sizeof(obj::_vertex_normal)
+    + file.parameter_space_vertices().capacity() * sizeof(obj::_parameter_space_vertex)
+    + file.faces().capacity() * sizeof(obj::_face)
+    + file.lines().capacity() * sizeof(obj::_line);
     std::println("[LOG] Total memory allocated: {} bytes ({} MB)", total, total / 1024 / 1024);
 
     struct mfb_window *window = mfb_open_ex("CXX Rasterizer", 800, 600, MFB_WF_RESIZABLE);
