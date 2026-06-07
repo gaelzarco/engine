@@ -24,6 +24,10 @@ target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES
     modules/obj/obj_v0_3.cppm
 )
+target_sources(engine
+    PUBLIC FILE_SET CXX_MODULES FILES
+    modules/render/render_v0.cppm
+)
 target_link_libraries(engine PRIVATE minifb)
 target_compile_options(engine PRIVATE -O3 -flto -march=native)
 target_link_options(engine PRIVATE -flto)
