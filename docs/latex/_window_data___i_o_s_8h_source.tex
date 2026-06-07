@@ -1,0 +1,26 @@
+\doxysection{Window\+Data\+\_\+\+IOS.\+h}
+\hypertarget{_window_data___i_o_s_8h_source}{}\label{_window_data___i_o_s_8h_source}\index{modules/minifb/src/ios/WindowData\_IOS.h@{modules/minifb/src/ios/WindowData\_IOS.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB\_enums.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <MiniFB\_internal.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <WindowData.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <MetalKit/MetalKit.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <os/lock.h>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{@class}\ \doxymbox{\hyperlink{interfacei_o_s_view_delegate}{iOSViewDelegate}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_vertex}{Vertex}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y,\ z,\ w;}
+\DoxyCodeLine{00013\ \}\ \doxymbox{\hyperlink{struct_vertex}{Vertex}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00016\ \ \ \ \ \doxymbox{\hyperlink{interfacei_o_s_view_delegate}{iOSViewDelegate}}\ \ \ \ \ *view\_delegate;}
+\DoxyCodeLine{00017\ \ \ \ \ Vertex\ \ \ \ \ \ \ \ \ \ \ \ \ \ vertices[4];}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ \ \ \ *timer;}
+\DoxyCodeLine{00019\ \ \ \ \ os\_unfair\_lock\ \ \ \ \ \ buffer\_lock;}
+\DoxyCodeLine{00020\ \}\ \doxymbox{\hyperlink{struct_s_window_data___i_o_s}{SWindowData\_IOS}};}
+
+\end{DoxyCode}

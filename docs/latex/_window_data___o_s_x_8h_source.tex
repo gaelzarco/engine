@@ -1,0 +1,33 @@
+\doxysection{Window\+Data\+\_\+\+OSX.\+h}
+\hypertarget{_window_data___o_s_x_8h_source}{}\label{_window_data___o_s_x_8h_source}\index{modules/minifb/src/macos/WindowData\_OSX.h@{modules/minifb/src/macos/WindowData\_OSX.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB\_enums.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <WindowData.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#if\ defined(USE\_METAL\_API)}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\ \ \ \ \#include\ <MetalKit/MetalKit.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{@class}\ \doxymbox{\hyperlink{interface_o_s_x_window}{OSXWindow}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{@class}\ OSXViewDelegate;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_vertex}{Vertex}}\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{float}\ x,\ y,\ z,\ w;}
+\DoxyCodeLine{00015\ \}\ \doxymbox{\hyperlink{struct_vertex}{Vertex}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00018\ \ \ \ \ \doxymbox{\hyperlink{interface_o_s_x_window}{OSXWindow}}\ \ \ \ \ \ \ \ \ \ \ *window;}
+\DoxyCodeLine{00019\ \ \ \ \ OSXViewDelegate\ \ \ \ \ *viewController;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ \ \ \ *timer;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#if\ defined(USE\_METAL\_API)}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_vertex}{Vertex}}\ \ \ \ \ \ \ \ \ \ vertices[4];}
+\DoxyCodeLine{00025\ \ \ \ \ \}\ metal;}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00027\ \}\ \doxymbox{\hyperlink{struct_s_window_data___o_s_x}{SWindowData\_OSX}};}
+
+\end{DoxyCode}

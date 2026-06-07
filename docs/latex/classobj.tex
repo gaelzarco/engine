@@ -1,0 +1,389 @@
+\doxysection{obj Class Reference}
+\hypertarget{classobj}{}\label{classobj}\index{obj@{obj}}
+
+
+Represents a parsed Wavefront OBJ file.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structobj_1_1__vertex}{\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A geometric vertex with optional homogeneous coordinate. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{\+\_\+texture\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em A texture (UV or UVW) coordinate. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__vertex__normal}{\+\_\+vertex\+\_\+normal}}
+\begin{DoxyCompactList}\small\item\em A vertex normal vector. Not required to be unit length. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{\+\_\+parameter\+\_\+space\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A point in parameter space, used for free-\/form geometry. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__face__vertex}{\+\_\+face\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A single vertex reference within a face, encoding optional texture and normal indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classobj_a940edd8c51f24e2993978f345938f10f}\label{classobj_a940edd8c51f24e2993978f345938f10f} 
+using {\bfseries \+\_\+face} = std::\+vector$<$\doxymbox{\hyperlink{structobj_1_1__face__vertex}{\+\_\+face\+\_\+vertex}}$>$
+\begin{DoxyCompactList}\small\item\em An ordered list of face vertices forming a polygon. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a1a101c51cc09e34e382745e6ab50be1a}\label{classobj_a1a101c51cc09e34e382745e6ab50be1a} 
+using {\bfseries \+\_\+line\+\_\+vertex} = int
+\begin{DoxyCompactList}\small\item\em A single vertex index reference within a line element (1-\/based). \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98}\label{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98} 
+using {\bfseries \+\_\+line} = std::\+vector$<$\doxymbox{\hyperlink{classobj_a1a101c51cc09e34e382745e6ab50be1a}{\+\_\+line\+\_\+vertex}}$>$
+\begin{DoxyCompactList}\small\item\em An ordered list of vertex indices forming a polyline. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a92955dded15b830b7a5259a481f2b8a0}\label{classobj_a92955dded15b830b7a5259a481f2b8a0} 
+using {\bfseries \+\_\+vertices} = std::\+vector$<$\doxymbox{\hyperlink{structobj_1_1__vertex}{\+\_\+vertex}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all geometric vertices in the model. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}\label{classobj_a126a58a72c4717b11b6a905dd7cfe4a6} 
+using {\bfseries \+\_\+texture\+\_\+coordinates} = std::\+vector$<$\doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{\+\_\+texture\+\_\+coordinate}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all texture coordinates in the model. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a1176800623ebc9d142aae489b2d961c2}\label{classobj_a1176800623ebc9d142aae489b2d961c2} 
+using {\bfseries \+\_\+vertex\+\_\+normals} = std::\+vector$<$\doxymbox{\hyperlink{structobj_1_1__vertex__normal}{\+\_\+vertex\+\_\+normal}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all vertex normals in the model. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_a4980a8cdae03e3c903d56a911fa1bd12}\label{classobj_a4980a8cdae03e3c903d56a911fa1bd12} 
+using {\bfseries \+\_\+parameter\+\_\+space\+\_\+vertices} = std::\+vector$<$\doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{\+\_\+parameter\+\_\+space\+\_\+vertex}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all parameter space vertices in the model. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_ac91cd5e0a093942e15456b0f60265c0c}\label{classobj_ac91cd5e0a093942e15456b0f60265c0c} 
+using {\bfseries \+\_\+faces} = std::\+vector$<$\doxymbox{\hyperlink{classobj_a940edd8c51f24e2993978f345938f10f}{\+\_\+face}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all face polygons in the model. \end{DoxyCompactList}\item 
+\Hypertarget{classobj_afd721cdabd549bdd05511bc61391aeae}\label{classobj_afd721cdabd549bdd05511bc61391aeae} 
+using {\bfseries \+\_\+lines} = std::\+vector$<$\doxymbox{\hyperlink{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98}{\+\_\+line}}$>$
+\begin{DoxyCompactList}\small\item\em Collection of all polyline elements in the model. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}} (\doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} v=\{\}, \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} vt=\{\}, \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} vn=\{\}, \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} vp=\{\}, \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} f=\{\}, \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} l=\{\})
+\begin{DoxyCompactList}\small\item\em Constructs an {\ttfamily obj} with optionally pre-\/populated geometry data. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a708bc8a07323962b0d5e6434d956d6de}{vertices}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the geometric vertex list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_abcbdb1a4838b6b51c411c0d02ecf56cb}{vertices}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the geometric vertex list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a774ae0a43035653196e0b6cbd43717cb}{texture\+\_\+coordinates}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the texture coordinate list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a55b2f862b89c191b3ba8be8138805693}{texture\+\_\+coordinates}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the texture coordinate list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a923d0daff44ddeac530ef42a9ab2771a}{vertex\+\_\+normals}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the vertex normal list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a7d413ad603cbe28e309551e84852a493}{vertex\+\_\+normals}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the vertex normal list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a83b4a52727211fb83e549408d8920161}{parameter\+\_\+space\+\_\+vertices}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the parameter space vertex list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a518698b4fd482a08552e8d2d6ac8413e}{parameter\+\_\+space\+\_\+vertices}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the parameter space vertex list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_ae0ffcd2f8ca4fc54aed87cd4a5402054}{faces}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the face list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a8c23aca14ff1f057d5cf5b4662e59663}{faces}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the face list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a2f171c463dce333ada0431dfe1058961}{lines}} () noexcept -\/$>$ \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} \&
+\begin{DoxyCompactList}\small\item\em Returns a mutable reference to the polyline list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_add5036c5cd685e15a6281c57993ed338}{lines}} () const noexcept -\/$>$ const \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} \&
+\begin{DoxyCompactList}\small\item\em Returns a read-\/only reference to the polyline list. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a243badc3a0a0a6b3612951a03f8e4952}{read}} (const std::\+string \&file\+\_\+name) -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Parses a Wavefront OBJ file and populates the model\textquotesingle{}s geometry data. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output}} () const -\/$>$ std::\+string
+\begin{DoxyCompactList}\small\item\em Formats all stored geometry as a human-\/readable string. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_a4630138bb706c2ff2e1a4187e26c1932}{print}} () const -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Prints the formatted geometry to standard output. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{memory\+\_\+out}} () const -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Logs the total heap memory reserved by all internal geometry containers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a parsed Wavefront OBJ file. 
+
+Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-\/performance parser using {\ttfamily std::\+from\+\_\+chars} for zero-\/allocation numeric conversion.
+
+\begin{DoxyNote}{Note}
+Exported from C++20 module {\ttfamily obj\+\_\+v0\+\_\+3}.
+\end{DoxyNote}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}}\ model;}
+\DoxyCodeLine{model.\doxymbox{\hyperlink{classobj_a243badc3a0a0a6b3612951a03f8e4952}{read}}(\textcolor{stringliteral}{"{}mesh.obj"{}});}
+\DoxyCodeLine{model.\doxymbox{\hyperlink{classobj_a4630138bb706c2ff2e1a4187e26c1932}{print}}();}
+\DoxyCodeLine{model.\doxymbox{\hyperlink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{memory\_out}}();}
+
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+
+
+\label{doc-constructors}
+\Hypertarget{classobj_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classobj_a03c3704a351856bc5ed8afb066107e3e}\index{obj@{obj}!obj@{obj}}
+\index{obj@{obj}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{obj()}{obj()}}
+{\footnotesize\ttfamily \label{classobj_a03c3704a351856bc5ed8afb066107e3e} 
+obj::\+obj (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}}}]{v}{ = {\ttfamily \{\}}, }\item[{\doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}}}]{vt}{ = {\ttfamily \{\}}, }\item[{\doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}}}]{vn}{ = {\ttfamily \{\}}, }\item[{\doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}}}]{vp}{ = {\ttfamily \{\}}, }\item[{\doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}}}]{f}{ = {\ttfamily \{\}}, }\item[{\doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}}}]{l}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs an {\ttfamily obj} with optionally pre-\/populated geometry data. 
+
+All parameters are moved into internal storage. Passing no arguments constructs an empty model.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & Geometric vertices. \\
+\hline
+{\em vt} & Texture coordinates. \\
+\hline
+{\em vn} & Vertex normals. \\
+\hline
+{\em vp} & Parameter space vertices. \\
+\hline
+{\em f} & Face polygons. \\
+\hline
+{\em l} & Polyline elements. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classobj_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classobj_a8c23aca14ff1f057d5cf5b4662e59663}\index{obj@{obj}!faces@{faces}}
+\index{faces@{faces}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{faces()}{faces()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_a8c23aca14ff1f057d5cf5b4662e59663} 
+auto obj::\+faces (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the face list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_ae0ffcd2f8ca4fc54aed87cd4a5402054}\index{obj@{obj}!faces@{faces}}
+\index{faces@{faces}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{faces()}{faces()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_ae0ffcd2f8ca4fc54aed87cd4a5402054} 
+auto obj::\+faces (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the face list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\+\_\+faces}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a6dbd86e83e5564c9a471601d0269b147}\index{obj@{obj}!format\_output@{format\_output}}
+\index{format\_output@{format\_output}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{format\_output()}{format\_output()}}
+{\footnotesize\ttfamily \label{classobj_a6dbd86e83e5564c9a471601d0269b147} 
+auto obj::\+format\+\_\+output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std::\+string\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Formats all stored geometry as a human-\/readable string. 
+
+Each element is written on its own line. Optional components (e.\+g. the {\ttfamily w} component of a vertex, or the {\ttfamily vt} /\+ {\ttfamily vn} indices of a face vertex) are omitted from the output when they hold their default zero value.
+
+\begin{DoxyReturn}{Returns}
+A {\ttfamily std::\+string} containing the formatted representation of the model. 
+\end{DoxyReturn}
+\Hypertarget{classobj_add5036c5cd685e15a6281c57993ed338}\index{obj@{obj}!lines@{lines}}
+\index{lines@{lines}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{lines()}{lines()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_add5036c5cd685e15a6281c57993ed338} 
+auto obj::\+lines (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the polyline list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a2f171c463dce333ada0431dfe1058961}\index{obj@{obj}!lines@{lines}}
+\index{lines@{lines}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{lines()}{lines()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_a2f171c463dce333ada0431dfe1058961} 
+auto obj::\+lines (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the polyline list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_afd721cdabd549bdd05511bc61391aeae}{\+\_\+lines}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}\index{obj@{obj}!memory\_out@{memory\_out}}
+\index{memory\_out@{memory\_out}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{memory\_out()}{memory\_out()}}
+{\footnotesize\ttfamily \label{classobj_aa2ec83bc4e4ef053ad37a4da935c747e} 
+auto obj::\+memory\+\_\+out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ void}
+
+
+
+Logs the total heap memory reserved by all internal geometry containers. 
+
+Reports the sum of {\ttfamily capacity()} \texorpdfstring{$\ast$}{*} sizeof(element) across all six containers. Output is written to standard output in the form:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[LOG]\ Memory\ allocated:\ <bytes>\ bytes\ (\string~<MB>\ MB)}
+
+\end{DoxyCode}
+
+
+\begin{DoxyNote}{Note}
+Reports reserved (capacity) memory, not the memory occupied by currently stored elements (size). Values may therefore exceed the memory strictly required to hold the parsed geometry. 
+\end{DoxyNote}
+\Hypertarget{classobj_a518698b4fd482a08552e8d2d6ac8413e}\index{obj@{obj}!parameter\_space\_vertices@{parameter\_space\_vertices}}
+\index{parameter\_space\_vertices@{parameter\_space\_vertices}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{parameter\_space\_vertices()}{parameter\_space\_vertices()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_a518698b4fd482a08552e8d2d6ac8413e} 
+auto obj::\+parameter\+\_\+space\+\_\+vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the parameter space vertex list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a83b4a52727211fb83e549408d8920161}\index{obj@{obj}!parameter\_space\_vertices@{parameter\_space\_vertices}}
+\index{parameter\_space\_vertices@{parameter\_space\_vertices}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{parameter\_space\_vertices()}{parameter\_space\_vertices()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_a83b4a52727211fb83e549408d8920161} 
+auto obj::\+parameter\+\_\+space\+\_\+vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the parameter space vertex list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\+\_\+parameter\+\_\+space\+\_\+vertices}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a4630138bb706c2ff2e1a4187e26c1932}\index{obj@{obj}!print@{print}}
+\index{print@{print}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{classobj_a4630138bb706c2ff2e1a4187e26c1932} 
+auto obj::\+print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ void}
+
+
+
+Prints the formatted geometry to standard output. 
+
+Equivalent to {\ttfamily std::\+print}("{}\{\}"{}, \doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()}).
+
+\begin{DoxySeeAlso}{See also}
+\doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()} 
+\end{DoxySeeAlso}
+\Hypertarget{classobj_a243badc3a0a0a6b3612951a03f8e4952}\index{obj@{obj}!read@{read}}
+\index{read@{read}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{read()}{read()}}
+{\footnotesize\ttfamily \label{classobj_a243badc3a0a0a6b3612951a03f8e4952} 
+auto obj::\+read (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+\_\+name}{}\end{DoxyParamCaption}) -\/$>$ void}
+
+
+
+Parses a Wavefront OBJ file and populates the model\textquotesingle{}s geometry data. 
+
+Reads the entire file into a buffer and performs a single-\/pass parse using {\ttfamily std::\+from\+\_\+chars} for locale-\/independent, allocation-\/free numeric conversion. Recognised keywords:\+ {\ttfamily v}, {\ttfamily vt}, {\ttfamily vn}, {\ttfamily vp}, {\ttfamily f}, {\ttfamily l}. Comment lines ({\ttfamily \#}) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.
+
+Face vertex tokens support all three OBJ index formats:\+
+\begin{DoxyItemize}
+\item {\ttfamily v} 
+\item {\ttfamily v/\+vt} 
+\item {\ttfamily v/\+vt/\+vn} 
+\item {\ttfamily v/\+/\+vn} 
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+\_\+name} & Path to the {\ttfamily }.obj file to read.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+runtime\+\_\+error} & if the file cannot be opened.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+Appends parsed data to any geometry already stored in the object. Call on a default-\/constructed instance to parse a single file cleanly. 
+\end{DoxyNote}
+\Hypertarget{classobj_a55b2f862b89c191b3ba8be8138805693}\index{obj@{obj}!texture\_coordinates@{texture\_coordinates}}
+\index{texture\_coordinates@{texture\_coordinates}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{texture\_coordinates()}{texture\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_a55b2f862b89c191b3ba8be8138805693} 
+auto obj::\+texture\+\_\+coordinates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the texture coordinate list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a774ae0a43035653196e0b6cbd43717cb}\index{obj@{obj}!texture\_coordinates@{texture\_coordinates}}
+\index{texture\_coordinates@{texture\_coordinates}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{texture\_coordinates()}{texture\_coordinates()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_a774ae0a43035653196e0b6cbd43717cb} 
+auto obj::\+texture\+\_\+coordinates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the texture coordinate list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a7d413ad603cbe28e309551e84852a493}\index{obj@{obj}!vertex\_normals@{vertex\_normals}}
+\index{vertex\_normals@{vertex\_normals}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{vertex\_normals()}{vertex\_normals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_a7d413ad603cbe28e309551e84852a493} 
+auto obj::\+vertex\+\_\+normals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the vertex normal list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a923d0daff44ddeac530ef42a9ab2771a}\index{obj@{obj}!vertex\_normals@{vertex\_normals}}
+\index{vertex\_normals@{vertex\_normals}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{vertex\_normals()}{vertex\_normals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_a923d0daff44ddeac530ef42a9ab2771a} 
+auto obj::\+vertex\+\_\+normals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the vertex normal list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_a1176800623ebc9d142aae489b2d961c2}{\+\_\+vertex\+\_\+normals}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_abcbdb1a4838b6b51c411c0d02ecf56cb}\index{obj@{obj}!vertices@{vertices}}
+\index{vertices@{vertices}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{vertices()}{vertices()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classobj_abcbdb1a4838b6b51c411c0d02ecf56cb} 
+auto obj::\+vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ const \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a read-\/only reference to the geometric vertex list. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the internal {\ttfamily \doxylink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} container. 
+\end{DoxyReturn}
+\Hypertarget{classobj_a708bc8a07323962b0d5e6434d956d6de}\index{obj@{obj}!vertices@{vertices}}
+\index{vertices@{vertices}!obj@{obj}}
+\doxysubsubsection{\texorpdfstring{vertices()}{vertices()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classobj_a708bc8a07323962b0d5e6434d956d6de} 
+auto obj::\+vertices (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a mutable reference to the geometric vertex list. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the internal {\ttfamily \doxylink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\+\_\+vertices}} container. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+modules/\+obj/\+\doxymbox{\hyperlink{obj__v0__3_8cppm}{obj\+\_\+v0\+\_\+3.\+cppm}}\end{DoxyCompactItemize}

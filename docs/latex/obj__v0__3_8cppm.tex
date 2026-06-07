@@ -1,0 +1,35 @@
+\doxysection{modules/\+obj/\+obj\+\_\+v0\+\_\+3.cppm File Reference}
+\hypertarget{obj__v0__3_8cppm}{}\label{obj__v0__3_8cppm}\index{modules/obj/obj\_v0\_3.cppm@{modules/obj/obj\_v0\_3.cppm}}
+
+
+C++20 module providing a parser and in-\/memory representation for the Wavefront OBJ format.  
+
+
+{\ttfamily \+\#include $<$charconv$>$}\newline
+{\ttfamily \+\#include $<$vector$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$fstream$>$}\newline
+{\ttfamily \+\#include $<$print$>$}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classobj}{obj}}
+\begin{DoxyCompactList}\small\item\em Represents a parsed Wavefront OBJ file. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__vertex}{obj::\+\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A geometric vertex with optional homogeneous coordinate. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{obj::\+\+\_\+texture\+\_\+coordinate}}
+\begin{DoxyCompactList}\small\item\em A texture (UV or UVW) coordinate. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__vertex__normal}{obj::\+\+\_\+vertex\+\_\+normal}}
+\begin{DoxyCompactList}\small\item\em A vertex normal vector. Not required to be unit length. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{obj::\+\+\_\+parameter\+\_\+space\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A point in parameter space, used for free-\/form geometry. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structobj_1_1__face__vertex}{obj::\+\+\_\+face\+\_\+vertex}}
+\begin{DoxyCompactList}\small\item\em A single vertex reference within a face, encoding optional texture and normal indices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C++20 module providing a parser and in-\/memory representation for the Wavefront OBJ format. 
+
+\begin{DoxyVersion}{Version}
+0.\+3 
+\end{DoxyVersion}

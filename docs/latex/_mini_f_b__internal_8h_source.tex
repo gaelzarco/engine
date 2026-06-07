@@ -1,0 +1,95 @@
+\doxysection{Mini\+FB\+\_\+internal.\+h}
+\hypertarget{_mini_f_b__internal_8h_source}{}\label{_mini_f_b__internal_8h_source}\index{modules/minifb/src/MiniFB\_internal.h@{modules/minifb/src/MiniFB\_internal.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}WindowData.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ kCall(func,\ ...)\ \ \ \ if\ (window\_data\ \&\&\ window\_data-\/>func)\ window\_data-\/>func((struct\ mfb\_window\ *)\ window\_data,\ \_\_VA\_ARGS\_\_);}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ kUnused(var)\ \ \ \ \ \ \ \ (void)\ var;}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ Mobile\ backends\ may\ encode\ a\ pointer\ id\ in\ the\ upper\ bits\ of\ mouse\ positions.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Keep\ these\ constants\ centralized\ so\ packing/unpacking\ stays\ compatible.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_POS\_ID\_BITS\ \ \ 4u}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_POS\_BITS\ \ \ \ \ \ (32u\ -\/\ MFB\_COMBINED\_POS\_ID\_BITS)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_POS\_ID\_SHIFT\ \ MFB\_COMBINED\_POS\_BITS}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_POS\_MASK\ \ \ \ \ \ ((1u\ <<\ MFB\_COMBINED\_POS\_BITS)\ -\/\ 1u)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_POS\_SIGN\_BIT\ \ (1u\ <<\ (MFB\_COMBINED\_POS\_BITS\ -\/\ 1u))}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#define\ MFB\_COMBINED\_ID\_MASK\ \ \ \ \ \ \ ((1u\ <<\ MFB\_COMBINED\_POS\_ID\_BITS)\ -\/\ 1u)}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00024\ mfb\_pack\_pos\_id(int32\_t\ pos,\ uint32\_t\ \textcolor{keywordtype}{id})\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ uint32\_t\ packed\ =\ (((uint32\_t)\ pos)\ \&\ MFB\_COMBINED\_POS\_MASK)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ ((\textcolor{keywordtype}{id}\ \&\ MFB\_COMBINED\_ID\_MASK)\ <<\ MFB\_COMBINED\_POS\_ID\_SHIFT);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keywordtype}{int})\ packed;}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00031\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ int32\_t}
+\DoxyCodeLine{00032\ mfb\_unpack\_pos(uint32\_t\ combined)\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ uint32\_t\ pos\_bits\ =\ combined\ \&\ MFB\_COMBINED\_POS\_MASK;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordflow}{if}\ ((pos\_bits\ \&\ MFB\_COMBINED\_POS\_SIGN\_BIT)\ !=\ 0u)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ pos\_bits\ |=\ \string~MFB\_COMBINED\_POS\_MASK;}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordflow}{return}\ (int32\_t)\ pos\_bits;}
+\DoxyCodeLine{00038\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00041\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t}
+\DoxyCodeLine{00042\ mfb\_unpack\_id(uint32\_t\ combined)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ (combined\ >>\ MFB\_COMBINED\_POS\_ID\_SHIFT)\ \&\ MFB\_COMBINED\_ID\_MASK;}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ int64\_t\ \ \ \ \ start\_ticks;}
+\DoxyCodeLine{00049\ \ \ \ \ int64\_t\ \ \ \ \ last\_delta\_ticks;}
+\DoxyCodeLine{00050\ \ \ \ \ uint64\_t\ \ \ \ accumulated\_ticks;}
+\DoxyCodeLine{00051\ \ \ \ \ int64\_t\ \ \ \ \ accumulated\_error\_ticks;}
+\DoxyCodeLine{00052\ \}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00056\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \#undef\ MFB\_LOG}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_LOG(level,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ const\ mfb\_log\_info\ mfb\_log\_info\_aux\ =\ \{\ level,\ \_\_FILE\_\_,\ MFB\_FUNC\_NAME,\ \_\_LINE\_\_\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_log(\&mfb\_log\_info\_aux,\ "{}MiniFB"{},\ \_\_VA\_ARGS\_\_);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_LOG(level,\ ...)\ mfb\_log(\&(mfb\_log\_info)\{\ level,\ \_\_FILE\_\_,\ MFB\_FUNC\_NAME,\ \_\_LINE\_\_\ \},\ "{}MiniFB"{},\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{short}\ \textcolor{keywordtype}{int}\ g\_keycodes[MFB\_MAX\_KEYS];}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ keyboard\_default(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\ key,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ release\_cpp\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ calculate\_buffer\_layout(uint32\_t\ width,\ uint32\_t\ height,\ uint32\_t\ *stride\_out,\ \textcolor{keywordtype}{size\_t}\ *total\_bytes\_out);}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ mfb\_validate\_viewport(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_s_window_data}{SWindowData}}\ *window\_data,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ offset\_x,\ \textcolor{keywordtype}{unsigned}\ offset\_y,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *backend\_name);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ calc\_dst\_factor(\doxymbox{\hyperlink{struct_s_window_data}{SWindowData}}\ *window\_data,\ uint32\_t\ width,\ uint32\_t\ height);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ resize\_dst(\doxymbox{\hyperlink{struct_s_window_data}{SWindowData}}\ *window\_data,\ uint32\_t\ width,\ uint32\_t\ height);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_target\_fps\_aux();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ stretch\_image(uint32\_t\ *src\_image,\ uint32\_t\ src\_x,\ uint32\_t\ src\_y,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ src\_width,\ uint32\_t\ src\_height,\ uint32\_t\ src\_pitch,}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ *dst\_image,\ uint32\_t\ dst\_x,\ uint32\_t\ dst\_y,}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ dst\_width,\ uint32\_t\ dst\_height,\ uint32\_t\ dst\_pitch);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00088\ \}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

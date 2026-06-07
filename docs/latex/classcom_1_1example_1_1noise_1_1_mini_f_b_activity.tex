@@ -1,0 +1,33 @@
+\doxysection{com.\+example.\+noise.\+Mini\+FBActivity Class Reference}
+\hypertarget{classcom_1_1example_1_1noise_1_1_mini_f_b_activity}{}\label{classcom_1_1example_1_1noise_1_1_mini_f_b_activity}\index{com.example.noise.MiniFBActivity@{com.example.noise.MiniFBActivity}}
+Inheritance diagram for com.\+example.\+noise.\+Mini\+FBActivity:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1example_1_1noise_1_1_mini_f_b_activity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_a28217ab07e37e581d7cce600450a32f8}\label{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_a28217ab07e37e581d7cce600450a32f8} 
+void {\bfseries on\+Window\+Focus\+Changed} (boolean has\+Focus)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_a7c5fd992890855288cb10f74d658219e}\label{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_a7c5fd992890855288cb10f74d658219e} 
+void {\bfseries on\+Create} (Bundle saved\+Instance\+State)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Minimal Native\+Activity subclass that sets up a proper fullscreen + display-\/cutout (notch) mode for all Android API levels supported by Mini\+FB (min\+Sdk = 24).\hypertarget{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{Why this is needed}{Why this is needed}}\label{classcom_1_1example_1_1noise_1_1_mini_f_b_activity_autotoc_md21}
+Android API 32+ changed the default handling of the display cutout (notch):\+ by default the system reserves space for it, so the native window reports its full pixel dimensions but rendered content is shifted/\+clipped. API 35+ forces edge-\/to-\/edge automatically (works again), but API 32-\/34 needs an explicit opt-\/in from the app.
+
+This class addresses the problem programmatically, complementing the manifest theme (Option A) which provides an early fallback before Java code runs.
+
+on\+Window\+Focus\+Changed is also overridden because Android can temporarily restore system bars (e.\+g. when the user swipes from an edge) and we want to hide them again. 
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+modules/\+minifb/\+examples/\+android/\+native2026/\+app/\+src/\+main/\+java/\+com/\+example/\+noise/\+Mini\+FBActivity.\+java\end{DoxyCompactItemize}

@@ -1,0 +1,43 @@
+\chapter{The xdg\+\_\+output\+\_\+unstable\+\_\+v1 protocol }
+\hypertarget{page_xdg_output_unstable_v1}{}\label{page_xdg_output_unstable_v1}\index{The xdg\_output\_unstable\_v1 protocol@{The xdg\_output\_unstable\_v1 protocol}}
+Protocol to describe output regions\hypertarget{page_xdg_output_unstable_v1_page_desc_xdg_output_unstable_v1}{}\doxysection{\texorpdfstring{Description}{Description}}\label{page_xdg_output_unstable_v1_page_desc_xdg_output_unstable_v1}
+This protocol aims at describing outputs in a way which is more in line with the concept of an output on desktop oriented systems.
+
+Some information are more specific to the concept of an output for a desktop oriented system and may not make sense in other applications, such as IVI systems for example.
+
+Typically, the global compositor space on a desktop system is made of a contiguous or overlapping set of rectangular regions.
+
+Some of the information provided in this protocol might be identical to their counterparts already available from wl\+\_\+output, in which case the information provided by this protocol should be preferred to their equivalent in wl\+\_\+output. The goal is to move the desktop specific concepts (such as output location within the global compositor space, the connector name and types, etc.) out of the core wl\+\_\+output protocol.
+
+Warning! The protocol described in this file is experimental and backward incompatible changes may be made. Backward compatible changes may be added together with the corresponding interface version bump. Backward incompatible changes are done by bumping the version number in the protocol and interface names and resetting the interface version. Once the protocol is to be declared stable, the \textquotesingle{}z\textquotesingle{} prefix and the version number in the protocol and interface names are removed and the interface version number is reset.\hypertarget{page_xdg_output_unstable_v1_page_ifaces_xdg_output_unstable_v1}{}\doxysection{\texorpdfstring{Interfaces}{Interfaces}}\label{page_xdg_output_unstable_v1_page_ifaces_xdg_output_unstable_v1}
+
+\begin{DoxyItemize}
+\item \doxylink{page_iface_zxdg_output_manager_v1}{zxdg\+\_\+output\+\_\+manager\+\_\+v1} -\/ manage xdg\+\_\+output objects
+\item \doxylink{page_iface_zxdg_output_v1}{zxdg\+\_\+output\+\_\+v1} -\/ compositor logical output region 
+\end{DoxyItemize}\hypertarget{page_xdg_output_unstable_v1_page_copyright_xdg_output_unstable_v1}{}\doxysection{\texorpdfstring{Copyright}{Copyright}}\label{page_xdg_output_unstable_v1_page_copyright_xdg_output_unstable_v1}
+
+\begin{DoxyPre}
+
+Copyright © 2017 Red Hat Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the "{}Software"{}),
+to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice (including the next
+paragraph) shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "{}AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
+THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.
+\end{DoxyPre}
+ \input{page_iface_zxdg_output_manager_v1}
+\input{page_iface_zxdg_output_v1}

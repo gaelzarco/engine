@@ -1,0 +1,195 @@
+\doxysection{Mini\+FB\+\_\+cpp.\+h}
+\hypertarget{_mini_f_b__cpp_8h_source}{}\label{_mini_f_b__cpp_8h_source}\index{modules/minifb/include/MiniFB\_cpp.h@{modules/minifb/include/MiniFB\_cpp.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}MiniFB.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ To\ be\ able\ to\ distinguish\ these\ C++\ functions,\ using\ std::function,\ from\ C\ functions,\ using\ raw\ function\ pointers,\ we\ need\ to\ reverse\ params\ order.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ Note\ that\ FROM\ the\ compiler\ point\ of\ view}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ \ \ mfb\_set\_XXX\_callback(window,\ \&my\_c\_func)}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ and}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ \ \ mfb\_set\_XXX\_callback(window,\ [](...)\ \{\})}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ have\ the\ same\ parameters.}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ mfb\_set\_active\_callback\ \ \ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{bool})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00019\ \textcolor{keywordtype}{void}\ mfb\_set\_resize\_callback\ \ \ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00020\ \textcolor{keywordtype}{void}\ mfb\_set\_close\_callback\ \ \ \ \ \ \ (std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{struct}\ mfb\_window\ *)>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00021\ \textcolor{keywordtype}{void}\ mfb\_set\_keyboard\_callback\ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00022\ \textcolor{keywordtype}{void}\ mfb\_set\_char\_input\_callback\ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00023\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_button\_callback(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00024\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_move\_callback\ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00025\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_scroll\_callback(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float})>\ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00026\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00030\ \textcolor{keywordtype}{void}\ mfb\_set\_active\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ mfb\_set\_resize\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00036\ \textcolor{keywordtype}{void}\ mfb\_set\_close\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{bool}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *));}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ mfb\_set\_keyboard\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00042\ \textcolor{keywordtype}{void}\ mfb\_set\_char\_input\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_button\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_move\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_scroll\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float}));}
+\DoxyCodeLine{00052\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ To\ avoid\ clumsy\ hands}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00057\ \textcolor{keyword}{class\ }mfb\_stub\ \{}
+\DoxyCodeLine{00058\ \ \ \ \ mfb\_stub()\ :\ m\_window(NULL)\ \{\}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }mfb\_stub\_vector;}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_active\_callback\ \ \ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_resize\_callback\ \ \ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_close\_callback\ \ \ \ \ \ \ (std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{struct}\ mfb\_window\ *)>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_keyboard\_callback\ \ \ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_char\_input\_callback\ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_button\_callback(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_move\_callback\ \ (std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_scroll\_callback(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float})>\ \ \ \ \ \ \ \ \ \ \ func,\ \textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_active\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_resize\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_close\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{bool}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *));}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_keyboard\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_char\_input\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_button\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}));}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_move\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}));}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_scroll\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *obj,\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float}));}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ mfb\_stub\ *get\_instance(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ active\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ is\_active);}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ resize\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ close\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ keyboard\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\ key,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed);}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ char\_input\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int});}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mouse\_btn\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_button\ button,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mouse\_move\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ scroll\_stub(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{float}\ delta\_x,\ \textcolor{keywordtype}{float}\ delta\_y);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{struct\ }mfb\_window\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *m\_window;}
+\DoxyCodeLine{00099\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_active;}
+\DoxyCodeLine{00100\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_resize;}
+\DoxyCodeLine{00101\ \ \ \ \ std::function<bool(\textcolor{keyword}{struct}\ mfb\_window\ *window)>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_close;}
+\DoxyCodeLine{00102\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ \ m\_keyboard;}
+\DoxyCodeLine{00103\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_char\_input;}
+\DoxyCodeLine{00104\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool})>\ \ \ m\_mouse\_btn;}
+\DoxyCodeLine{00105\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int})>\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ m\_mouse\_move;}
+\DoxyCodeLine{00106\ \ \ \ \ std::function<void(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float})>\ \ \ m\_scroll;}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00110\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00111\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_active\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}))\ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00115\ \ \ \ \ stub-\/>m\_active\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2);}
+\DoxyCodeLine{00116\ \ \ \ \ mfb\_set\_active\_callback(window,\ mfb\_stub::active\_stub);}
+\DoxyCodeLine{00117\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00120\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00121\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_resize\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}))\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00125\ \ \ \ \ stub-\/>m\_resize\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2,\ \_3);}
+\DoxyCodeLine{00126\ \ \ \ \ mfb\_set\_resize\_callback(window,\ mfb\_stub::resize\_stub);}
+\DoxyCodeLine{00127\ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00130\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00131\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_close\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{bool}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window))\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00135\ \ \ \ \ stub-\/>m\_close\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1);}
+\DoxyCodeLine{00136\ \ \ \ \ mfb\_set\_close\_callback(window,\ mfb\_stub::close\_stub);}
+\DoxyCodeLine{00137\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00140\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00141\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_keyboard\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}))\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00145\ \ \ \ \ stub-\/>m\_keyboard\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2,\ \_3,\ \_4);}
+\DoxyCodeLine{00146\ \ \ \ \ mfb\_set\_keyboard\_callback(window,\ mfb\_stub::keyboard\_stub);}
+\DoxyCodeLine{00147\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00150\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00151\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_char\_input\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}))\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00155\ \ \ \ \ stub-\/>m\_char\_input\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2);}
+\DoxyCodeLine{00156\ \ \ \ \ mfb\_set\_char\_input\_callback(window,\ mfb\_stub::char\_input\_stub);}
+\DoxyCodeLine{00157\ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00160\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00161\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_button\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_button,\ mfb\_key\_mod,\ \textcolor{keywordtype}{bool}))\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00165\ \ \ \ \ stub-\/>m\_mouse\_btn\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2,\ \_3,\ \_4);}
+\DoxyCodeLine{00166\ \ \ \ \ mfb\_set\_mouse\_button\_callback(window,\ mfb\_stub::mouse\_btn\_stub);}
+\DoxyCodeLine{00167\ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00170\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00171\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_move\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int},\ \textcolor{keywordtype}{int}))\ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00175\ \ \ \ \ stub-\/>m\_mouse\_move\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2,\ \_3);}
+\DoxyCodeLine{00176\ \ \ \ \ mfb\_set\_mouse\_move\_callback(window,\ mfb\_stub::mouse\_move\_stub);}
+\DoxyCodeLine{00177\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00180\ \textcolor{keyword}{template}\ <\textcolor{keyword}{class}\ T>}
+\DoxyCodeLine{00181\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ mfb\_set\_mouse\_scroll\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ T\ *\doxymbox{\hyperlink{classobj}{obj}},\ \textcolor{keywordtype}{void}\ (T::*method)(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\_mod,\ \textcolor{keywordtype}{float},\ \textcolor{keywordtype}{float}))\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{using\ namespace\ }std::placeholders;}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ mfb\_stub\ \ \ \ *stub\ =\ mfb\_stub::get\_instance(window);}
+\DoxyCodeLine{00185\ \ \ \ \ stub-\/>m\_scroll\ =\ std::bind(method,\ \doxymbox{\hyperlink{classobj}{obj}},\ \_1,\ \_2,\ \_3,\ \_4);}
+\DoxyCodeLine{00186\ \ \ \ \ mfb\_set\_mouse\_scroll\_callback(window,\ mfb\_stub::scroll\_stub);}
+\DoxyCodeLine{00187\ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

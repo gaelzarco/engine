@@ -1,0 +1,61 @@
+\doxysection{The zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1 interface }
+\hypertarget{group__iface__zxdg__toplevel__decoration__v1}{}\label{group__iface__zxdg__toplevel__decoration__v1}\index{The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structzxdg__toplevel__decoration__v1__listener}{zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1\+\_\+listener}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_gae0ed7401b51b65ad2b3e175b9d5d2812}\label{group__iface__zxdg__toplevel__decoration__v1_gae0ed7401b51b65ad2b3e175b9d5d2812} 
+\+\#define {\bfseries ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+CONFIGURE\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_ga5840e49892bc335995cab19122286ad6}\label{group__iface__zxdg__toplevel__decoration__v1_ga5840e49892bc335995cab19122286ad6} 
+\+\#define {\bfseries ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+DESTROY\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_gaa8bf9e5f6ed36b35d07101f61a8cd051}\label{group__iface__zxdg__toplevel__decoration__v1_gaa8bf9e5f6ed36b35d07101f61a8cd051} 
+\+\#define {\bfseries ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+SET\+\_\+\+MODE\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_gad0a9600c2bda1d6c4b054a232a00a109}\label{group__iface__zxdg__toplevel__decoration__v1_gad0a9600c2bda1d6c4b054a232a00a109} 
+\+\#define {\bfseries ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+UNSET\+\_\+\+MODE\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{group__iface__zxdg__toplevel__decoration__v1_ga6d34192e631e9279d2f8c3c25dd38c9e}{zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1\+\_\+mode}} \{ \doxymbox{\hyperlink{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9ea46b9a3908e72d4e9f280fa43734cb13d}{ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+MODE\+\_\+\+CLIENT\+\_\+\+SIDE}} = 1
+, \doxymbox{\hyperlink{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9eabb146c0d4252444236feb25ab709fa75}{ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+MODE\+\_\+\+SERVER\+\_\+\+SIDE}} = 2
+ \}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The decoration object allows the compositor to toggle server-\/side window decorations for a toplevel surface. The client can request to switch to another mode.
+
+The xdg\+\_\+toplevel\+\_\+decoration object must be destroyed before its xdg\+\_\+toplevel. 
+
+\label{doc-enum-members}
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_ga6d34192e631e9279d2f8c3c25dd38c9e}\index{The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}!zxdg\_toplevel\_decoration\_v1\_mode@{zxdg\_toplevel\_decoration\_v1\_mode}}
+\index{zxdg\_toplevel\_decoration\_v1\_mode@{zxdg\_toplevel\_decoration\_v1\_mode}!The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}}
+\doxysubsubsection{\texorpdfstring{zxdg\_toplevel\_decoration\_v1\_mode}{zxdg\_toplevel\_decoration\_v1\_mode}}
+{\footnotesize\ttfamily \label{group__iface__zxdg__toplevel__decoration__v1_ga6d34192e631e9279d2f8c3c25dd38c9e} 
+enum \doxymbox{\hyperlink{group__iface__zxdg__toplevel__decoration__v1_ga6d34192e631e9279d2f8c3c25dd38c9e}{zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1\+\_\+mode}}}
+
+window decoration modes
+
+These values describe window decoration modes. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_CLIENT\_SIDE@{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_CLIENT\_SIDE}!The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}}
+\index{The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}!ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_CLIENT\_SIDE@{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_CLIENT\_SIDE}}
+}\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9ea46b9a3908e72d4e9f280fa43734cb13d}\label{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9ea46b9a3908e72d4e9f280fa43734cb13d} 
+ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+MODE\+\_\+\+CLIENT\+\_\+\+SIDE&no server-\/side window decoration \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_SERVER\_SIDE@{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_SERVER\_SIDE}!The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}}
+\index{The zxdg\_toplevel\_decoration\_v1 interface@{The zxdg\_toplevel\_decoration\_v1 interface}!ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_SERVER\_SIDE@{ZXDG\_TOPLEVEL\_DECORATION\_V1\_MODE\_SERVER\_SIDE}}
+}\Hypertarget{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9eabb146c0d4252444236feb25ab709fa75}\label{group__iface__zxdg__toplevel__decoration__v1_gga6d34192e631e9279d2f8c3c25dd38c9eabb146c0d4252444236feb25ab709fa75} 
+ZXDG\+\_\+\+TOPLEVEL\+\_\+\+DECORATION\+\_\+\+V1\+\_\+\+MODE\+\_\+\+SERVER\+\_\+\+SIDE&server-\/side window decoration \\
+\hline
+
+\end{DoxyEnumFields}

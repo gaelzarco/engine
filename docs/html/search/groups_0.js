@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['interface_0',['interface',['../group__iface__wp__fractional__scale__manager__v1.html',1,'The wp_fractional_scale_manager_v1 interface'],['../group__iface__wp__fractional__scale__v1.html',1,'The wp_fractional_scale_v1 interface'],['../group__iface__xdg__popup.html',1,'The xdg_popup interface'],['../group__iface__xdg__positioner.html',1,'The xdg_positioner interface'],['../group__iface__xdg__surface.html',1,'The xdg_surface interface'],['../group__iface__xdg__toplevel.html',1,'The xdg_toplevel interface'],['../group__iface__xdg__wm__base.html',1,'The xdg_wm_base interface'],['../group__iface__zxdg__decoration__manager__v1.html',1,'The zxdg_decoration_manager_v1 interface'],['../group__iface__zxdg__output__manager__v1.html',1,'The zxdg_output_manager_v1 interface'],['../group__iface__zxdg__output__v1.html',1,'The zxdg_output_v1 interface'],['../group__iface__zxdg__toplevel__decoration__v1.html',1,'The zxdg_toplevel_decoration_v1 interface']]]
+];

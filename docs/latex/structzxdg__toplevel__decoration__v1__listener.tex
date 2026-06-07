@@ -1,0 +1,32 @@
+\doxysection{zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1\+\_\+listener Struct Reference}
+\hypertarget{structzxdg__toplevel__decoration__v1__listener}{}\label{structzxdg__toplevel__decoration__v1__listener}\index{zxdg\_toplevel\_decoration\_v1\_listener@{zxdg\_toplevel\_decoration\_v1\_listener}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structzxdg__toplevel__decoration__v1__listener_aa2e05c2aee9c6cc32dcf85df87d97baa}{configure}} )(void \texorpdfstring{$\ast$}{*}data, struct zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1 \texorpdfstring{$\ast$}{*}zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1, uint32\+\_\+t mode)
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structzxdg__toplevel__decoration__v1__listener_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structzxdg__toplevel__decoration__v1__listener_aa2e05c2aee9c6cc32dcf85df87d97baa}\index{zxdg\_toplevel\_decoration\_v1\_listener@{zxdg\_toplevel\_decoration\_v1\_listener}!configure@{configure}}
+\index{configure@{configure}!zxdg\_toplevel\_decoration\_v1\_listener@{zxdg\_toplevel\_decoration\_v1\_listener}}
+\doxysubsubsection{\texorpdfstring{configure}{configure}}
+{\footnotesize\ttfamily \label{structzxdg__toplevel__decoration__v1__listener_aa2e05c2aee9c6cc32dcf85df87d97baa} 
+void(\texorpdfstring{$\ast$}{*} zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1\+\_\+listener::\+configure) (void \texorpdfstring{$\ast$}{*}data, struct zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1 \texorpdfstring{$\ast$}{*}zxdg\+\_\+toplevel\+\_\+decoration\+\_\+v1, uint32\+\_\+t mode)}
+
+notify a decoration mode change
+
+The configure event configures the effective decoration mode. The configured state should not be applied immediately. Clients must send an ack\+\_\+configure in response to this event. See xdg\+\_\+surface.\+configure and xdg\+\_\+surface.\+ack\+\_\+configure for details.
+
+A configure event can be sent at any time. The specified mode must be obeyed by the client. 
+\begin{DoxyParams}{Parameters}
+{\em mode} & the decoration mode \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+modules/\+minifb/\+src/\+wayland/\+generated/\+xdg-\/decoration-\/client-\/protocol.\+h\end{DoxyCompactItemize}

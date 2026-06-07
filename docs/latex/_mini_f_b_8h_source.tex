@@ -1,0 +1,167 @@
+\doxysection{Mini\+FB.\+h}
+\hypertarget{_mini_f_b_8h_source}{}\label{_mini_f_b_8h_source}\index{modules/minifb/include/MiniFB.h@{modules/minifb/include/MiniFB.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}MiniFB\_types.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}MiniFB\_macros.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Create\ a\ window\ that\ is\ used\ to\ display\ the\ buffer\ sent\ into\ the\ mfb\_update\ function,\ returns\ 0\ if\ fails.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ If\ title\ is\ NULL\ or\ empty,\ a\ backend-\/default\ title\ ("{}minifb"{})\ is\ used.}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }mfb\_window\ *\ mfb\_open(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *title,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }mfb\_window\ *\ mfb\_open\_ex(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *title,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height,\ \textcolor{keywordtype}{unsigned}\ flags);}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Update\ the\ display}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Input\ buffer\ is\ assumed\ to\ be\ a\ 32-\/bit\ buffer\ of\ the\ size\ given\ in\ the\ open\ call}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Will\ return\ a\ negative\ status\ if\ something\ went\ wrong\ or\ the\ user\ want\ to\ exit}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Also\ updates\ the\ window\ events}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Pixel\ format:}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ \ \ Each\ pixel\ is\ a\ packed\ uint32\_t.\ \ The\ expected\ byte\ order\ in\ memory\ depends\ on\ the}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ \ \ platform\ and\ is\ handled\ automatically\ by\ the\ MFB\_RGB\ /\ MFB\_ARGB\ macros:}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ \ \ \ \ Desktop\ /\ iOS\ /\ Web:\ \ BGRA\ in\ memory\ \ (B\ at\ lowest\ address)}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ \ \ \ \ Android\ (LE):\ \ \ \ \ \ \ \ \ RGBA\ in\ memory\ \ (R\ at\ lowest\ address)}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//\ \ \ Always\ use\ MFB\_RGB(r,g,b)\ or\ MFB\_ARGB(a,r,g,b)\ to\ construct\ pixel\ values;\ these}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\ \ \ macros\ expand\ to\ the\ correct\ bit\ layout\ on\ every\ platform.}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\ \ \ If\ you\ copy\ pixel\ data\ from\ an\ external\ source\ (image\ loader,\ GPU\ readback,\ etc.)}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ \ \ that\ always\ produces\ RGBA\ bytes\ (e.g.\ stb\_image,\ libpng),\ you\ must\ swizzle\ R<-\/>B}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ \ \ before\ passing\ the\ buffer\ to\ mfb\_update\_ex\ on\ non-\/Android\ platforms.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ On\ Wayland,\ mfb\_update\_ex\ may\ block\ until\ the\ compositor\ grants\ a\ frame\ callback.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ On\ Android,\ mfb\_update\_ex\ returns\ MFB\_STATE\_OK\ without\ rendering\ when\ ANativeWindow}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ \ \ is\ temporarily\ unavailable\ during\ lifecycle\ transitions\ (pause\ /\ surface\ lost).}}
+\DoxyCodeLine{00037\ mfb\_update\_state\ \ \ \ mfb\_update(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *buffer);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ mfb\_update\_state\ \ \ \ mfb\_update\_ex(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{comment}{//\ Only\ updates\ the\ window\ events}}
+\DoxyCodeLine{00042\ mfb\_update\_state\ \ \ \ mfb\_update\_events(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ Close\ the\ window}}
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_close(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{comment}{//\ Set\ user\ data}}
+\DoxyCodeLine{00048\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_user\_data(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *user\_data);}
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_user\_data(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Set\ viewport\ in\ drawable\ coordinates\ (same\ units\ as\ mfb\_get\_window\_width/height\ and\ resize\ callback)}}
+\DoxyCodeLine{00052\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_viewport(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ offset\_x,\ \textcolor{keywordtype}{unsigned}\ offset\_y,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Let\ mfb\ calculate\ the\ best\ fit\ from\ your\ framebuffer\ original\ size\ (same\ drawable\ coordinate\ units)}}
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_viewport\_best\_fit(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ old\_width,\ \textcolor{keywordtype}{unsigned}\ old\_height);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{comment}{//\ DPI}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ [Deprecated]:\ Probably\ a\ better\ name\ will\ be\ mfb\_get\_monitor\_scale}}
+\DoxyCodeLine{00058\ MFB\_DEPRECATED(\textcolor{stringliteral}{"{}mfb\_get\_moniter\_dpi\ deprecated,\ use\ mfb\_get\_monitor\_scale\ instead"{}})}
+\DoxyCodeLine{00059\ void\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_monitor\_dpi(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{float}\ *dpi\_x,\ \textcolor{keywordtype}{float}\ *dpi\_y);}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ Use\ this\ instead.}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ Returns\ monitor/content\ scale\ as\ multipliers\ (1.0\ =\ 100\%).}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ If\ window\ is\ non-\/NULL,\ returns\ the\ scale\ of\ the\ monitor\ containing\ that\ window.}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ If\ window\ is\ NULL,\ returns\ the\ primary\ monitor\ scale\ on\ platforms\ that\ support\ it}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ (macOS,\ Windows,\ X11,\ iOS,\ Web,\ Android),\ or\ 1.0\ otherwise\ (Wayland,\ DOS).}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ Output\ pointers\ may\ be\ NULL.}}
+\DoxyCodeLine{00066\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_monitor\_scale(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{float}\ *scale\_x,\ \textcolor{keywordtype}{float}\ *scale\_y);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ Show/hide\ cursor}}
+\DoxyCodeLine{00069\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_show\_cursor(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ show);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ Callbacks}}
+\DoxyCodeLine{00072\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_active\_callback(struct\ mfb\_window\ *window,\ mfb\_active\_func\ callback);}
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_resize\_callback(struct\ mfb\_window\ *window,\ mfb\_resize\_func\ callback);}
+\DoxyCodeLine{00074\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_close\_callback(struct\ mfb\_window\ *window,\ mfb\_close\_func\ callback);}
+\DoxyCodeLine{00075\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_keyboard\_callback(struct\ mfb\_window\ *window,\ mfb\_keyboard\_func\ callback);}
+\DoxyCodeLine{00076\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_char\_input\_callback(struct\ mfb\_window\ *window,\ mfb\_char\_input\_func\ callback);}
+\DoxyCodeLine{00077\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_button\_callback(struct\ mfb\_window\ *window,\ mfb\_mouse\_button\_func\ callback);}
+\DoxyCodeLine{00078\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_move\_callback(struct\ mfb\_window\ *window,\ mfb\_mouse\_move\_func\ callback);}
+\DoxyCodeLine{00079\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_scroll\_callback(struct\ mfb\_window\ *window,\ mfb\_mouse\_scroll\_func\ callback);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00082\ const\ \textcolor{keywordtype}{char}\ *\ \ \ \ \ \ \ \ mfb\_get\_key\_name(mfb\_key\ key);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_is\_window\_active(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00085\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_width(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00086\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_height(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00087\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_size(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ *width,\ \textcolor{keywordtype}{unsigned}\ *height);}
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_offset\_x(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00089\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_offset\_y(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00090\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_width(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00091\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_height(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00092\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_bounds(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ *offset\_x,\ \textcolor{keywordtype}{unsigned}\ *offset\_y,\ \textcolor{keywordtype}{unsigned}\ *width,\ \textcolor{keywordtype}{unsigned}\ *height);}
+\DoxyCodeLine{00093\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_x(struct\ mfb\_window\ *window);\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Last\ mouse\ pos\ X\ (Android/iOS\ touch\ path\ may\ encode\ pointer\ id\ in\ upper\ bits)}}
+\DoxyCodeLine{00094\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_y(struct\ mfb\_window\ *window);\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Last\ mouse\ pos\ Y\ (Android/iOS\ touch\ path\ may\ encode\ pointer\ id\ in\ upper\ bits)}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ Decode\ a\ value\ that\ may\ contain\ an\ encoded\ touch\ pointer\ id.}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ Android/iOS\ encode\ touch\ pointer\ id\ in\ upper\ bits\ of\ mouse\ X/Y\ getters.}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ Desktop/Web/DOS:\ pos=combined,\ id=0.}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ Mobile\ decoding\ preserves\ signed\ position\ values.}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//\ Output\ pointers\ may\ be\ NULL.}}
+\DoxyCodeLine{00100\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch(\textcolor{keywordtype}{int}\ combined,\ \textcolor{keywordtype}{int}\ *pos,\ \textcolor{keywordtype}{int}\ *\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00101\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch\_pos(\textcolor{keywordtype}{int}\ combined);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ position\ from\ a\ packed\ touch\ value.}}
+\DoxyCodeLine{00102\ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch\_id(\textcolor{keywordtype}{int}\ combined);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ pointer\ id\ from\ a\ packed\ touch\ value.}}
+\DoxyCodeLine{00103\ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_scroll\_x(struct\ mfb\_window\ *window);\ \ \ \ \ \ \textcolor{comment}{//\ Mouse\ wheel\ delta\ X\ from\ the\ most\ recent\ event\ pump\ (0.0f\ if\ none).}}
+\DoxyCodeLine{00104\ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_scroll\_y(struct\ mfb\_window\ *window);\ \ \ \ \ \ \textcolor{comment}{//\ Mouse\ wheel\ delta\ Y\ from\ the\ most\ recent\ event\ pump\ (0.0f\ if\ none).}}
+\DoxyCodeLine{00105\ const\ uint8\_t\ *\ \ \ \ \ mfb\_get\_mouse\_button\_buffer(struct\ mfb\_window\ *window);\ \textcolor{comment}{//\ One\ byte\ for\ every\ button.\ Press\ (1),\ Release\ 0.\ (up\ to\ 8\ buttons)}}
+\DoxyCodeLine{00106\ const\ uint8\_t\ *\ \ \ \ \ mfb\_get\_key\_buffer(struct\ mfb\_window\ *window);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ One\ byte\ for\ every\ key.\ Press\ (1),\ Release\ 0.}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ FPS}}
+\DoxyCodeLine{00109\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_target\_fps(uint32\_t\ fps);}
+\DoxyCodeLine{00110\ \textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_target\_fps(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00111\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_wait\_sync(struct\ mfb\_window\ *window);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ Timer}}
+\DoxyCodeLine{00114\ struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *\ \ mfb\_timer\_create(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00115\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_destroy(struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{00116\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_reset(struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{00117\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_compensated\_reset(struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{00118\ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_now(struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_delta(struct\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{00120\ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_get\_frequency(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00121\ \textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_get\_resolution(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \textcolor{comment}{//\ Logger}}
+\DoxyCodeLine{00124\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_logger(mfb\_log\_func\ user\_logger);}
+\DoxyCodeLine{00125\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_log\_level(mfb\_log\_level\ level);}
+\DoxyCodeLine{00126\ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_log(const\ \doxymbox{\hyperlink{structmfb__log__info}{mfb\_log\_info}}\ *info,\ const\ \textcolor{keywordtype}{char}\ *tag,\ const\ \textcolor{keywordtype}{char}\ *message,\ ...);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \textcolor{comment}{//\ Returns\ the\ display\ cutout\ (notch/punch-\/hole)\ insets\ in\ pixels\ -\/\ the\ physical\ area\ of}}
+\DoxyCodeLine{00131\ \textcolor{comment}{//\ the\ screen\ obstructed\ by\ the\ camera\ notch\ or\ Dynamic\ Island.\ \ Values\ are\ 0\ on\ edges}}
+\DoxyCodeLine{00132\ \textcolor{comment}{//\ that\ have\ no\ physical\ cutout,\ or\ on\ devices/platforms\ without\ a\ cutout.}}
+\DoxyCodeLine{00133\ \textcolor{comment}{//\ Insets\ are\ margins\ from\ each\ edge\ (not\ a\ rectangle):\ no\ inset\ means\ 0,\ 0,\ 0,\ 0.}}
+\DoxyCodeLine{00134\ \textcolor{comment}{//\ Android:\ requires\ API\ 28+;\ returns\ false\ (all\ zeros)\ on\ older\ APIs.}}
+\DoxyCodeLine{00135\ \textcolor{comment}{//\ iOS:\ approximated\ from\ UIWindow.safeAreaInsets;\ bottom\ is\ always\ 0\ (home\ indicator}}
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ \ \ is\ excluded\ since\ it\ is\ not\ a\ physical\ obstruction).}}
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ Desktop\ platforms\ (macOS,\ Windows,\ Linux,\ Web):\ true\ with\ all\ zeros\ for\ a\ valid\ window.}}
+\DoxyCodeLine{00138\ \textcolor{comment}{//\ All\ output\ parameters\ are\ optional\ (may\ be\ NULL).}}
+\DoxyCodeLine{00139\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_display\_cutout\_insets(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ *left,\ \textcolor{keywordtype}{int}\ *top,\ \textcolor{keywordtype}{int}\ *right,\ \textcolor{keywordtype}{int}\ *bottom);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{comment}{//\ Returns\ the\ full\ safe-\/area\ insets\ in\ pixels\ -\/\ the\ union\ of\ the\ display\ cutout\ area}}
+\DoxyCodeLine{00142\ \textcolor{comment}{//\ AND\ the\ system\ bars\ (status\ bar,\ navigation\ bar\ /\ home\ indicator).\ \ Useful\ to\ know}}
+\DoxyCodeLine{00143\ \textcolor{comment}{//\ how\ much\ of\ the\ screen\ edges\ are\ reserved\ by\ the\ OS,\ even\ when\ bars\ are\ transparent.}}
+\DoxyCodeLine{00144\ \textcolor{comment}{//\ Insets\ are\ margins\ from\ each\ edge\ (not\ a\ rectangle):\ no\ inset\ means\ 0,\ 0,\ 0,\ 0.}}
+\DoxyCodeLine{00145\ \textcolor{comment}{//\ Android\ API\ 30+:\ queries\ WindowInsets.Type.systemBars()|displayCutout().}}
+\DoxyCodeLine{00146\ \textcolor{comment}{//\ Android\ API\ 24-\/29:\ falls\ back\ to\ getSystemWindowInset\{Top,\ Right,\ Bottom,\ Left\}().}}
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ iOS:\ reads\ UIWindow.safeAreaInsets\ (includes\ notch\ +\ status\ bar\ +\ home\ indicator).}}
+\DoxyCodeLine{00148\ \textcolor{comment}{//\ Desktop\ platforms\ (macOS,\ Windows,\ Linux,\ Web):\ true\ with\ all\ zeros\ for\ a\ valid\ window.}}
+\DoxyCodeLine{00149\ \textcolor{comment}{//\ All\ output\ parameters\ are\ optional\ (may\ be\ NULL).}}
+\DoxyCodeLine{00150\ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_display\_safe\_insets(struct\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ *left,\ \textcolor{keywordtype}{int}\ *top,\ \textcolor{keywordtype}{int}\ *right,\ \textcolor{keywordtype}{int}\ *bottom);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#ifdef\ \_\_cplusplus}}
+\DoxyCodeLine{00155\ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#if\ !defined(MINIFB\_AVOID\_CPP\_HEADERS)}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\ \ \ \ \#include\ "{}MiniFB\_cpp.h"{}}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

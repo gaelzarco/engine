@@ -1,0 +1,63 @@
+\doxysection{Window\+Data.\+h}
+\hypertarget{_window_data_8h_source}{}\label{_window_data_8h_source}\index{modules/minifb/src/WindowData.h@{modules/minifb/src/WindowData.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <MiniFB\_types.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#define\ MFB\_MAX\_KEYS\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 512}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ MFB\_MAX\_MOUSE\_BUTTONS\ \ \ \ \ \ \ \ \ 8}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#define\ MFB\_MAX\_MOUSE\_BUTTONS\_MASK\ \ (MFB\_MAX\_MOUSE\_BUTTONS\ -\/\ 1)}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *specific;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *user\_data;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ mfb\_active\_func\ \ \ \ \ \ \ \ \ active\_func;}
+\DoxyCodeLine{00018\ \ \ \ \ mfb\_resize\_func\ \ \ \ \ \ \ \ \ resize\_func;}
+\DoxyCodeLine{00019\ \ \ \ \ mfb\_close\_func\ \ \ \ \ \ \ \ \ \ close\_func;}
+\DoxyCodeLine{00020\ \ \ \ \ mfb\_keyboard\_func\ \ \ \ \ \ \ keyboard\_func;}
+\DoxyCodeLine{00021\ \ \ \ \ mfb\_char\_input\_func\ \ \ \ \ char\_input\_func;}
+\DoxyCodeLine{00022\ \ \ \ \ mfb\_mouse\_button\_func\ \ \ mouse\_btn\_func;}
+\DoxyCodeLine{00023\ \ \ \ \ mfb\_mouse\_move\_func\ \ \ \ \ mouse\_move\_func;}
+\DoxyCodeLine{00024\ \ \ \ \ mfb\_mouse\_scroll\_func\ \ \ mouse\_wheel\_func;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window\_width;}
+\DoxyCodeLine{00027\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window\_height;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst\_offset\_x;}
+\DoxyCodeLine{00030\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst\_offset\_y;}
+\DoxyCodeLine{00031\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst\_width;}
+\DoxyCodeLine{00032\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ dst\_height;}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ factor\_x;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ factor\_y;}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ factor\_width;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ factor\_height;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *draw\_buffer;}
+\DoxyCodeLine{00039\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer\_width;}
+\DoxyCodeLine{00040\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer\_height;}
+\DoxyCodeLine{00041\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer\_stride;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ int32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_pos\_x;}
+\DoxyCodeLine{00044\ \ \ \ \ int32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_pos\_y;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_wheel\_x;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_wheel\_y;}
+\DoxyCodeLine{00047\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_button\_status[MFB\_MAX\_MOUSE\_BUTTONS];}
+\DoxyCodeLine{00048\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ key\_status[MFB\_MAX\_KEYS];}
+\DoxyCodeLine{00049\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mod\_keys;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\_cursor\_visible;}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\_active;}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ is\_initialized;}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ must\_resize\_context;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ close;}
+\DoxyCodeLine{00057\ \}\ \doxymbox{\hyperlink{struct_s_window_data}{SWindowData}};}
+
+\end{DoxyCode}

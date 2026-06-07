@@ -1,0 +1,26 @@
+\doxysection{Window\+Data\+\_\+\+Win.\+h}
+\hypertarget{_window_data___win_8h_source}{}\label{_window_data___win_8h_source}\index{modules/minifb/src/windows/WindowData\_Win.h@{modules/minifb/src/windows/WindowData\_Win.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB\_enums.h>}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\#define\ WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00008\ \ \ \ \ HWND\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ window;}
+\DoxyCodeLine{00009\ \ \ \ \ WNDCLASS\ \ \ \ \ \ \ \ \ \ \ \ wc;}
+\DoxyCodeLine{00010\ \ \ \ \ HDC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hdc;}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#if\ defined(USE\_OPENGL\_API)}}
+\DoxyCodeLine{00012\ \ \ \ \ HGLRC\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hGLRC;}
+\DoxyCodeLine{00013\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ text\_id;}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00015\ \ \ \ \ BITMAPINFO\ \ \ \ \ \ \ \ \ \ *bitmap\_info;}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ \ \ \ *timer;}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mouse\_inside;}
+\DoxyCodeLine{00019\ \ \ \ \ WCHAR\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ high\_surrogate;}
+\DoxyCodeLine{00020\ \}\ \doxymbox{\hyperlink{struct_s_window_data___win}{SWindowData\_Win}};}
+
+\end{DoxyCode}

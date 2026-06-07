@@ -1,0 +1,35 @@
+\doxysection{X11\+Mini\+FB\+\_\+scale\+\_\+funcs.\+h}
+\hypertarget{_x11_mini_f_b__scale__funcs_8h_source}{}\label{_x11_mini_f_b__scale__funcs_8h_source}\index{modules/minifb/src/x11/X11MiniFB\_scale\_funcs.h@{modules/minifb/src/x11/X11MiniFB\_scale\_funcs.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <X11/Xlib.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00007\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_xresources;}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{float}\ x\_xresources;}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{float}\ y\_xresources;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_xsettings;}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ x\_xsettings;}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ y\_xsettings;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_xrandr\_window;}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{float}\ x\_xrandr\_window;}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{float}\ y\_xrandr\_window;}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_xrandr\_any;}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{float}\ x\_xrandr\_any;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{float}\ y\_xrandr\_any;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_display\_mm;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{float}\ x\_display\_mm;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{float}\ y\_display\_mm;}
+\DoxyCodeLine{00026\ \}\ \doxymbox{\hyperlink{struct_s_x11_scale_methods}{SX11ScaleMethods}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00029\ mfb\_x11\_query\_scale\_methods(Display\ *display,\ Window\ window,\ \textcolor{keywordtype}{int}\ screen,\ \doxymbox{\hyperlink{struct_s_x11_scale_methods}{SX11ScaleMethods}}\ *methods);}
+
+\end{DoxyCode}

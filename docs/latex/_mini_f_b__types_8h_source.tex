@@ -1,0 +1,36 @@
+\doxysection{Mini\+FB\+\_\+types.\+h}
+\hypertarget{_mini_f_b__types_8h_source}{}\label{_mini_f_b__types_8h_source}\index{modules/minifb/include/MiniFB\_types.h@{modules/minifb/include/MiniFB\_types.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}MiniFB\_enums.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ Opaque\ pointers}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00007\ \textcolor{keyword}{struct\ }mfb\_window;}
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}};}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Event\ callbacks}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{typedef}\ void(*mfb\_active\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ is\_active);}
+\DoxyCodeLine{00013\ \textcolor{keyword}{typedef}\ void(*mfb\_resize\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height);}
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ bool(*mfb\_close\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window);}
+\DoxyCodeLine{00015\ \textcolor{keyword}{typedef}\ void(*mfb\_keyboard\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ mfb\_key\ key,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed);}
+\DoxyCodeLine{00016\ \textcolor{keyword}{typedef}\ void(*mfb\_char\_input\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ code);}
+\DoxyCodeLine{00017\ \textcolor{keyword}{typedef}\ void(*mfb\_mouse\_button\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ mfb\_mouse\_button\ button,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed);}
+\DoxyCodeLine{00018\ \textcolor{keyword}{typedef}\ void(*mfb\_mouse\_move\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y);}
+\DoxyCodeLine{00019\ \textcolor{keyword}{typedef}\ void(*mfb\_mouse\_scroll\_func)(\textcolor{keyword}{struct\ }mfb\_window\ *window,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{float}\ delta\_x,\ \textcolor{keywordtype}{float}\ delta\_y);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ Log}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00024\ \ \ \ \ mfb\_log\_level\ level;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \ \ *file;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ \ \ *func;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ line;}
+\DoxyCodeLine{00028\ \}\ \doxymbox{\hyperlink{structmfb__log__info}{mfb\_log\_info}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{typedef}\ void\ (*mfb\_log\_func)(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structmfb__log__info}{mfb\_log\_info}}\ *info,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *tag,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *message);}
+
+\end{DoxyCode}

@@ -1,0 +1,60 @@
+\chapter{Engine }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Engine@{Engine}}
+\label{md__r_e_a_d_m_e_autotoc_md68}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md68}%
+
+
+A C++23 3D engine built with Mini\+FB as single dependency. Targets Unix environments.\hypertarget{md__r_e_a_d_m_e_autotoc_md69}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md__r_e_a_d_m_e_autotoc_md69}
+
+\begin{DoxyItemize}
+\item OBJ file parsing via C++23 named modules ({\ttfamily import \doxylink{classobj}{obj}}) built from scratch.
+\item Real-\/time windowed rendering with \href{https://github.com/nicowillis/minifb}{\texttt{Mini\+FB}}
+\item Simple 3D rendering pipeline built from scratch.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md70}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{md__r_e_a_d_m_e_autotoc_md70}
+
+\begin{DoxyItemize}
+\item C++23
+\item Clang 22+
+\item CMake + Ninja
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md71}{}\doxysection{\texorpdfstring{Configuration}{Configuration}}\label{md__r_e_a_d_m_e_autotoc_md71}
+Using different obj file parser versions programatically:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ change\ import\ to\ target\ version}}
+\DoxyCodeLine{\textcolor{keyword}{import}\ \doxymbox{\hyperlink{module__obj__v0__1}{obj\_v0\_1}};}
+\DoxyCodeLine{\textcolor{comment}{//\ OR}}
+\DoxyCodeLine{\textcolor{keyword}{import}\ \doxymbox{\hyperlink{module__obj__v0}{obj\_v0}}}
+\DoxyCodeLine{\textcolor{comment}{//\ etc.}}
+
+\end{DoxyCode}
+ Be sure to update CMake file to reflect target file version to include:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_sources(engine}
+\DoxyCodeLine{\ \ \ \ PUBLIC\ FILE\_SET\ CXX\_MODULES\ FILES}
+\DoxyCodeLine{\ \ \ \ modules/obj\_v0\_1.cppm\ \#\ update\ this}
+\DoxyCodeLine{)}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md72}{}\doxysection{\texorpdfstring{Build}{Build}}\label{md__r_e_a_d_m_e_autotoc_md72}
+Requires Clang 22+ and CMake with Ninja. 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/B\ build\ -\/G\ Ninja}
+\DoxyCodeLine{ln\ -\/sf\ build/compile\_commands.json\ .}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
+
+\end{DoxyCode}
+ Or run {\ttfamily chmod +x ./\+build.sh} on root directory, then {\ttfamily ./\+build.sh}\hypertarget{md__r_e_a_d_m_e_autotoc_md73}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md__r_e_a_d_m_e_autotoc_md73}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./build/engine\ ./assets/<asset>}
+
+\end{DoxyCode}
+
+
+Or programmatically:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\doxymbox{\hyperlink{classobj__}{obj\_}}\ model;}
+\DoxyCodeLine{model.read(\textcolor{stringliteral}{"{}./assets/<asset>"{}});}
+\DoxyCodeLine{model.print();}
+
+\end{DoxyCode}
+ 

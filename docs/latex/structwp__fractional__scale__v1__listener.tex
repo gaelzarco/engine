@@ -1,0 +1,32 @@
+\doxysection{wp\+\_\+fractional\+\_\+scale\+\_\+v1\+\_\+listener Struct Reference}
+\hypertarget{structwp__fractional__scale__v1__listener}{}\label{structwp__fractional__scale__v1__listener}\index{wp\_fractional\_scale\_v1\_listener@{wp\_fractional\_scale\_v1\_listener}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+void(\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structwp__fractional__scale__v1__listener_aeddc02a7634248d4a19cde896d21f366}{preferred\+\_\+scale}} )(void \texorpdfstring{$\ast$}{*}data, struct wp\+\_\+fractional\+\_\+scale\+\_\+v1 \texorpdfstring{$\ast$}{*}wp\+\_\+fractional\+\_\+scale\+\_\+v1, uint32\+\_\+t scale)
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structwp__fractional__scale__v1__listener_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structwp__fractional__scale__v1__listener_aeddc02a7634248d4a19cde896d21f366}\index{wp\_fractional\_scale\_v1\_listener@{wp\_fractional\_scale\_v1\_listener}!preferred\_scale@{preferred\_scale}}
+\index{preferred\_scale@{preferred\_scale}!wp\_fractional\_scale\_v1\_listener@{wp\_fractional\_scale\_v1\_listener}}
+\doxysubsubsection{\texorpdfstring{preferred\_scale}{preferred\_scale}}
+{\footnotesize\ttfamily \label{structwp__fractional__scale__v1__listener_aeddc02a7634248d4a19cde896d21f366} 
+void(\texorpdfstring{$\ast$}{*} wp\+\_\+fractional\+\_\+scale\+\_\+v1\+\_\+listener::\+preferred\+\_\+scale) (void \texorpdfstring{$\ast$}{*}data, struct wp\+\_\+fractional\+\_\+scale\+\_\+v1 \texorpdfstring{$\ast$}{*}wp\+\_\+fractional\+\_\+scale\+\_\+v1, uint32\+\_\+t scale)}
+
+notify of new preferred scale
+
+Notification of a new preferred scale for this surface that the compositor suggests that the client should use.
+
+The sent scale is the numerator of a fraction with a denominator of 120. 
+\begin{DoxyParams}{Parameters}
+{\em scale} & the new preferred scale \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+modules/\+minifb/\+src/\+wayland/\+generated/\+fractional-\/scale-\/v1-\/client-\/protocol.\+h\end{DoxyCompactItemize}

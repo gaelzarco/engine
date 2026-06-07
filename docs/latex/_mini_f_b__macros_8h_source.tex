@@ -1,0 +1,100 @@
+\doxysection{Mini\+FB\+\_\+macros.\+h}
+\hypertarget{_mini_f_b__macros_8h_source}{}\label{_mini_f_b__macros_8h_source}\index{modules/minifb/include/MiniFB\_macros.h@{modules/minifb/include/MiniFB\_macros.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ cross-\/platform\ deprecation\ macro,\ try\ to\ use\ the\ clean\ [[deprecated]]\ if\ it's\ avalible,\ if\ not,\ use\ compiler-\/specific\ fallbacks}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ C++\ [[deprecated]]\ attribute}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#if\ !defined(MFB\_DEPRECATED)\ \&\&\ defined(\_\_has\_cpp\_attribute)}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\ \ \ \ \#if\ \_\_has\_cpp\_attribute(deprecated)}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_DEPRECATED(msg)\ [[deprecated(msg)]]}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ C23\ [[deprecated]]\ attribute}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#if\ !defined(MFB\_DEPRECATED)\ \&\&\ defined(\_\_has\_c\_attribute)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\ \ \ \ \#if\ \_\_has\_c\_attribute(deprecated)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_DEPRECATED(msg)\ [[deprecated(msg)]]}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ gcc/clang\ \_\_attribute\_\_\ method}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#if\ !defined(MFB\_DEPRECATED)\ \&\&\ (defined(\_\_GNUC\_\_)\ ||\ defined(\_\_clang\_\_))}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_DEPRECATED(msg)\ \_\_attribute\_\_((deprecated(msg)))}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ msvc\ \_\_declspec\ method}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#if\ !defined(MFB\_DEPRECATED)\ \&\&\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_DEPRECATED(msg)\ \_\_declspec(deprecated(msg))}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ if\ we\ can't\ use\ any\ of\ those,\ just\ don't\ bother}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#if\ !defined(MFB\_DEPRECATED)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_DEPRECATED(msg)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Enumerator\ deprecation\ macro.}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ Note:\ \_\_declspec(deprecated)\ is\ intentionally\ not\ used\ here\ because\ it\ is}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ not\ portable\ for\ enum\ constants\ in\ C\ mode\ across\ compilers.}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\#if\ !defined(MFB\_ENUM\_DEPRECATED)\ \&\&\ defined(\_\_has\_cpp\_attribute)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \#if\ \_\_has\_cpp\_attribute(deprecated)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_ENUM\_DEPRECATED(msg)\ [[deprecated(msg)]]}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#if\ !defined(MFB\_ENUM\_DEPRECATED)\ \&\&\ defined(\_\_has\_c\_attribute)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \#if\ \_\_has\_c\_attribute(deprecated)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_ENUM\_DEPRECATED(msg)\ [[deprecated(msg)]]}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#if\ !defined(MFB\_ENUM\_DEPRECATED)\ \&\&\ (defined(\_\_GNUC\_\_)\ ||\ defined(\_\_clang\_\_))}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_ENUM\_DEPRECATED(msg)\ \_\_attribute\_\_((deprecated(msg)))}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#if\ !defined(MFB\_ENUM\_DEPRECATED)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_ENUM\_DEPRECATED(msg)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_FUNC\_NAME\ \_\_FUNCTION\_\_}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_FUNC\_NAME\ \_\_func\_\_}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#if\ defined(\_\_cplusplus)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_LOG(level,\ tag,\ ...)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ do\ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ const\ mfb\_log\_info\ mfb\_log\_info\_aux\ =\ \{\ level,\ \_\_FILE\_\_,\ MFB\_FUNC\_NAME,\ \_\_LINE\_\_\ \};\ \(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ mfb\_log(\&mfb\_log\_info\_aux,\ tag,\ \_\_VA\_ARGS\_\_);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_LOG(level,\ tag,\ ...)\ mfb\_log(\&(mfb\_log\_info)\{\ level,\ \_\_FILE\_\_,\ MFB\_FUNC\_NAME,\ \_\_LINE\_\_\ \},\ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#define\ MFB\_LOGT(tag,\ ...)\ MFB\_LOG(MFB\_LOG\_TRACE,\ \ \ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ MFB\_LOGD(tag,\ ...)\ MFB\_LOG(MFB\_LOG\_DEBUG,\ \ \ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#define\ MFB\_LOGI(tag,\ ...)\ MFB\_LOG(MFB\_LOG\_INFO,\ \ \ \ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ MFB\_LOGW(tag,\ ...)\ MFB\_LOG(MFB\_LOG\_WARNING,\ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#define\ MFB\_LOGE(tag,\ ...)\ MFB\_LOG(MFB\_LOG\_ERROR,\ \ \ tag,\ \_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\#if\ !defined(\_\_ANDROID\_\_)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_RGB(r,\ g,\ b)\ \ \ \ \ \ \ \ \ ((((uint32\_t)\ (r))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (b)))}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ \#define\ MFB\_ARGB(a,\ r,\ g,\ b)\ \ \ \ \ ((((uint32\_t)\ (a))\ <<\ 24)\ |\ (((uint32\_t)\ (r))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (b)))}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ \#if\ defined(HOST\_WORDS\_BIGENDIAN)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_RGB(r,\ g,\ b)\ \ \ \ \ ((((uint32\_t)\ (r))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (b)))}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_ARGB(a,\ r,\ g,\ b)\ ((((uint32\_t)\ (a))\ <<\ 24)\ |\ (((uint32\_t)\ (r))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (b)))}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ \#else}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_RGB(r,\ g,\ b)\ \ \ \ \ ((((uint32\_t)\ (b))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (r)))}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#define\ MFB\_ARGB(a,\ r,\ g,\ b)\ ((((uint32\_t)\ (a))\ <<\ 24)\ |\ (((uint32\_t)\ (b))\ <<\ 16)\ |\ (((uint32\_t)\ (g))\ <<\ 8)\ |\ ((uint32\_t)\ (r)))}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \#endif}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

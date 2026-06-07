@@ -1,0 +1,88 @@
+\doxysection{Window\+Data\+\_\+\+Way.\+h}
+\hypertarget{_window_data___way_8h_source}{}\label{_window_data___way_8h_source}\index{modules/minifb/src/wayland/WindowData\_Way.h@{modules/minifb/src/wayland/WindowData\_Way.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB\_enums.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#define\ WAYLAND\_MAX\_OUTPUTS\ 16}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{struct\ }wl\_display;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{struct\ }wl\_registry;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }wl\_compositor;}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }wl\_shell;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{struct\ }wl\_seat;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }wl\_keyboard;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{struct\ }wl\_pointer;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{struct\ }wl\_callback;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }wl\_shm;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }wl\_shm\_pool;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{struct\ }wl\_output;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }wl\_surface;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }wl\_shell\_surface;}
+\DoxyCodeLine{00022\ \textcolor{keyword}{struct\ }wl\_buffer;}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }xdg\_wm\_base;}
+\DoxyCodeLine{00024\ \textcolor{keyword}{struct\ }xdg\_surface;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }xdg\_toplevel;}
+\DoxyCodeLine{00026\ \textcolor{keyword}{struct\ }wp\_fractional\_scale\_manager\_v1;}
+\DoxyCodeLine{00027\ \textcolor{keyword}{struct\ }wp\_fractional\_scale\_v1;}
+\DoxyCodeLine{00028\ \textcolor{keyword}{struct\ }zxdg\_decoration\_manager\_v1;}
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }zxdg\_toplevel\_decoration\_v1;}
+\DoxyCodeLine{00030\ \textcolor{keyword}{struct\ }xkb\_context;}
+\DoxyCodeLine{00031\ \textcolor{keyword}{struct\ }xkb\_keymap;}
+\DoxyCodeLine{00032\ \textcolor{keyword}{struct\ }xkb\_state;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_display\ \ \ \ \ \ \ *display;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_registry\ \ \ \ \ \ *registry;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_compositor\ \ \ \ *compositor;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{struct\ }xdg\_wm\_base\ \ \ \ \ \ *shell;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_seat\ \ \ \ \ \ \ \ \ \ *seat;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_keyboard\ \ \ \ \ \ *keyboard;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_pointer\ \ \ \ \ \ \ *pointer;}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_cursor\_theme\ \ *cursor\_theme;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_cursor\ \ \ \ \ \ \ \ *default\_cursor;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_surface\ \ \ \ \ \ \ *cursor\_surface;}
+\DoxyCodeLine{00046\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pointer\_serial;}
+\DoxyCodeLine{00047\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pointer\_enter\_serial;}
+\DoxyCodeLine{00048\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pointer\_serial\_valid;}
+\DoxyCodeLine{00049\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ startup\_state\_applied;}
+\DoxyCodeLine{00050\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ request\_fullscreen;}
+\DoxyCodeLine{00051\ \ \ \ \ uint8\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ request\_maximized;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_shm\ \ \ \ \ \ \ \ \ \ \ *shm;}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_shm\_pool\ \ \ \ \ \ *shm\_pool;}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{struct\ }wp\_fractional\_scale\_manager\_v1\ *fractional\_scale\_manager;}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{struct\ }wp\_fractional\_scale\_v1\ *fractional\_scale;}
+\DoxyCodeLine{00057\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ preferred\_scale\_120;}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_output\ \ \ \ \ \ \ \ *outputs[WAYLAND\_MAX\_OUTPUTS];}
+\DoxyCodeLine{00059\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\_ids[WAYLAND\_MAX\_OUTPUTS];}
+\DoxyCodeLine{00060\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\_scales[WAYLAND\_MAX\_OUTPUTS];}
+\DoxyCodeLine{00061\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ output\_count;}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_output\ \ \ \ \ \ \ \ *current\_output;}
+\DoxyCodeLine{00063\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\_output\_scale;}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_surface\ \ \ \ \ \ \ *surface;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{struct\ }xdg\_surface\ \ \ \ \ \ *shell\_surface;}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{struct\ }xdg\_toplevel\ \ \ \ \ *toplevel;}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_decoration\_manager\_v1\ *decoration\_manager;}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_toplevel\_decoration\_v1\ *toplevel\_decoration;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ seat\_version;}
+\DoxyCodeLine{00071\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shm\_format;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shm\_length;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ shm\_pool\_size;}
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *shm\_ptr;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ fd;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ \ \ \ \ \ \ \ *timer;}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{struct\ }xkb\_context\ \ \ \ \ \ *xkb\_context;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{struct\ }xkb\_keymap\ \ \ \ \ \ \ *xkb\_keymap;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{struct\ }xkb\_state\ \ \ \ \ \ \ \ *xkb\_state;}
+\DoxyCodeLine{00082\ \}\ \doxymbox{\hyperlink{struct_s_window_data___way}{SWindowData\_Way}};}
+
+\end{DoxyCode}

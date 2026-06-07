@@ -1,0 +1,36 @@
+\doxysection{The zxdg\+\_\+output\+\_\+v1 interface }
+\hypertarget{group__iface__zxdg__output__v1}{}\label{group__iface__zxdg__output__v1}\index{The zxdg\_output\_v1 interface@{The zxdg\_output\_v1 interface}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structzxdg__output__v1__listener}{zxdg\+\_\+output\+\_\+v1\+\_\+listener}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_ga644d38447d311db0eed1713b029e225c}\label{group__iface__zxdg__output__v1_ga644d38447d311db0eed1713b029e225c} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+LOGICAL\+\_\+\+POSITION\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_gaf7a0832f659130b9bd283349617ab551}\label{group__iface__zxdg__output__v1_gaf7a0832f659130b9bd283349617ab551} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+LOGICAL\+\_\+\+SIZE\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_ga98352799577b85f1b6fcf3b10177e923}\label{group__iface__zxdg__output__v1_ga98352799577b85f1b6fcf3b10177e923} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+DONE\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_gaa6a327b20e3689abf0a26c3d352d3c4d}\label{group__iface__zxdg__output__v1_gaa6a327b20e3689abf0a26c3d352d3c4d} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+NAME\+\_\+\+SINCE\+\_\+\+VERSION}~2
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_gad299a5d2e446fc8383f20bebf0939be2}\label{group__iface__zxdg__output__v1_gad299a5d2e446fc8383f20bebf0939be2} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+DESCRIPTION\+\_\+\+SINCE\+\_\+\+VERSION}~2
+\item 
+\Hypertarget{group__iface__zxdg__output__v1_ga5644dca37fbd7ec08cae406cca32e355}\label{group__iface__zxdg__output__v1_ga5644dca37fbd7ec08cae406cca32e355} 
+\+\#define {\bfseries ZXDG\+\_\+\+OUTPUT\+\_\+\+V1\+\_\+\+DESTROY\+\_\+\+SINCE\+\_\+\+VERSION}~1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An xdg\+\_\+output describes part of the compositor geometry.
+
+This typically corresponds to a monitor that displays part of the compositor space.
+
+For objects version 3 onwards, after all xdg\+\_\+output properties have been sent (when the object is created and when properties are updated), a wl\+\_\+output.\+done event is sent. This allows changes to the output properties to be seen as atomic, even if they happen via multiple events. 

@@ -1,0 +1,633 @@
+\doxysection{gdbstub.\+h}
+\hypertarget{gdbstub_8h_source}{}\label{gdbstub_8h_source}\index{modules/minifb/examples/dos/gdbstub.h@{modules/minifb/examples/dos/gdbstub.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{keywordtype}{void}\ gdb\_start();}
+\DoxyCodeLine{00004\ \textcolor{keywordtype}{void}\ gdb\_checkpoint();}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#ifdef\ GDB\_IMPLEMENTATION}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#ifdef\ NDEBUG}}
+\DoxyCodeLine{00008\ \textcolor{keywordtype}{void}\ gdb\_start()\ \{\}}
+\DoxyCodeLine{00009\ \textcolor{keywordtype}{void}\ gdb\_checkpoint()\ \{\}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#ifndef\ DJGPP}}
+\DoxyCodeLine{00012\ \textcolor{keywordtype}{void}\ gdb\_start()\ \{\}}
+\DoxyCodeLine{00013\ \textcolor{keywordtype}{void}\ gdb\_checkpoint()\ \{\}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <bios.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <dpmi.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <go32.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <pc.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <setjmp.h>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <signal.h>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <sys/exceptn.h>}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ <sys/farptr.h>}}
+\DoxyCodeLine{00026\ \textcolor{keywordtype}{void}\ gdb\_loop(\textcolor{keywordtype}{int}\ exception\_number);}
+\DoxyCodeLine{00027\ \textcolor{keywordtype}{void}\ gdb\_tick\_handler();}
+\DoxyCodeLine{00028\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *gdb\_read\_packet();}
+\DoxyCodeLine{00029\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ gdb\_write\_packet(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *buffer);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\#ifdef\ GDB\_DEBUG\_PRINT}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#define\ gdb\_debug(...)\ printf(\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#define\ gdb\_debug(...)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#include\ <crt0.h>}}
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{int}\ \_crt0\_startup\_flags\ =\ \_CRT0\_FLAG\_LOCK\_MEMORY;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\#define\ UART\_LINE\_CONTROL\ 3}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#define\ UART\_LCR\_DIVISOR\_LATCH\ 0x80}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#define\ UART\_DIVISOR\_LATCH\_WORD\ 0}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#define\ UART\_BPS\_DIVISOR\_115200\ 1}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#define\ IO\_BUFFER\_SIZE\ 1024\ *\ 1024}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ clang-\/format\ off}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{enum}\ gdb\_register\ \{\ EAX,\ ECX,\ EDX,\ EBX,\ ESP,\ EBP,\ ESI,\ EDI,\ EIP,\ EFLAGS,\ CS,\ SS,\ DS,\ ES,\ FS,\ GS,\ NUM\_REGISTERS\ \};}
+\DoxyCodeLine{00048\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ *register\_names[]\ =\ \{\textcolor{stringliteral}{"{}EAX"{}},\ \textcolor{stringliteral}{"{}ECX"{}},\ \textcolor{stringliteral}{"{}EDX"{}},\ \textcolor{stringliteral}{"{}EBX"{}},\ \textcolor{stringliteral}{"{}ESP"{}},\ \textcolor{stringliteral}{"{}EBP"{}},\ \textcolor{stringliteral}{"{}ESI"{}},\ \textcolor{stringliteral}{"{}EDI"{}},\ \textcolor{stringliteral}{"{}EIP"{}},\ \textcolor{stringliteral}{"{}EFLAGS"{}},\ \textcolor{stringliteral}{"{}CS"{}},\ \textcolor{stringliteral}{"{}SS"{}},\ \textcolor{stringliteral}{"{}DS"{}},\ \textcolor{stringliteral}{"{}ES"{}},\ \textcolor{stringliteral}{"{}FS"{}},\ \textcolor{stringliteral}{"{}GS"{}}\};}
+\DoxyCodeLine{00049\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ hex\_chars[]\ =\ \textcolor{stringliteral}{"{}0123456789abcdef"{}};}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ clang-\/format\ on}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }gdb\_context\ \{}
+\DoxyCodeLine{00053\ \ \ \textcolor{keywordtype}{int}\ registers[NUM\_REGISTERS];}
+\DoxyCodeLine{00054\ \ \ \textcolor{keywordtype}{char}\ input\_buffer[IO\_BUFFER\_SIZE];}
+\DoxyCodeLine{00055\ \ \ \textcolor{keywordtype}{char}\ output\_buffer[IO\_BUFFER\_SIZE];}
+\DoxyCodeLine{00056\ \ \ \textcolor{keywordtype}{int}\ mem\_error;}
+\DoxyCodeLine{00057\ \ \ void\ (*mem\_error\_callback)();}
+\DoxyCodeLine{00058\ \ \ \textcolor{keywordtype}{int}\ no\_ack\_mode;}
+\DoxyCodeLine{00059\ \ \ \textcolor{keywordtype}{int}\ was\_interrupted;}
+\DoxyCodeLine{00060\ \ \ \_go32\_dpmi\_seginfo\ old\_tick\_handler;}
+\DoxyCodeLine{00061\ \ \ \_go32\_dpmi\_seginfo\ tick\_handler;}
+\DoxyCodeLine{00062\ \}\ gdb\_context;}
+\DoxyCodeLine{00063\ gdb\_context\ ctx\ =\ \{0\};}
+\DoxyCodeLine{00064\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ handler\_mutex;}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ serial\_port\_init()\ \{}
+\DoxyCodeLine{00067\ \ \ \_bios\_serialcom(\_COM\_INIT,\ 0,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{char})(\_COM\_9600\ |\ \_COM\_NOPARITY\ |\ \_COM\_STOP1\ |\ \_COM\_CHR8));}
+\DoxyCodeLine{00069\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ base\ =\ \_farpeekw(0x0040,\ 0);}
+\DoxyCodeLine{00070\ \ \ outp(base\ +\ UART\_LINE\_CONTROL,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ inp(base\ +\ UART\_LINE\_CONTROL)\ |\ UART\_LCR\_DIVISOR\_LATCH);}
+\DoxyCodeLine{00072\ \ \ outpw(base\ +\ UART\_DIVISOR\_LATCH\_WORD,\ UART\_BPS\_DIVISOR\_115200);}
+\DoxyCodeLine{00073\ \ \ outp(base\ +\ UART\_LINE\_CONTROL,}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ inp(base\ +\ UART\_LINE\_CONTROL)\ \&\ \string~UART\_LCR\_DIVISOR\_LATCH);}
+\DoxyCodeLine{00075\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ serial\_port\_putc(\textcolor{keywordtype}{char}\ c)\ \{\ \_bios\_serialcom(\_COM\_SEND,\ 0,\ c);\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ serial\_port\_getc()\ \{}
+\DoxyCodeLine{00080\ \ \ \textcolor{keywordflow}{return}\ \_bios\_serialcom(\_COM\_RECEIVE,\ 0,\ 0)\ \&\ 0xff;}
+\DoxyCodeLine{00081\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ set\_mem\_error(\textcolor{keywordtype}{void})\ \{\ ctx.mem\_error\ =\ 1;\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hex\_to\_byte(\textcolor{keywordtype}{char}\ ch)\ \{}
+\DoxyCodeLine{00086\ \ \ \textcolor{keywordflow}{if}\ ((ch\ >=\ \textcolor{charliteral}{'a'})\ \&\&\ (ch\ <=\ \textcolor{charliteral}{'f'}))}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordflow}{return}\ (ch\ -\/\ \textcolor{charliteral}{'a'}\ +\ 10);}
+\DoxyCodeLine{00088\ \ \ \textcolor{keywordflow}{if}\ ((ch\ >=\ \textcolor{charliteral}{'0'})\ \&\&\ (ch\ <=\ \textcolor{charliteral}{'9'}))}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordflow}{return}\ (ch\ -\/\ \textcolor{charliteral}{'0'});}
+\DoxyCodeLine{00090\ \ \ \textcolor{keywordflow}{if}\ ((ch\ >=\ \textcolor{charliteral}{'A'})\ \&\&\ (ch\ <=\ \textcolor{charliteral}{'F'}))}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordflow}{return}\ (ch\ -\/\ \textcolor{charliteral}{'A'}\ +\ 10);}
+\DoxyCodeLine{00092\ \ \ \textcolor{keywordflow}{return}\ (-\/1);}
+\DoxyCodeLine{00093\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ hex\_to\_int(\textcolor{keywordtype}{char}\ **ptr,\ \textcolor{keywordtype}{int}\ *intValue)\ \{}
+\DoxyCodeLine{00096\ \ \ \textcolor{keywordtype}{int}\ numChars\ =\ 0;}
+\DoxyCodeLine{00097\ \ \ *intValue\ =\ 0;}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \textcolor{keywordflow}{while}\ (**ptr)\ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{int}\ hexValue\ =\ hex\_to\_byte(**ptr);}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (hexValue\ >=\ 0)\ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ *intValue\ =\ (*intValue\ <<\ 4)\ |\ hexValue;}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ numChars++;}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ (*ptr)++;}
+\DoxyCodeLine{00110\ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \textcolor{keywordflow}{return}\ (numChars);}
+\DoxyCodeLine{00113\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ mem\_get\_byte(\textcolor{keywordtype}{char}\ *addr)\ \{\ \textcolor{keywordflow}{return}\ *addr;\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ mem\_set\_byte(\textcolor{keywordtype}{char}\ *addr,\ \textcolor{keywordtype}{int}\ val)\ \{\ *addr\ =\ val;\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ *mem\_to\_hex(\textcolor{keywordtype}{char}\ *mem,\ \textcolor{keywordtype}{char}\ *buf,\ \textcolor{keywordtype}{int}\ count,\ \textcolor{keywordtype}{int}\ may\_fault)\ \{}
+\DoxyCodeLine{00120\ \ \ \textcolor{keywordflow}{if}\ (may\_fault)}
+\DoxyCodeLine{00121\ \ \ \ \ ctx.mem\_error\_callback\ =\ set\_mem\_error;}
+\DoxyCodeLine{00122\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ count;\ i++)\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ch\ =\ mem\_get\_byte(mem++);}
+\DoxyCodeLine{00124\ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\%x\ "{}},\ ch);}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordflow}{if}\ (may\_fault\ \&\&\ ctx.mem\_error)}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (buf);}
+\DoxyCodeLine{00127\ \ \ \ \ *buf++\ =\ hex\_chars[ch\ >>\ 4];}
+\DoxyCodeLine{00128\ \ \ \ \ *buf++\ =\ hex\_chars[ch\ \%\ 16];}
+\DoxyCodeLine{00129\ \ \ \}}
+\DoxyCodeLine{00130\ \ \ *buf\ =\ 0;}
+\DoxyCodeLine{00131\ \ \ \textcolor{keywordflow}{if}\ (may\_fault)}
+\DoxyCodeLine{00132\ \ \ \ \ ctx.mem\_error\_callback\ =\ NULL;}
+\DoxyCodeLine{00133\ \ \ \textcolor{keywordflow}{return}\ (buf);}
+\DoxyCodeLine{00134\ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{char}\ *hex\_to\_mem(\textcolor{keywordtype}{char}\ *buf,\ \textcolor{keywordtype}{char}\ *mem,\ \textcolor{keywordtype}{int}\ count,\ \textcolor{keywordtype}{int}\ may\_fault)\ \{}
+\DoxyCodeLine{00137\ \ \ \textcolor{keywordflow}{if}\ (may\_fault)}
+\DoxyCodeLine{00138\ \ \ \ \ ctx.mem\_error\_callback\ =\ set\_mem\_error;}
+\DoxyCodeLine{00139\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ count;\ i++)\ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ ch\ =\ hex\_to\_byte(*buf++)\ <<\ 4;}
+\DoxyCodeLine{00141\ \ \ \ \ ch\ =\ ch\ +\ hex\_to\_byte(*buf++);}
+\DoxyCodeLine{00142\ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\%x\ "{}},\ ch);}
+\DoxyCodeLine{00143\ \ \ \ \ mem\_set\_byte(mem++,\ ch);}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{if}\ (may\_fault\ \&\&\ ctx.mem\_error)}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (mem);}
+\DoxyCodeLine{00146\ \ \ \}}
+\DoxyCodeLine{00147\ \ \ \textcolor{keywordflow}{if}\ (may\_fault)}
+\DoxyCodeLine{00148\ \ \ \ \ ctx.mem\_error\_callback\ =\ NULL;}
+\DoxyCodeLine{00149\ \ \ \textcolor{keywordflow}{return}\ (mem);}
+\DoxyCodeLine{00150\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exception\_save\_registers(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00153\ \ \ ctx.registers[EAX]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_eax;}
+\DoxyCodeLine{00154\ \ \ ctx.registers[ECX]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_ecx;}
+\DoxyCodeLine{00155\ \ \ ctx.registers[EDX]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_edx;}
+\DoxyCodeLine{00156\ \ \ ctx.registers[EBX]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_ebx;}
+\DoxyCodeLine{00157\ \ \ ctx.registers[ESP]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_esp;}
+\DoxyCodeLine{00158\ \ \ ctx.registers[EBP]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_ebp;}
+\DoxyCodeLine{00159\ \ \ ctx.registers[ESI]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_esi;}
+\DoxyCodeLine{00160\ \ \ ctx.registers[EDI]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_edi;}
+\DoxyCodeLine{00161\ \ \ ctx.registers[EIP]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_eip;}
+\DoxyCodeLine{00162\ \ \ ctx.registers[EFLAGS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_eflags;}
+\DoxyCodeLine{00163\ \ \ ctx.registers[CS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_cs;}
+\DoxyCodeLine{00164\ \ \ ctx.registers[SS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_ss;}
+\DoxyCodeLine{00165\ \ \ ctx.registers[DS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_ds;}
+\DoxyCodeLine{00166\ \ \ ctx.registers[ES]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_es;}
+\DoxyCodeLine{00167\ \ \ ctx.registers[FS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_fs;}
+\DoxyCodeLine{00168\ \ \ ctx.registers[GS]\ =\ (int)\_\_djgpp\_exception\_state-\/>\_\_gs;}
+\DoxyCodeLine{00169\ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \textcolor{keyword}{extern}\ \textcolor{keywordtype}{void}\ exception\_return();}
+\DoxyCodeLine{00172\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}.text"{}});}
+\DoxyCodeLine{00173\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}.globl\ \_exception\_return"{}});}
+\DoxyCodeLine{00174\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\_exception\_return:"{}});}
+\DoxyCodeLine{00175\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movw\ \_ctx+44,\ \%ss"{}});}
+\DoxyCodeLine{00176\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+16,\ \%esp"{}});}
+\DoxyCodeLine{00177\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+4,\ \%ecx"{}});}
+\DoxyCodeLine{00178\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+8,\ \%edx"{}});}
+\DoxyCodeLine{00179\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+12,\ \%ebx"{}});}
+\DoxyCodeLine{00180\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+20,\ \%ebp"{}});}
+\DoxyCodeLine{00181\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+24,\ \%esi"{}});}
+\DoxyCodeLine{00182\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+28,\ \%edi"{}});}
+\DoxyCodeLine{00183\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movw\ \_ctx+48,\ \%ds"{}});}
+\DoxyCodeLine{00184\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movw\ \_ctx+52,\ \%es"{}});}
+\DoxyCodeLine{00185\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movw\ \_ctx+56,\ \%fs"{}});}
+\DoxyCodeLine{00186\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movw\ \_ctx+60,\ \%gs"{}});}
+\DoxyCodeLine{00187\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+36,\ \%eax"{}});}
+\DoxyCodeLine{00188\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ pushl\ \%eax"{}});}
+\DoxyCodeLine{00189\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+40,\ \%eax"{}});}
+\DoxyCodeLine{00190\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ pushl\ \%eax"{}});}
+\DoxyCodeLine{00191\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx+32,\ \%eax"{}});}
+\DoxyCodeLine{00192\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ pushl\ \%eax"{}});}
+\DoxyCodeLine{00193\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ movl\ \_ctx,\ \%eax"{}});}
+\DoxyCodeLine{00194\ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}\ \ \ iret"{}});}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exception\_sigsegv\_handler(\textcolor{keywordtype}{int}\ exception\_number)\ \{}
+\DoxyCodeLine{00197\ \ \ exception\_save\_registers();}
+\DoxyCodeLine{00198\ \ \ gdb\_loop(exception\_number);}
+\DoxyCodeLine{00199\ \ \ exception\_return();}
+\DoxyCodeLine{00200\ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exception\_handler(\textcolor{keywordtype}{int}\ exception\_number)\ \{}
+\DoxyCodeLine{00203\ \ \ exception\_save\_registers();}
+\DoxyCodeLine{00204\ \ \ gdb\_loop(exception\_number);}
+\DoxyCodeLine{00205\ \ \ exception\_return();}
+\DoxyCodeLine{00206\ \}}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ exception\_to\_signal(\textcolor{keywordtype}{int}\ exception\_number)\ \{}
+\DoxyCodeLine{00209\ \ \ \textcolor{keywordtype}{int}\ signal\_number;}
+\DoxyCodeLine{00210\ \ \ \textcolor{keywordflow}{switch}\ (exception\_number)\ \{}
+\DoxyCodeLine{00211\ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00212\ \ \ \ \ signal\_number\ =\ 8;}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ divide\ by\ zero\ */}}
+\DoxyCodeLine{00214\ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00215\ \ \ \ \ signal\_number\ =\ 5;}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ debug\ exception\ */}}
+\DoxyCodeLine{00217\ \ \ \textcolor{keywordflow}{case}\ 302:}
+\DoxyCodeLine{00218\ \ \ \textcolor{keywordflow}{case}\ 3:}
+\DoxyCodeLine{00219\ \ \ \ \ signal\_number\ =\ 5;}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ breakpoint\ */}}
+\DoxyCodeLine{00221\ \ \ \textcolor{keywordflow}{case}\ 4:}
+\DoxyCodeLine{00222\ \ \ \ \ signal\_number\ =\ 16;}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ into\ instruction\ (overflow)\ */}}
+\DoxyCodeLine{00224\ \ \ \textcolor{keywordflow}{case}\ 5:}
+\DoxyCodeLine{00225\ \ \ \ \ signal\_number\ =\ 16;}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ bound\ instruction\ */}}
+\DoxyCodeLine{00227\ \ \ \textcolor{keywordflow}{case}\ 6:}
+\DoxyCodeLine{00228\ \ \ \ \ signal\_number\ =\ 4;}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ Invalid\ opcode\ */}}
+\DoxyCodeLine{00230\ \ \ \textcolor{keywordflow}{case}\ 7:}
+\DoxyCodeLine{00231\ \ \ \ \ signal\_number\ =\ 8;}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ coprocessor\ not\ available\ */}}
+\DoxyCodeLine{00233\ \ \ \textcolor{keywordflow}{case}\ 8:}
+\DoxyCodeLine{00234\ \ \ \ \ signal\_number\ =\ 7;}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ double\ fault\ */}}
+\DoxyCodeLine{00236\ \ \ \textcolor{keywordflow}{case}\ 9:}
+\DoxyCodeLine{00237\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ coprocessor\ segment\ overrun\ */}}
+\DoxyCodeLine{00239\ \ \ \textcolor{keywordflow}{case}\ 10:}
+\DoxyCodeLine{00240\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ Invalid\ TSS\ */}}
+\DoxyCodeLine{00242\ \ \ \textcolor{keywordflow}{case}\ 11:}
+\DoxyCodeLine{00243\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ Segment\ not\ present\ */}}
+\DoxyCodeLine{00245\ \ \ \textcolor{keywordflow}{case}\ 12:}
+\DoxyCodeLine{00246\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ stack\ exception\ */}}
+\DoxyCodeLine{00248\ \ \ \textcolor{keywordflow}{case}\ 13:}
+\DoxyCodeLine{00249\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ general\ protection\ */}}
+\DoxyCodeLine{00251\ \ \ \textcolor{keywordflow}{case}\ 14:}
+\DoxyCodeLine{00252\ \ \ \ \ signal\_number\ =\ 11;}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ page\ fault\ */}}
+\DoxyCodeLine{00254\ \ \ \textcolor{keywordflow}{case}\ 16:}
+\DoxyCodeLine{00255\ \ \ \ \ signal\_number\ =\ 7;}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordflow}{break};\ \textcolor{comment}{/*\ coprocessor\ error\ */}}
+\DoxyCodeLine{00257\ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00258\ \ \ \ \ signal\_number\ =\ 7;\ \textcolor{comment}{/*\ "{}software\ generated"{}*/}}
+\DoxyCodeLine{00259\ \ \ \}}
+\DoxyCodeLine{00260\ \ \ \textcolor{keywordflow}{return}\ (signal\_number);}
+\DoxyCodeLine{00261\ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exception\_init()\ \{}
+\DoxyCodeLine{00264\ \ \ \_go32\_dpmi\_lock\_data(register\_names,\ \textcolor{keyword}{sizeof}(register\_names));}
+\DoxyCodeLine{00265\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ NUM\_REGISTERS;\ i++)}
+\DoxyCodeLine{00266\ \ \ \ \ \_go32\_dpmi\_lock\_data(register\_names[0],\ 3);}
+\DoxyCodeLine{00267\ \ \ \_go32\_dpmi\_lock\_data(hex\_chars,\ \textcolor{keyword}{sizeof}(hex\_chars));}
+\DoxyCodeLine{00268\ \ \ \_go32\_dpmi\_lock\_data(\&ctx,\ \textcolor{keyword}{sizeof}(ctx));}
+\DoxyCodeLine{00269\ \ \ \_go32\_dpmi\_lock\_data(\&handler\_mutex,\ \textcolor{keyword}{sizeof}(handler\_mutex));}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \_go32\_dpmi\_lock\_code(serial\_port\_init,\ 4096);}
+\DoxyCodeLine{00272\ \ \ \_go32\_dpmi\_lock\_code(serial\_port\_putc,\ 4096);}
+\DoxyCodeLine{00273\ \ \ \_go32\_dpmi\_lock\_code(serial\_port\_getc,\ 4096);}
+\DoxyCodeLine{00274\ \ \ \_go32\_dpmi\_lock\_code(set\_mem\_error,\ 4096);}
+\DoxyCodeLine{00275\ \ \ \_go32\_dpmi\_lock\_code(hex\_to\_byte,\ 4096);}
+\DoxyCodeLine{00276\ \ \ \_go32\_dpmi\_lock\_code(hex\_to\_int,\ 4096);}
+\DoxyCodeLine{00277\ \ \ \_go32\_dpmi\_lock\_code(mem\_get\_byte,\ 4096);}
+\DoxyCodeLine{00278\ \ \ \_go32\_dpmi\_lock\_code(mem\_set\_byte,\ 4096);}
+\DoxyCodeLine{00279\ \ \ \_go32\_dpmi\_lock\_code(mem\_to\_hex,\ 4096);}
+\DoxyCodeLine{00280\ \ \ \_go32\_dpmi\_lock\_code(hex\_to\_mem,\ 4096);}
+\DoxyCodeLine{00281\ \ \ \_go32\_dpmi\_lock\_code(exception\_save\_registers,\ 4096);}
+\DoxyCodeLine{00282\ \ \ \_go32\_dpmi\_lock\_code(exception\_return,\ 4096);}
+\DoxyCodeLine{00283\ \ \ \_go32\_dpmi\_lock\_code(exception\_sigsegv\_handler,\ 4096);}
+\DoxyCodeLine{00284\ \ \ \_go32\_dpmi\_lock\_code(exception\_handler,\ 4096);}
+\DoxyCodeLine{00285\ \ \ \_go32\_dpmi\_lock\_code(exception\_to\_signal,\ 4096);}
+\DoxyCodeLine{00286\ \ \ \_go32\_dpmi\_lock\_code(gdb\_start,\ 4096);}
+\DoxyCodeLine{00287\ \ \ \_go32\_dpmi\_lock\_code(gdb\_read\_packet,\ 4096);}
+\DoxyCodeLine{00288\ \ \ \_go32\_dpmi\_lock\_code(gdb\_write\_packet,\ 4096);}
+\DoxyCodeLine{00289\ \ \ \_go32\_dpmi\_lock\_code(gdb\_loop,\ 4096);}
+\DoxyCodeLine{00290\ \ \ \_go32\_dpmi\_lock\_code(gdb\_checkpoint,\ 4096);}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ signal(SIGSEGV,\ exception\_sigsegv\_handler);}
+\DoxyCodeLine{00293\ \ \ signal(SIGFPE,\ exception\_handler);}
+\DoxyCodeLine{00294\ \ \ signal(SIGTRAP,\ exception\_handler);}
+\DoxyCodeLine{00295\ \ \ signal(SIGILL,\ exception\_handler);}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \_go32\_dpmi\_get\_protected\_mode\_interrupt\_vector(0x1c,\ \&ctx.old\_tick\_handler);}
+\DoxyCodeLine{00298\ \ \ ctx.tick\_handler.pm\_offset\ =\ (int)\ gdb\_tick\_handler;}
+\DoxyCodeLine{00299\ \ \ ctx.tick\_handler.pm\_selector\ =\ \_go32\_my\_cs();}
+\DoxyCodeLine{00300\ \ \ \_go32\_dpmi\_allocate\_iret\_wrapper(\&ctx.tick\_handler);}
+\DoxyCodeLine{00301\ \ \ \_go32\_dpmi\_set\_protected\_mode\_interrupt\_vector(0x1c,\ \&ctx.tick\_handler);}
+\DoxyCodeLine{00302\ \}}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ exception\_dispose()\ \{}
+\DoxyCodeLine{00305\ \ \ signal(SIGSEGV,\ SIG\_DFL);}
+\DoxyCodeLine{00306\ \ \ signal(SIGFPE,\ SIG\_DFL);}
+\DoxyCodeLine{00307\ \ \ signal(SIGTRAP,\ SIG\_DFL);}
+\DoxyCodeLine{00308\ \ \ signal(SIGILL,\ SIG\_DFL);}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00310\ \ \ \_go32\_dpmi\_set\_protected\_mode\_interrupt\_vector(0x1c,\ \&ctx.old\_tick\_handler);}
+\DoxyCodeLine{00311\ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \textcolor{keywordtype}{void}\ gdb\_start(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00314\ \ \ ((void)\ register\_names[0]);}
+\DoxyCodeLine{00315\ \ \ serial\_port\_init();}
+\DoxyCodeLine{00316\ \ \ exception\_init();}
+\DoxyCodeLine{00317\ \ \ atexit(exception\_dispose);}
+\DoxyCodeLine{00318\ \ \ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}int\ \$3"{}});}
+\DoxyCodeLine{00319\ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *gdb\_read\_packet()\ \{}
+\DoxyCodeLine{00322\ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *buffer\ =\ (\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *)\ ctx.input\_buffer;}
+\DoxyCodeLine{00323\ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ checksum;}
+\DoxyCodeLine{00324\ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ xmitcsum;}
+\DoxyCodeLine{00325\ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00326\ \ \ \textcolor{keyword}{register}\ \textcolor{keywordtype}{char}\ ch;}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \textcolor{keywordflow}{while}\ (1)\ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordflow}{while}\ ((ch\ =\ serial\_port\_getc())\ !=\ \textcolor{charliteral}{'\$'})}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ ;}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ retry:}
+\DoxyCodeLine{00333\ \ \ \ \ checksum\ =\ 0;}
+\DoxyCodeLine{00334\ \ \ \ \ xmitcsum\ =\ -\/1;}
+\DoxyCodeLine{00335\ \ \ \ \ count\ =\ 0;}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keywordflow}{while}\ (count\ <\ IO\_BUFFER\_SIZE)\ \{}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ ch\ =\ serial\_port\_getc();}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ch\ ==\ \textcolor{charliteral}{'\$'})\ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Retrying\(\backslash\)n"{}});}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{goto}\ retry;}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ch\ ==\ \textcolor{charliteral}{'\#'})\ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Found\ end\ of\ packet\(\backslash\)n"{}});}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ checksum\ =\ checksum\ +\ ch;}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ buffer[count]\ =\ ch;}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ count\ =\ count\ +\ 1;}
+\DoxyCodeLine{00350\ \ \ \ \ \}}
+\DoxyCodeLine{00351\ \ \ \ \ buffer[count]\ =\ 0;}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{keywordflow}{if}\ (ch\ ==\ \textcolor{charliteral}{'\#'})\ \{}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ ch\ =\ serial\_port\_getc();}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ xmitcsum\ =\ hex\_to\_byte(ch)\ <<\ 4;}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ ch\ =\ serial\_port\_getc();}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ xmitcsum\ +=\ hex\_to\_byte(ch);}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (checksum\ !=\ xmitcsum)\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ctx.no\_ack\_mode)}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ serial\_port\_putc(\textcolor{charliteral}{'-\/'});}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ctx.no\_ack\_mode)}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ serial\_port\_putc(\textcolor{charliteral}{'+'});}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer[2]\ ==\ \textcolor{charliteral}{':'})\ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ serial\_port\_putc(buffer[0]);}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ serial\_port\_putc(buffer[1]);}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&buffer[3];}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \&buffer[0];}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00373\ \ \ \ \ \}}
+\DoxyCodeLine{00374\ \ \ \}}
+\DoxyCodeLine{00375\ \}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00377\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ gdb\_write\_packet(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *buffer)\ \{}
+\DoxyCodeLine{00378\ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ checksum;}
+\DoxyCodeLine{00379\ \ \ \textcolor{keywordtype}{int}\ count;}
+\DoxyCodeLine{00380\ \ \ \textcolor{keywordtype}{char}\ ch;}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{00383\ \ \ \ \ serial\_port\_putc(\textcolor{charliteral}{'\$'});}
+\DoxyCodeLine{00384\ \ \ \ \ checksum\ =\ 0;}
+\DoxyCodeLine{00385\ \ \ \ \ count\ =\ 0;}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordflow}{while}\ ((ch\ =\ buffer[count]))\ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ serial\_port\_putc(ch);}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ checksum\ +=\ ch;}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ count\ +=\ 1;}
+\DoxyCodeLine{00391\ \ \ \ \ \}}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \ \ \ \ serial\_port\_putc(\textcolor{charliteral}{'\#'});}
+\DoxyCodeLine{00394\ \ \ \ \ serial\_port\_putc(hex\_chars[checksum\ >>\ 4]);}
+\DoxyCodeLine{00395\ \ \ \ \ serial\_port\_putc(hex\_chars[checksum\ \%\ 16]);}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx.no\_ack\_mode)}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00399\ \ \ \}\ \textcolor{keywordflow}{while}\ (serial\_port\_getc()\ !=\ \textcolor{charliteral}{'+'});}
+\DoxyCodeLine{00400\ \}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \textcolor{keywordtype}{void}\ gdb\_loop(\textcolor{keywordtype}{int}\ exception\_number)\ \{}
+\DoxyCodeLine{00403\ \ \ \textcolor{keywordflow}{if}\ (handler\_mutex)}
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00405\ \ \ handler\_mutex\ =\ 1;}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \ \ \textcolor{keywordtype}{int}\ stepping,\ addr,\ length;}
+\DoxyCodeLine{00408\ \ \ \textcolor{keywordtype}{char}\ *ptr;}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \ \ \textcolor{comment}{/*\ reply\ to\ host\ that\ an\ exception\ has\ occurred\ */}}
+\DoxyCodeLine{00411\ \ \ \textcolor{keywordtype}{int}\ sigval\ =\ exception\_to\_signal(exception\_number);}
+\DoxyCodeLine{00412\ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n===\ STOPPED:\ sig:\ \%i,\ evec:\ \%i,\ ip\ \%p,\ [ip]\ \%x\(\backslash\)n"{}},\ sigval,}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ exception\_number,\ (\textcolor{keywordtype}{void}\ *)\ ctx.registers[EIP],}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ *(\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *)\ ctx.registers[EIP]);}
+\DoxyCodeLine{00415\ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ l\ =\ 0;\ l\ <\ NUM\_REGISTERS;\ l++)}
+\DoxyCodeLine{00416\ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\%s:\ \%x\ "{}},\ register\_names[l],\ ctx.registers[l]);}
+\DoxyCodeLine{00417\ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'S'};}
+\DoxyCodeLine{00420\ \ \ ctx.output\_buffer[1]\ =\ hex\_chars[sigval\ >>\ 4];}
+\DoxyCodeLine{00421\ \ \ ctx.output\_buffer[2]\ =\ hex\_chars[sigval\ \%\ 16];}
+\DoxyCodeLine{00422\ \ \ ctx.output\_buffer[3]\ =\ 0;}
+\DoxyCodeLine{00423\ }
+\DoxyCodeLine{00424\ \ \ gdb\_write\_packet((\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *)\ ctx.output\_buffer);}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \ \ stepping\ =\ 0;}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \ \ \textcolor{keywordflow}{while}\ (1\ ==\ 1)\ \{}
+\DoxyCodeLine{00429\ \ \ \ \ ctx.output\_buffer[0]\ =\ 0;}
+\DoxyCodeLine{00430\ \ \ \ \ ptr\ =\ (\textcolor{keywordtype}{char}\ *)\ gdb\_read\_packet();}
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordtype}{char}\ cmd\ =\ *ptr++;}
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keywordflow}{switch}\ (cmd)\ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'?'}:}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}?\ (Query\ the\ reason\ the\ target\ halted\ on\ connect)\(\backslash\)n"{}});}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'S'};}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ ctx.output\_buffer[1]\ =\ hex\_chars[sigval\ >>\ 4];}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ ctx.output\_buffer[2]\ =\ hex\_chars[sigval\ \%\ 16];}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ ctx.output\_buffer[3]\ =\ 0;}
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'D'}:}
+\DoxyCodeLine{00441\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}D\ (Detach)\(\backslash\)n"{}});}
+\DoxyCodeLine{00442\ \ \ \ \ \ \ exit(0);}
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'H'}:}
+\DoxyCodeLine{00445\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}H\ (Set\ thread\ for\ subsequent\ operations)\(\backslash\)n"{}});}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00448\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'q'}:}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}C"{}}))\ \{}
+\DoxyCodeLine{00450\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qC\ (Return\ the\ current\ thread\ ID.)\(\backslash\)n"{}});}
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'Q'};}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ ctx.output\_buffer[1]\ =\ \textcolor{charliteral}{'C'};}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ ctx.output\_buffer[2]\ =\ \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ ctx.output\_buffer[3]\ =\ 0;}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00456\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}Attached"{}}))\ \{}
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qAttached\ (Check\ if\ attached\ to\ existing\ or\ new\ process)\(\backslash\)n"{}});}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'1'};}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ ctx.output\_buffer[1]\ =\ 0;}
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}fThreadInfo"{}}))\ \{}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qfThreadInfo\ (Obtain\ a\ list\ of\ all\ active\ thread\ IDs)\(\backslash\)n"{}});}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'m'};}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ ctx.output\_buffer[1]\ =\ \textcolor{charliteral}{'0'};}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ ctx.output\_buffer[2]\ =\ 0;}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}sThreadInfo"{}}))\ \{}
+\DoxyCodeLine{00468\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qsThreadInfo\ (Obtain\ a\ list\ of\ all\ active\ thread\ IDs,\ "{}}}
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}subsequent)\(\backslash\)n"{}});}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ ctx.output\_buffer[0]\ =\ \textcolor{charliteral}{'l'};}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ ctx.output\_buffer[1]\ =\ 0;}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}Symbol::"{}}))\ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Symbol::\ (Notify\ the\ target\ that\ GDB\ is\ prepared\ to\ serve\ "{}}}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}symbol\ lookup\ requests)\(\backslash\)n"{}});}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00477\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}Supported"{}}))\ \{}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qSupported"{}});}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}QStartNoAckMode+;PacketSize=1048576;"{}});}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}Offsets"{}}))\ \{}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}qOffsets"{}});}
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}Text=0;Data=0;Bss=0;"{}});}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00487\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Unhandled:\ \%c\%s\(\backslash\)n"{}},\ cmd,\ ptr);}
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00489\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00490\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'Q'}:}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!strcmp(ptr,\ \textcolor{stringliteral}{"{}StartNoAckMode"{}}))\ \{}
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}QStartNoAckMode"{}});}
+\DoxyCodeLine{00493\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ ctx.no\_ack\_mode\ =\ 1;}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Unhandled:\ \%c\%s\(\backslash\)n"{}},\ cmd,\ ptr);}
+\DoxyCodeLine{00498\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00500\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'d'}:}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}d\ (Toggle\ debug\ flag)\(\backslash\)n"{}});}
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00503\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'g'}:}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}g\ (Read\ general\ registers)\(\backslash\)n"{}});}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ l\ =\ 0;\ l\ <\ NUM\_REGISTERS;\ l++)}
+\DoxyCodeLine{00506\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\%s:\ \%x\ "{}}}
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ register\_names[l],\ ctx.registers[l]);}
+\DoxyCodeLine{00509\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00510\ \ \ \ \ \ \ mem\_to\_hex((\textcolor{keywordtype}{char}\ *)\ ctx.registers,\ ctx.output\_buffer,\ NUM\_REGISTERS\ *\ 4,}
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 0);}
+\DoxyCodeLine{00512\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00513\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'G'}:}
+\DoxyCodeLine{00514\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}G\ (Write\ general\ registers)\(\backslash\)n"{}});}
+\DoxyCodeLine{00515\ \ \ \ \ \ \ hex\_to\_mem(ptr,\ (\textcolor{keywordtype}{char}\ *)\ ctx.registers,\ NUM\_REGISTERS\ *\ 4,\ 0);}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00517\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00518\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'P'}:\ \{}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}P\ (Write\ register\ n\ with\ value\ r)\(\backslash\)n"{}});}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ register\_number;}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&register\_number)\ \&\&\ *ptr++\ ==\ \textcolor{charliteral}{'='})}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (register\_number\ >=\ 0\ \&\&\ register\_number\ <\ NUM\_REGISTERS)\ \{}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}set\ reg:\ \%i,\ "{}},\ register\_number);}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ hex\_to\_mem(ptr,\ (\textcolor{keywordtype}{char}\ *)\&ctx.registers[register\_number],\ 4,\ 0);}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}E01"{}});}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00533\ \ \ \ \ \}}
+\DoxyCodeLine{00534\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'m'}:}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}m\ (Read\ length\ addressable\ memory\ units\ starting\ at\ address\ "{}}}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}addr)\(\backslash\)n"{}});}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&addr))\ \{}
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}read,\ addr:\ \%p,\ "{}},\ (\textcolor{keywordtype}{void}\ *)\ addr);}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*(ptr++)\ ==\ \textcolor{charliteral}{','})\ \{}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&length))\ \{}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \ \ \ \ ptr\ =\ 0;}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \ \ \ \ ctx.mem\_error\ =\ 0;}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ mem\_to\_hex((\textcolor{keywordtype}{char}\ *)\ addr,\ ctx.output\_buffer,\ length,\ 1);}
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx.mem\_error)\ \{}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}E03"{}});}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)\ \{}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}E01"{}});}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'M'}:}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}M\ (Write\ length\ addressable\ memory\ units\ starting\ at\ address\ "{}}}
+\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}addr)\(\backslash\)n"{}});}
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&addr))\ \{}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}write,\ addr:\ \%p,\ "{}},\ (\textcolor{keywordtype}{void}\ *)\ addr);}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*(ptr++)\ ==\ \textcolor{charliteral}{','})\ \{}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&length))}
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*(ptr++)\ ==\ \textcolor{charliteral}{':'})\ \{}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ctx.mem\_error\ =\ 0;}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hex\_to\_mem(ptr,\ (\textcolor{keywordtype}{char}\ *)\ addr,\ length,\ 1);}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ctx.mem\_error)\ \{}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}E03"{}});}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}OK"{}});}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00572\ }
+\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ptr\ =\ 0;}
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\(\backslash\)n"{}});}
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ptr)\ \{}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ strcpy(ctx.output\_buffer,\ \textcolor{stringliteral}{"{}E02"{}});}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00583\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'s'}:}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ stepping\ =\ 1;}
+\DoxyCodeLine{00585\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'c'}:\ \{}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ addr\ =\ 0;}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex\_to\_int(\&ptr,\ \&addr))\ \{}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ ctx.registers[EIP]\ =\ addr;}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}\%c,\ offset:\ \%p,\ ip:\ \%p\ (\%s)\(\backslash\)n"{}},\ cmd,\ (\textcolor{keywordtype}{void}\ *)\ addr,}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{void}\ *)\ ctx.registers[EIP],\ cmd\ ==\ \textcolor{charliteral}{'c'}\ ?\ \textcolor{stringliteral}{"{}Continue"{}}\ :\ \textcolor{stringliteral}{"{}Step"{}});}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ ctx.registers[EFLAGS]\ \&=\ 0xfffffeff;}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stepping)}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ ctx.registers[EFLAGS]\ |=\ 0x100;}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00596\ \ \ \ \ \ \ handler\_mutex\ =\ 0;}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00598\ \ \ \ \ \}}
+\DoxyCodeLine{00599\ \ \ \ \ \textcolor{keywordflow}{case}\ \textcolor{charliteral}{'k'}:}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00601\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ gdb\_debug(\textcolor{stringliteral}{"{}Unhandled:\ \%c\%s\(\backslash\)n"{}},\ cmd,\ ptr);}
+\DoxyCodeLine{00603\ \ \ \ \ \}}
+\DoxyCodeLine{00604\ }
+\DoxyCodeLine{00605\ \ \ \ \ gdb\_write\_packet((\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\ *)\ ctx.output\_buffer);}
+\DoxyCodeLine{00606\ \ \ \}}
+\DoxyCodeLine{00607\ }
+\DoxyCodeLine{00608\ \ \ handler\_mutex\ =\ 0;}
+\DoxyCodeLine{00609\ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00610\ \}}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \textcolor{keywordtype}{void}\ gdb\_tick\_handler(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{00613\ \ \ \textcolor{keywordtype}{int}\ status\ =\ \_bios\_serialcom(\_COM\_STATUS,\ 0,\ 0);}
+\DoxyCodeLine{00614\ \ \ \textcolor{keywordflow}{if}\ (status\ \&\ (1\ <<\ 8)\ \&\&\ !handler\_mutex)\ \{}
+\DoxyCodeLine{00615\ \ \ \ \ ctx.was\_interrupted\ =\ 1;}
+\DoxyCodeLine{00616\ \ \ \}}
+\DoxyCodeLine{00617\ \}}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ \textcolor{keywordtype}{void}\ gdb\_checkpoint()\ \{}
+\DoxyCodeLine{00620\ \ \ \textcolor{keywordflow}{if}\ (ctx.was\_interrupted)\ \{}
+\DoxyCodeLine{00621\ \ \ \ \ ctx.was\_interrupted\ =\ 0;}
+\DoxyCodeLine{00622\ \ \ \ \ \textcolor{keyword}{asm}(\textcolor{stringliteral}{"{}int\ \$3"{}});}
+\DoxyCodeLine{00623\ \ \ \}}
+\DoxyCodeLine{00624\ \}}
+\DoxyCodeLine{00625\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00626\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00627\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

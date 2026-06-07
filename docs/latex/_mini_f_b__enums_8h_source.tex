@@ -1,0 +1,122 @@
+\doxysection{Mini\+FB\+\_\+enums.\+h}
+\hypertarget{_mini_f_b__enums_8h_source}{}\label{_mini_f_b__enums_8h_source}\index{modules/minifb/include/MiniFB\_enums.h@{modules/minifb/include/MiniFB\_enums.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}MiniFB\_keylist.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}MiniFB\_macros.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Enums}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ MFB\_STATE\_OK\ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ 0,}
+\DoxyCodeLine{00016\ \ \ \ \ MFB\_STATE\_EXIT\ \ \ \ \ \ \ \ \ \ \ =\ -\/1,}
+\DoxyCodeLine{00017\ \ \ \ \ MFB\_STATE\_INVALID\_WINDOW\ =\ -\/2,}
+\DoxyCodeLine{00018\ \ \ \ \ MFB\_STATE\_INVALID\_BUFFER\ =\ -\/3,}
+\DoxyCodeLine{00019\ \ \ \ \ MFB\_STATE\_INTERNAL\_ERROR\ =\ -\/4,}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ STATE\_OK\ \ \ \ \ \ \ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}STATE\_OK\ is\ deprecated,\ use\ MFB\_STATE\_OK"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_STATE\_OK,}
+\DoxyCodeLine{00022\ \ \ \ \ STATE\_EXIT\ \ \ \ \ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}STATE\_EXIT\ is\ deprecated,\ use\ MFB\_STATE\_EXIT"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_STATE\_EXIT,}
+\DoxyCodeLine{00023\ \ \ \ \ STATE\_INVALID\_WINDOW\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}STATE\_INVALID\_WINDOW\ is\ deprecated,\ use\ MFB\_STATE\_INVALID\_WINDOW"{}})\ =\ MFB\_STATE\_INVALID\_WINDOW,}
+\DoxyCodeLine{00024\ \ \ \ \ STATE\_INVALID\_BUFFER\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}STATE\_INVALID\_BUFFER\ is\ deprecated,\ use\ MFB\_STATE\_INVALID\_BUFFER"{}})\ =\ MFB\_STATE\_INVALID\_BUFFER,}
+\DoxyCodeLine{00025\ \ \ \ \ STATE\_INTERNAL\_ERROR\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}STATE\_INTERNAL\_ERROR\ is\ deprecated,\ use\ MFB\_STATE\_INTERNAL\_ERROR"{}})\ =\ MFB\_STATE\_INTERNAL\_ERROR,}
+\DoxyCodeLine{00026\ \}\ mfb\_update\_state;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00029\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ MFB\_MOUSE\_BTN\_0,\ \textcolor{comment}{//\ No\ mouse\ button}}
+\DoxyCodeLine{00031\ \ \ \ \ MFB\_MOUSE\_BTN\_1,}
+\DoxyCodeLine{00032\ \ \ \ \ MFB\_MOUSE\_BTN\_2,}
+\DoxyCodeLine{00033\ \ \ \ \ MFB\_MOUSE\_BTN\_3,}
+\DoxyCodeLine{00034\ \ \ \ \ MFB\_MOUSE\_BTN\_4,}
+\DoxyCodeLine{00035\ \ \ \ \ MFB\_MOUSE\_BTN\_5,}
+\DoxyCodeLine{00036\ \ \ \ \ MFB\_MOUSE\_BTN\_6,}
+\DoxyCodeLine{00037\ \ \ \ \ MFB\_MOUSE\_BTN\_7,}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ MOUSE\_BTN\_0\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_0\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_0"{}})\ =\ MFB\_MOUSE\_BTN\_0,}
+\DoxyCodeLine{00040\ \ \ \ \ MOUSE\_BTN\_1\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_1\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_1"{}})\ =\ MFB\_MOUSE\_BTN\_1,}
+\DoxyCodeLine{00041\ \ \ \ \ MOUSE\_BTN\_2\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_2\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_2"{}})\ =\ MFB\_MOUSE\_BTN\_2,}
+\DoxyCodeLine{00042\ \ \ \ \ MOUSE\_BTN\_3\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_3\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_3"{}})\ =\ MFB\_MOUSE\_BTN\_3,}
+\DoxyCodeLine{00043\ \ \ \ \ MOUSE\_BTN\_4\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_4\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_4"{}})\ =\ MFB\_MOUSE\_BTN\_4,}
+\DoxyCodeLine{00044\ \ \ \ \ MOUSE\_BTN\_5\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_5\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_5"{}})\ =\ MFB\_MOUSE\_BTN\_5,}
+\DoxyCodeLine{00045\ \ \ \ \ MOUSE\_BTN\_6\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_6\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_6"{}})\ =\ MFB\_MOUSE\_BTN\_6,}
+\DoxyCodeLine{00046\ \ \ \ \ MOUSE\_BTN\_7\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_BTN\_7\ is\ deprecated,\ use\ MFB\_MOUSE\_BTN\_7"{}})\ =\ MFB\_MOUSE\_BTN\_7,}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ MFB\_MOUSE\_LEFT\_DEPRECATED\ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_LEFT\ is\ deprecated,\ use\ MFB\_MOUSE\_LEFT"{}})\ \ \ \ \ =\ MFB\_MOUSE\_BTN\_1,}
+\DoxyCodeLine{00049\ \ \ \ \ MFB\_MOUSE\_RIGHT\_DEPRECATED\ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_RIGHT\ is\ deprecated,\ use\ MFB\_MOUSE\_RIGHT"{}})\ \ \ =\ MFB\_MOUSE\_BTN\_2,}
+\DoxyCodeLine{00050\ \ \ \ \ MFB\_MOUSE\_MIDDLE\_DEPRECATED\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}MOUSE\_MIDDLE\ is\ deprecated,\ use\ MFB\_MOUSE\_MIDDLE"{}})\ =\ MFB\_MOUSE\_BTN\_3,}
+\DoxyCodeLine{00051\ \}\ mfb\_mouse\_button;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ MFB\_MOUSE\_LEFT\ \ \ MFB\_MOUSE\_BTN\_1}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ MFB\_MOUSE\_RIGHT\ \ MFB\_MOUSE\_BTN\_2}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ MFB\_MOUSE\_MIDDLE\ MFB\_MOUSE\_BTN\_3}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ MOUSE\_LEFT\ \ \ \ \ \ \ MFB\_MOUSE\_LEFT\_DEPRECATED}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#define\ MOUSE\_RIGHT\ \ \ \ \ \ MFB\_MOUSE\_RIGHT\_DEPRECATED}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ MOUSE\_MIDDLE\ \ \ \ \ MFB\_MOUSE\_MIDDLE\_DEPRECATED}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00062\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \#define\ KEY\_VALUE(NAME,\ VALUE,\ \_)\ MFB\_\#\#NAME\ =\ VALUE,}}
+\DoxyCodeLine{00064\ KEY\_LIST(KEY\_VALUE)}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{preprocessor}{\#undef\ KEY\_VALUE}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \#define\ KEY\_VALUE(NAME,\ VALUE,\ \_)\ NAME\ MFB\_ENUM\_DEPRECATED(\#NAME\ "{}\ is\ deprecated,\ use\ MFB\_"{}\ \#NAME)\ =\ MFB\_\#\#NAME,}}
+\DoxyCodeLine{00068\ KEY\_LIST(KEY\_VALUE)}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{preprocessor}{\#undef\ KEY\_VALUE}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ MFB\_KB\_KEY\_LAST\_DEPRECATED\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_KEY\_LAST\ is\ deprecated,\ use\ MFB\_KB\_KEY\_LAST"{}})\ =\ MFB\_KB\_KEY\_MENU,}
+\DoxyCodeLine{00072\ \}\ mfb\_key;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\#define\ MFB\_KB\_KEY\_LAST\ \ MFB\_KB\_KEY\_MENU}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#define\ KB\_KEY\_LAST\ \ \ \ \ \ MFB\_KB\_KEY\_LAST\_DEPRECATED}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00079\ \ \ \ \ MFB\_KB\_MOD\_SHIFT\ \ \ \ \ \ \ \ =\ 0x0001,}
+\DoxyCodeLine{00080\ \ \ \ \ MFB\_KB\_MOD\_CONTROL\ \ \ \ \ \ =\ 0x0002,}
+\DoxyCodeLine{00081\ \ \ \ \ MFB\_KB\_MOD\_ALT\ \ \ \ \ \ \ \ \ \ =\ 0x0004,}
+\DoxyCodeLine{00082\ \ \ \ \ MFB\_KB\_MOD\_SUPER\ \ \ \ \ \ \ \ =\ 0x0008,}
+\DoxyCodeLine{00083\ \ \ \ \ MFB\_KB\_MOD\_CAPS\_LOCK\ \ \ \ =\ 0x0010,}
+\DoxyCodeLine{00084\ \ \ \ \ MFB\_KB\_MOD\_NUM\_LOCK\ \ \ \ \ =\ 0x0020,}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ KB\_MOD\_SHIFT\ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_SHIFT\ is\ deprecated,\ use\ MFB\_KB\_MOD\_SHIFT"{}})\ \ \ \ \ \ \ \ \ =\ MFB\_KB\_MOD\_SHIFT,}
+\DoxyCodeLine{00087\ \ \ \ \ KB\_MOD\_CONTROL\ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_CONTROL\ is\ deprecated,\ use\ MFB\_KB\_MOD\_CONTROL"{}})\ \ \ \ \ =\ MFB\_KB\_MOD\_CONTROL,}
+\DoxyCodeLine{00088\ \ \ \ \ KB\_MOD\_ALT\ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_ALT\ is\ deprecated,\ use\ MFB\_KB\_MOD\_ALT"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_KB\_MOD\_ALT,}
+\DoxyCodeLine{00089\ \ \ \ \ KB\_MOD\_SUPER\ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_SUPER\ is\ deprecated,\ use\ MFB\_KB\_MOD\_SUPER"{}})\ \ \ \ \ \ \ \ \ =\ MFB\_KB\_MOD\_SUPER,}
+\DoxyCodeLine{00090\ \ \ \ \ KB\_MOD\_CAPS\_LOCK\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_CAPS\_LOCK\ is\ deprecated,\ use\ MFB\_KB\_MOD\_CAPS\_LOCK"{}})\ =\ MFB\_KB\_MOD\_CAPS\_LOCK,}
+\DoxyCodeLine{00091\ \ \ \ \ KB\_MOD\_NUM\_LOCK\ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}KB\_MOD\_NUM\_LOCK\ is\ deprecated,\ use\ MFB\_KB\_MOD\_NUM\_LOCK"{}})\ \ \ =\ MFB\_KB\_MOD\_NUM\_LOCK}
+\DoxyCodeLine{00092\ \}\ mfb\_key\_mod;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00095\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00096\ \ \ \ \ MFB\_WF\_RESIZABLE\ \ \ \ \ \ \ \ \ \ =\ 0x01,}
+\DoxyCodeLine{00097\ \ \ \ \ MFB\_WF\_FULLSCREEN\ \ \ \ \ \ \ \ \ =\ 0x02,}
+\DoxyCodeLine{00098\ \ \ \ \ MFB\_WF\_FULLSCREEN\_DESKTOP\ =\ 0x04,}
+\DoxyCodeLine{00099\ \ \ \ \ MFB\_WF\_BORDERLESS\ \ \ \ \ \ \ \ \ =\ 0x08,}
+\DoxyCodeLine{00100\ \ \ \ \ MFB\_WF\_ALWAYS\_ON\_TOP\ \ \ \ \ \ =\ 0x10,}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ WF\_RESIZABLE\ \ \ \ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}WF\_RESIZABLE\ is\ deprecated,\ use\ MFB\_WF\_RESIZABLE"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_WF\_RESIZABLE,}
+\DoxyCodeLine{00103\ \ \ \ \ WF\_FULLSCREEN\ \ \ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}WF\_FULLSCREEN\ is\ deprecated,\ use\ MFB\_WF\_FULLSCREEN"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_WF\_FULLSCREEN,}
+\DoxyCodeLine{00104\ \ \ \ \ WF\_FULLSCREEN\_DESKTOP\ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}WF\_FULLSCREEN\_DESKTOP\ is\ deprecated,\ use\ MFB\_WF\_FULLSCREEN\_DESKTOP"{}})\ =\ MFB\_WF\_FULLSCREEN\_DESKTOP,}
+\DoxyCodeLine{00105\ \ \ \ \ WF\_BORDERLESS\ \ \ \ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}WF\_BORDERLESS\ is\ deprecated,\ use\ MFB\_WF\_BORDERLESS"{}})\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ MFB\_WF\_BORDERLESS,}
+\DoxyCodeLine{00106\ \ \ \ \ WF\_ALWAYS\_ON\_TOP\ \ \ \ \ \ MFB\_ENUM\_DEPRECATED(\textcolor{stringliteral}{"{}WF\_ALWAYS\_ON\_TOP\ is\ deprecated,\ use\ MFB\_WF\_ALWAYS\_ON\_TOP"{}})\ \ \ \ \ \ \ \ \ \ \ =\ MFB\_WF\_ALWAYS\_ON\_TOP,}
+\DoxyCodeLine{00107\ \}\ mfb\_window\_flags;}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00110\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ MFB\_LOG\_TRACE\ =\ 0,}
+\DoxyCodeLine{00112\ \ \ \ \ MFB\_LOG\_DEBUG,}
+\DoxyCodeLine{00113\ \ \ \ \ MFB\_LOG\_INFO,}
+\DoxyCodeLine{00114\ \ \ \ \ MFB\_LOG\_WARNING,}
+\DoxyCodeLine{00115\ \ \ \ \ MFB\_LOG\_ERROR,}
+\DoxyCodeLine{00116\ \}\ mfb\_log\_level;}
+
+\end{DoxyCode}

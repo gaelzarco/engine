@@ -1,0 +1,72 @@
+\doxysection{render\+\_\+v0.\+cppm}
+\hypertarget{render__v0_8cppm_source}{}\label{render__v0_8cppm_source}\index{modules/render/render\_v0.cppm@{modules/render/render\_v0.cppm}}
+\doxymbox{\hyperlink{render__v0_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}../minifb/include/MiniFB\_cpp.h"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{export}\ \textcolor{keyword}{module}\ \doxymbox{\hyperlink{module__render__v0}{render\_v0}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/easily-\/swappable-\/parameters)}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/narrowing-\/conversions)}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/float-\/loop-\/counter)}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }buff\_color\ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{using\ }color\_t\ =\ uint8\_t;}
+\DoxyCodeLine{00050\ \ \ \ \ buff\_color(color\_t\ r\ =\ 0,\ color\_t\ g\ =\ 0,\ color\_t\ b\ =\ 0)\ :\ \_r(r),\ \_g(g),\ \_b(b)\ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (r\ ==\ 0\ \&\&\ g\ ==\ 0\ \&\ b\ ==\ 0)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ std::mt19937\ rng(rd());}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \_r\ =\ rng();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \_g\ =\ rng();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \_b\ =\ rng();}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ color\_t\ \_r;}
+\DoxyCodeLine{00061\ \ \ \ \ color\_t\ \_g;}
+\DoxyCodeLine{00062\ \ \ \ \ color\_t\ \_b;}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structpoint}{point}}\ \{\ \textcolor{keywordtype}{int}\ x,\ y\{\};\ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00109\ \textcolor{keyword}{export}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}{line}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ std::vector<std::size\_t>\&\ buff,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structbuff__color}{buff\_color}}\&\ color,}
+\DoxyCodeLine{00110\ \textcolor{keyword}{const}\ std::size\_t\ WIDTH,\ \textcolor{keyword}{const}\ std::size\_t\ HEIGHT)\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ steep\ =\ std::abs(a.x\ -\/\ b.x)\ <\ std::abs(a.y\ -\/\ b.y);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ std::swap(a.x,\ a.y);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::swap(b.x,\ b.y);}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (a.x\ >\ b.x)\ std::swap(a,\ b);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ a.y;}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ 0;}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\{a.x\};\ x\ <=\ b.x;\ x++)\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ buff[x\ *\ WIDTH\ +\ y]\ =\ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ buff[y\ *\ WIDTH\ +\ x]\ =\ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ err\ +=\ 2\ *\ std::abs(b.y\ -\/\ a.y);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ >\ b.x\ -\/\ a.x)\ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ y\ +=\ b.y\ >\ a.y\ ?\ 1\ :\ -\/1;}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ err\ -\/=\ 2\ *\ (b.x\ -\/\ a.x);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \}}
+\DoxyCodeLine{00136\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/float-\/loop-\/counter)}}
+\DoxyCodeLine{00137\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/narrowing-\/conversions)}}
+\DoxyCodeLine{00138\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/easily-\/swappable-\/parameters)}}
+\DoxyCodeLine{00139\ }
+
+\end{DoxyCode}

@@ -1,0 +1,1125 @@
+\doxysection{modules/\+minifb Directory Reference}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09}{}\label{dir_006c2d4c6a64548781c165edce9aee09}\index{modules/minifb Directory Reference@{modules/minifb Directory Reference}}
+\doxysubsubsection*{Directories}
+\begin{DoxyCompactItemize}
+\item 
+directory \doxymbox{\hyperlink{dir_b7f75438416d7ed88eac0970354fbbf7}{examples}}
+\item 
+directory \doxymbox{\hyperlink{dir_1123cdc8022b076fe5c1642a9841ec79}{include}}
+\item 
+directory \doxymbox{\hyperlink{dir_90fbe9955caae3804584ff94751a6da6}{src}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md22}{}\doxysubsection{\texorpdfstring{Mini\+FB}{Mini\+FB}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md22}
+Mini\+FB (Mini Frame\+Buffer) is a small cross-\/platform library that makes it easy to render (32-\/bit) pixels in a window.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md23}{}\doxysubsection{\texorpdfstring{Quick Start}{Quick Start}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md23}
+An example is the best way to show how it works:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{engine_8cpp_a9d6b8cae4881c54db1d2df3da92c712f}{main}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }mfb\_window\ *window\ =\ mfb\_open\_ex(\textcolor{stringliteral}{"{}my\ display"{}},\ 800,\ 600,\ MFB\_WF\_RESIZABLE);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (window\ ==\ NULL)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ *buffer\ =\ malloc(800\ *\ 600\ *\ 4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ mfb\_update\_state\ state;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ add\ some\ fancy\ rendering\ to\ the\ buffer\ of\ size\ 800\ *\ 600}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ state\ =\ mfb\_update\_ex(window,\ buffer,\ 800,\ 600);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (state\ !=\ MFB\_STATE\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}(mfb\_wait\_sync(window));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ free(buffer);}
+\DoxyCodeLine{\ \ \ \ buffer\ =\ NULL;}
+\DoxyCodeLine{\ \ \ \ window\ =\ NULL;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md24}{}\doxysubsubsection{\texorpdfstring{How it works}{How it works}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md24}
+
+\begin{DoxyEnumerate}
+\item First the application creates a {\bfseries{window}} calling {\bfseries{mfb\+\_\+open}} or {\bfseries{mfb\+\_\+open\+\_\+ex}}.
+\item Next, it\textquotesingle{}s the application\textquotesingle{}s responsibility to allocate a buffer to work with.
+\item Next, call {\bfseries{mfb\+\_\+update}} or {\bfseries{mfb\+\_\+update\+\_\+ex}} to copy the buffer to the window and display it. If this function returns a value lower than 0, the window has been destroyed internally and cannot be used anymore.
+\item Last the code waits to synchronize with the monitor calling {\bfseries{mfb\+\_\+wait\+\_\+sync}}.
+\end{DoxyEnumerate}
+
+{\bfseries{Note:\+}} By default, if ESC key is pressed, {\bfseries{mfb\+\_\+update}} /\+ {\bfseries{mfb\+\_\+update\+\_\+ex}} will return -\/1 (and the window will have been destroyed internally).
+
+See \href{https://github.com/emoon/minifb/blob/master/examples/noise.c}{\texttt{https:\+/\+/\+github.\+com/\+emoon/\+minifb/\+blob/\+master/\+examples/\+noise.\+c}} for a complete example.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md25}{}\doxysubsection{\texorpdfstring{Supported Platforms}{Supported Platforms}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md25}
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Platform  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Backends  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Status  \\
+{\bfseries{Windows}}  &GDI, Open\+GL  &Fully supported  \\
+{\bfseries{mac\+OS}}  &Cocoa, Metal  &Fully supported  \\
+{\bfseries{Linux/\+\+Unix}}  &X11, Wayland  &Fully supported (X11, Wayland)  \\
+{\bfseries{i\+OS}}  &Metal  &Beta  \\
+{\bfseries{Android}}  &Native  &Beta  \\
+{\bfseries{Web}}  &WASM  &Beta  \\
+{\bfseries{DOS}}  &DJGPP  &Beta  \\
+\end{DoxyTable}
+
+
+Mini\+FB has been tested on Windows, mac\+OS, Linux, i\+OS, Android, web, and DOSBox-\/x. Compatibility may vary depending on your setup. Currently, the library does not perform any data conversion if a proper 32-\/bit display cannot be created.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md26}{}\doxysubsection{\texorpdfstring{Features}{Features}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md26}
+
+\begin{DoxyItemize}
+\item Window creation and management
+\item Event callbacks (keyboard, mouse, window lifecycle)
+\item Direct window state queries
+\item Per-\/window custom data
+\item Built-\/in timers and FPS control
+\item C and C++ interfaces
+\item Cursor control
+\end{DoxyItemize}\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md27}{}\doxysubsection{\texorpdfstring{API Reference}{API Reference}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md27}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md28}{}\doxysubsubsection{\texorpdfstring{Window Management}{Window Management}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md28}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ and\ manage\ windows}}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }mfb\_window\ *\ mfb\_open(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *title,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }mfb\_window\ *\ mfb\_open\_ex(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *title,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height,\ \textcolor{keywordtype}{unsigned}\ flags);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_close(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Update\ and\ synchronization}}
+\DoxyCodeLine{mfb\_update\_state\ \ \ \ mfb\_update(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *buffer);}
+\DoxyCodeLine{mfb\_update\_state\ \ \ \ mfb\_update\_ex(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *buffer,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{mfb\_update\_state\ \ \ \ mfb\_update\_events(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_wait\_sync(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Viewport\ control}}
+\DoxyCodeLine{\textcolor{comment}{//\ Coordinates/sizes\ are\ in\ drawable\ coordinates\ (same\ units\ as\ mfb\_get\_window\_width/height\ and\ resize\ callback).}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_viewport(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ offset\_x,\ \textcolor{keywordtype}{unsigned}\ offset\_y,\ \textcolor{keywordtype}{unsigned}\ width,\ \textcolor{keywordtype}{unsigned}\ height);}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_viewport\_best\_fit(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ old\_width,\ \textcolor{keywordtype}{unsigned}\ old\_height);}
+
+\end{DoxyCode}
+
+
+{\ttfamily mfb\+\_\+set\+\_\+viewport()} returns {\ttfamily false} if:\+
+\begin{DoxyItemize}
+\item {\ttfamily width == 0} or {\ttfamily height == 0}
+\item viewport bounds exceed the current window drawable size
+\end{DoxyItemize}
+
+{\ttfamily mfb\+\_\+open()} and {\ttfamily mfb\+\_\+open\+\_\+ex()} return {\ttfamily NULL} if:\+
+\begin{DoxyItemize}
+\item {\ttfamily width == 0} or {\ttfamily height == 0}
+\item {\ttfamily width \texorpdfstring{$\ast$}{*} 4} would overflow the internal framebuffer stride
+\end{DoxyItemize}
+
+If {\ttfamily title} is {\ttfamily NULL} or empty, Mini\+FB uses {\ttfamily "{}minifb"{}} as the effective window/\+canvas title.
+
+If both {\ttfamily MFB\+\_\+\+WF\+\_\+\+FULLSCREEN} and {\ttfamily MFB\+\_\+\+WF\+\_\+\+FULLSCREEN\+\_\+\+DESKTOP} are provided, {\ttfamily MFB\+\_\+\+WF\+\_\+\+FULLSCREEN} takes precedence.
+
+{\ttfamily mfb\+\_\+update\+\_\+ex()} returns {\ttfamily MFB\+\_\+\+STATE\+\_\+\+INVALID\+\_\+\+BUFFER} if:\+
+\begin{DoxyItemize}
+\item {\ttfamily buffer == NULL}
+\item {\ttfamily width == 0} or {\ttfamily height == 0}
+\item {\ttfamily width \texorpdfstring{$\ast$}{*} 4} would overflow internal stride calculations
+\end{DoxyItemize}
+
+{\ttfamily mfb\+\_\+update\+\_\+ex()} runtime behavior is backend-\/specific:\+
+\begin{DoxyItemize}
+\item Wayland waits for compositor frame callback inside {\ttfamily mfb\+\_\+update\+\_\+ex()} (can block).
+\item Android may return {\ttfamily MFB\+\_\+\+STATE\+\_\+\+OK} without presenting when {\ttfamily ANative\+Window} is temporarily unavailable during lifecycle transitions.
+\end{DoxyItemize}
+
+Open-\/time readiness is backend-\/specific:\+
+\begin{DoxyItemize}
+\item Wayland waits for the initial configure handshake before returning from {\ttfamily mfb\+\_\+open\+\_\+ex()}.
+\item Android may return a window handle before {\ttfamily ANative\+Window} is ready (rendering starts once the native window becomes available).
+\end{DoxyItemize}
+
+{\ttfamily mfb\+\_\+open\+\_\+ex()} flag support by backend:\+
+
+
+\begin{DoxyTable}{6}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Backend  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}RESIZABLE  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}BORDERLESS  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}ALWAYS\+\_\+\+ON\+\_\+\+TOP  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}FULLSCREEN  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}FULLSCREEN\+\_\+\+DESKTOP  \\
+Windows  &Yes  &Yes  &Yes  &Yes  &Yes  \\
+X11  &Yes  &Yes\texorpdfstring{$\ast$}{*}  &Yes\texorpdfstring{$\ast$}{*}  &Yes\texorpdfstring{$\ast$}{*}  &Yes\texorpdfstring{$\ast$}{*}  \\
+Wayland  &Yes  &Yes  &No (ignored, warning)  &Yes  &Yes (maximized)  \\
+mac\+OS  &Yes  &Yes  &Yes  &Yes  &Yes (zoom/\+maximize)  \\
+Web  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &Yes\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}  &Yes\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}  \\
+DOS  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  \\
+Android  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  \\
+i\+OS  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  &No (ignored, warning)  \\
+\end{DoxyTable}
+
+
+
+\begin{DoxyItemize}
+\item Best effort via window-\/manager hints/\+properties; behavior depends on compositor/\+\+WM support.
+\end{DoxyItemize}
+
+\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} Browser-\/managed fullscreen; typically requires a user gesture before entering fullscreen.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{Event Callbacks}{Event Callbacks}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md29}
+Register callbacks to handle window events:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Callback\ types}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_active\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_active\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_resize\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_resize\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_close\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_close\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_keyboard\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_keyboard\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_char\_input\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_char\_input\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_button\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_button\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_move\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_move\_func\ callback);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_mouse\_scroll\_callback(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_scroll\_func\ callback);}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md30}{}\doxysubsubsubsection{\texorpdfstring{Callback Signature Examples}{Callback Signature Examples}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md30}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ active(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ is\_active)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Called\ when\ window\ gains/loses\ focus}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ resize(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Called\ when\ window\ is\ resized\ (width/height\ use\ the\ same\ drawable\ units\ as\ mfb\_set\_viewport)}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Optionally\ adjust\ viewport:}}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ mfb\_set\_viewport(window,\ x,\ y,\ width,\ height);}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ close(\textcolor{keyword}{struct}\ mfb\_window\ *window)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Called\ when\ close\ is\ requested}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \ \ \ \textcolor{comment}{//\ true\ =>\ confirm\ close,\ false\ =>\ cancel}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ keyboard(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\ key,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (key\ ==\ KB\_KEY\_ESCAPE)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ mfb\_close(window);}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ char\_input(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ char\_code)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Unicode\ character\ input}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ mouse\_btn(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_mouse\_button\ button,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{bool}\ is\_pressed)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mouse\ button\ events}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ mouse\_move(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mouse\ movement\ (note:\ fired\ frequently)}}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ mouse\_scroll(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ mfb\_key\_mod\ mod,\ \textcolor{keywordtype}{float}\ delta\_x,\ \textcolor{keywordtype}{float}\ delta\_y)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Mouse\ wheel/scroll\ events}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md31}{}\doxysubsubsubsection{\texorpdfstring{C++ Callback Interface}{C++ Callback Interface}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md31}
+If you are using C++, you can set callbacks to class methods or lambda expressions:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Using\ object\ and\ pointer\ to\ member}}
+\DoxyCodeLine{mfb\_set\_active\_callback(window,\ \&myObject,\ \&MyClass::onActive);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Using\ std::bind}}
+\DoxyCodeLine{mfb\_set\_active\_callback(std::bind(\&MyClass::onActive,\ \&myObject,\ \_1,\ \_2),\ window);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Using\ lambda}}
+\DoxyCodeLine{mfb\_set\_active\_callback([](\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ is\_active)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Handle\ event}}
+\DoxyCodeLine{\},\ window);}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md32}{}\doxysubsubsection{\texorpdfstring{Window State Queries}{Window State Queries}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md32}
+Query window and input state directly (alternative to callbacks):\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Window\ state}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_is\_window\_active(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_width(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_height(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_window\_size(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ *width,\ \textcolor{keywordtype}{unsigned}\ *height);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Key\ utilities}}
+\DoxyCodeLine{\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\ \ \ \ \ \ \ \ mfb\_get\_key\_name(mfb\_key\ key);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Drawable\ area\ (considering\ viewport\ scaling/DPI)}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_offset\_x(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_offset\_y(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_width(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_height(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_drawable\_bounds(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{unsigned}\ *offset\_x,\ \textcolor{keywordtype}{unsigned}\ *offset\_y,\ \textcolor{keywordtype}{unsigned}\ *width,\ \textcolor{keywordtype}{unsigned}\ *height);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Input\ state}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_x(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_y(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch(\textcolor{keywordtype}{int}\ combined,\ \textcolor{keywordtype}{int}\ *pos,\ \textcolor{keywordtype}{int}\ *\textcolor{keywordtype}{id});\ \ \ \ \ \textcolor{comment}{//\ Decode\ packed\ mobile\ touch\ pos/id}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch\_pos(\textcolor{keywordtype}{int}\ combined);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ position\ from\ a\ packed\ touch\ value}}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_decode\_touch\_id(\textcolor{keywordtype}{int}\ combined);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ pointer\ id\ from\ a\ packed\ touch\ value}}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_scroll\_x(\textcolor{keyword}{struct}\ mfb\_window\ *window);\ \ \ \ \ \ \textcolor{comment}{//\ Mouse\ wheel\ delta\ X\ from\ the\ most\ recent\ event\ pump\ (0.0f\ if\ none)}}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_mouse\_scroll\_y(\textcolor{keyword}{struct}\ mfb\_window\ *window);\ \ \ \ \ \ \textcolor{comment}{//\ Mouse\ wheel\ delta\ Y\ from\ the\ most\ recent\ event\ pump\ (0.0f\ if\ none)}}
+\DoxyCodeLine{\textcolor{keyword}{const}\ uint8\_t\ *\ \ \ \ \ mfb\_get\_mouse\_button\_buffer(\textcolor{keyword}{struct}\ mfb\_window\ *window);\ \textcolor{comment}{//\ 1=pressed,\ 0=released\ (8\ buttons)}}
+\DoxyCodeLine{\textcolor{keyword}{const}\ uint8\_t\ *\ \ \ \ \ mfb\_get\_key\_buffer(\textcolor{keyword}{struct}\ mfb\_window\ *window);\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 1=pressed,\ 0=released}}
+
+\end{DoxyCode}
+
+
+On Android/\+i\+OS touch paths, {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+x()} and {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+y()} include an encoded touch pointer id in the upper bits. Use {\ttfamily mfb\+\_\+decode\+\_\+touch()} to decode both at once, or {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+pos()} /\+ {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+id()} individually. On desktop/\+\+Web/\+\+DOS, {\ttfamily id} is always {\ttfamily 0}. For touch callbacks, the pointer id is also exposed as {\ttfamily button} in {\ttfamily mfb\+\_\+mouse\+\_\+button\+\_\+func} ({\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+0}..{\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+7}). On Android/\+i\+OS touch move callbacks, {\ttfamily mfb\+\_\+mouse\+\_\+move\+\_\+func} receives packed {\ttfamily x/\+y} values (same encoding as getters). On Android, external {\ttfamily HOVER\+\_\+\+MOVE} also uses packed {\ttfamily x/\+y}; if Android does not provide a valid pointer id, Mini\+FB uses fallback id {\ttfamily 15}. {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+scroll\+\_\+x/\+y()} are pump-\/local values:\+ Mini\+FB resets them to {\ttfamily 0.\+0f} before each backend event pump, then writes the delta if a scroll event is received during that pump.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md33}{}\doxysubsubsection{\texorpdfstring{Per-\/\+Window Data}{Per-\/\+Window Data}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md33}
+Attach and retrieve custom data per window:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_user\_data(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{void}\ *user\_data);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_user\_data(\textcolor{keyword}{struct}\ mfb\_window\ *window);}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md34}{}\doxysubsubsection{\texorpdfstring{Timers}{Timers}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md34}
+Create and manage timers independently:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *\ \ mfb\_timer\_create(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_destroy(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_reset(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_compensated\_reset(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_now(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_delta(\textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structmfb__timer}{mfb\_timer}}\ *tmr);}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_get\_frequency(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\textcolor{keywordtype}{double}\ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_timer\_get\_resolution(\textcolor{keywordtype}{void});}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md35}{}\doxysubsubsection{\texorpdfstring{Frame Rate Control}{Frame Rate Control}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md35}
+Control target FPS and frame synchronization:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_set\_target\_fps(uint32\_t\ fps);\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default:\ 60\ fps}}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_target\_fps(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_wait\_sync(\textcolor{keyword}{struct}\ mfb\_window\ *window);\ \textcolor{comment}{//\ Frame\ sync\ point}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note:\+}} Hardware-\/accelerated syncing (Open\+GL /\+ Metal, where supported) will use vertical sync. Other platforms use software pacing.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md36}{}\doxysubsubsection{\texorpdfstring{Logging}{Logging}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md36}
+Mini\+FB ships with a simple logger that you can redirect or disable:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Set\ a\ custom\ logger;\ pass\ NULL\ to\ restore\ the\ built-\/in\ logger}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ mfb\_set\_logger(mfb\_log\_func\ user\_logger);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Control\ verbosity\ threshold\ (inclusive)}}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ mfb\_set\_log\_level(mfb\_log\_level\ level);}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item Levels (low → high):\+ {\ttfamily MFB\+\_\+\+LOG\+\_\+\+TRACE}, {\ttfamily MFB\+\_\+\+LOG\+\_\+\+DEBUG}, {\ttfamily MFB\+\_\+\+LOG\+\_\+\+INFO}, {\ttfamily MFB\+\_\+\+LOG\+\_\+\+WARNING}, {\ttfamily MFB\+\_\+\+LOG\+\_\+\+ERROR}.
+\item Defaults:\+ in {\ttfamily \+\_\+\+DEBUG} builds the threshold is {\ttfamily MFB\+\_\+\+LOG\+\_\+\+DEBUG}; in release builds {\ttfamily MFB\+\_\+\+LOG\+\_\+\+INFO}.
+\item Messages with a level {\bfseries{below}} the threshold are discarded; equal or higher are emitted.
+\item Custom loggers receive the message already formatted ({\ttfamily level} + {\ttfamily message}).
+\item The built-\/in logger writes {\ttfamily TRACE}/\+{\ttfamily DEBUG}/\+{\ttfamily INFO} to {\ttfamily stdout} and {\ttfamily WARNING}/\+{\ttfamily ERROR} to {\ttfamily stderr} as {\ttfamily \+[Mini\+FB (LEVEL)]\+ message}.
+\end{DoxyItemize}\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md37}{}\doxysubsubsection{\texorpdfstring{Cursor Control}{Cursor Control}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md37}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_show\_cursor(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{bool}\ show);}
+
+\end{DoxyCode}
+
+
+{\bfseries{Note:\+}} Cursor hiding is supported on Windows, mac\+OS, X11, and Wayland only.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md38}{}\doxysubsubsection{\texorpdfstring{Monitor Information}{Monitor Information}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md38}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_monitor\_scale(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{float}\ *scale\_x,\ \textcolor{keywordtype}{float}\ *scale\_y);}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mfb\_get\_monitor\_dpi(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{float}\ *dpi\_x,\ \textcolor{keywordtype}{float}\ *dpi\_y);\ \textcolor{comment}{//\ [Deprecated]}}
+
+\end{DoxyCode}
+
+
+{\ttfamily mfb\+\_\+get\+\_\+monitor\+\_\+scale()}:\+
+
+
+\begin{DoxyItemize}
+\item Returns scale multipliers ({\ttfamily 1.\+0} = 100\%).
+\item If {\ttfamily window == NULL}, outputs still receive a safe fallback ({\ttfamily 1.\+0}) when their pointers are non-\/{\ttfamily NULL}.
+\item Some backends provide real scale values (for example Retina/\+\+Hi\+DPI); others currently return fixed {\ttfamily 1.\+0}.
+\item On X11, scale detection is implemented (Xresources/\+\+XRand\+R/\+fallbacks), but in many desktop setups the value is effectively startup-\/time and may not update dynamically after changing global scale while the app is running.
+\end{DoxyItemize}
+
+If you define layout in logical units and need drawable-\/coordinate values for {\ttfamily mfb\+\_\+set\+\_\+viewport()}, convert explicitly:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{float}\ sx\ =\ 1.0f,\ sy\ =\ 1.0f;}
+\DoxyCodeLine{mfb\_get\_monitor\_scale(window,\ \&sx,\ \&sy);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ margin\_x\_viewport\ =\ (unsigned)\ lroundf(margin\_logical\_x\ *\ sx);}
+\DoxyCodeLine{\textcolor{keywordtype}{unsigned}\ margin\_y\_viewport\ =\ (unsigned)\ lroundf(margin\_logical\_y\ *\ sy);}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md39}{}\doxysubsubsection{\texorpdfstring{Display Insets}{Display Insets}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md39}
+Two C functions let you query display insets from native code:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Physical\ cutout/notch\ area\ only.}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ mfb\_get\_display\_cutout\_insets(\textcolor{keyword}{struct}\ mfb\_window\ *window,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *left,\ \textcolor{keywordtype}{int}\ *top,\ \textcolor{keywordtype}{int}\ *right,\ \textcolor{keywordtype}{int}\ *bottom);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Full\ safe\ area:\ cutout\ +\ system\ UI\ reserved\ regions.}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ mfb\_get\_display\_safe\_insets(\textcolor{keyword}{struct}\ mfb\_window\ *window,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ *left,\ \textcolor{keywordtype}{int}\ *top,\ \textcolor{keywordtype}{int}\ *right,\ \textcolor{keywordtype}{int}\ *bottom);}
+
+\end{DoxyCode}
+
+
+Insets are {\bfseries{edge margins in pixels}}, not a rectangle:\+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily left}, {\ttfamily top}, {\ttfamily right}, {\ttfamily bottom} are distances from each window edge.
+\item No reserved area means {\ttfamily 0, 0, 0, 0}.
+\item If you need a safe rectangle, derive it from window size:\+
+\begin{DoxyItemize}
+\item {\ttfamily safe\+\_\+x = left}
+\item {\ttfamily safe\+\_\+y = top}
+\item {\ttfamily safe\+\_\+w = window\+\_\+w -\/ left -\/ right}
+\item {\ttfamily safe\+\_\+h = window\+\_\+h -\/ top -\/ bottom}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+Return value contract (all backends):\+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily true}:\+ query succeeded, output values are valid (possibly all zeros).
+\item {\ttfamily false}:\+ query unavailable/\+invalid at that moment; outputs are set to zeros.
+\end{DoxyItemize}
+
+Behavior by backend:\+
+
+\texorpdfstring{$\vert$}{|} Backend \texorpdfstring{$\vert$}{|} {\ttfamily mfb\+\_\+get\+\_\+display\+\_\+cutout\+\_\+insets} \texorpdfstring{$\vert$}{|} {\ttfamily mfb\+\_\+get\+\_\+display\+\_\+safe\+\_\+insets} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|}-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/---\texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} Android \texorpdfstring{$\vert$}{|} Physical cutout only ({\ttfamily Display\+Cutout}, API 28+). Returns {\ttfamily true} with zeros when there is no cutout. Returns {\ttfamily false} if unavailable (e.\+g. API \texorpdfstring{$<$}{<} 28 or query failure). \texorpdfstring{$\vert$}{|} Full safe insets. API 30+:\+ {\ttfamily Window\+Insets.\+get\+Insets(system\+Bars\texorpdfstring{$\vert$}{|}display\+Cutout)}. API 24-\/29:\+ {\ttfamily get\+System\+Window\+Inset\texorpdfstring{$\ast$}{*}()} fallback. \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} i\+OS \texorpdfstring{$\vert$}{|} Approximated from {\ttfamily UIWindow.\+safe\+Area\+Insets} for physical cutout intent. Bottom is kept {\ttfamily 0} (home indicator is not a physical cutout). \texorpdfstring{$\vert$}{|} Uses {\ttfamily UIWindow.\+safe\+Area\+Insets} directly (includes notch/\+\+Dynamic Island + status bar + home indicator). \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} Desktop/\+\+Web/\+\+DOS \texorpdfstring{$\vert$}{|} Returns {\ttfamily true} with zeros for a valid window (no platform cutout/\+safe-\/inset data exposed). \texorpdfstring{$\vert$}{|} Returns {\ttfamily true} with zeros for a valid window. \texorpdfstring{$\vert$}{|}
+
+For any backend, passing {\ttfamily window == NULL} returns {\ttfamily false} and zero outputs.
+
+Example usage (safe layout):\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{void}\ on\_resize(\textcolor{keyword}{struct}\ mfb\_window\ *window,\ \textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height)\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ left\ =\ 0,\ top\ =\ 0,\ right\ =\ 0,\ bottom\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (!mfb\_get\_display\_safe\_insets(window,\ \&left,\ \&top,\ \&right,\ \&bottom))\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ safe\_x\ =\ left;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ safe\_y\ =\ top;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ safe\_w\ =\ width\ \ -\/\ left\ -\/\ right;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{int}\ safe\_h\ =\ height\ -\/\ top\ \ -\/\ bottom;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Clamp\ defensive,\ in\ case\ platform\ values\ arrive\ before\ resize\ settles.}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (safe\_w\ <\ 0)\ safe\_w\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (safe\_h\ <\ 0)\ safe\_h\ =\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Place\ important\ UI\ inside\ [safe\_x,\ safe\_y,\ safe\_w,\ safe\_h].}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md40}{}\doxysubsection{\texorpdfstring{Integration}{Integration}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md40}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md41}{}\doxysubsubsection{\texorpdfstring{Adding Mini\+FB to Your Project}{Adding Mini\+FB to Your Project}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md41}
+Add this {\bfseries{repository as a submodule}} in your dependencies folder:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ submodule\ add\ https://github.com/emoon/minifb.git\ dependencies/minifb}
+
+\end{DoxyCode}
+
+
+Then in your {\ttfamily CMake\+Lists.\+txt} file:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{add\_subdirectory(dependencies/minifb)}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Link\ MiniFB\ to\ your\ project:}
+\DoxyCodeLine{target\_link\_libraries(\$\{PROJECT\_NAME\}\ minifb)}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md42}{}\doxysubsection{\texorpdfstring{Build Instructions}{Build Instructions}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md42}
+The build system is {\bfseries{CMake}}.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md43}{}\doxysubsection{\texorpdfstring{Versioning}{Versioning}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md43}
+Mini\+FB existed for many years without an official release version. Starting from this codebase, the project now uses Sem\+Ver and declares {\bfseries{v0.\+9.\+0}} as the official baseline version.
+
+Builds expose public version/\+build metadata for C/\+\+C++ consumers via {\ttfamily \doxylink{minifb__version_8h_source}{minifb\+\_\+version.\+h}} (generated at configure time and installed with the public headers). This includes:\+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily MINIFB\+\_\+\+VERSION\+\_\+\+STRING} /\+ major-\/minor-\/patch macros
+\item packed {\ttfamily MINIFB\+\_\+\+VERSION\+\_\+\+NUMERIC} and extraction helpers
+\item optional Git-\/derived metadata ({\ttfamily MINIFB\+\_\+\+COMMIT\+\_\+\+COUNT}, {\ttfamily MINIFB\+\_\+\+COMMITS\+\_\+\+SINCE\+\_\+\+TAG}, {\ttfamily MINIFB\+\_\+\+GIT\+\_\+\+SHA}, {\ttfamily MINIFB\+\_\+\+GIT\+\_\+\+DIRTY})
+\end{DoxyItemize}
+
+When building from a source archive without {\ttfamily .git} metadata, defaults are used ({\ttfamily unknown} SHA, counters {\ttfamily 0}) and the build still succeeds.
+
+Some projects use date-\/based versions when retrofitting versioning. Mini\+FB now uses Sem\+Ver to keep compatibility expectations clearer for users and downstream integrations.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md44}{}\doxysubsubsection{\texorpdfstring{Windows}{Windows}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md44}
+If you use {\bfseries{CMake}}, a Visual Studio project will be generated.
+
+Furthermore you can also use {\bfseries{Min\+GW}} instead of Visual Studio.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md45}{}\doxysubsubsubsection{\texorpdfstring{Open\+GL API backend (Windows)}{Open\+GL API backend (Windows)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md45}
+By default, the Open\+GL backend is used instead of Windows GDI because it is faster. To maintain compatibility with older computers, an Open\+GL 1.\+5 context is created (no shaders needed).
+
+To enable or disable Open\+GL just use a CMake flag:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_OPENGL\_API=ON}
+\DoxyCodeLine{\#\ or}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_OPENGL\_API=OFF}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+OPENGL\+\_\+\+API} is still accepted for compatibility, but deprecated.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md46}{}\doxysubsubsection{\texorpdfstring{X11 (Free\+BSD, Linux, \texorpdfstring{$\ast$}{*}nix)}{X11 (Free\+BSD, Linux, \texorpdfstring{$\ast$}{*}nix)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md46}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md47}{}\doxysubsubsubsection{\texorpdfstring{Dependencies for X11 on Ubuntu/\+\+Debian}{Dependencies for X11 on Ubuntu/\+\+Debian}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md47}
+To compile Mini\+FB with X11 backend on Ubuntu/\+\+Debian, install the following packages:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt-\/get\ update}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ -\/y\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ build-\/essential\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ cmake\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ pkg-\/config\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libx11-\/dev\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libxkbcommon-\/dev\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libgl1-\/mesa-\/dev\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libxrandr-\/dev}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\bfseries{build-\/essential}}:\+ Compiler toolchain (gcc, g++, make)
+\item {\bfseries{cmake}}:\+ Build system
+\item {\bfseries{pkg-\/config}}:\+ Helper tool for compiling applications and libraries
+\item {\bfseries{libx11-\/dev}}:\+ X11 core libraries and headers
+\item {\bfseries{libxkbcommon-\/dev}}:\+ Keyboard handling library
+\item {\bfseries{libgl1-\/mesa-\/dev}}:\+ Open\+GL libraries (required if using Open\+GL backend, which is default)
+\item {\bfseries{libxrandr-\/dev}} {\itshape (optional)}:\+ Enables XRand\+R-\/based monitor scale/\+\+DPI queries on X11 ({\ttfamily mfb\+\_\+get\+\_\+monitor\+\_\+scale} fallback path and diagnostics)
+\end{DoxyItemize}
+
+If you prefer to use X11 without Open\+GL (XImage rendering), you can omit {\ttfamily libgl1-\/mesa-\/dev}. If you do not need XRand\+R-\/assisted scale/\+\+DPI detection, you can omit {\ttfamily libxrandr-\/dev}.
+
+Equivalent packages for other distros:\+
+
+
+\begin{DoxyItemize}
+\item Fedora:\+ {\ttfamily gcc}, {\ttfamily cmake}, {\ttfamily pkg-\/config}, {\ttfamily lib\+X11-\/devel}, {\ttfamily libxkbcommon-\/devel}, {\ttfamily mesa-\/lib\+GL-\/devel}
+\item Arch:\+ {\ttfamily base-\/devel}, {\ttfamily cmake}, {\ttfamily pkgconf}, {\ttfamily libx11}, {\ttfamily libxkbcommon}, {\ttfamily mesa}
+\item open\+SUSE:\+ {\ttfamily gcc}, {\ttfamily cmake}, {\ttfamily pkg-\/config}, {\ttfamily lib\+X11-\/devel}, {\ttfamily libxkbcommon-\/devel}, {\ttfamily Mesa-\/lib\+GL-\/devel}
+\end{DoxyItemize}\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md48}{}\doxysubsubsubsection{\texorpdfstring{Building with CMake}{Building with CMake}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md48}
+If you use {\bfseries{CMake}}, just disable the flag:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/x11}
+\DoxyCodeLine{cd\ build-\/x11}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_WAYLAND\_API=OFF}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+WAYLAND\+\_\+\+API} is still accepted for compatibility, but deprecated.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md49}{}\doxysubsubsubsection{\texorpdfstring{Open\+GL API backend (X11)}{Open\+GL API backend (X11)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md49}
+By default, the Open\+GL backend is used instead of X11 XImages because it is faster. To maintain compatibility with older computers, an Open\+GL 1.\+5 context is created (no shaders needed).
+
+To enable or disable Open\+GL just use a CMake flag:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_OPENGL\_API=ON\ -\/DMINIFB\_USE\_WAYLAND\_API=OFF}
+\DoxyCodeLine{\#\ or}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_OPENGL\_API=OFF\ -\/DMINIFB\_USE\_WAYLAND\_API=OFF}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+OPENGL\+\_\+\+API} and {\ttfamily USE\+\_\+\+WAYLAND\+\_\+\+API} are still accepted for compatibility, but deprecated.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md50}{}\doxysubsubsection{\texorpdfstring{Wayland (Linux)}{Wayland (Linux)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md50}
+Depends on gcc and wayland-\/client and wayland-\/cursor. Built using the wayland-\/gcc variants. The Wayland backend supports the same core Mini\+FB API surface as the other primary desktop backends (Windows, mac\+OS, X11).\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md51}{}\doxysubsubsubsection{\texorpdfstring{Dependencies for Wayland on Ubuntu/\+\+Debian}{Dependencies for Wayland on Ubuntu/\+\+Debian}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md51}
+To compile Mini\+FB with Wayland backend on Ubuntu/\+\+Debian, install the following packages:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{sudo\ apt-\/get\ update}
+\DoxyCodeLine{sudo\ apt-\/get\ install\ -\/y\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ build-\/essential\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ cmake\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ pkg-\/config\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libwayland-\/dev\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ libxkbcommon-\/dev\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ wayland-\/protocols}
+
+\end{DoxyCode}
+
+
+
+\begin{DoxyItemize}
+\item {\bfseries{build-\/essential}}:\+ Compiler toolchain (gcc, g++, make)
+\item {\bfseries{cmake}}:\+ Build system
+\item {\bfseries{pkg-\/config}}:\+ Helper tool for compiling applications and libraries
+\item {\bfseries{libwayland-\/dev}}:\+ Wayland client libraries and headers
+\item {\bfseries{libxkbcommon-\/dev}}:\+ Keyboard handling library
+\item {\bfseries{wayland-\/protocols}}:\+ Wayland protocol definitions
+\end{DoxyItemize}
+
+Equivalent packages for other distros:\+
+
+
+\begin{DoxyItemize}
+\item Fedora:\+ {\ttfamily gcc}, {\ttfamily cmake}, {\ttfamily pkg-\/config}, {\ttfamily wayland-\/devel}, {\ttfamily libxkbcommon-\/devel}, {\ttfamily wayland-\/protocols-\/devel}
+\item Arch:\+ {\ttfamily base-\/devel}, {\ttfamily cmake}, {\ttfamily pkgconf}, {\ttfamily wayland}, {\ttfamily libxkbcommon}, {\ttfamily wayland-\/protocols}
+\item open\+SUSE:\+ {\ttfamily gcc}, {\ttfamily cmake}, {\ttfamily pkg-\/config}, {\ttfamily wayland-\/devel}, {\ttfamily libxkbcommon-\/devel}, {\ttfamily wayland-\/protocols-\/devel}
+\end{DoxyItemize}\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md52}{}\doxysubsubsubsection{\texorpdfstring{Wayland Protocol Compatibility}{Wayland Protocol Compatibility}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md52}
+Different Linux distributions and versions may ship with different versions of Wayland and its protocols. Mini\+FB includes pre-\/generated protocol headers and code that work with most common setups. However, if you encounter compatibility issues or want to ensure optimal compatibility with your specific Wayland version, you can regenerate the protocol files using your system\textquotesingle{}s Wayland version.
+
+To regenerate Wayland protocol files for your system you must run first the protocol generation script:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{chmod\ +x\ ./tools/wayland/generate-\/protocols.sh}
+\DoxyCodeLine{./tools/wayland/generate-\/protocols.sh}
+
+\end{DoxyCode}
+
+
+This script will generate protocol headers and code that are specifically compatible with your installed Wayland version, potentially resolving any version mismatch issues.
+
+If you use {\bfseries{CMake}}, just enable the flag:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/wayland}
+\DoxyCodeLine{cd\ build-\/wayland}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_WAYLAND\_API=ON}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+WAYLAND\+\_\+\+API} is still accepted for compatibility, but deprecated.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md53}{}\doxysubsubsection{\texorpdfstring{mac\+OS}{mac\+OS}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md53}
+Cocoa and clang are assumed to be installed on the system (downloading the latest Xcode and installing the command line tools should do the trick).
+
+Note that mac\+OS Mojave+ does not support the Cocoa framework as expected. For that reason, you can switch to the Metal API. To enable it with CMake, use the {\ttfamily MINIFB\+\_\+\+USE\+\_\+\+METAL\+\_\+\+API} option.
+
+If you use {\bfseries{CMake}}, just enable the flag:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/macos-\/metal}
+\DoxyCodeLine{cd\ build-\/macos-\/metal}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_METAL\_API=ON}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+METAL\+\_\+\+API} is still accepted for compatibility, but deprecated.
+
+Or, if you don\textquotesingle{}t want to use the Metal API:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/macos-\/cocoa}
+\DoxyCodeLine{cd\ build-\/macos-\/cocoa}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_METAL\_API=OFF}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md54}{}\doxysubsubsubsection{\texorpdfstring{Coordinate system}{Coordinate system}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md54}
+On mac\+OS, the default mouse coordinate system is (0, 0) → (left, bottom). But since we want to create a multiplatform library, we invert the coordinates so that (0, 0) → (left, top), like on the other platforms.
+
+In any case, if you want to get the default coordinate system you can use the CMake flag:\+ {\ttfamily MINIFB\+\_\+\+USE\+\_\+\+INVERTED\+\_\+\+Y\+\_\+\+ON\+\_\+\+MACOS=ON}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/macos-\/inverted-\/y}
+\DoxyCodeLine{cd\ build-\/macos-\/inverted-\/y}
+\DoxyCodeLine{cmake\ ..\ -\/DMINIFB\_USE\_INVERTED\_Y\_ON\_MACOS=ON}
+
+\end{DoxyCode}
+ {\ttfamily USE\+\_\+\+INVERTED\+\_\+\+Y\+\_\+\+ON\+\_\+\+MACOS} is still accepted for compatibility, but deprecated.
+
+{\bfseries{Note}}:\+ In the future, we may use a global option so that all platforms behave in the same way. Probably:\+ -\/DUSE\+\_\+\+INVERTED\+\_\+Y\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md55}{}\doxysubsubsection{\texorpdfstring{i\+OS (beta)}{i\+OS (beta)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md55}
+It works with and without a {\ttfamily UIWindow}. If you create the window/\+view hierarchy through Storyboard, set the {\ttfamily UIView\+Controller} to {\ttfamily \doxylink{interfacei_o_s_view_controller}{i\+OSView\+Controller}} and the root {\ttfamily UIView} to {\ttfamily \doxylink{interfacei_o_s_view}{i\+OSView}}.
+
+{\bfseries{Launch screen /\+ storyboard requirement}}:\+
+
+For App Store distribution, Apple requires a launch storyboard (legacy static launch images are deprecated). Without a launch storyboard, i\+OS can start in a compatibility layout and you may see top/\+bottom black bands or an incorrect initial drawable size.
+
+That is why there are now two i\+OS example targets:\+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily noise}:\+ uses {\ttfamily examples/\+ios/\+\+Info.\+plist} + {\ttfamily examples/\+ios/\+\+Launch\+Screen.\+storyboard} (recommended, App Store-\/ready).
+\item {\ttfamily noise\+\_\+no\+\_\+storyboard}:\+ uses {\ttfamily examples/\+ios/\+\+Info.\+no\+\_\+storyboard.\+plist} without launch storyboard (useful for legacy/\+manual setups and behavior comparison).
+\end{DoxyItemize}
+
+Apple references:\+
+\begin{DoxyItemize}
+\item \href{https://developer.apple.com/news/?id=03042020b}{\texttt{https:\+/\+/\+developer.\+apple.\+com/\+news/\+?id=03042020b}}
+\item \href{https://developer.apple.com/documentation/xcode/specifying-your-apps-launch-screen}{\texttt{https:\+/\+/\+developer.\+apple.\+com/\+documentation/\+xcode/\+specifying-\/your-\/apps-\/launch-\/screen}}
+\item \href{https://developer.apple.com/videos/play/wwdc2019/401/}{\texttt{https:\+/\+/\+developer.\+apple.\+com/\+videos/\+play/\+wwdc2019/\+401/\+}}
+\end{DoxyItemize}
+
+{\bfseries{Issues}}:\+
+
+
+\begin{DoxyItemize}
+\item To run on a physical device, you need to set a valid \textquotesingle{}Signing Team\textquotesingle{} and \textquotesingle{}Bundle Identifier\textquotesingle{}.
+\item i\+OS Simulator supports Metal on modern Xcode versions, but final validation should still be done on real devices.
+\end{DoxyItemize}
+
+{\bfseries{Limitations}}:\+
+
+
+\begin{DoxyItemize}
+\item No keyboard or char-\/input callbacks (i\+OS backend uses touch events instead)
+\item Single window only (flags to {\ttfamily mfb\+\_\+open\+\_\+ex()} are ignored)
+\item {\ttfamily mfb\+\_\+show\+\_\+cursor()} is a no-\/op (no cursor concept on touch devices)
+\item No dedicated multitouch API; touches are mapped to mouse callbacks ({\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+0}..{\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+7})
+\item Mouse events represent touch events (coordinates track the last processed touch event)
+\item Touch pointer id is packed into upper bits of {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+x()} /\+ {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+y()} values; decode with {\ttfamily mfb\+\_\+decode\+\_\+touch()} /\+ {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+pos()} /\+ {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+id()}
+\item No mouse wheel/\+scroll callback support on i\+OS
+\end{DoxyItemize}
+
+{\ttfamily mfb\+\_\+set\+\_\+active\+\_\+callback()} is triggered from i\+OS app lifecycle notifications (active/\+inactive transitions). {\ttfamily mfb\+\_\+set\+\_\+close\+\_\+callback()} is called as a termination notification only; i\+OS does not allow canceling app termination.
+
+{\ttfamily mfb\+\_\+set\+\_\+target\+\_\+fps()} /\+ {\ttfamily mfb\+\_\+get\+\_\+target\+\_\+fps()} are supported on i\+OS for software pacing via {\ttfamily mfb\+\_\+wait\+\_\+sync()}. If your app is driven by {\ttfamily CADisplay\+Link} (like the example), frame pacing is display-\/driven by i\+OS.
+
+Core rendering, viewport, timers, and user data management work normally.
+
+{\bfseries{Example}}:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ -\/c}
+\DoxyCodeLine{-\/\ (BOOL)application:(UIApplication\ *)application\ didFinishLaunchingWithOptions:(NSDictionary\ *)launchOptions\ \{}
+\DoxyCodeLine{\ \ \ \ g\_width\ \ =\ [UIScreen\ mainScreen].bounds.size.width;}
+\DoxyCodeLine{\ \ \ \ g\_height\ =\ [UIScreen\ mainScreen].bounds.size.height;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ g\_window\ =\ mfb\_open("{}noise"{},\ g\_width,\ g\_height);}
+\DoxyCodeLine{\ \ \ \ if\ (g\_window\ ==\ NULL)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ return\ NO;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ g\_buffer\ =\ malloc(g\_width\ *\ g\_height\ *\ 4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ return\ YES;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ (void)applicationDidBecomeActive:(UIApplication\ *)application\ \{}
+\DoxyCodeLine{\ \ \ \ mDisplayLink\ =\ [CADisplayLink\ displayLinkWithTarget:self\ selector:@selector(OnUpdateFrame)];}
+\DoxyCodeLine{\ \ \ \ [mDisplayLink\ addToRunLoop:[NSRunLoop\ currentRunLoop]\ forMode:NSDefaultRunLoopMode];}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ (void)applicationWillTerminate:(UIApplication\ *)application\ \{}
+\DoxyCodeLine{\ \ \ \ [mDisplayLink\ invalidate];}
+\DoxyCodeLine{\ \ \ \ mfb\_close(g\_window);}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ (void)\ OnUpdateFrame\ \{}
+\DoxyCodeLine{\ \ \ \ if(g\_buffer\ !=\ NULL)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ //\ Do\ your\ wonderful\ rendering\ stuff}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ mfb\_update\_state\ state\ =\ mfb\_update\_ex(g\_window,\ g\_buffer,\ g\_width,\ g\_height);}
+\DoxyCodeLine{\ \ \ \ if\ (state\ !=\ MFB\_STATE\_OK)\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ free(g\_buffer);}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ g\_window\ =\ NULL;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ g\_buffer\ =\ NULL;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ g\_width\ \ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ g\_height\ =\ 0;}
+\DoxyCodeLine{\ \ \ \ \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+{\bfseries{CMake}}:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build-\/ios}
+\DoxyCodeLine{cd\ build-\/ios}
+\DoxyCodeLine{cmake\ -\/G\ Xcode\ -\/DCMAKE\_SYSTEM\_NAME=iOS\ -\/DCMAKE\_OSX\_DEPLOYMENT\_TARGET=11.0\ ..}
+
+\end{DoxyCode}
+
+
+Then choose the Xcode scheme you want to run:\+
+
+
+\begin{DoxyItemize}
+\item {\ttfamily noise} (with launch storyboard, recommended)
+\item {\ttfamily noise\+\_\+no\+\_\+storyboard} (without launch storyboard)
+\end{DoxyItemize}\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md56}{}\doxysubsubsection{\texorpdfstring{Android (beta)}{Android (beta)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md56}
+Take a look at the example in examples/\+android. You need {\bfseries{Android Studio}} to build and run it.
+
+{\bfseries{Limitations}}:\+
+
+
+\begin{DoxyItemize}
+\item No general keyboard/\+char-\/input callback support yet
+\item Single window only (flags to {\ttfamily mfb\+\_\+open\+\_\+ex()} are ignored)
+\item {\ttfamily mfb\+\_\+show\+\_\+cursor()} is a no-\/op (no cursor concept on touch devices)
+\item No dedicated multitouch API; touches are mapped to mouse callbacks ({\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+0}..{\ttfamily MFB\+\_\+\+MOUSE\+\_\+\+BTN\+\_\+7})
+\item Mouse events represent touch events (last processed touch position)
+\item Touch pointer id is packed into upper bits of {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+x()} /\+ {\ttfamily mfb\+\_\+get\+\_\+mouse\+\_\+y()} values; decode with {\ttfamily mfb\+\_\+decode\+\_\+touch()} /\+ {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+pos()} /\+ {\ttfamily mfb\+\_\+decode\+\_\+touch\+\_\+id()}
+\item {\ttfamily mfb\+\_\+get\+\_\+monitor\+\_\+scale()} reports Android density scale (same value for X/\+Y, from {\ttfamily AConfiguration\+\_\+get\+Density()} with {\ttfamily 160dpi = 1.\+0})
+\end{DoxyItemize}
+
+{\bfseries{Note}}:\+ On Android, pressing {\ttfamily BACK} should close the app by default. In some emulators, right-\/click may be mapped to {\ttfamily BACK}. For debugging this case, the Android example CMake option {\ttfamily MINIFB\+\_\+\+ANDROID\+\_\+\+CAPTURE\+\_\+\+RIGHT\+\_\+\+CLICK\+\_\+\+AS\+\_\+\+ESC} can be enabled to map {\ttfamily BACK} to {\ttfamily ESC} instead (default:\+ {\ttfamily OFF}).
+
+{\ttfamily mfb\+\_\+set\+\_\+target\+\_\+fps()} /\+ {\ttfamily mfb\+\_\+get\+\_\+target\+\_\+fps()} are supported on Android for software pacing via {\ttfamily mfb\+\_\+wait\+\_\+sync()}.
+
+All other Mini\+FB functions work normally, including timers, viewports, and user data management.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md57}{}\doxysubsubsubsection{\texorpdfstring{Pixel format on Android}{Pixel format on Android}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md57}
+Mini\+FB uses a {\bfseries{32-\/bit pixel buffer}} on all platforms, but the byte order in memory differs between Android and desktop/\+i\+OS:\+
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Platform  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Byte order in memory  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Equivalent uint32\+\_\+t (LE)  \\
+Desktop (Windows, Linux, mac\+OS)  &B · G · R · X  &{\ttfamily 0x00\+RRGGBB}  \\
+i\+OS  &B · G · R · A  &{\ttfamily 0x00\+RRGGBB}  \\
+{\bfseries{Android}}  &{\bfseries{R · G · B · X}}  &{\bfseries{{\ttfamily 0x00\+BBGGRR}}}  \\
+\end{DoxyTable}
+
+
+{\bfseries{You do not need to think about this}} as long as you construct pixels with the {\ttfamily MFB\+\_\+\+RGB} /\+ {\ttfamily MFB\+\_\+\+ARGB} macros, they expand to the correct bit layout automatically on every platform:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{buffer[i]\ =\ MFB\_RGB(255,\ 0,\ 0);\ \ \ \textcolor{comment}{//\ always\ displays\ red,\ on\ every\ platform}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Where it matters:\+ external pixel data.}} If you load an image with a library that always produces RGBA bytes in memory (e.\+g. {\ttfamily stb\+\_\+image}, {\ttfamily libpng}, browser canvas), and you pass that data directly to {\ttfamily mfb\+\_\+update\+\_\+ex}, the colors will be correct on Android but {\bfseries{red and blue will be swapped on desktop/\+i\+OS}} (and vice-\/versa if you adapt for desktop).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ stb\_image\ /\ libpng\ give\ RGBA\ bytes\ in\ memory:}}
+\DoxyCodeLine{\textcolor{comment}{//\ \ \ byte[0]=R\ \ byte[1]=G\ \ byte[2]=B\ \ byte[3]=A}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ On\ Android\ this\ is\ exactly\ what\ ANativeWindow\ expects,\ pass\ as-\/is.}}
+\DoxyCodeLine{\textcolor{comment}{//\ On\ desktop/iOS\ you\ must\ swap\ R\ <-\/>\ B\ before\ calling\ mfb\_update\_ex.}}
+
+\end{DoxyCode}
+
+
+{\bfseries{Why can\textquotesingle{}t Android just accept the same format as desktop?}} {\ttfamily ANative\+Window} (the Android NDK surface API) does not expose a BGRA format in its public interface, only {\ttfamily WINDOW\+\_\+\+FORMAT\+\_\+\+RGBX\+\_\+8888} (RGBA bytes) and {\ttfamily WINDOW\+\_\+\+FORMAT\+\_\+\+RGB\+\_\+565} are guaranteed on all devices. Doing a full-\/buffer swizzle per frame inside the library would add CPU cost for every rendered frame. The current design avoids that cost by adjusting the macro at compile time instead.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md58}{}\doxysubsubsubsection{\texorpdfstring{Display cutout /\+ Notch (API 32-\/34)}{Display cutout /\+ Notch (API 32-\/34)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md58}
+Android\textquotesingle{}s handling of the display cutout (notch, punch-\/hole camera) changed across API levels and can cause a framebuffer-\/size mismatch if not handled explicitly:\+
+
+
+\begin{DoxyTable}{3}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}API level  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Default behaviour  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Result  \\
+≤ 31  &Legacy fullscreen flags handle everything  &Works out of the box  \\
+32-\/34  &System reserves space for the cutout by default  &{\bfseries{Content shifted /\+ clipped}}  \\
+≥ 35  &Edge-\/to-\/edge is forced by the OS  &Works out of the box  \\
+\end{DoxyTable}
+
+
+Two approaches are provided in the example ({\ttfamily examples/\+android/\+native2026}); pick whichever fits your project.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md59}{}\doxysubsubsubsubsection{\texorpdfstring{Option A -\/ Manifest + theme (no Java code)}{Option A -\/ Manifest + theme (no Java code)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md59}
+Add a theme to {\ttfamily res/\+values/\+styles.\+xml}:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{resources}>}
+\DoxyCodeLine{\ \ \ \ <\textcolor{keywordtype}{style}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}FullscreenNative"{}}\ \textcolor{keyword}{parent}=\textcolor{stringliteral}{"{}@android:style/Theme.NoTitleBar.Fullscreen"{}}>}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{<!-\/-\/\ Allows\ the\ window\ to\ draw\ into\ the\ cutout\ area\ (API\ 31+).\ -\/-\/>}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ <\textcolor{keywordtype}{item}\ \textcolor{keyword}{name}=\textcolor{stringliteral}{"{}android:windowLayoutInDisplayCutoutMode"{}}>\textcolor{keyword}{always}</\textcolor{keywordtype}{item}>}
+\DoxyCodeLine{\ \ \ \ </\textcolor{keywordtype}{style}>}
+\DoxyCodeLine{</\textcolor{keywordtype}{resources}>}
+
+\end{DoxyCode}
+
+
+Then reference it in {\ttfamily Android\+Manifest.\+xml}:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{activity}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{android:name}=\textcolor{stringliteral}{"{}android.app.NativeActivity"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{android:theme}=\textcolor{stringliteral}{"{}@style/FullscreenNative"{}}}
+\DoxyCodeLine{\ \ \ \ ...>}
+
+\end{DoxyCode}
+
+
+{\bfseries{Pros}}:\+ zero Java code, takes effect before the native thread starts. {\bfseries{Cons}}:\+ limited runtime control; no way to query inset values from C.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md60}{}\doxysubsubsubsubsection{\texorpdfstring{Option B -\/ Java subclass (recommended)}{Option B -\/ Java subclass (recommended)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md60}
+Subclass {\ttfamily Native\+Activity} in {\ttfamily Mini\+FBActivity.\+java} and override {\ttfamily on\+Create} /\+ {\ttfamily on\+Window\+Focus\+Changed} to call {\ttfamily setup\+Fullscreen()}, which:\+
+
+
+\begin{DoxyItemize}
+\item Sets {\ttfamily LAYOUT\+\_\+\+IN\+\_\+\+DISPLAY\+\_\+\+CUTOUT\+\_\+\+MODE\+\_\+\+ALWAYS} (API 31+) or {\ttfamily SHORT\+\_\+\+EDGES} (API 28-\/30).
+\item Hides system bars via {\ttfamily Window\+Insets\+Controller} (API 30+) or the legacy {\ttfamily set\+System\+Ui\+Visibility} flags (API 24-\/29).
+\item Re-\/applies on focus changes (bars can reappear after an edge-\/swipe gesture).
+\end{DoxyItemize}
+
+In {\ttfamily Android\+Manifest.\+xml} replace the activity class name:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<\textcolor{keywordtype}{activity}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{android:name}=\textcolor{stringliteral}{"{}com.example.noise.MiniFBActivity"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{android:theme}=\textcolor{stringliteral}{"{}@style/FullscreenNative"{}}}
+\DoxyCodeLine{\ \ \ \ ...>}
+
+\end{DoxyCode}
+
+
+The theme is kept as an early fallback; the Java code overrides it once the Activity starts.
+
+{\bfseries{Pros}}:\+ robust, handles all API levels, re-\/applies after gesture-\/triggered bar visibility. {\bfseries{Cons}}:\+ requires one Java source file.
+
+Both options can coexist (the theme fires first, the Java code reinforces it).\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md61}{}\doxysubsubsubsection{\texorpdfstring{Querying Insets from C}{Querying Insets from C}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md61}
+The display inset APIs are backend-\/agnostic:\+ {\ttfamily mfb\+\_\+get\+\_\+display\+\_\+cutout\+\_\+insets()} and {\ttfamily mfb\+\_\+get\+\_\+display\+\_\+safe\+\_\+insets()}.
+
+See Display Insets in the API reference for exact semantics, return contract, and backend behavior details.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md62}{}\doxysubsubsection{\texorpdfstring{Web (WASM)}{Web (WASM)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md62}
+Download and install \href{https://emscripten.org/}{\texttt{Emscripten}}. When configuring your CMake build, specify the Emscripten toolchain file. Then proceed to build as usual.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md63}{}\doxysubsubsubsection{\texorpdfstring{Building and running the examples (WASM)}{Building and running the examples (WASM)}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md63}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/DCMAKE\_TOOLCHAIN\_FILE=/path/to/emsdk/<version>/emscripten/cmake/Modules/Platform/Emscripten.cmake\ -\/B\ build-\/web\ .}
+\DoxyCodeLine{cmake\ -\/-\/build\ build-\/web}
+
+\end{DoxyCode}
+
+
+On Windows, you can\textquotesingle{}t use Visual Studio\textquotesingle{}s default CMake generator because Emscripten uses its own toolchain based on a modified version of Clang. Instead, you need to generate Min\+GW-\/compatible makefiles. If you have Min\+GW installed:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/DCMAKE\_TOOLCHAIN\_FILE=C:\(\backslash\)Path\(\backslash\)to\(\backslash\)emsdk\(\backslash\)<version>\(\backslash\)upstream\(\backslash\)emscripten\(\backslash\)cmake\(\backslash\)Modules\(\backslash\)Platform\(\backslash\)Emscripten.cmake\ -\/G\ "{}MinGW\ Makefiles"{}\ -\/B\ build-\/web\ .}
+\DoxyCodeLine{cmake\ -\/-\/build\ build-\/web}
+
+\end{DoxyCode}
+
+
+\begin{quote}
+{\bfseries{Note}}:\+ On Windows, you will need a build tool other than Visual Studio. \href{https://ninja-build.org/}{\texttt{Ninja}} is the best and easiest option. Simply download it, put the {\ttfamily ninja.\+exe} executable somewhere in your path, and make it available on the command line via your {\ttfamily PATH} environment variable. Then invoke the first command above with the addition of {\ttfamily -\/G Ninja} at the end. \end{quote}
+
+
+Then open the file {\ttfamily build-\/web/\+index.\+html} in your browser to view the example index.
+
+The examples are build using the Emscripten flag {\ttfamily -\/s\+SINGLE\+\_\+\+FILE}, which will coalesce the {\ttfamily .js} and {\ttfamily .wasm} files into a single {\ttfamily .js} file. If you build your own apps without the {\ttfamily -\/s\+SINGLE\+\_\+\+FILE} flag, you can not simply open the {\ttfamily .html} file in the browser from disk. Instead, you need an HTTP server to serve the build output. The simplest solution for that is Python\textquotesingle{}s {\ttfamily http.\+server} module:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{python3\ -\/m\ http.server\ -\/-\/directory\ build-\/web}
+
+\end{DoxyCode}
+
+
+You can then open the index at \href{http://localhost:8000}{\texttt{http:\+/\+/\+localhost:\+8000}} in your browser.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md64}{}\doxysubsubsubsection{\texorpdfstring{Integrating a Mini\+FB app in a website}{Integrating a Mini\+FB app in a website}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md64}
+To build an executable target for the web, you need to add a linker option specifying its module name, e.\+g.:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{target\_link\_options(my\_app\ PRIVATE\ "{}-\/sEXPORT\_NAME=my\_app"{})}
+
+\end{DoxyCode}
+
+
+The Emscripten toolchain will then build a {\ttfamily my\+\_\+app.\+wasm} and {\ttfamily my\+\_\+app.\+js} file containing your app\textquotesingle{}s WASM code and Java\+Script glue code to load the WASM file and run it. To load and run your app, you need to:\+
+
+
+\begin{DoxyEnumerate}
+\item Call the {\ttfamily \texorpdfstring{$<$}{<}my\+\_\+module\+\_\+name\texorpdfstring{$>$}{>}()} in Java\+Script.
+\item Optionally create a {\ttfamily \texorpdfstring{$<$}{<}canvas\texorpdfstring{$>$}{>}} element whose {\ttfamily id} matches the effective Mini\+FB title. If it does not exist, the backend will create one and append it to the document, logging a warning.
+\end{DoxyEnumerate}
+
+Example app:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{engine_8cpp_a9d6b8cae4881c54db1d2df3da92c712f}{main}}()\ \{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{struct\ }mfb\_window\ *window\ =\ mfb\_open(\textcolor{stringliteral}{"{}my\_app"{}},\ 320,\ 240);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{if}\ (window\ ==\ NULL)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ uint32\_t\ *buffer\ =\ malloc(320\ *\ 240\ *\ 4);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ mfb\_update\_state\ state;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{//\ TODO:\ add\ some\ fancy\ rendering\ to\ the\ buffer\ of\ size\ 320\ *\ 240}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ state\ =\ mfb\_update\_ex(window,\ buffer,\ 320,\ 240);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (state\ !=\ MFB\_STATE\_OK)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}(mfb\_wait\_sync(window));}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ free(buffer);}
+\DoxyCodeLine{\ \ \ \ buffer\ =\ NULL;}
+\DoxyCodeLine{\ \ \ \ window\ =\ NULL;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Assuming the build will generate {\ttfamily my\+\_\+app.\+wasm} and {\ttfamily my\+\_\+app.\+js}, the simplest {\ttfamily .html} file to load and run the app would look like this:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<html>}
+\DoxyCodeLine{<!DOCTYPE\ html>}
+\DoxyCodeLine{<html\ lang="{}en"{}>}
+\DoxyCodeLine{<head>}
+\DoxyCodeLine{\ \ \ \ <meta\ charset='utf-\/8'>}
+\DoxyCodeLine{\ \ \ \ <meta\ http-\/equiv='X-\/UA-\/Compatible'\ content='IE=edge'>}
+\DoxyCodeLine{\ \ \ \ <meta\ name='viewport'\ content='width=device-\/width,\ initial-\/scale=1'>}
+\DoxyCodeLine{\ \ \ \ <!-\/-\/\ Load\ the\ app's\ .js\ file\ -\/-\/>}
+\DoxyCodeLine{\ \ \ \ <script\ src="{}./my\_app.js"{}></script>}
+\DoxyCodeLine{</head>}
+\DoxyCodeLine{<body>}
+\DoxyCodeLine{<div>}
+\DoxyCodeLine{\ \ \ \ <canvas\ id="{}my\_app"{}\ style="{}background:\ \#000;"{}></canvas>}
+\DoxyCodeLine{</div>}
+\DoxyCodeLine{<script>}
+\DoxyCodeLine{\ \ \ \ //\ Call\ the\ app's\ main()\ function}
+\DoxyCodeLine{\ \ \ \ my\_app();}
+\DoxyCodeLine{</script>}
+\DoxyCodeLine{</body>}
+\DoxyCodeLine{</html>}
+
+\end{DoxyCode}
+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md65}{}\doxysubsubsubsection{\texorpdfstring{Limitations \& caveats}{Limitations \& caveats}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md65}
+The web backend has the following backend-\/specific behavior:\+
+
+
+\begin{DoxyItemize}
+\item In {\ttfamily mfb\+\_\+open\+\_\+ex()}, only fullscreen flags are currently interpreted ({\ttfamily MFB\+\_\+\+WF\+\_\+\+FULLSCREEN}, {\ttfamily MFB\+\_\+\+WF\+\_\+\+FULLSCREEN\+\_\+\+DESKTOP}); other window flags are ignored
+\item {\ttfamily mfb\+\_\+get\+\_\+monitor\+\_\+dpi()} /\+ {\ttfamily mfb\+\_\+get\+\_\+monitor\+\_\+scale()} report fixed values ({\ttfamily 1.\+0} scale)
+\item {\ttfamily mfb\+\_\+set\+\_\+target\+\_\+fps()} /\+ {\ttfamily mfb\+\_\+get\+\_\+target\+\_\+fps()} store/\+query the target value, but do not currently control browser frame pacing (the browser event loop /\+ RAF timing drives pacing)
+\item {\ttfamily mfb\+\_\+show\+\_\+cursor()} tracks requested visibility, but hiding the browser cursor is not implemented yet
+\end{DoxyItemize}
+
+Core rendering, events, viewport and timers are supported.
+
+When calling {\ttfamily mfb\+\_\+open()} or {\ttfamily mfb\+\_\+open\+\_\+ex()}, Web uses the effective title as canvas id. If {\ttfamily title} is {\ttfamily NULL} or empty, the effective title is {\ttfamily "{}minifb"{}}, so the backend looks for {\ttfamily \texorpdfstring{$<$}{<}canvas id="{}minifb"{}\texorpdfstring{$>$}{>}}. If a matching canvas is not found, the backend creates one automatically and appends it to the document, and logs a warning. The functions modify the {\ttfamily width} and {\ttfamily height} attributes of the selected/\+created {\ttfamily \texorpdfstring{$<$}{<}canvas\texorpdfstring{$>$}{>}}. If not already set, they also modify CSS {\ttfamily width} and {\ttfamily height}.
+
+Setting the CSS width and height of the canvas allows you to up-\/scale the framebuffer arbitrarily:\+
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{//\ Request\ a\ 320x240\ window}
+\DoxyCodeLine{mfb\_open("{}my\_app"{},\ 320,\ 240);}
+\DoxyCodeLine{}
+\DoxyCodeLine{//\ Up-\/scale\ 2x\ via\ CSS}
+\DoxyCodeLine{<canvas\ id="{}my\_app"{}\ style="{}width:\ 640px;\ height:\ 480px"{}>}
+\DoxyCodeLine{\`{}\`{}\`{}\`{}}
+\DoxyCodeLine{}
+\DoxyCodeLine{If\ not\ already\ set,\ the\ backend\ will\ also\ set\ a\ handful\ of\ CSS\ styles\ on\ the\ canvas\ that\ are\ good\ defaults\ for\ pixel\ graphics.}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ \`{}image-\/rendering:\ pixelated`}
+\DoxyCodeLine{-\/\ \`{}user-\/select:\ none`}
+\DoxyCodeLine{-\/\ \`{}border:\ none`}
+\DoxyCodeLine{-\/\ \`{}outline-\/style:\ none`;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\ MS-\/DOS\ (DJGPP)}
+\DoxyCodeLine{}
+\DoxyCodeLine{Use\ the\ \`{}tools/dos/download-\/dos-\/tools.sh`\ file\ to\ download\ all\ the\ tools\ needed\ to\ compile,\ run\ and\ debug\ MiniFB\ DOS\ applications.\ The\ Bash\ script\ will\ download\ the\ following\ tools:}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ [DJGPP](https://www.delorie.com/djgpp/),\ a\ GCC\ fork\ targeting\ 32-\/bit\ protected\ mode\ DOS.}
+\DoxyCodeLine{-\/\ [GDB\ 7.1a](https://github.com/badlogic/gdb-\/7.1a),\ a\ GDB\ fork\ that\ can\ remotely\ debug\ 32-\/bit\ COFF\ executables\ via\ TCP,\ running\ in\ e.g.\ DOSBox-\/x,\ VirtualBox,\ or\ a\ real\ machine.}
+\DoxyCodeLine{-\/\ [DOSBox-\/x](https://github.com/badlogic/dosbox-\/x/),\ a\ fork\ of\ the\ popular\ DOS\ emulator\ with\ some\ modifications\ to\ enable\ remote\ debugging\ via\ GDB.}
+\DoxyCodeLine{}
+\DoxyCodeLine{The\ tools\ are\ downloaded\ to\ the\ \`{}tools/dos/`\ folder.\ The\ folder\ also\ contains\ a\ DOSBox-\/x\ configuration\ file\ \`{}dosbox-\/x.conf`\ preconfigured\ for\ debugging.\ The\ \`{}toolchain-\/djgpp.cmake`\ file\ is\ a\ CMake\ toolchain\ file\ for\ DJGPP.}
+\DoxyCodeLine{}
+\DoxyCodeLine{You\ can\ optionally\ run\ the\ script\ with\ the\ argument\ \`{}-\/-\/with-\/vs-\/code`.\ If\ you\ have\ [Visual\ Studio\ Code](https://code.visualstudio.com/)\ installed,\ the\ script\ will\ install\ extensions\ needed\ for\ C/C++\ development\ and\ debugging,\ and\ create\ a\ \`{}.vscode`\ folder\ in\ the\ repository\ root\ containing\ launch\ configurations,\ tasks,\ and\ various\ other\ settings\ for\ DOS\ development\ in\ VS\ Code.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\#\ Building\ and\ running\ the\ examples\ (DOS)}
+
+\end{DoxyCode}
+ sh cmake -\/DCMAKE\+\_\+\+TOOLCHAIN\+\_\+\+FILE=./\+tools/\+dos/\+toolchain-\/djgpp.cmake -\/B build-\/dos . cmake --build build-\/dos 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{or\ from\ the\ build-\/dos\ directory:}
+
+\end{DoxyCode}
+ sh cmake -\/DCMAKE\+\_\+\+TOOLCHAIN\+\_\+\+FILE=../\+tools/\+dos/\+toolchain-\/djgpp.cmake .. cmake --build . 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{>\ **Note**:\ On\ Windows,\ you\ will\ need\ a\ build\ tool\ other\ than\ Visual\ Studio.\ [Ninja](https://ninja-\/build.org/)\ is\ the\ best\ and\ easiest\ option.\ Simply\ download\ it,\ put\ the\ \`{}ninja.exe`\ executable\ somewhere,\ and\ make\ it\ available\ on\ the\ command\ line\ via\ your\ \`{}PATH`\ environment\ variable.\ Then\ invoke\ the\ first\ command\ above\ with\ the\ addition\ of\ \`{}-\/G\ Ninja`\ at\ the\ end.}
+\DoxyCodeLine{}
+\DoxyCodeLine{This\ will\ generate\ DOS\ 32-\/bit\ \`{}.exe`\ files\ in\ the\ \`{}build-\/dos/`\ folder\ which\ you\ can\ run\ with\ DOSBox-\/x\ like\ this:}
+
+\end{DoxyCode}
+ sh ./\+tools/\+dos/\+dosbox-\/x/\+dosbox-\/x -\/fastlaunch -\/exit -\/conf ./\+tools/\+dos/\+dosbox-\/x.conf build-\/dos/\+\texorpdfstring{$<$}{<}executable-\/file\texorpdfstring{$>$}{>} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Note\ that\ the\ DOS\ backend\ cannot\ support\ multi-\/window\ applications.\ The\ examples\ \`{}multiple-\/windows.c`\ and\ \`{}hidpi.c`\ will\ thus\ not\ run\ correctly.}
+\DoxyCodeLine{}
+\DoxyCodeLine{The\ \`{}dos`\ example\ target\ (`examples/dos/debug\_dos.c`)\ is\ a\ GDB-\/stub\ debugging\ sample.\ In\ a\ \`{}Debug`\ build\ it\ calls\ \`{}gdb\_start()`\ and\ waits\ for\ a\ debugger\ connection.\ If\ you\ want\ a\ regular\ visual\ test,\ run\ \`{}noise`\ or\ \`{}input\_events`\ instead.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\#\ Compiling\ your\ own\ MiniFB\ app\ for\ DOS}
+\DoxyCodeLine{}
+\DoxyCodeLine{Copy\ the\ folder\ \`{}examples/dos/`\ from\ the\ MiniFB\ repository\ to\ your\ project\ and\ run\ the\ \`{}tools/dos/download-\/dos-\/tools.sh`\ file\ as\ described\ above.\ Pull\ in\ MiniFB\ via\ CMake\ as\ described\ above.}
+\DoxyCodeLine{}
+\DoxyCodeLine{Then,\ when\ configuring\ your\ CMake\ build,\ specify\ the\ DJGPP\ toolchain\ file:}
+
+\end{DoxyCode}
+ sh cmake -\/DCMAKE\+\_\+\+TOOLCHAIN\+\_\+\+FILE=./\+tools/\+dos/\+toolchain-\/djgpp.cmake ... rest of your configure parameters ... 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{The\ build\ will\ then\ generate\ DOS\ 32-\/bit\ protected\ mode\ executables\ and\ use\ the\ MiniFB\ DOS\ backend.\ You\ can\ run\ the\ executables\ as\ is\ in\ DOSBox-\/x\ or\ FreeDOS,\ or\ a\ Windows\ version\ that\ can\ run\ DOS\ applications.}
+\DoxyCodeLine{}
+\DoxyCodeLine{Running\ the\ executables\ in\ vanilla\ MS-\/DOS\ requires\ a\ DPMI\ server.\ Download\ [CWSDPMI](https://www.ibiblio.org/pub/micro/pc-\/stuff/freedos/files/distributions/1.2/repos/pkg-\/html/cwsdpmi.html),\ extract\ the\ ZIP\ file,\ and\ place\ the\ \`{}CWSDPMI.EXE`\ file\ found\ in\ the\ \`{}BIN/`\ folder\ next\ to\ your\ application's\ executable.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\#\#\ Debugging\ your\ MiniFB\ app\ in\ DOSBox-\/x}
+\DoxyCodeLine{}
+\DoxyCodeLine{The\ MiniFB\ DOS\ backend\ comes\ with\ a\ [GDB\ stub](https://sourceware.org/gdb/onlinedocs/gdb/Remote-\/Stub.html)\ in\ [`examples/dos/gdbstub.h`](examples/dos/gdbstub.h)\ that\ you\ can\ incorporate\ into\ your\ application\ to\ enable\ remote\ debugging\ your\ app\ through\ GDB.\ Run\ the\ \`{}tools/dos/download-\/dos-\/tools.sh`\ script\ as\ described\ above\ to\ get\ GDB\ and\ DOSBox-\/x\ versions\ capable\ of\ remote\ debugging.\ Then,\ in\ the\ source\ file\ that\ contains\ your\ \`{}main()`\ function,\ include\ the\ \`{}gdbstub.h`\ file\ and\ call\ the\ \`{}gdb\_start()`\ and\ \`{}gdb\_checkpoint()`\ functions\ like\ this:}
+
+\end{DoxyCode}
+ c \+\#define GDB\+\_\+\+IMPLEMENTATION \+\#include "{}gdbstub.\+h"{}
+
+int main(void) \{ gdb\+\_\+start();
+
+... setup code ...
+
+do \{ ... main loop ... gdb\+\_\+checkpoint(); \} while (mfb\+\_\+wait\+\_\+sync(window)); \} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Configure\ your\ CMake\ build\ with\ \`{}-\/DCMAKE\_BUILD\_TYPE=Debug`\ to\ generate\ debug\ binaries\ and\ build\ your\ application.}
+\DoxyCodeLine{}
+\DoxyCodeLine{Run\ your\ application\ with\ the\ downloaded\ DOSBox-\/x:}
+
+\end{DoxyCode}
+ sh ./\+tools/\+dos/\+dosbox-\/x/\+dosbox-\/x -\/fastlaunch -\/exit -\/conf ./\+tools/\+dos/\+dosbox-\/x.conf path/\+to/\+your/\+executable.\+exe 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{DOSBox-\/x\ will\ start\ up,\ your\ application\ will\ wait\ for\ GDB\ to\ connect\ (`gdb\_start()`).}
+\DoxyCodeLine{}
+\DoxyCodeLine{Run\ GDB,\ load\ the\ debugging\ information\ from\ the\ executable\ and\ connect\ to\ your\ app\ running\ and\ waiting\ in\ DOSBox-\/x:}
+
+\end{DoxyCode}
+ sh ./\+tools/\+dos/\+gdb/\+gdb (gdb) file path/\+to/\+your/\+executable.\+exe (gdb) target remote localhost:\+5123 \`{}\`{}\`{}
+
+GDB will show your app being halted on the {\ttfamily gdb\+\_\+start()} line. You can now set breakpoints, step, continue, inspect local variables and so on.
+
+If your app is executing and you press {\ttfamily CTRL+C} to interrupt it, you will end up inside {\ttfamily gdb\+\_\+checkpoint()}. You can then set breakpoints, or step out to inspect your program state.
+
+Alternatively, you can use VS Code to debug via a graphical user interface. Run the {\ttfamily download-\/dos-\/tools.\+sh} script with the {\ttfamily -\/-\/with-\/vs-\/code} flag. This will install C/\+\+C++/\+\+CMake VS Code extensions and copy the {\ttfamily tools/\+dos/\+.vscode} folder to the project root. Open the project root folder in VS Code, select the {\ttfamily djgpp} \href{https://vector-of-bool.github.io/docs/vscode-cmake-tools/kits.html}{\texttt{CMake kit}}, select the {\ttfamily Debug} \href{https://vector-of-bool.github.io/docs/vscode-cmake-tools/getting_started.html\#selecting-a-variant}{\texttt{CMake variant}}, and the \href{https://vector-of-bool.github.io/docs/vscode-cmake-tools/debugging.html\#selecting-a-launch-target}{\texttt{CMake launch target}}, then run the {\ttfamily DOS debug target} launch configuration.
+
+You can use both the CLI and GUI method for debugging the Mini\+FB examples as well. See the example \href{examples/dos/debug_dos.c}{\texttt{examples/\+dos/\+debug\+\_\+dos.\+c}} for usage of the GDB stub.\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md66}{}\doxysubsection{\texorpdfstring{Platform-\/\+Specific Limitations}{Platform-\/\+Specific Limitations}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md66}
+Some Mini\+FB features are not available on all platforms. Here\textquotesingle{}s a summary of what\textquotesingle{}s supported:\+\hypertarget{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md67}{}\doxysubsubsection{\texorpdfstring{Feature Support Matrix}{Feature Support Matrix}}\label{dir_006c2d4c6a64548781c165edce9aee09_autotoc_md67}
+
+\begin{DoxyTable}{9}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Feature  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Windows  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}mac\+OS  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Linux X11  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Wayland  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}i\+OS  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Android  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Web  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}DOS  \\
+Window creation  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  \\
+mfb\+\_\+update  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  \\
+Keyboard input  &Yes  &Yes  &Yes  &Yes  &No  &Limited  &Yes  &Limited  \\
+Mouse input  &Yes  &Yes  &Yes  &Yes  &Touch  &Touch  &Yes  &Limited  \\
+Multi-\/window  &Yes  &Yes  &Yes  &Yes  &No  &No  &Yes  &No  \\
+Viewport  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  &Yes  \\
+Cursor hiding  &Yes  &Yes  &Yes  &Yes  &No-\/op  &No-\/op  &Yes  &No-\/op  \\
+Monitor DPI /\+ scale  &Yes  &Yes  &Yes\texorpdfstring{$\ast$}{*}  &Yes  &Yes  &Yes  &Yes  &Fixed  \\
+Target FPS  &Yes  &Yes  &Yes  &Yes  &Yes\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}  &Yes  &Limited\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}  &Limited\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}  \\
+Hardware sync  &Open\+GL  &Metal  &Open\+GL  &-\/  &Metal  &-\/  &Browser-\/driven  &-\/  \\
+\end{DoxyTable}
+
+
+{\ttfamily \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}} On i\+OS, this applies when using {\ttfamily mfb\+\_\+wait\+\_\+sync()}. If your app loop is driven by {\ttfamily CADisplay\+Link}, pacing is already tied to display refresh.
+
+{\ttfamily \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}} Web/\+\+DOS currently store/\+report the target FPS value, but frame pacing is not controlled by it.
+
+{\ttfamily \texorpdfstring{$\ast$}{*}} X11 monitor scale is available, but often behaves as an initial value only; runtime global-\/scale changes may not be reflected until restart (environment-\/dependent, especially under XWayland).
+
+For detailed caveats and behavior differences, see each platform section above (i\+OS, Android, Web, DOS). 

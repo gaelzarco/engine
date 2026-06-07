@@ -1,0 +1,93 @@
+\doxysection{modules/\+render/\+render\+\_\+v0.cppm File Reference}
+\hypertarget{render__v0_8cppm}{}\label{render__v0_8cppm}\index{modules/render/render\_v0.cppm@{modules/render/render\_v0.cppm}}
+
+
+C++20 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer.  
+
+
+{\ttfamily \+\#include $<$vector$>$}\newline
+{\ttfamily \+\#include $<$cstdint$>$}\newline
+{\ttfamily \+\#include $<$random$>$}\newline
+{\ttfamily \+\#include $<$cmath$>$}\newline
+{\ttfamily \+\#include "{}../\+minifb/\+include/\+\+Mini\+FB\+\_\+cpp.\+h"{}}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structbuff__color}{buff\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em An RGB colour value for use with a Mini\+FB pixel buffer. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structpoint}{point}}
+\begin{DoxyCompactList}\small\item\em A 2D integer screen-\/space coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}{line}} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, std::\+vector$<$ std::\+size\+\_\+t $>$ \&buff, const \doxymbox{\hyperlink{structbuff__color}{buff\+\_\+color}} \&color, const std::\+size\+\_\+t WIDTH, const std::\+size\+\_\+t HEIGHT)
+\begin{DoxyCompactList}\small\item\em Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C++20 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer. 
+
+\begin{DoxyVersion}{Version}
+0.\+0
+\end{DoxyVersion}
+\begin{DoxyNote}{Note}
+The following clang-\/tidy checks are suppressed intentionally:\+
+\begin{DoxyItemize}
+\item {\ttfamily bugprone-\/easily-\/swappable-\/parameters}:\+ coordinate parameters are swapped deliberately as part of the Bresenham steep-\/line transform.
+\item {\ttfamily bugprone-\/narrowing-\/conversions}:\+ RNG output is truncated to {\ttfamily uint8\+\_\+t} by design.
+\item {\ttfamily bugprone-\/float-\/loop-\/counter}:\+ integer loop counter is used; suppression is present for future-\/proofing subpixel variants. 
+\end{DoxyItemize}
+\end{DoxyNote}
+
+
+\label{doc-func-members}
+\Hypertarget{render__v0_8cppm_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}\index{render\_v0.cppm@{render\_v0.cppm}!line@{line}}
+\index{line@{line}!render\_v0.cppm@{render\_v0.cppm}}
+\doxysubsubsection{\texorpdfstring{line()}{line()}}
+{\footnotesize\ttfamily \label{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c} 
+void line (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{a}{, }\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{b}{, }\item[{std::\+vector$<$ std::\+size\+\_\+t $>$ \&}]{buff}{, }\item[{const \doxymbox{\hyperlink{structbuff__color}{buff\+\_\+color}} \&}]{color}{, }\item[{const std::\+size\+\_\+t}]{WIDTH}{, }\item[{const std::\+size\+\_\+t}]{HEIGHT}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [export]}}
+
+
+
+Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer. 
+
+Implements Bresenham\textquotesingle{}s line algorithm with a steep-\/line correction:\+ when the line is more vertical than horizontal, the axes are swapped so the inner loop always iterates over the longer axis, guaranteeing every pixel along the line is filled without gaps.
+
+The buffer is a flat row-\/major array of packed {\ttfamily MFB\+\_\+\+RGB} pixels with dimensions {\ttfamily WIDTH} × {\ttfamily HEIGHT}. Pixel {\ttfamily }(x, y) maps to index {\ttfamily y} \texorpdfstring{$\ast$}{*} WIDTH + x.
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Start point of the line (screen-\/space pixels). \\
+\hline
+{\em b} & End point of the line (screen-\/space pixels). \\
+\hline
+{\em buff} & Flat pixel buffer of size {\ttfamily WIDTH} \texorpdfstring{$\ast$}{*} {\ttfamily HEIGHT}, modified in place. \\
+\hline
+{\em color} & RGB colour to paint the line with. \\
+\hline
+{\em WIDTH} & Horizontal extent of the pixel buffer in pixels. \\
+\hline
+{\em HEIGHT} & Vertical extent of the pixel buffer in pixels.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+No bounds checking is performed. Both endpoints must lie within \+[0, WIDTH) × \+[0, HEIGHT) or the write will access memory outside {\ttfamily buff}.
+\end{DoxyWarning}
+\begin{DoxyNote}{Note}
+{\ttfamily a} and {\ttfamily b} are taken by value; the algorithm may swap their coordinates internally without affecting the caller\textquotesingle{}s variables.
+\end{DoxyNote}
+\begin{DoxyParagraph}{Complexity}
+O(max(\texorpdfstring{$\vert$}{|}Δx\texorpdfstring{$\vert$}{|}, \texorpdfstring{$\vert$}{|}Δy\texorpdfstring{$\vert$}{|})) — one write per pixel along the dominant axis.
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Example}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::vector<std::size\_t>\ buffer(WIDTH\ *\ HEIGHT,\ 0);}
+\DoxyCodeLine{\doxymbox{\hyperlink{structbuff__color}{buff\_color}}\ red(255,\ 0,\ 0);}
+\DoxyCodeLine{\doxymbox{\hyperlink{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}{line}}(\{0,\ 0\},\ \{WIDTH\ -\/\ 1,\ HEIGHT\ -\/\ 1\},\ buffer,\ red,\ WIDTH,\ HEIGHT);}
+
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}

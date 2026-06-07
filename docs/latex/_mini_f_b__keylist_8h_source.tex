@@ -1,0 +1,143 @@
+\doxysection{Mini\+FB\+\_\+keylist.\+h}
+\hypertarget{_mini_f_b__keylist_8h_source}{}\label{_mini_f_b__keylist_8h_source}\index{modules/minifb/include/MiniFB\_keylist.h@{modules/minifb/include/MiniFB\_keylist.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00004\ \textcolor{comment}{epic\ preprocessor\ tomfoolery}}
+\DoxyCodeLine{00005\ \textcolor{comment}{}}
+\DoxyCodeLine{00006\ \textcolor{comment}{pass\ another\ macro\ name\ INTO\ this\ macro\ to\ get\ the\ correct\ data\ in\ the\ way\ you\ need\ it}}
+\DoxyCodeLine{00007\ \textcolor{comment}{}}
+\DoxyCodeLine{00008\ \textcolor{comment}{e.g\ to\ link\ every\ value\ to\ its\ string:}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ const\ char\ *key\_strings\ =\ \{}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ \ \ \ \ \#define\ DEFINE\_KEY(name,\ value,\ str)\ [name]\ =\ str,}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ \ KEY\_LIST(DEFINE\_KEY)}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ \ \ \ \#undef\ DEFINE\_KEY}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ \}}}
+\DoxyCodeLine{00014\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ KEY\_LIST(\_)\ \(\backslash\)}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_UNKNOWN,\ \ \ \ \ \ \ -\/1,\ \ "{}Unknown"{})\ \(\backslash\)}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_SPACE,\ \ \ \ \ \ \ \ \ 32,\ \ "{}Space"{})\ \(\backslash\)}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_APOSTROPHE,\ \ \ \ 39,\ \ "{}Apostrophe"{})\ \(\backslash\)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_COMMA,\ \ \ \ \ \ \ \ \ 44,\ \ "{}Comma"{})\ \(\backslash\)}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_MINUS,\ \ \ \ \ \ \ \ \ 45,\ \ "{}Minus"{})\ \(\backslash\)}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_PERIOD,\ \ \ \ \ \ \ \ 46,\ \ "{}Period"{})\ \(\backslash\)}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_SLASH,\ \ \ \ \ \ \ \ \ 47,\ \ "{}Slash"{})\ \(\backslash\)}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_0,\ \ \ \ \ \ \ \ \ \ \ \ \ 48,\ \ "{}0"{})\ \(\backslash\)}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_1,\ \ \ \ \ \ \ \ \ \ \ \ \ 49,\ \ "{}1"{})\ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_2,\ \ \ \ \ \ \ \ \ \ \ \ \ 50,\ \ "{}2"{})\ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_3,\ \ \ \ \ \ \ \ \ \ \ \ \ 51,\ \ "{}3"{})\ \(\backslash\)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_4,\ \ \ \ \ \ \ \ \ \ \ \ \ 52,\ \ "{}4"{})\ \(\backslash\)}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_5,\ \ \ \ \ \ \ \ \ \ \ \ \ 53,\ \ "{}5"{})\ \(\backslash\)}}
+\DoxyCodeLine{00030\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_6,\ \ \ \ \ \ \ \ \ \ \ \ \ 54,\ \ "{}6"{})\ \(\backslash\)}}
+\DoxyCodeLine{00031\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_7,\ \ \ \ \ \ \ \ \ \ \ \ \ 55,\ \ "{}7"{})\ \(\backslash\)}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_8,\ \ \ \ \ \ \ \ \ \ \ \ \ 56,\ \ "{}8"{})\ \(\backslash\)}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_9,\ \ \ \ \ \ \ \ \ \ \ \ \ 57,\ \ "{}9"{})\ \(\backslash\)}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_SEMICOLON,\ \ \ \ \ 59,\ \ "{}Semicolon"{})\ \(\backslash\)}}
+\DoxyCodeLine{00035\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_EQUAL,\ \ \ \ \ \ \ \ \ 61,\ \ "{}Equal"{})\ \(\backslash\)}}
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_A,\ \ \ \ \ \ \ \ \ \ \ \ \ 65,\ \ "{}A"{})\ \(\backslash\)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_B,\ \ \ \ \ \ \ \ \ \ \ \ \ 66,\ \ "{}B"{})\ \(\backslash\)}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_C,\ \ \ \ \ \ \ \ \ \ \ \ \ 67,\ \ "{}C"{})\ \(\backslash\)}}
+\DoxyCodeLine{00039\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_D,\ \ \ \ \ \ \ \ \ \ \ \ \ 68,\ \ "{}D"{})\ \(\backslash\)}}
+\DoxyCodeLine{00040\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_E,\ \ \ \ \ \ \ \ \ \ \ \ \ 69,\ \ "{}E"{})\ \(\backslash\)}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F,\ \ \ \ \ \ \ \ \ \ \ \ \ 70,\ \ "{}F"{})\ \(\backslash\)}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_G,\ \ \ \ \ \ \ \ \ \ \ \ \ 71,\ \ "{}G"{})\ \(\backslash\)}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_H,\ \ \ \ \ \ \ \ \ \ \ \ \ 72,\ \ "{}H"{})\ \(\backslash\)}}
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_I,\ \ \ \ \ \ \ \ \ \ \ \ \ 73,\ \ "{}I"{})\ \(\backslash\)}}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_J,\ \ \ \ \ \ \ \ \ \ \ \ \ 74,\ \ "{}J"{})\ \(\backslash\)}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_K,\ \ \ \ \ \ \ \ \ \ \ \ \ 75,\ \ "{}K"{})\ \(\backslash\)}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_L,\ \ \ \ \ \ \ \ \ \ \ \ \ 76,\ \ "{}L"{})\ \(\backslash\)}}
+\DoxyCodeLine{00048\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_M,\ \ \ \ \ \ \ \ \ \ \ \ \ 77,\ \ "{}M"{})\ \(\backslash\)}}
+\DoxyCodeLine{00049\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_N,\ \ \ \ \ \ \ \ \ \ \ \ \ 78,\ \ "{}N"{})\ \(\backslash\)}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_O,\ \ \ \ \ \ \ \ \ \ \ \ \ 79,\ \ "{}O"{})\ \(\backslash\)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_P,\ \ \ \ \ \ \ \ \ \ \ \ \ 80,\ \ "{}P"{})\ \(\backslash\)}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_Q,\ \ \ \ \ \ \ \ \ \ \ \ \ 81,\ \ "{}Q"{})\ \(\backslash\)}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_R,\ \ \ \ \ \ \ \ \ \ \ \ \ 82,\ \ "{}R"{})\ \(\backslash\)}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_S,\ \ \ \ \ \ \ \ \ \ \ \ \ 83,\ \ "{}S"{})\ \(\backslash\)}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_T,\ \ \ \ \ \ \ \ \ \ \ \ \ 84,\ \ "{}T"{})\ \(\backslash\)}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_U,\ \ \ \ \ \ \ \ \ \ \ \ \ 85,\ \ "{}U"{})\ \(\backslash\)}}
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_V,\ \ \ \ \ \ \ \ \ \ \ \ \ 86,\ \ "{}V"{})\ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_W,\ \ \ \ \ \ \ \ \ \ \ \ \ 87,\ \ "{}W"{})\ \(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_X,\ \ \ \ \ \ \ \ \ \ \ \ \ 88,\ \ "{}X"{})\ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_Y,\ \ \ \ \ \ \ \ \ \ \ \ \ 89,\ \ "{}Y"{})\ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_Z,\ \ \ \ \ \ \ \ \ \ \ \ \ 90,\ \ "{}Z"{})\ \(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT\_BRACKET,\ \ 91,\ \ "{}Left\_Bracket"{})\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_BACKSLASH,\ \ \ \ \ 92,\ \ "{}Backslash"{})\ \(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT\_BRACKET,\ 93,\ \ "{}Right\_Bracket"{})\ \(\backslash\)}}
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_GRAVE\_ACCENT,\ \ 96,\ \ "{}Grave\_Accent"{})\ \(\backslash\)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_WORLD\_1,\ \ \ \ \ \ \ 161,\ "{}World\_1"{})\ \(\backslash\)}}
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_WORLD\_2,\ \ \ \ \ \ \ 162,\ "{}World\_2"{})\ \(\backslash\)}}
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_ESCAPE,\ \ \ \ \ \ \ \ 256,\ "{}Escape"{})\ \(\backslash\)}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_ENTER,\ \ \ \ \ \ \ \ \ 257,\ "{}Enter"{})\ \(\backslash\)}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_TAB,\ \ \ \ \ \ \ \ \ \ \ 258,\ "{}Tab"{})\ \(\backslash\)}}
+\DoxyCodeLine{00071\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_BACKSPACE,\ \ \ \ \ 259,\ "{}Backspace"{})\ \(\backslash\)}}
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_INSERT,\ \ \ \ \ \ \ \ 260,\ "{}Insert"{})\ \(\backslash\)}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_DELETE,\ \ \ \ \ \ \ \ 261,\ "{}Delete"{})\ \(\backslash\)}}
+\DoxyCodeLine{00074\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT,\ \ \ \ \ \ \ \ \ 262,\ "{}Right"{})\ \(\backslash\)}}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT,\ \ \ \ \ \ \ \ \ \ 263,\ "{}Left"{})\ \(\backslash\)}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_DOWN,\ \ \ \ \ \ \ \ \ \ 264,\ "{}Down"{})\ \(\backslash\)}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_UP,\ \ \ \ \ \ \ \ \ \ \ \ 265,\ "{}Up"{})\ \(\backslash\)}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_PAGE\_UP,\ \ \ \ \ \ \ 266,\ "{}Page\_Up"{})\ \(\backslash\)}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_PAGE\_DOWN,\ \ \ \ \ 267,\ "{}Page\_Down"{})\ \(\backslash\)}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_HOME,\ \ \ \ \ \ \ \ \ \ 268,\ "{}Home"{})\ \(\backslash\)}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_END,\ \ \ \ \ \ \ \ \ \ \ 269,\ "{}End"{})\ \(\backslash\)}}
+\DoxyCodeLine{00082\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_CAPS\_LOCK,\ \ \ \ \ 280,\ "{}Caps\_Lock"{})\ \(\backslash\)}}
+\DoxyCodeLine{00083\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_SCROLL\_LOCK,\ \ \ 281,\ "{}Scroll\_Lock"{})\ \(\backslash\)}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_NUM\_LOCK,\ \ \ \ \ \ 282,\ "{}Num\_Lock"{})\ \(\backslash\)}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_PRINT\_SCREEN,\ \ 283,\ "{}Print\_Screen"{})\ \(\backslash\)}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_PAUSE,\ \ \ \ \ \ \ \ \ 284,\ "{}Pause"{})\ \(\backslash\)}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F1,\ \ \ \ \ \ \ \ \ \ \ \ 290,\ "{}F1"{})\ \(\backslash\)}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F2,\ \ \ \ \ \ \ \ \ \ \ \ 291,\ "{}F2"{})\ \(\backslash\)}}
+\DoxyCodeLine{00089\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F3,\ \ \ \ \ \ \ \ \ \ \ \ 292,\ "{}F3"{})\ \(\backslash\)}}
+\DoxyCodeLine{00090\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F4,\ \ \ \ \ \ \ \ \ \ \ \ 293,\ "{}F4"{})\ \(\backslash\)}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F5,\ \ \ \ \ \ \ \ \ \ \ \ 294,\ "{}F5"{})\ \(\backslash\)}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F6,\ \ \ \ \ \ \ \ \ \ \ \ 295,\ "{}F6"{})\ \(\backslash\)}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F7,\ \ \ \ \ \ \ \ \ \ \ \ 296,\ "{}F7"{})\ \(\backslash\)}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F8,\ \ \ \ \ \ \ \ \ \ \ \ 297,\ "{}F8"{})\ \(\backslash\)}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F9,\ \ \ \ \ \ \ \ \ \ \ \ 298,\ "{}F9"{})\ \(\backslash\)}}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F10,\ \ \ \ \ \ \ \ \ \ \ 299,\ "{}F10"{})\ \(\backslash\)}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F11,\ \ \ \ \ \ \ \ \ \ \ 300,\ "{}F11"{})\ \(\backslash\)}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F12,\ \ \ \ \ \ \ \ \ \ \ 301,\ "{}F12"{})\ \(\backslash\)}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F13,\ \ \ \ \ \ \ \ \ \ \ 302,\ "{}F13"{})\ \(\backslash\)}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F14,\ \ \ \ \ \ \ \ \ \ \ 303,\ "{}F14"{})\ \(\backslash\)}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F15,\ \ \ \ \ \ \ \ \ \ \ 304,\ "{}F15"{})\ \(\backslash\)}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F16,\ \ \ \ \ \ \ \ \ \ \ 305,\ "{}F16"{})\ \(\backslash\)}}
+\DoxyCodeLine{00103\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F17,\ \ \ \ \ \ \ \ \ \ \ 306,\ "{}F17"{})\ \(\backslash\)}}
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F18,\ \ \ \ \ \ \ \ \ \ \ 307,\ "{}F18"{})\ \(\backslash\)}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F19,\ \ \ \ \ \ \ \ \ \ \ 308,\ "{}F19"{})\ \(\backslash\)}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F20,\ \ \ \ \ \ \ \ \ \ \ 309,\ "{}F20"{})\ \(\backslash\)}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F21,\ \ \ \ \ \ \ \ \ \ \ 310,\ "{}F21"{})\ \(\backslash\)}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F22,\ \ \ \ \ \ \ \ \ \ \ 311,\ "{}F22"{})\ \(\backslash\)}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F23,\ \ \ \ \ \ \ \ \ \ \ 312,\ "{}F23"{})\ \(\backslash\)}}
+\DoxyCodeLine{00110\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F24,\ \ \ \ \ \ \ \ \ \ \ 313,\ "{}F24"{})\ \(\backslash\)}}
+\DoxyCodeLine{00111\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_F25,\ \ \ \ \ \ \ \ \ \ \ 314,\ "{}F25"{})\ \(\backslash\)}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_0,\ \ \ \ \ \ \ \ \ \ 320,\ "{}KP\_0"{})\ \(\backslash\)}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_1,\ \ \ \ \ \ \ \ \ \ 321,\ "{}KP\_1"{})\ \(\backslash\)}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_2,\ \ \ \ \ \ \ \ \ \ 322,\ "{}KP\_2"{})\ \(\backslash\)}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_3,\ \ \ \ \ \ \ \ \ \ 323,\ "{}KP\_3"{})\ \(\backslash\)}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_4,\ \ \ \ \ \ \ \ \ \ 324,\ "{}KP\_4"{})\ \(\backslash\)}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_5,\ \ \ \ \ \ \ \ \ \ 325,\ "{}KP\_5"{})\ \(\backslash\)}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_6,\ \ \ \ \ \ \ \ \ \ 326,\ "{}KP\_6"{})\ \(\backslash\)}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_7,\ \ \ \ \ \ \ \ \ \ 327,\ "{}KP\_7"{})\ \(\backslash\)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_8,\ \ \ \ \ \ \ \ \ \ 328,\ "{}KP\_8"{})\ \(\backslash\)}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_9,\ \ \ \ \ \ \ \ \ \ 329,\ "{}KP\_9"{})\ \(\backslash\)}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_DECIMAL,\ \ \ \ 330,\ "{}KP\_Decimal"{})\ \(\backslash\)}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_DIVIDE,\ \ \ \ \ 331,\ "{}KP\_Divide"{})\ \(\backslash\)}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_MULTIPLY,\ \ \ 332,\ "{}KP\_Multiply"{})\ \(\backslash\)}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_SUBTRACT,\ \ \ 333,\ "{}KP\_Subtract"{})\ \(\backslash\)}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_ADD,\ \ \ \ \ \ \ \ 334,\ "{}KP\_Add"{})\ \(\backslash\)}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_ENTER,\ \ \ \ \ \ 335,\ "{}KP\_Enter"{})\ \(\backslash\)}}
+\DoxyCodeLine{00128\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_KP\_EQUAL,\ \ \ \ \ \ 336,\ "{}KP\_Equal"{})\ \(\backslash\)}}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT\_SHIFT,\ \ \ \ 340,\ "{}Left\_Shift"{})\ \(\backslash\)}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT\_CONTROL,\ \ 341,\ "{}Left\_Control"{})\ \(\backslash\)}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT\_ALT,\ \ \ \ \ \ 342,\ "{}Left\_Alt"{})\ \(\backslash\)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_LEFT\_SUPER,\ \ \ \ 343,\ "{}Left\_Super"{})\ \(\backslash\)}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT\_SHIFT,\ \ \ 344,\ "{}Right\_Shift"{})\ \(\backslash\)}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT\_CONTROL,\ 345,\ "{}Right\_Control"{})\ \(\backslash\)}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT\_ALT,\ \ \ \ \ 346,\ "{}Right\_Alt"{})\ \(\backslash\)}}
+\DoxyCodeLine{00136\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_RIGHT\_SUPER,\ \ \ 347,\ "{}Right\_Super"{})\ \(\backslash\)}}
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\ \ \ \ \_(KB\_KEY\_MENU,\ \ \ \ \ \ \ \ \ \ 348,\ "{}Menu"{})}}
+
+\end{DoxyCode}

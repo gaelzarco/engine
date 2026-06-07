@@ -1,0 +1,60 @@
+\doxysection{OSXWindow.\+h}
+\hypertarget{_o_s_x_window_8h_source}{}\label{_o_s_x_window_8h_source}\index{modules/minifb/src/macos/OSXWindow.h@{modules/minifb/src/macos/OSXWindow.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#import\ <Cocoa/Cocoa.h>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <WindowData.h>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <MiniFB\_enums.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00006\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t}
+\DoxyCodeLine{00007\ translate\_modifiers(NSEventModifierFlags\ flags)\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ uint32\_t\ mod\_keys\ =\ 0;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagCapsLock)\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_CAPS\_LOCK;}
+\DoxyCodeLine{00012\ \ \ \ \ \}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagShift)\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_SHIFT;}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagControl)\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_CONTROL;}
+\DoxyCodeLine{00018\ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagOption)\ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_ALT;}
+\DoxyCodeLine{00021\ \ \ \ \ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagCommand)\ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_SUPER;}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordflow}{if}\ (flags\ \&\ NSEventModifierFlagNumericPad)\ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ mod\_keys\ |=\ MFB\_KB\_MOD\_NUM\_LOCK;}
+\DoxyCodeLine{00027\ \ \ \ \ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordflow}{return}\ mod\_keys;}
+\DoxyCodeLine{00030\ \}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{@interface\ }\doxymbox{\hyperlink{interface_o_s_x_window}{OSXWindow}}\ :\ NSWindow<NSWindowDelegate>}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ NSView\ \ \ \ \ \ \ \ \ \ \ \ \ \ *childContentView;}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{@public}\ \doxymbox{\hyperlink{struct_s_window_data}{SWindowData}}\ *window\_data;}
+\DoxyCodeLine{00037\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{00040\ -\/\ (id)\ initWithContentRect:(NSRect)\ contentRect}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ styleMask:(NSWindowStyleMask)\ windowStyle}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ backing:(NSBackingStoreType)\ bufferingType}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ defer:(BOOL)\ deferCreation}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ windowData:(\doxymbox{\hyperlink{struct_s_window_data}{SWindowData}}\ *)\ windowData;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ -\/\ (void)\ removeWindowData;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ Return\ the\ real\ content\ view\ (the\ internal\ frame\ view\ that\ implements\ drawRect:)}}
+\DoxyCodeLine{00049\ -\/\ (NSView\ *)\ rootContentView;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Invalidate/reset\ cursor\ rects\ for\ the\ frame\ view\ so\ per-\/window\ cursor\ changes\ take\ effect}}
+\DoxyCodeLine{00052\ -\/\ (void)\ updateCursorRects;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{@end}}
+
+\end{DoxyCode}

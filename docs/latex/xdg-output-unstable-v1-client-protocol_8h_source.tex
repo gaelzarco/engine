@@ -1,0 +1,142 @@
+\doxysection{xdg-\/output-\/unstable-\/v1-\/client-\/protocol.h}
+\hypertarget{xdg-output-unstable-v1-client-protocol_8h_source}{}\label{xdg-output-unstable-v1-client-protocol_8h_source}\index{modules/minifb/src/wayland/generated/xdg-\/output-\/unstable-\/v1-\/client-\/protocol.h@{modules/minifb/src/wayland/generated/xdg-\/output-\/unstable-\/v1-\/client-\/protocol.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{/*\ Generated\ by\ wayland-\/scanner\ 1.20.0\ */}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#ifndef\ XDG\_OUTPUT\_UNSTABLE\_V1\_CLIENT\_PROTOCOL\_H}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#define\ XDG\_OUTPUT\_UNSTABLE\_V1\_CLIENT\_PROTOCOL\_H}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stddef.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}wayland-\/client.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifdef\ \ \_\_cplusplus}}
+\DoxyCodeLine{00011\ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \{}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{struct\ }wl\_output;}
+\DoxyCodeLine{00077\ \textcolor{keyword}{struct\ }zxdg\_output\_manager\_v1;}
+\DoxyCodeLine{00078\ \textcolor{keyword}{struct\ }zxdg\_output\_v1;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#ifndef\ ZXDG\_OUTPUT\_MANAGER\_V1\_INTERFACE}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_MANAGER\_V1\_INTERFACE}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00095\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keyword}{struct\ }wl\_interface\ zxdg\_output\_manager\_v1\_interface;}
+\DoxyCodeLine{00096\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00097\ \textcolor{preprocessor}{\#ifndef\ ZXDG\_OUTPUT\_V1\_INTERFACE}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_INTERFACE}\textcolor{preprocessor}{}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00128\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keyword}{struct\ }wl\_interface\ zxdg\_output\_v1\_interface;}
+\DoxyCodeLine{00129\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_MANAGER\_V1\_DESTROY\ 0}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_MANAGER\_V1\_GET\_XDG\_OUTPUT\ 1}}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_MANAGER\_V1\_DESTROY\_SINCE\_VERSION\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_MANAGER\_V1\_GET\_XDG\_OUTPUT\_SINCE\_VERSION\ 1}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00145\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00146\ zxdg\_output\_manager\_v1\_set\_user\_data(\textcolor{keyword}{struct}\ zxdg\_output\_manager\_v1\ *zxdg\_output\_manager\_v1,\ \textcolor{keywordtype}{void}\ *user\_data)}
+\DoxyCodeLine{00147\ \{}
+\DoxyCodeLine{00148\ \ \ \ \ wl\_proxy\_set\_user\_data((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1,\ user\_data);}
+\DoxyCodeLine{00149\ \}}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00152\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ *}
+\DoxyCodeLine{00153\ zxdg\_output\_manager\_v1\_get\_user\_data(\textcolor{keyword}{struct}\ zxdg\_output\_manager\_v1\ *zxdg\_output\_manager\_v1)}
+\DoxyCodeLine{00154\ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordflow}{return}\ wl\_proxy\_get\_user\_data((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1);}
+\DoxyCodeLine{00156\ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t}
+\DoxyCodeLine{00159\ zxdg\_output\_manager\_v1\_get\_version(\textcolor{keyword}{struct}\ zxdg\_output\_manager\_v1\ *zxdg\_output\_manager\_v1)}
+\DoxyCodeLine{00160\ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{return}\ wl\_proxy\_get\_version((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1);}
+\DoxyCodeLine{00162\ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00172\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00173\ zxdg\_output\_manager\_v1\_destroy(\textcolor{keyword}{struct}\ zxdg\_output\_manager\_v1\ *zxdg\_output\_manager\_v1)}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ wl\_proxy\_marshal\_flags((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1,}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ ZXDG\_OUTPUT\_MANAGER\_V1\_DESTROY,\ NULL,\ wl\_proxy\_get\_version((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1),\ WL\_MARSHAL\_FLAG\_DESTROY);}
+\DoxyCodeLine{00177\ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *}
+\DoxyCodeLine{00185\ zxdg\_output\_manager\_v1\_get\_xdg\_output(\textcolor{keyword}{struct}\ zxdg\_output\_manager\_v1\ *zxdg\_output\_manager\_v1,\ \textcolor{keyword}{struct}\ wl\_output\ *output)}
+\DoxyCodeLine{00186\ \{}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{struct\ }wl\_proxy\ *id;}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{id}\ =\ wl\_proxy\_marshal\_flags((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1,}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ ZXDG\_OUTPUT\_MANAGER\_V1\_GET\_XDG\_OUTPUT,\ \&zxdg\_output\_v1\_interface,\ wl\_proxy\_get\_version((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_manager\_v1),\ 0,\ NULL,\ output);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *)\ id;}
+\DoxyCodeLine{00193\ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00199\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structzxdg__output__v1__listener}{zxdg\_output\_v1\_listener}}\ \{}
+\DoxyCodeLine{00213\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structzxdg__output__v1__listener_af1b76b1afc837a4bc84539bfeb4e5c7d}{logical\_position}})(\textcolor{keywordtype}{void}\ *data,}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *zxdg\_output\_v1,}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ x,}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ y);}
+\DoxyCodeLine{00260\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structzxdg__output__v1__listener_a69799367017665e9f7f4192d98ab6c7a}{logical\_size}})(\textcolor{keywordtype}{void}\ *data,}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *zxdg\_output\_v1,}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ width,}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ height);}
+\DoxyCodeLine{00277\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structzxdg__output__v1__listener_a333f1697335dcaa4b22658207e054747}{done}})(\textcolor{keywordtype}{void}\ *data,}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *zxdg\_output\_v1);}
+\DoxyCodeLine{00305\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structzxdg__output__v1__listener_a144fafc64ca53a600b831242bd416dd0}{name}})(\textcolor{keywordtype}{void}\ *data,}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *zxdg\_output\_v1,}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\doxymbox{\hyperlink{structzxdg__output__v1__listener_a144fafc64ca53a600b831242bd416dd0}{name}});}
+\DoxyCodeLine{00330\ \ \ \ \ void\ (*\doxymbox{\hyperlink{structzxdg__output__v1__listener_a31446a20b2215a3e4721c6cf9f85dcf5}{description}})(\textcolor{keywordtype}{void}\ *data,}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }zxdg\_output\_v1\ *zxdg\_output\_v1,}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}\ *\doxymbox{\hyperlink{structzxdg__output__v1__listener_a31446a20b2215a3e4721c6cf9f85dcf5}{description}});}
+\DoxyCodeLine{00333\ \};}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00338\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00339\ zxdg\_output\_v1\_add\_listener(\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *zxdg\_output\_v1,}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structzxdg__output__v1__listener}{zxdg\_output\_v1\_listener}}\ *listener,\ \textcolor{keywordtype}{void}\ *data)}
+\DoxyCodeLine{00341\ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordflow}{return}\ wl\_proxy\_add\_listener((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1,}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (\textcolor{keywordtype}{void}\ (**)(\textcolor{keywordtype}{void}))\ listener,\ data);}
+\DoxyCodeLine{00344\ \}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_DESTROY\ 0}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00351\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_LOGICAL\_POSITION\_SINCE\_VERSION\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00355\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_LOGICAL\_SIZE\_SINCE\_VERSION\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_DONE\_SINCE\_VERSION\ 1}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_NAME\_SINCE\_VERSION\ 2}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00367\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_DESCRIPTION\_SINCE\_VERSION\ 2}}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#define\ ZXDG\_OUTPUT\_V1\_DESTROY\_SINCE\_VERSION\ 1}}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00375\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00376\ zxdg\_output\_v1\_set\_user\_data(\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *zxdg\_output\_v1,\ \textcolor{keywordtype}{void}\ *user\_data)}
+\DoxyCodeLine{00377\ \{}
+\DoxyCodeLine{00378\ \ \ \ \ wl\_proxy\_set\_user\_data((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1,\ user\_data);}
+\DoxyCodeLine{00379\ \}}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00382\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ *}
+\DoxyCodeLine{00383\ zxdg\_output\_v1\_get\_user\_data(\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *zxdg\_output\_v1)}
+\DoxyCodeLine{00384\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keywordflow}{return}\ wl\_proxy\_get\_user\_data((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1);}
+\DoxyCodeLine{00386\ \}}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ uint32\_t}
+\DoxyCodeLine{00389\ zxdg\_output\_v1\_get\_version(\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *zxdg\_output\_v1)}
+\DoxyCodeLine{00390\ \{}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{return}\ wl\_proxy\_get\_version((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1);}
+\DoxyCodeLine{00392\ \}}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00400\ \textcolor{keyword}{static}\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}}
+\DoxyCodeLine{00401\ zxdg\_output\_v1\_destroy(\textcolor{keyword}{struct}\ zxdg\_output\_v1\ *zxdg\_output\_v1)}
+\DoxyCodeLine{00402\ \{}
+\DoxyCodeLine{00403\ \ \ \ \ wl\_proxy\_marshal\_flags((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1,}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ ZXDG\_OUTPUT\_V1\_DESTROY,\ NULL,\ wl\_proxy\_get\_version((\textcolor{keyword}{struct}\ wl\_proxy\ *)\ zxdg\_output\_v1),\ WL\_MARSHAL\_FLAG\_DESTROY);}
+\DoxyCodeLine{00405\ \}}
+\DoxyCodeLine{00406\ }
+\DoxyCodeLine{00407\ \textcolor{preprocessor}{\#ifdef\ \ \_\_cplusplus}}
+\DoxyCodeLine{00408\ \}}
+\DoxyCodeLine{00409\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00410\ }
+\DoxyCodeLine{00411\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

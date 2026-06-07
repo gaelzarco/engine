@@ -1,0 +1,59 @@
+\doxysection{buff\+\_\+color Struct Reference}
+\hypertarget{structbuff__color}{}\label{structbuff__color}\index{buff\_color@{buff\_color}}
+
+
+An RGB colour value for use with a Mini\+FB pixel buffer.  
+
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structbuff__color_a0cb0c76a203efd750c1fd28c3f800337}\label{structbuff__color_a0cb0c76a203efd750c1fd28c3f800337} 
+using {\bfseries color\+\_\+t} = uint8\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structbuff__color_ac00158f009cda1e29739c3df090f10ef}\label{structbuff__color_ac00158f009cda1e29739c3df090f10ef} 
+{\bfseries buff\+\_\+color} (color\+\_\+t r=0, color\+\_\+t g=0, color\+\_\+t b=0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{structbuff__color_a61623b793668cfe761dccb50cc79ec2a}\label{structbuff__color_a61623b793668cfe761dccb50cc79ec2a} 
+color\+\_\+t {\bfseries \+\_\+r}
+\item 
+\Hypertarget{structbuff__color_a856576de6428e59c40219688d41b01c5}\label{structbuff__color_a856576de6428e59c40219688d41b01c5} 
+color\+\_\+t {\bfseries \+\_\+g}
+\item 
+\Hypertarget{structbuff__color_a2f2ef0d9e1f19e2e4ecfac2151a122cf}\label{structbuff__color_a2f2ef0d9e1f19e2e4ecfac2151a122cf} 
+color\+\_\+t {\bfseries \+\_\+b}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An RGB colour value for use with a Mini\+FB pixel buffer. 
+
+Each channel is an unsigned 8-\/bit integer in the range \+[0, 255]\+. If all three channels are 0 (the default), the constructor generates a random colour using a non-\/deterministic seed, making it convenient for debug visualisation where a unique-\/looking colour is needed without having to specify one explicitly.
+
+\begin{DoxyParagraph}{Example — explicit colour}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{buff\_color\ red(255,\ 0,\ 0);}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Example — random colour}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{buff\_color\ random\_color;\ \textcolor{comment}{//\ r,\ g,\ b\ chosen\ randomly\ at\ construction}}
+
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+modules/\+render/\+\doxymbox{\hyperlink{render__v0_8cppm}{render\+\_\+v0.\+cppm}}\end{DoxyCompactItemize}

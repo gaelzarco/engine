@@ -1,0 +1,103 @@
+\doxysection{engine.\+cpp File Reference}
+\hypertarget{engine_8cpp}{}\label{engine_8cpp}\index{engine.cpp@{engine.cpp}}
+
+
+Entry point for the CXX Rasterizer — a minimal Wavefront OBJ viewer with a software-\/rendered Mini\+FB window.  
+
+
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$print$>$}\newline
+{\ttfamily \+\#include $<$chrono$>$}\newline
+{\ttfamily \+\#include $<$ctime$>$}\newline
+{\ttfamily \+\#include "{}modules/\+minifb/\+include/\+\+Mini\+FB\+\_\+cpp.\+h"{}}\newline
+{\ttfamily import obj\+\_\+v0\+\_\+3;}\newline
+{\ttfamily import render\+\_\+v0;}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \doxymbox{\hyperlink{engine_8cpp_a9d6b8cae4881c54db1d2df3da92c712f}{main}} (int argc, const char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+) -\/$>$ int
+\begin{DoxyCompactList}\small\item\em Application entry point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Entry point for the CXX Rasterizer — a minimal Wavefront OBJ viewer with a software-\/rendered Mini\+FB window. 
+
+Loads a Wavefront OBJ file supplied on the command line, logs parse time and heap usage, opens an 800×600 resizable Mini\+FB window, and renders a small set of test lines using {\ttfamily render\+\_\+v0\textquotesingle{}s} Bresenham rasterizer before entering the main display loop.
+
+\begin{DoxyParagraph}{Dependencies}
+
+\begin{DoxyItemize}
+\item C++20 module {\ttfamily obj\+\_\+v0\+\_\+3} — OBJ file parsing and in-\/memory representation.
+\item C++20 module {\ttfamily render\+\_\+v0} — 2D primitive rasterization into a pixel buffer.
+\item Mini\+FB — cross-\/platform framebuffer window library.
+\end{DoxyItemize}
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Usage}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./rasterizer\ <path/to/model.obj>}
+
+\end{DoxyCode}
+
+\end{DoxyParagraph}
+\begin{DoxyParagraph}{Diagnostics}
+The following log messages are written to standard output:\+ 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{[ERR]\ Please\ include\ file\ path\ \textcolor{keywordflow}{for}\ \doxymbox{\hyperlink{classobj}{obj}}\ file\ \ \ \textcolor{comment}{//\ no\ argument\ supplied}}
+\DoxyCodeLine{[LOG]\ .\doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}}\ read\ duration:\ <N>\ ms\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ OBJ\ parse\ wall-\/clock\ time}}
+\DoxyCodeLine{[LOG]\ Memory\ allocated:\ <bytes>\ bytes\ (\string~N\ MB)\ \textcolor{comment}{//\ heap\ reserved\ by\ obj\ containers}}
+\DoxyCodeLine{[ERR]\ Failed\ to\ create\ window\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ MiniFB\ window\ creation\ failure}}
+
+\end{DoxyCode}
+ 
+\end{DoxyParagraph}
+
+
+\label{doc-func-members}
+\Hypertarget{engine_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{engine_8cpp_a9d6b8cae4881c54db1d2df3da92c712f}\index{engine.cpp@{engine.cpp}!main@{main}}
+\index{main@{main}!engine.cpp@{engine.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{engine_8cpp_a9d6b8cae4881c54db1d2df3da92c712f} 
+auto main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{argv}{\+[$\,$]\+}\end{DoxyParamCaption}) -\/$>$ int}
+
+
+
+Application entry point. 
+
+Performs the following steps in order:\+
+\begin{DoxyEnumerate}
+\item Validates that a file path argument was supplied; exits with code 1 otherwise.
+\item Parses the OBJ file at {\ttfamily argv}\+[1]\+, logging wall-\/clock parse time and reserved heap memory via {\ttfamily \doxylink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{obj::\+memory\+\_\+out()}}.
+\item Opens a resizable Mini\+FB window titled "{}\+CXX Rasterizer"{} at {\ttfamily WIDTH} × {\ttfamily HEIGHT} pixels; exits with code 1 on failure.
+\item Allocates a flat {\ttfamily WIDTH} × {\ttfamily HEIGHT} pixel buffer initialised to zero.
+\item Constructs three test points and four randomly coloured {\ttfamily \doxylink{structbuff__color}{buff\+\_\+color}} instances, then draws four lines between those points into the buffer using {\ttfamily render\+\_\+v0::\+line()}.
+\item Enters the Mini\+FB event loop, pushing the buffer to the window every sync interval until the window is closed or an error state is returned.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments (must be ≥ 2). \\
+\hline
+{\em argv} & Argument vector. {\ttfamily argv}\+[1]\+ must be a path to a valid {\ttfamily }.obj file.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 on clean exit, 1 on argument or window-\/creation error.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The four {\ttfamily \doxylink{structbuff__color}{buff\+\_\+color}} instances are default-\/constructed (all channels 0), which triggers random colour generation in {\ttfamily \doxylink{structbuff__color}{buff\+\_\+color}\textquotesingle{}s} constructor. Each line is therefore drawn in a distinct, unpredictable colour.
+\end{DoxyNote}
+\begin{DoxyWarning}{Warning}
+The pixel buffer is {\ttfamily std::\+size\+\_\+t} typed to match the Mini\+FB API on this platform. Ensure {\ttfamily mfb\+\_\+update\+\_\+ex} expects the same element width if porting to a different Mini\+FB configuration.
+\end{DoxyWarning}
+\begin{DoxySeeAlso}{See also}
+\doxylink{classobj_a243badc3a0a0a6b3612951a03f8e4952}{obj::\+read()} 
+
+\doxylink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{obj::\+memory\+\_\+out()} 
+
+render\+\_\+v0::\+line() 
+
+\doxylink{structbuff__color}{buff\+\_\+color} 
+\end{DoxySeeAlso}
