@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['line_0',['line',['../render__v0_8cppm.html#aa82b28352727e69a02ec61fc09902b8c',1,'render_v0.cppm']]],
-  ['lines_1',['lines',['../classobj.html#a2f171c463dce333ada0431dfe1058961',1,'obj::lines() noexcept -&gt; _lines &amp;'],['../classobj.html#add5036c5cd685e15a6281c57993ed338',1,'obj::lines() const noexcept -&gt; const _lines &amp;']]]
+  ['faces_0',['faces',['../classobj.html#ae0ffcd2f8ca4fc54aed87cd4a5402054',1,'obj::faces() noexcept -&gt; _faces &amp;'],['../classobj.html#a8c23aca14ff1f057d5cf5b4662e59663',1,'obj::faces() const noexcept -&gt; const _faces &amp;']]],
+  ['format_5foutput_1',['format_output',['../classobj.html#a6dbd86e83e5564c9a471601d0269b147',1,'obj']]]
 ];

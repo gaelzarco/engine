@@ -1,0 +1,24 @@
+/**
+ * @mainpage CXX23 Game Engine
+ *
+ * @section intro Overview
+ * A lightweight C++23 software rasterizer and OBJ model viewer
+ * built on MiniFB for cross-platform windowing.
+ *
+ * @section modules Modules
+ * | Module        | Description                                      |
+ * |---------------|--------------------------------------------------|
+ * | @c obj_v0_3   | Wavefront OBJ parser and in-memory representation |
+ * | @c render_v0  | 2D Bresenham line rasterizer                     |
+ *
+ * @section usage Usage
+ * @code
+ * ./rasterizer <path/to/model.obj>
+ * @endcode
+ *
+ * @section build Building
+ * @code
+ * cmake -B build && cmake --build build
+ * @endcode
+ *
+ */
