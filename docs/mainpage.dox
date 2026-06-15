@@ -2,8 +2,7 @@
  * @mainpage CXX23 Game Engine
  *
  * @section intro Overview
- * A lightweight C++23 software rasterizer and OBJ model viewer
- * built on MiniFB for cross-platform windowing.
+ * A lightweight C++23 software rasterizer built to view .OBJ models.
  *
  * @section modules Modules
  * | Module        | Description                                      |

@@ -34,7 +34,7 @@
 #include <ctime>
 #include "modules/minifb/include/MiniFB_cpp.h"
 
-import obj_v0_3;
+import obj_v0;
 import render_v0;
 
 /** @brief Horizontal resolution of the framebuffer and window, in pixels. */

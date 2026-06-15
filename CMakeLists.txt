@@ -22,7 +22,7 @@ add_executable(engine engine.cpp)
 
 target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES
-    modules/obj/obj_v0_3.cppm
+    modules/obj/obj_v0.cppm
 )
 target_sources(engine
     PUBLIC FILE_SET CXX_MODULES FILES

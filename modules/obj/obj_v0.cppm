@@ -11,7 +11,7 @@ module;
 #include <fstream>
 #include <print>
 
-export module obj_v0_3;
+export module obj_v0;
 
 /**
  * @class obj
