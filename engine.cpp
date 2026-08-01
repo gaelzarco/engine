@@ -111,14 +111,8 @@ auto main(int argc, const char* argv[]) -> int {
     point c{}; c.x = 62; c.y = 53;
 
     buff_color color{};
-    buff_color color1{};
-    buff_color color2{};
-    buff_color color3{};
 
-    line(a, b, buffer, color, WIDTH, HEIGHT);
-    line(c, b, buffer, color1, WIDTH, HEIGHT);
-    line(c, a, buffer, color2, WIDTH, HEIGHT);
-    line(a, c, buffer, color3, WIDTH, HEIGHT);
+    triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
 
     while (mfb_wait_sync(window)) {
         state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);

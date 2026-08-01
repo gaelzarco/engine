@@ -15,9 +15,6 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 add_subdirectory(modules/minifb)
 
-set(CMAKE_CXX_CLANG_TIDY clang-tidy)
-set_target_properties(minifb PROPERTIES CXX_CLANG_TIDY "")
-
 add_executable(engine engine.cpp)
 
 target_sources(engine

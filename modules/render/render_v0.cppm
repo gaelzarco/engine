@@ -133,6 +133,13 @@ const std::size_t WIDTH, const std::size_t HEIGHT) {
         }
     }
 }
+
+export void triangle(point a, point b, point c,std::vector<std::size_t>& buff,
+const buff_color& color, const std::size_t width, const std::size_t height) {
+    line(a, b, buff, color, width, height);
+    line(b, c, buff, color, width, height);
+    line(c, a, buff, color, width, height);
+}
 // NOLINTEND(bugprone-float-loop-counter)
 // NOLINTEND(bugprone-narrowing-conversions)
 // NOLINTEND(bugprone-easily-swappable-parameters)
