@@ -5,11 +5,7 @@
  */
 module;
 
-#include <charconv>
-#include <vector>
-#include <string>
-#include <fstream>
-#include <print>
+import std;
 
 export module obj_v0;
 
@@ -22,7 +18,7 @@ export module obj_v0;
  * Provides a high-performance parser using @c std::from_chars for zero-allocation
  * numeric conversion.
  *
- * @note Exported from C++20 module @c obj_v0_3.
+ * @note Exported from C++23 module @c obj_v0_3.
  *
  * @par Example
  * @code
@@ -233,8 +229,6 @@ public:
      * @brief Prints the formatted geometry to standard output.
      *
      * Equivalent to @c std::print("{}", format_output()).
-     *
-     * @see format_output()
      */
     auto print() const -> void;
 

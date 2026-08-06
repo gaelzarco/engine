@@ -1,39 +1,20 @@
 /**
  * @file render_v0.cppm
- * @brief C++20 module providing primitive 2D rendering utilities for a MiniFB pixel buffer.
+ * @brief C++23 module providing primitive 2D rendering utilities for a MiniFB pixel buffer.
  * @version 0.0
- *
- * @note The following clang-tidy checks are suppressed intentionally:
- *       - @c bugprone-easily-swappable-parameters: coordinate parameters are
- *         swapped deliberately as part of the Bresenham steep-line transform.
- *       - @c bugprone-narrowing-conversions: RNG output is truncated to @c uint8_t by design.
- *       - @c bugprone-float-loop-counter: integer loop counter is used; suppression
- *         is present for future-proofing subpixel variants.
  */
 
 module;
 
-#include <vector>
-#include <cstdint>
-#include <random>
-#include <cmath>
 #include "../minifb/include/MiniFB_cpp.h"
 
-export module render_v0;
+import std;
 
-// NOLINTBEGIN(bugprone-easily-swappable-parameters)
-// NOLINTBEGIN(bugprone-narrowing-conversions)
-// NOLINTBEGIN(bugprone-float-loop-counter)
+export module render_v0;
 
 /**
  * @struct buff_color
  * @brief An RGB colour value for use with a MiniFB pixel buffer.
- *
- * Each channel is an unsigned 8-bit integer in the range [0, 255].
- * If all three channels are 0 (the default), the constructor generates
- * a random colour using a non-deterministic seed, making it convenient
- * for debug visualisation where a unique-looking colour is needed without
- * having to specify one explicitly.
  *
  * @par Example — explicit colour
  * @code
@@ -73,31 +54,23 @@ export struct point { int x, y{}; };
 /**
  * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel buffer.
  *
- * Implements Bresenham's line algorithm with a steep-line correction:
- * when the line is more vertical than horizontal, the axes are swapped so
- * the inner loop always iterates over the longer axis, guaranteeing every
- * pixel along the line is filled without gaps.
- *
  * The buffer is a flat row-major array of packed @c MFB_RGB pixels with
- * dimensions @p WIDTH × @p HEIGHT. Pixel @c (x, y) maps to index
- * @c y * WIDTH + x.
+ * dimensions @p width × @p height. Pixel @c (x, y) maps to index
+ * @c y * width + x.
  *
  * @param a       Start point of the line (screen-space pixels).
  * @param b       End point of the line (screen-space pixels).
- * @param buff    Flat pixel buffer of size @p WIDTH * @p HEIGHT, modified in place.
+ * @param buff    Flat pixel buffer of size @p width * @p height, modified in place.
  * @param color   RGB colour to paint the line with.
- * @param WIDTH   Horizontal extent of the pixel buffer in pixels.
- * @param HEIGHT  Vertical extent of the pixel buffer in pixels.
+ * @param width   Horizontal extent of the pixel buffer in pixels.
+ * @param height  Vertical extent of the pixel buffer in pixels.
  *
  * @warning No bounds checking is performed. Both endpoints must lie within
- *          [0, WIDTH) × [0, HEIGHT) or the write will access memory outside
+ *          [0, width) × [0,height ) or the write will access memory outside
  *          @p buff.
  *
  * @note @p a and @p b are taken by value; the algorithm may swap their
  *       coordinates internally without affecting the caller's variables.
- *
- * @par Complexity
- * O(max(|Δx|, |Δy|)) — one write per pixel along the dominant axis.
  *
  * @par Example
  * @code
@@ -106,8 +79,8 @@ export struct point { int x, y{}; };
  * line({0, 0}, {WIDTH - 1, HEIGHT - 1}, buffer, red, WIDTH, HEIGHT);
  * @endcode
  */
-export void line(point a, point b, std::vector<std::size_t>& buff, const buff_color& color,
-const std::size_t WIDTH, const std::size_t HEIGHT) {
+export auto line(point a, point b, std::vector<std::size_t>& buff, const buff_color& color,
+const std::size_t& width, const std::size_t& height) -> void {
     bool steep = std::abs(a.x - b.x) < std::abs(a.y - b.y);
 
     if (steep) {
@@ -122,9 +95,9 @@ const std::size_t WIDTH, const std::size_t HEIGHT) {
 
     for (int x{a.x}; x <= b.x; x++) {
         if (steep) {
-            buff[x * WIDTH + y] = MFB_RGB(color._r, color._g, color._b);
+            buff[x * width + y] = MFB_RGB(color._r, color._g, color._b);
         } else {
-            buff[y * WIDTH + x] = MFB_RGB(color._r, color._g, color._b);
+            buff[y * width + x] = MFB_RGB(color._r, color._g, color._b);
         }
         err += 2 * std::abs(b.y - a.y);
         if (err > b.x - a.x) {
@@ -134,13 +107,10 @@ const std::size_t WIDTH, const std::size_t HEIGHT) {
     }
 }
 
-export void triangle(point a, point b, point c,std::vector<std::size_t>& buff,
-const buff_color& color, const std::size_t width, const std::size_t height) {
+export auto triangle(point a, point b, point c,std::vector<std::size_t>& buff,
+const buff_color& color, const std::size_t& width, const std::size_t& height) -> void {
     line(a, b, buff, color, width, height);
     line(b, c, buff, color, width, height);
     line(c, a, buff, color, width, height);
 }
-// NOLINTEND(bugprone-float-loop-counter)
-// NOLINTEND(bugprone-narrowing-conversions)
-// NOLINTEND(bugprone-easily-swappable-parameters)
 
