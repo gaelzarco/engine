@@ -21,9 +21,9 @@ import obj_v0;
 import render_v0;
 
 /** @brief Horizontal resolution of the framebuffer and window, in pixels. */
-const static std::size_t WIDTH = 1080;
+const static std::size_t WIDTH = 1920;
 /** @brief Vertical resolution of the framebuffer and window, in pixels. */
-const static std::size_t HEIGHT = 1920;
+const static std::size_t HEIGHT = 1080;
 
 /**
  * @brief Application entry point.

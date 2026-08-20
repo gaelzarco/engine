@@ -9,6 +9,7 @@ module;
 #include "../minifb/include/MiniFB_cpp.h"
 #include <algorithm>
 #include <print>
+#include <array>
 
 import std;
 
@@ -136,12 +137,33 @@ const buff_color& color, const std::size_t& width, const std::size_t& height) ->
     line(c, a, buff, color, width, height);
 
     // Create triangle bounding box
-    const auto xmin = std::min({a.x, b.x, c.x});
-    const auto ymin = std::min({a.y, b.y, c.y});
+    const int xmin = std::min({a.x, b.x, c.x});
+    const int ymin = std::min({a.y, b.y, c.y});
 
-    const auto xmax = std::max({a.x, b.x, c.x});
-    const auto ymax = std::max({a.y, b.y, c.y});
+    const int xmax = std::max({a.x, b.x, c.x});
+    const int ymax = std::max({a.y, b.y, c.y});
 
     std::println("[LOG] Min bounding points ({}, {})", xmin, ymin);
     std::println("[LOG] Max bounding points ({}, {})", xmax, ymax);
+}
+
+/*
+ * @brief Helper function that builds two edge vectors from a common origin @c a to compute 2D
+ * cross-product for triangle rasterization. 
+ *
+ * @param a First triangle vertex point (screen-space pixels).
+ * @param b Second triangle vertex point (screen-space pixels).
+ * @param c Third triangle vertex point (screen-space pixels).
+ *
+ * @return  Determinant value
+ */
+export auto get_determinant(const point& a, const point& b, const point& c) -> int {
+    const point ab = {b.x - a.x, b.y - a.y};
+    const point ac = {c.x - a.x, c.y - a.y};
+
+    const int result = ab.y * ac.x - ab.x * ac.y;
+
+    std::println("[LOG] Determinant {}", result);
+
+    return result;
 }
