@@ -15,16 +15,15 @@
  */
 
 #include "modules/minifb/include/MiniFB_cpp.h"
-#include <clocale>
 
 import std;
 import obj_v0;
 import render_v0;
 
 /** @brief Horizontal resolution of the framebuffer and window, in pixels. */
-const static std::size_t WIDTH = 800;
+const static std::size_t WIDTH = 1080;
 /** @brief Vertical resolution of the framebuffer and window, in pixels. */
-const static std::size_t HEIGHT = 600;
+const static std::size_t HEIGHT = 1920;
 
 /**
  * @brief Application entry point.
@@ -35,7 +34,6 @@ const static std::size_t HEIGHT = 600;
  * @return 0 on clean exit, 1 on argument or window-creation error.
  */
 auto main(int argc, const char* argv[]) -> int {
-    setlocale(LC_ALL, "");
 
     if (argc < 2) {
         std::println("[ERR] Please include file path for obj file");
@@ -73,7 +71,6 @@ auto main(int argc, const char* argv[]) -> int {
     buff_color color{};
 
     triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
-    triangle({400, 500}, {500, 600}, {200, 300}, buffer, color, WIDTH, HEIGHT);
 
     while (mfb_wait_sync(window)) {
         state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);

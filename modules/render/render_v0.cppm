@@ -7,6 +7,8 @@
 module;
 
 #include "../minifb/include/MiniFB_cpp.h"
+#include <algorithm>
+#include <print>
 
 import std;
 
@@ -46,24 +48,20 @@ export struct buff_color {
 /**
  * @struct point
  * @brief A 2D integer screen-space coordinate.
- * @var point::x  Horizontal position in pixels. Default: 0.
- * @var point::y  Vertical position in pixels.   Default: 0.
+ * @var point::x Horizontal position in pixels. Default: 0.
+ * @var point::y Vertical position in pixels. Default: 0.
  */
 export struct point { int x, y{}; };
 
 /**
  * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel buffer.
  *
- * The buffer is a flat row-major array of packed @c MFB_RGB pixels with
- * dimensions @p width × @p height. Pixel @c (x, y) maps to index
- * @c y * width + x.
- *
  * @param a       Start point of the line (screen-space pixels).
  * @param b       End point of the line (screen-space pixels).
  * @param buff    Flat pixel buffer of size @p width * @p height, modified in place.
  * @param color   RGB colour to paint the line with.
- * @param width   Horizontal extent of the pixel buffer in pixels.
- * @param height  Vertical extent of the pixel buffer in pixels.
+ * @param width   Total pixel width of MiniFB window
+ * @param height  Total pixel height of MiniFB window
  *
  * @warning No bounds checking is performed. Both endpoints must lie within
  *          [0, width) × [0,height ) or the write will access memory outside
@@ -107,10 +105,43 @@ const std::size_t& width, const std::size_t& height) -> void {
     }
 }
 
+/*
+ * @brief Rasterizes triangle within MiniFB pixel buffer using provided color
+ * and points. Utilizes bounding box algorithm to fill in triangle.
+ *
+ * @param a      First triangle vertex point (screen-space pixels).
+ * @param b      Second triangle vertex point (screen-space pixels).
+ * @param c      Third triangle vertex point (screen-space pixels).
+ * @param buff   Flat pixel buffer of size @p width * @p height, modified in place.
+ * @param color  RGB color to paint the triangle.
+ * @param width  Total pixel width of MiniFB window.
+ * @param height Total pixel height of MiniFB window.
+ *
+ * @par Example
+ * @code
+ * const static std::size_t WIDTH = 1080;
+ * const static std::size_t HEIGHT = 1920;
+ * point a{7, 3};
+ * point b{12, 37};
+ * point c{62, 53};
+ * buff_color color{};
+ * triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
+ * @endcode
+ */
 export auto triangle(point a, point b, point c,std::vector<std::size_t>& buff,
 const buff_color& color, const std::size_t& width, const std::size_t& height) -> void {
+    // Draw triangle edges
     line(a, b, buff, color, width, height);
     line(b, c, buff, color, width, height);
     line(c, a, buff, color, width, height);
-}
 
+    // Create triangle bounding box
+    const auto xmin = std::min({a.x, b.x, c.x});
+    const auto ymin = std::min({a.y, b.y, c.y});
+
+    const auto xmax = std::max({a.x, b.x, c.x});
+    const auto ymax = std::max({a.y, b.y, c.y});
+
+    std::println("[LOG] Min bounding points ({}, {})", xmin, ymin);
+    std::println("[LOG] Max bounding points ({}, {})", xmax, ymax);
+}
