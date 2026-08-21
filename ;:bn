@@ -15,29 +15,28 @@ import std;
 export module render_v0;
 
 /**
- * @struct rgb_color
+ * @struct buff_color
  * @brief An RGB colour value for use with a MiniFB pixel buffer.
  *
  * @par Example — explicit colour
  * @code
- * rgb_color red(255, 0, 0);
+ * buff_color red(255, 0, 0);
  * @endcode
  *
  * @par Example — random colour
  * @code
- * rgb_color random_color; // r, g, b chosen randomly at construction
+ * buff_color random_color; // r, g, b chosen randomly at construction
  * @endcode
  */
-export struct rgb_color {
+export struct buff_color {
     using color_t = uint8_t;
-    rgb_color(color_t r = 0, color_t g = 0, color_t b = 0) : _r(r), _g(g), _b(b) {
+    buff_color(color_t r = 0, color_t g = 0, color_t b = 0) : _r(r), _g(g), _b(b) {
         if (r == 0 && g == 0 & b == 0) {
             std::random_device rd;
             std::mt19937 rng(rd());
-            std::uniform_int_distribution<int> rgb_rng(0, 255);
-            _r = rgb_rng(rng);
-            _g = rgb_rng(rng);
-            _b = rgb_rng(rng);
+            _r = rng();
+            _g = rng();
+            _b = rng();
         }
     }
 
@@ -74,11 +73,11 @@ export struct point { int x, y{}; };
  * @par Example
  * @code
  * std::vector<std::size_t> buffer(WIDTH * HEIGHT, 0);
- * rgb_color red(255, 0, 0);
+ * buff_color red(255, 0, 0);
  * line({0, 0}, {WIDTH - 1, HEIGHT - 1}, buffer, red, WIDTH, HEIGHT);
  * @endcode
  */
-export auto line(point a, point b, std::vector<std::size_t>& buff, const rgb_color& color,
+export auto line(point a, point b, std::vector<std::size_t>& buff, const buff_color& color,
 const std::size_t& width, const std::size_t& height) -> void {
     bool steep = std::abs(a.x - b.x) < std::abs(a.y - b.y);
 
@@ -93,7 +92,7 @@ const std::size_t& width, const std::size_t& height) -> void {
     int err = 0;
 
     for (int x{a.x}; x <= b.x; x++) {
-        if (a.x >= width || a.y >= height || b.x >= width || b.y >= height) return;
+        if (x > width || y > height) return;
         if (steep) {
             buff[x * width + y] = MFB_RGB(color._r, color._g, color._b);
         } else {
@@ -123,6 +122,8 @@ export auto get_determinant(const point& a, const point& b, const point& c) -> i
 
     const int result = ab.y * ac.x - ab.x * ac.y;
 
+    std::println("[LOG] Determinant {}", result);
+
     return result;
 }
 
@@ -145,12 +146,12 @@ export auto get_determinant(const point& a, const point& b, const point& c) -> i
  * point a{7, 3};
  * point b{12, 37};
  * point c{62, 53};
- * rgb_color color{};
+ * buff_color color{};
  * triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
  * @endcode
  */
 export auto triangle(point a, point b, point c,std::vector<std::size_t>& buff,
-const rgb_color& color, const std::size_t& width, const std::size_t& height) -> void {
+const buff_color& color, const std::size_t& width, const std::size_t& height) -> void {
     // Draw triangle edges
     line(a, b, buff, color, width, height);
     line(b, c, buff, color, width, height);
@@ -176,4 +177,7 @@ const rgb_color& color, const std::size_t& width, const std::size_t& height) -> 
             }
         }
     }
+
+    std::println("[LOG] Min bounding points ({}, {})", xmin, ymin);
+    std::println("[LOG] Max bounding points ({}, {})", xmax, ymax);
 }

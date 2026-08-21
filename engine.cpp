@@ -4,13 +4,13 @@
  *        with a software-rendered MiniFB window.
  *
  * @par Dependencies
- * - C++23 module @c obj_v0_3  — OBJ file parsing and in-memory representation.
+ * - C++23 module @c           — OBJ file parsing and in-memory representation.
  * - C++23 module @c render_v0 — 2D primitive rasterization into a pixel buffer.
  * - MiniFB                    — cross-platform framebuffer window library.
  *
  * @par Usage
  * @code
- * ./rasterizer <path/to/model.obj>
+ * ./build/engine <path/to/model.obj>
  * @endcode
  */
 
@@ -68,9 +68,35 @@ auto main(int argc, const char* argv[]) -> int {
     point b{12, 37};
     point c{62, 53};
 
-    buff_color color{};
+    rgb_color color{};
 
     triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
+
+    // Draw 50 random triangles
+    for (auto i{0uz}; i < 50; ++i) {
+        std::random_device rd;
+        std::mt19937 rng(rd());
+
+        // Limit random distribution to values within bounds
+        std::uniform_int_distribution<int> distX(0, WIDTH - 1);
+        std::uniform_int_distribution<int> distY(0, HEIGHT - 1);
+
+        // Generate points within random distribution
+        const int v1x = distX(rng); const int v1y = distY(rng);
+        const int v2x = distX(rng); const int v2y = distY(rng);
+        const int v3x = distX(rng); const int v3y = distY(rng);
+
+        // Build vertices
+        const point v1{v1x, v1y};
+        const point v2{v2x, v2y};
+        const point v3{v3x, v3y};
+
+        // Generate random color
+        rgb_color v_color{};
+
+        // Draw triangle
+        triangle(v1, v2, v3, buffer, v_color, WIDTH, HEIGHT);
+    }
 
     while (mfb_wait_sync(window)) {
         state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);
