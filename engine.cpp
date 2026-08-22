@@ -24,6 +24,8 @@ import render_v0;
 const static std::size_t WIDTH = 1920;
 /** @brief Vertical resolution of the framebuffer and window, in pixels. */
 const static std::size_t HEIGHT = 1080;
+/** @brief Amount of triangles to benchmark during draw operations */
+const static std::size_t TRIANGLE_QUANT = 100;
 
 /**
  * @brief Application entry point.
@@ -44,14 +46,14 @@ auto main(int argc, const char* argv[]) -> int {
     obj file{};
 
     // LOGGING
-    auto start = std::chrono::high_resolution_clock::now();
+    auto read_start = std::chrono::high_resolution_clock::now();
 
     file.read(file_path);
 
     // LOGGING
-    auto stop = std::chrono::high_resolution_clock::now();
-    auto duration = std::chrono::duration_cast<std::chrono::milliseconds> (stop - start);
-    std::println("[LOG] .obj read duration: {} ms", duration.count());
+    auto read_stop = std::chrono::high_resolution_clock::now();
+    auto read_duration = std::chrono::duration_cast<std::chrono::milliseconds> (read_stop - read_start);
+    std::println("[LOG] .obj read duration: {} ms", read_duration.count());
     file.memory_out();
 
     struct mfb_window *window = mfb_open_ex("CXX Rasterizer", WIDTH, HEIGHT, MFB_WF_RESIZABLE);
@@ -61,26 +63,20 @@ auto main(int argc, const char* argv[]) -> int {
         return 1;
     };
 
-    std::vector<std::size_t> buffer(static_cast<size_t>(WIDTH * HEIGHT));
+    std::vector<std::uint32_t> buffer(static_cast<size_t>(WIDTH * HEIGHT));
     mfb_update_state state;
 
-    point a{7, 3};
-    point b{12, 37};
-    point c{62, 53};
+    std::random_device rd;
+    std::mt19937 rng(rd());
 
-    rgb_color color{};
+    // Limit random distribution to values within bounds
+    std::uniform_int_distribution<int> distX(0, WIDTH - 1);
+    std::uniform_int_distribution<int> distY(0, HEIGHT - 1);
 
-    triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
+    auto draw_start = std::chrono::high_resolution_clock::now();
 
     // Draw 50 random triangles
-    for (auto i{0uz}; i < 50; ++i) {
-        std::random_device rd;
-        std::mt19937 rng(rd());
-
-        // Limit random distribution to values within bounds
-        std::uniform_int_distribution<int> distX(0, WIDTH - 1);
-        std::uniform_int_distribution<int> distY(0, HEIGHT - 1);
-
+    for (auto i{0uz}; i < TRIANGLE_QUANT; ++i) {
         // Generate points within random distribution
         const int v1x = distX(rng); const int v1y = distY(rng);
         const int v2x = distX(rng); const int v2y = distY(rng);
@@ -97,6 +93,10 @@ auto main(int argc, const char* argv[]) -> int {
         // Draw triangle
         triangle(v1, v2, v3, buffer, v_color, WIDTH, HEIGHT);
     }
+
+    auto draw_stop = std::chrono::high_resolution_clock::now();
+    auto draw_duration = std::chrono::duration_cast<std::chrono::milliseconds> (draw_stop - draw_start);
+    std::println("[LOG] {} triangle draw duration: {} ms", TRIANGLE_QUANT, draw_duration.count());
 
     while (mfb_wait_sync(window)) {
         state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);

@@ -54,8 +54,23 @@ export struct rgb_color {
  */
 export struct point { int x, y{}; };
 
+/*
+* @brief Helper function to check if point is within bounds
+*
+* @param col    X value of point
+* @param row    Y value of point
+* @param width  Total pixel width of MiniFB window
+* @param height Total pixel height of MiniFB window
+*
+* @return Boolean value dictating if point is within bounds or not
+*/
+auto in_bounds(const int& col, const int& row, const std::size_t& width, const std::size_t& height) -> bool {
+    return col >= 0 && col < static_cast<int>(width) && row >= 0
+        && row < static_cast<int>(height);
+};
+
 /**
- * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel buffer.
+ * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel buffer with bounds checking.
  *
  * @param a       Start point of the line (screen-space pixels).
  * @param b       End point of the line (screen-space pixels).
@@ -63,10 +78,6 @@ export struct point { int x, y{}; };
  * @param color   RGB colour to paint the line with.
  * @param width   Total pixel width of MiniFB window
  * @param height  Total pixel height of MiniFB window
- *
- * @warning No bounds checking is performed. Both endpoints must lie within
- *          [0, width) × [0,height ) or the write will access memory outside
- *          @p buff.
  *
  * @note @p a and @p b are taken by value; the algorithm may swap their
  *       coordinates internally without affecting the caller's variables.
@@ -78,7 +89,7 @@ export struct point { int x, y{}; };
  * line({0, 0}, {WIDTH - 1, HEIGHT - 1}, buffer, red, WIDTH, HEIGHT);
  * @endcode
  */
-export auto line(point a, point b, std::vector<std::size_t>& buff, const rgb_color& color,
+export auto line(point a, point b, std::vector<std::uint32_t>& buff, const rgb_color& color,
 const std::size_t& width, const std::size_t& height) -> void {
     bool steep = std::abs(a.x - b.x) < std::abs(a.y - b.y);
 
@@ -93,12 +104,16 @@ const std::size_t& width, const std::size_t& height) -> void {
     int err = 0;
 
     for (int x{a.x}; x <= b.x; x++) {
-        if (a.x >= width || a.y >= height || b.x >= width || b.y >= height) return;
-        if (steep) {
-            buff[x * width + y] = MFB_RGB(color._r, color._g, color._b);
+        int col = steep ? y : x;
+        int row = steep ? x : y;
+
+        if (!in_bounds(col, row, width, height)) {
+            std::println("[LOG] skipped point out of bounds");
         } else {
-            buff[y * width + x] = MFB_RGB(color._r, color._g, color._b);
+            buff[static_cast<std::size_t>(row) * width + static_cast<std::size_t>(col)] =
+            MFB_RGB(color._r, color._g, color._b);
         }
+
         err += 2 * std::abs(b.y - a.y);
         if (err > b.x - a.x) {
             y += b.y > a.y ? 1 : -1;
@@ -117,7 +132,7 @@ const std::size_t& width, const std::size_t& height) -> void {
  *
  * @return  Determinant value
  */
-export auto get_determinant(const point& a, const point& b, const point& c) -> int {
+auto get_determinant(const point& a, const point& b, const point& c) -> int {
     const point ab = {b.x - a.x, b.y - a.y};
     const point ac = {c.x - a.x, c.y - a.y};
 
@@ -149,12 +164,10 @@ export auto get_determinant(const point& a, const point& b, const point& c) -> i
  * triangle(a, b, c, buffer, color, WIDTH, HEIGHT);
  * @endcode
  */
-export auto triangle(point a, point b, point c,std::vector<std::size_t>& buff,
+export auto triangle(point a, point b, point c,std::vector<std::uint32_t>& buff,
 const rgb_color& color, const std::size_t& width, const std::size_t& height) -> void {
-    // Draw triangle edges
-    line(a, b, buff, color, width, height);
-    line(b, c, buff, color, width, height);
-    line(c, a, buff, color, width, height);
+    if (get_determinant(a, b, c) == 0) return;
+    if (get_determinant(a, b, c) < 0) std::swap(b, c);
 
     // Create triangle bounding box
     const int xmin = std::min({a.x, b.x, c.x});
@@ -162,9 +175,11 @@ const rgb_color& color, const std::size_t& width, const std::size_t& height) -> 
 
     const int xmax = std::max({a.x, b.x, c.x});
     const int ymax = std::max({a.y, b.y, c.y});
-    
-    for (auto y{ymin}; y < ymax; ++y) {
-        for (auto x{xmin}; x < xmax; ++x) {
+
+    for (auto y{ymin}; y <= ymax; ++y) {
+        for (auto x{xmin}; x <= xmax; ++x) {
+            if (!in_bounds(x, y, width, height)) continue;
+
             const point p{x, y};
 
             const auto bounds_a = get_determinant(b, c, p);
@@ -172,7 +187,8 @@ const rgb_color& color, const std::size_t& width, const std::size_t& height) -> 
             const auto bounds_c = get_determinant(a, b, p);
 
             if (bounds_a >= 0 && bounds_b >= 0 && bounds_c >= 0) {
-                buff[y * width + x] = MFB_RGB(color._r, color._g, color._b);
+                buff[static_cast<std::size_t>(y) * width + static_cast<std::size_t>(x)] =
+                MFB_RGB(color._r, color._g, color._b);
             }
         }
     }
