@@ -1,6 +1,6 @@
 var annotated_dup =
 [
-    [ "buff_color", "structbuff__color.html", null ],
     [ "obj", "classobj.html", "classobj" ],
-    [ "point", "structpoint.html", null ]
+    [ "point", "structpoint.html", null ],
+    [ "rgb_color", "structrgb__color.html", null ]
 ];

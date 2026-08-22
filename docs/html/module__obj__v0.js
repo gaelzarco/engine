@@ -1,4 +1,4 @@
 var module__obj__v0 =
 [
-    [ "obj_", "classobj__.html", "classobj__" ]
+    [ "obj", "classobj.html", "classobj" ]
 ];

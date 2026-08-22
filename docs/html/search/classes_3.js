@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['point_0',['point',['../structpoint.html',1,'']]]
+  ['rgb_5fcolor_0',['rgb_color',['../structrgb__color.html',1,'']]]
 ];

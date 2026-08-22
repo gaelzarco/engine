@@ -93,7 +93,7 @@ Represents a parsed Wavefront OBJ file.
 Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-\/performance parser using {\ttfamily std::\+from\+\_\+chars} for zero-\/allocation numeric conversion.
 
 \begin{DoxyNote}{Note}
-Exported from C++20 module {\ttfamily obj\+\_\+v0\+\_\+3}.
+Exported from C++23 module {\ttfamily obj\+\_\+v0\+\_\+3}.
 \end{DoxyNote}
 \begin{DoxyParagraph}{Example}
 
@@ -108,7 +108,7 @@ Exported from C++20 module {\ttfamily obj\+\_\+v0\+\_\+3}.
 \end{DoxyParagraph}
 
 
-\label{doc-constructors}
+\label{classobj_doc-constructors}
 \Hypertarget{classobj_doc-constructors}
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classobj_a03c3704a351856bc5ed8afb066107e3e}\index{obj@{obj}!obj@{obj}}
@@ -140,7 +140,7 @@ All parameters are moved into internal storage. Passing no arguments constructs 
 \end{DoxyParams}
 
 
-\label{doc-func-members}
+\label{classobj_doc-func-members}
 \Hypertarget{classobj_doc-func-members}
 \doxysubsection{Member Function Documentation}
 \Hypertarget{classobj_a8c23aca14ff1f057d5cf5b4662e59663}\index{obj@{obj}!faces@{faces}}
@@ -179,7 +179,7 @@ auto obj::\+format\+\_\+output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaptio
 
 Formats all stored geometry as a human-\/readable string. 
 
-Each element is written on its own line. Optional components (e.\+g. the {\ttfamily w} component of a vertex, or the {\ttfamily vt} /\+ {\ttfamily vn} indices of a face vertex) are omitted from the output when they hold their default zero value.
+Each element is written on its own line. Optional components (e.\+g. the {\ttfamily w} component of a vertex, or the {\ttfamily vt} / {\ttfamily vn} indices of a face vertex) are omitted from the output when they hold their default zero value.
 
 \begin{DoxyReturn}{Returns}
 A {\ttfamily std::\+string} containing the formatted representation of the model. 
@@ -220,7 +220,7 @@ auto obj::\+memory\+\_\+out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})
 
 Logs the total heap memory reserved by all internal geometry containers. 
 
-Reports the sum of {\ttfamily capacity()} \texorpdfstring{$\ast$}{*} sizeof(element) across all six containers. Output is written to standard output in the form:\+ 
+Reports the sum of {\ttfamily capacity()} \texorpdfstring{$\ast$}{*} sizeof(element) across all six containers. Output is written to standard output in the form: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[LOG]\ Memory\ allocated:\ <bytes>\ bytes\ (\string~<MB>\ MB)}
 
@@ -266,12 +266,7 @@ auto obj::\+print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/
 
 Prints the formatted geometry to standard output. 
 
-Equivalent to {\ttfamily std::\+print}("{}\{\}"{}, \doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()}).
-
-\begin{DoxySeeAlso}{See also}
-\doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()} 
-\end{DoxySeeAlso}
-\Hypertarget{classobj_a243badc3a0a0a6b3612951a03f8e4952}\index{obj@{obj}!read@{read}}
+Equivalent to {\ttfamily std::\+print}("{}\{\}"{}, \doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()}). \Hypertarget{classobj_a243badc3a0a0a6b3612951a03f8e4952}\index{obj@{obj}!read@{read}}
 \index{read@{read}!obj@{obj}}
 \doxysubsubsection{\texorpdfstring{read()}{read()}}
 {\footnotesize\ttfamily \label{classobj_a243badc3a0a0a6b3612951a03f8e4952} 
@@ -281,9 +276,9 @@ auto obj::\+read (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+
 
 Parses a Wavefront OBJ file and populates the model\textquotesingle{}s geometry data. 
 
-Reads the entire file into a buffer and performs a single-\/pass parse using {\ttfamily std::\+from\+\_\+chars} for locale-\/independent, allocation-\/free numeric conversion. Recognised keywords:\+ {\ttfamily v}, {\ttfamily vt}, {\ttfamily vn}, {\ttfamily vp}, {\ttfamily f}, {\ttfamily l}. Comment lines ({\ttfamily \#}) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.
+Reads the entire file into a buffer and performs a single-\/pass parse using {\ttfamily std::\+from\+\_\+chars} for locale-\/independent, allocation-\/free numeric conversion. Recognised keywords: {\ttfamily v}, {\ttfamily vt}, {\ttfamily vn}, {\ttfamily vp}, {\ttfamily f}, {\ttfamily l}. Comment lines ({\ttfamily \#}) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.
 
-Face vertex tokens support all three OBJ index formats:\+
+Face vertex tokens support all three OBJ index formats:
 \begin{DoxyItemize}
 \item {\ttfamily v} 
 \item {\ttfamily v/\+vt} 
@@ -384,6 +379,6 @@ Reference to the internal {\ttfamily \doxylink{classobj_a92955dded15b830b7a5259a
 \end{DoxyReturn}
 
 
-The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-modules/\+obj/\+\doxymbox{\hyperlink{obj__v0__3_8cppm}{obj\+\_\+v0\+\_\+3.\+cppm}}\end{DoxyCompactItemize}
+modules/\+obj/obj\+\_\+v0.\+cppm\end{DoxyCompactItemize}

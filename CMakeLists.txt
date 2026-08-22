@@ -24,34 +24,32 @@ endif()
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
 
-project(engine)
+project(CXX23_renderer)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-# NOTE: CMAKE_CXX_MODULE_STD removed from global scope — set per-target below
 
 add_subdirectory(modules/minifb)
 
-add_executable(engine engine.cpp)
+add_executable(renderer main.cpp)
 
-# Scope both module-related properties to engine only, not the whole build
-set_target_properties(engine PROPERTIES
+set_target_properties(renderer PROPERTIES
     CXX_SCAN_FOR_MODULES ON
     CXX_MODULE_STD ON
 )
-target_compile_features(engine PUBLIC cxx_std_23)
+target_compile_features(renderer PUBLIC cxx_std_23)
 
-target_sources(engine
+target_sources(renderer
     PUBLIC FILE_SET CXX_MODULES FILES
     modules/obj/obj_v0.cppm
 )
-target_sources(engine
+target_sources(renderer
     PUBLIC FILE_SET CXX_MODULES FILES
     modules/render/render_v0.cppm
 )
 
-target_link_libraries(engine PRIVATE minifb)
-target_compile_options(engine PRIVATE -O3 -flto -march=native)
-target_link_options(engine PRIVATE -flto)
+target_link_libraries(renderer PRIVATE minifb)
+target_compile_options(renderer PRIVATE -O3 -flto -march=native)
+target_link_options(renderer PRIVATE -flto)

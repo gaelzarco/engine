@@ -3,17 +3,20 @@
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \doxymbox{\hyperlink{structbuff__color}{buff\+\_\+color}}
+struct \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}}
 \begin{DoxyCompactList}\small\item\em An RGB colour value for use with a Mini\+FB pixel buffer. \end{DoxyCompactList}\item 
 struct \doxymbox{\hyperlink{structpoint}{point}}
 \begin{DoxyCompactList}\small\item\em A 2D integer screen-\/space coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}{line}} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, std::\+vector$<$ std::\+size\+\_\+t $>$ \&buff, const \doxymbox{\hyperlink{structbuff__color}{buff\+\_\+color}} \&color, const std::\+size\+\_\+t WIDTH, const std::\+size\+\_\+t HEIGHT)
-\begin{DoxyCompactList}\small\item\em Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+auto \doxymbox{\hyperlink{render__v0_8cppm_af76b361e13cecae68de31611201266b5}{line}} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, std::\+vector$<$ std::\+uint32\+\_\+t $>$ \&buff, const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&color, const std::\+size\+\_\+t \&width, const std::\+size\+\_\+t \&height) -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer with bounds checking. \end{DoxyCompactList}\item 
+\Hypertarget{render__v0_8cppm_a645920902dafad0886aa35cdda416f5b}\label{render__v0_8cppm_a645920902dafad0886aa35cdda416f5b} 
+auto {\bfseries triangle} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, \doxymbox{\hyperlink{structpoint}{point}} c, std::\+vector$<$ std::\+uint32\+\_\+t $>$ \&buff, const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&color, const std::\+size\+\_\+t \&width, const std::\+size\+\_\+t \&height) -\/$>$ void
+\end{DoxyCompactItemize}
 \doxysubsubsection*{Files}
 \begin{DoxyCompactItemize}
 \item 
-file modules/\+render/\+\doxymbox{\hyperlink{render__v0_8cppm}{render\+\_\+v0.\+cppm}}
-\begin{DoxyCompactList}\small\item\em C++20 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+file modules/\+render/\doxymbox{\hyperlink{render__v0_8cppm}{render\+\_\+v0.\+cppm}}
+\begin{DoxyCompactList}\small\item\em C++23 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer. \end{DoxyCompactList}\end{DoxyCompactItemize}

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['obj_0',['obj',['../classobj.html',1,'']]]
+  ['point_0',['point',['../structpoint.html',1,'']]]
 ];

@@ -3,70 +3,155 @@
 \doxymbox{\hyperlink{render__v0_8cppm}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{00001\ }
-\DoxyCodeLine{00013\ }
-\DoxyCodeLine{00014\ \textcolor{keyword}{module};}
-\DoxyCodeLine{00015\ }
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cstdint>}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <random>}}
-\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cmath>}}
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}../minifb/include/MiniFB\_cpp.h"{}}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00022\ \textcolor{keyword}{export}\ \textcolor{keyword}{module}\ \doxymbox{\hyperlink{module__render__v0}{render\_v0}};}
-\DoxyCodeLine{00023\ }
-\DoxyCodeLine{00024\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/easily-\/swappable-\/parameters)}}
-\DoxyCodeLine{00025\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/narrowing-\/conversions)}}
-\DoxyCodeLine{00026\ \textcolor{comment}{//\ NOLINTBEGIN(bugprone-\/float-\/loop-\/counter)}}
-\DoxyCodeLine{00027\ }
-\DoxyCodeLine{00048\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }buff\_color\ \{}
-\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{using\ }color\_t\ =\ uint8\_t;}
-\DoxyCodeLine{00050\ \ \ \ \ buff\_color(color\_t\ r\ =\ 0,\ color\_t\ g\ =\ 0,\ color\_t\ b\ =\ 0)\ :\ \_r(r),\ \_g(g),\ \_b(b)\ \{}
-\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (r\ ==\ 0\ \&\&\ g\ ==\ 0\ \&\ b\ ==\ 0)\ \{}
-\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ std::mt19937\ rng(rd());}
-\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \_r\ =\ rng();}
-\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \_g\ =\ rng();}
-\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \_b\ =\ rng();}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00058\ \ \ \ \ \}}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00060\ \ \ \ \ color\_t\ \_r;}
-\DoxyCodeLine{00061\ \ \ \ \ color\_t\ \_g;}
-\DoxyCodeLine{00062\ \ \ \ \ color\_t\ \_b;}
-\DoxyCodeLine{00063\ \};}
-\DoxyCodeLine{00064\ }
-\DoxyCodeLine{00071\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structpoint}{point}}\ \{\ \textcolor{keywordtype}{int}\ x,\ y\{\};\ \};}
-\DoxyCodeLine{00072\ }
-\DoxyCodeLine{00109\ \textcolor{keyword}{export}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{render__v0_8cppm_aa82b28352727e69a02ec61fc09902b8c}{line}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ std::vector<std::size\_t>\&\ buff,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structbuff__color}{buff\_color}}\&\ color,}
-\DoxyCodeLine{00110\ \textcolor{keyword}{const}\ std::size\_t\ WIDTH,\ \textcolor{keyword}{const}\ std::size\_t\ HEIGHT)\ \{}
-\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ steep\ =\ std::abs(a.x\ -\/\ b.x)\ <\ std::abs(a.y\ -\/\ b.y);}
-\DoxyCodeLine{00112\ }
-\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
-\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ std::swap(a.x,\ a.y);}
-\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::swap(b.x,\ b.y);}
-\DoxyCodeLine{00116\ \ \ \ \ \}}
-\DoxyCodeLine{00117\ }
-\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordflow}{if}\ (a.x\ >\ b.x)\ std::swap(a,\ b);}
-\DoxyCodeLine{00119\ }
-\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ a.y;}
-\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ 0;}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\{a.x\};\ x\ <=\ b.x;\ x++)\ \{}
-\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
-\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ buff[x\ *\ WIDTH\ +\ y]\ =\ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
-\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ buff[y\ *\ WIDTH\ +\ x]\ =\ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
-\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ err\ +=\ 2\ *\ std::abs(b.y\ -\/\ a.y);}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ >\ b.x\ -\/\ a.x)\ \{}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ y\ +=\ b.y\ >\ a.y\ ?\ 1\ :\ -\/1;}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ err\ -\/=\ 2\ *\ (b.x\ -\/\ a.x);}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00134\ \ \ \ \ \}}
-\DoxyCodeLine{00135\ \}}
-\DoxyCodeLine{00136\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/float-\/loop-\/counter)}}
-\DoxyCodeLine{00137\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/narrowing-\/conversions)}}
-\DoxyCodeLine{00138\ \textcolor{comment}{//\ NOLINTEND(bugprone-\/easily-\/swappable-\/parameters)}}
-\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../minifb/include/MiniFB\_cpp.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <print>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{import}\ std;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{export}\ \textcolor{keyword}{module}\ \doxymbox{\hyperlink{module__render__v0}{render\_v0}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }rgb\_color\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{using\ }color\_t\ =\ uint8\_t;}
+\DoxyCodeLine{00033\ \ \ \ \ rgb\_color(color\_t\ r\ =\ 0,\ color\_t\ g\ =\ 0,\ color\_t\ b\ =\ 0)\ :\ \_r(r),\ \_g(g),\ \_b(b)\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (r\ ==\ 0\ \&\&\ g\ ==\ 0\ \&\ b\ ==\ 0)\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ std::mt19937\ rng(rd());}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ std::uniform\_int\_distribution<int>\ rgb\_rng(0,\ 255);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \_r\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \_g\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \_b\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ color\_t\ \_r;}
+\DoxyCodeLine{00045\ \ \ \ \ color\_t\ \_g;}
+\DoxyCodeLine{00046\ \ \ \ \ color\_t\ \_b;}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structpoint}{point}}\ \{\ \textcolor{keywordtype}{int}\ x,\ y\{\};\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00058\ \textcolor{comment}{*\ @brief\ Helper\ function\ to\ check\ if\ point\ is\ within\ bounds}}
+\DoxyCodeLine{00059\ \textcolor{comment}{*}}
+\DoxyCodeLine{00060\ \textcolor{comment}{*\ @param\ col\ \ \ \ X\ value\ of\ point}}
+\DoxyCodeLine{00061\ \textcolor{comment}{*\ @param\ row\ \ \ \ Y\ value\ of\ point}}
+\DoxyCodeLine{00062\ \textcolor{comment}{*\ @param\ width\ \ Total\ pixel\ width\ of\ MiniFB\ window}}
+\DoxyCodeLine{00063\ \textcolor{comment}{*\ @param\ height\ Total\ pixel\ height\ of\ MiniFB\ window}}
+\DoxyCodeLine{00064\ \textcolor{comment}{*}}
+\DoxyCodeLine{00065\ \textcolor{comment}{*\ @return\ Boolean\ value\ dictating\ if\ point\ is\ within\ bounds\ or\ not}}
+\DoxyCodeLine{00066\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{auto}\ in\_bounds(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ col,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ row,\ \textcolor{keyword}{const}\ std::size\_t\&\ width,\ \textcolor{keyword}{const}\ std::size\_t\&\ height)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordflow}{return}\ col\ >=\ 0\ \&\&\ col\ <\ static\_cast<int>(width)\ \&\&\ row\ >=\ 0}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \&\&\ row\ <\ static\_cast<int>(height);}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{export}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{render__v0_8cppm_af76b361e13cecae68de31611201266b5}{line}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ std::vector<std::uint32\_t>\&\ buff,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color,}
+\DoxyCodeLine{00093\ \textcolor{keyword}{const}\ std::size\_t\&\ width,\ \textcolor{keyword}{const}\ std::size\_t\&\ height)\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ steep\ =\ std::abs(a.x\ -\/\ b.x)\ <\ std::abs(a.y\ -\/\ b.y);}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::swap(a.x,\ a.y);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::swap(b.x,\ b.y);}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordflow}{if}\ (a.x\ >\ b.x)\ std::swap(a,\ b);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ a.y;}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ 0;}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\{a.x\};\ x\ <=\ b.x;\ x++)\ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ col\ =\ steep\ ?\ y\ :\ x;}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ row\ =\ steep\ ?\ x\ :\ y;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!in\_bounds(col,\ row,\ width,\ height))\ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ std::println(\textcolor{stringliteral}{"{}[LOG]\ skipped\ point\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ buff[\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(row)\ *\ width\ +\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(col)]\ =}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ err\ +=\ 2\ *\ std::abs(b.y\ -\/\ a.y);}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ >\ b.x\ -\/\ a.x)\ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ y\ +=\ b.y\ >\ a.y\ ?\ 1\ :\ -\/1;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ err\ -\/=\ 2\ *\ (b.x\ -\/\ a.x);}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00126\ \textcolor{comment}{\ *\ @brief\ Helper\ function\ that\ builds\ two\ edge\ vectors\ from\ a\ common\ origin\ @c\ a\ to\ compute\ 2D}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ *\ cross-\/product\ for\ triangle\ rasterization.\ }}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ *\ @param\ a\ First\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ *\ @param\ b\ Second\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ *\ @param\ c\ Third\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ *\ @return\ \ Determinant\ value}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00135\ \textcolor{keyword}{auto}\ get\_determinant(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ a,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ b,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ c)\ -\/>\ \textcolor{keywordtype}{int}\ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ ab\ =\ \{b.x\ -\/\ a.x,\ b.y\ -\/\ a.y\};}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ ac\ =\ \{c.x\ -\/\ a.x,\ c.y\ -\/\ a.y\};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ result\ =\ ab.y\ *\ ac.x\ -\/\ ab.x\ *\ ac.y;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00142\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ *\ @brief\ Rasterizes\ triangle\ within\ MiniFB\ pixel\ buffer\ using\ provided\ color}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ *\ and\ points.\ Utilizes\ bounding\ box\ algorithm\ to\ fill\ in\ triangle.}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ *\ @param\ a\ \ \ \ \ \ First\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ *\ @param\ b\ \ \ \ \ \ Second\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ *\ @param\ c\ \ \ \ \ \ Third\ triangle\ vertex\ point\ (screen-\/space\ pixels).}}
+\DoxyCodeLine{00151\ \textcolor{comment}{\ *\ @param\ buff\ \ \ Flat\ pixel\ buffer\ of\ size\ @p\ width\ *\ @p\ height,\ modified\ in\ place.}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ *\ @param\ color\ \ RGB\ color\ to\ paint\ the\ triangle.}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ *\ @param\ width\ \ Total\ pixel\ width\ of\ MiniFB\ window.}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ *\ @param\ height\ Total\ pixel\ height\ of\ MiniFB\ window.}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ *\ @par\ Example}}
+\DoxyCodeLine{00157\ \textcolor{comment}{\ *\ @code}}
+\DoxyCodeLine{00158\ \textcolor{comment}{\ *\ const\ static\ std::size\_t\ WIDTH\ =\ 1080;}}
+\DoxyCodeLine{00159\ \textcolor{comment}{\ *\ const\ static\ std::size\_t\ HEIGHT\ =\ 1920;}}
+\DoxyCodeLine{00160\ \textcolor{comment}{\ *\ point\ a\{7,\ 3\};}}
+\DoxyCodeLine{00161\ \textcolor{comment}{\ *\ point\ b\{12,\ 37\};}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ *\ point\ c\{62,\ 53\};}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ *\ rgb\_color\ color\{\};}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ *\ triangle(a,\ b,\ c,\ buffer,\ color,\ WIDTH,\ HEIGHT);}}
+\DoxyCodeLine{00165\ \textcolor{comment}{\ *\ @endcode}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{00167\ \textcolor{keyword}{export}\ \textcolor{keyword}{auto}\ triangle(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ \doxymbox{\hyperlink{structpoint}{point}}\ c,std::vector<std::uint32\_t>\&\ buff,}
+\DoxyCodeLine{00168\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color,\ \textcolor{keyword}{const}\ std::size\_t\&\ width,\ \textcolor{keyword}{const}\ std::size\_t\&\ height)\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_determinant(a,\ b,\ c)\ ==\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordflow}{if}\ (get\_determinant(a,\ b,\ c)\ <\ 0)\ std::swap(b,\ c);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{comment}{//\ Create\ triangle\ bounding\ box}}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ xmin\ =\ std::min(\{a.x,\ b.x,\ c.x\});}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ymin\ =\ std::min(\{a.y,\ b.y,\ c.y\});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ xmax\ =\ std::max(\{a.x,\ b.x,\ c.x\});}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ymax\ =\ std::max(\{a.y,\ b.y,\ c.y\});}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ y\{ymin\};\ y\ <=\ ymax;\ ++y)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ x\{xmin\};\ x\ <=\ xmax;\ ++x)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!in\_bounds(x,\ y,\ width,\ height))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ p\{x,\ y\};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_a\ =\ get\_determinant(b,\ c,\ p);}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_b\ =\ get\_determinant(c,\ a,\ p);}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_c\ =\ get\_determinant(a,\ b,\ p);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bounds\_a\ >=\ 0\ \&\&\ bounds\_b\ >=\ 0\ \&\&\ bounds\_c\ >=\ 0)\ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buff[\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(y)\ *\ width\ +\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(x)]\ =}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ MFB\_RGB(color.\_r,\ color.\_g,\ color.\_b);}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \}}
 
 \end{DoxyCode}

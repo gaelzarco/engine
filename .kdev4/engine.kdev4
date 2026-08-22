@@ -1,3 +1,6 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00\x0c\x00e\x00n\x00g\x00i\x00n\x00e)
+
 [CMake]
 Auto Configure on CMakeLists Changes=true
 Build Directory Count=1
@@ -13,6 +16,11 @@ Extra Arguments=
 Install Directory=/usr/local
 Runtime=Host System
 
+[Cppcheck]
+checkPerformance=true
+checkStyle=true
+checkUnusedFunction=true
+
 [Launch]
 Launch Configurations=Launch Configuration 0
 
@@ -27,10 +35,10 @@ Arguments=/home/xarco/code/cxx/engine/assets/model.obj
 Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00\x0c\x00e\x00n\x00g\x00i\x00n\x00e\x00\x00\x00\x0c\x00e\x00n\x00g\x00i\x00n\x00e)
 Dependency Action=Build
 EnvironmentGroup=
-Executable=file:///home/xarco/code/cxx/engine/build/engine
+Executable=file:///home/xarco/code/cxx/engine/build/renderer
 External Terminal=konsole --hold -e
-Kill Before Executing Again=4194304
-Project Target=engine,engine
+Kill Before Executing Again=65536
+Project Target=
 Use External Terminal=false
 Working Directory=file:///home/xarco/
 isExecutable=true

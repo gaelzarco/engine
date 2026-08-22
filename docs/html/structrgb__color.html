@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CXX23 GAME ENGINE: obj_v0 Module Reference</title>
+<title>CXX23 GAME ENGINE: rgb_color Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', codefold.init);
   </div>
 </div>
 <script type="text/javascript">
-document.addEventListener('DOMContentLoaded',() => { initNavTree('module__obj__v0.html','',''); });
+document.addEventListener('DOMContentLoaded',() => { initNavTree('structrgb__color.html','','structrgb__color-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -108,20 +108,41 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('module__obj__v
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">obj_v0 Module Reference</div></div>
+  <div class="headertitle"><div class="title">rgb_color Struct Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__render__v0.html">render_v0</a></div></div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>An RGB colour value for use with a MiniFB pixel buffer.  
+ <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:obj" id="r_obj"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classobj.html">obj</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a parsed Wavefront OBJ file.  <a href="classobj.html#details">More...</a><br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a110dfbd702e2720538e1616b8b530b6f" id="r_a110dfbd702e2720538e1616b8b530b6f"><td class="memItemLeft"><a id="a110dfbd702e2720538e1616b8b530b6f" name="a110dfbd702e2720538e1616b8b530b6f"></a>
+using&#160;</td><td class="memItemRight"><b>color_t</b> = uint8_t</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:af0e03924e0790e51ee59e08588195c0f" id="r_af0e03924e0790e51ee59e08588195c0f"><td class="memItemLeft"><a id="af0e03924e0790e51ee59e08588195c0f" name="af0e03924e0790e51ee59e08588195c0f"></a>
+&#160;</td><td class="memItemRight"><b>rgb_color</b> (color_t r=0, color_t g=0, color_t b=0)</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a32c9dd73c4f153c0b8682a005fc1cc6c" id="r_a32c9dd73c4f153c0b8682a005fc1cc6c"><td class="memItemLeft"><a id="a32c9dd73c4f153c0b8682a005fc1cc6c" name="a32c9dd73c4f153c0b8682a005fc1cc6c"></a>
+color_t&#160;</td><td class="memItemRight"><b>_r</b></td></tr>
+<tr class="memitem:a4790392a228d6c06d65dc43b323410c5" id="r_a4790392a228d6c06d65dc43b323410c5"><td class="memItemLeft"><a id="a4790392a228d6c06d65dc43b323410c5" name="a4790392a228d6c06d65dc43b323410c5"></a>
+color_t&#160;</td><td class="memItemRight"><b>_g</b></td></tr>
+<tr class="memitem:a1d0fc05794606a21020610faa302bd66" id="r_a1d0fc05794606a21020610faa302bd66"><td class="memItemLeft"><a id="a1d0fc05794606a21020610faa302bd66" name="a1d0fc05794606a21020610faa302bd66"></a>
+color_t&#160;</td><td class="memItemRight"><b>_b</b></td></tr>
 </table>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>
-Files</h2></td></tr>
-<tr class="memitem:obj_5Fv0_2Ecppm" id="r_obj_5Fv0_2Ecppm"><td class="memItemLeft">file &#160;</td><td class="memItemRight">modules/obj/<b>obj_v0.cppm</b></td></tr>
-</table>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An RGB colour value for use with a MiniFB pixel buffer. </p>
+<dl class="section user"><dt>Example — explicit colour</dt><dd><div class="fragment"><div class="line">rgb_color red(255, 0, 0);</div>
+</div><!-- fragment --></dd></dl>
+<dl class="section user"><dt>Example — random colour</dt><dd><div class="fragment"><div class="line">rgb_color random_color; <span class="comment">// r, g, b chosen randomly at construction</span></div>
+</div><!-- fragment --> </dd></dl>
+</div><hr/>The documentation for this struct was generated from the following file:<ul>
+<li>modules/render/<a class="el" href="render__v0_8cppm_source.html">render_v0.cppm</a></li>
+</ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <div id="page-nav" class="page-nav-panel">
@@ -135,6 +156,7 @@ Files</h2></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="structrgb__color.html">rgb_color</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.18.0 </li>
   </ul>
 </div>

@@ -4,3 +4,5 @@ compile_commands.json
 build/
 gcm.cache/
 .cache/
+.kdev4/
+*.kdev4
