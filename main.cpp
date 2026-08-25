@@ -31,7 +31,8 @@ const static std::size_t TRIANGLE_QUANT = 100;
  * @brief Application entry point.
  *
  * @param argc  Number of command-line arguments (must be ≥ 2).
- * @param argv  Argument vector. @c argv[1] must be a path to a valid @c .obj file.
+ * @param argv  Argument vector. @c argv[1] must be a path to a valid @c .obj
+ * file.
  *
  * @return 0 on clean exit, 1 on argument or window-creation error.
  */
@@ -56,7 +57,8 @@ auto main(int argc, const char* argv[]) -> int {
     std::println("[LOG] .obj read duration: {} ms", read_duration.count());
     file.memory_out();
 
-    struct mfb_window *window = mfb_open_ex("CXX Rasterizer", WIDTH, HEIGHT, MFB_WF_RESIZABLE);
+    struct mfb_window *window = mfb_open_ex("CXX Rasterizer", WIDTH, HEIGHT,
+    MFB_WF_RESIZABLE);
 
     if (window == nullptr) {
         std::println("[ERR] Failed to create window");
@@ -95,8 +97,10 @@ auto main(int argc, const char* argv[]) -> int {
     }
 
     auto draw_stop = std::chrono::high_resolution_clock::now();
-    auto draw_duration = std::chrono::duration_cast<std::chrono::milliseconds> (draw_stop - draw_start);
-    std::println("[LOG] {} triangle draw duration: {} ms", TRIANGLE_QUANT, draw_duration.count());
+    auto draw_duration = std::chrono::duration_cast<std::chrono::milliseconds>
+    (draw_stop - draw_start);
+    std::println("[LOG] {} triangle draw duration: {} ms", TRIANGLE_QUANT,
+    draw_duration.count());
 
     while (mfb_wait_sync(window)) {
         state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);

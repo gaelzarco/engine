@@ -1,6 +1,7 @@
 /**
  * @file render_v0.cppm
- * @brief C++23 module providing primitive 2D rendering utilities for a MiniFB pixel buffer.
+ * @brief C++23 module providing primitive 2D rendering utilities for a MiniFB
+ * pixel buffer.
  * @version 0.0
  */
 
@@ -30,7 +31,8 @@ export module render_v0;
  */
 export struct rgb_color {
     using color_t = uint8_t;
-    rgb_color(color_t r = 0, color_t g = 0, color_t b = 0) : _r(r), _g(g), _b(b) {
+    rgb_color(color_t r = 0, color_t g = 0, color_t b = 0) : _r(r), _g(g),
+    _b(b) {
         if (r == 0 && g == 0 & b == 0) {
             std::random_device rd;
             std::mt19937 rng(rd());
@@ -64,17 +66,20 @@ export struct point { int x, y{}; };
 *
 * @return Boolean value dictating if point is within bounds or not
 */
-auto in_bounds(const int& col, const int& row, const std::size_t& width, const std::size_t& height) -> bool {
+auto in_bounds(const int& col, const int& row, const std::size_t& width,
+const std::size_t& height) -> bool {
     return col >= 0 && col < static_cast<int>(width) && row >= 0
         && row < static_cast<int>(height);
 };
 
 /**
- * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel buffer with bounds checking.
+ * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel
+ *        buffer with bounds checking.
  *
  * @param a       Start point of the line (screen-space pixels).
  * @param b       End point of the line (screen-space pixels).
- * @param buff    Flat pixel buffer of size @p width * @p height, modified in place.
+ * @param buff    Flat pixel buffer of size @p width * @p height, modified in
+ *                place.
  * @param color   RGB colour to paint the line with.
  * @param width   Total pixel width of MiniFB window
  * @param height  Total pixel height of MiniFB window
@@ -89,8 +94,9 @@ auto in_bounds(const int& col, const int& row, const std::size_t& width, const s
  * line({0, 0}, {WIDTH - 1, HEIGHT - 1}, buffer, red, WIDTH, HEIGHT);
  * @endcode
  */
-export auto line(point a, point b, std::vector<std::uint32_t>& buff, const rgb_color& color,
-const std::size_t& width, const std::size_t& height) -> void {
+export auto line(point a, point b, std::vector<std::uint32_t>& buff,
+const rgb_color& color, const std::size_t& width, const std::size_t& height) ->
+void {
     bool steep = std::abs(a.x - b.x) < std::abs(a.y - b.y);
 
     if (steep) {
@@ -110,8 +116,9 @@ const std::size_t& width, const std::size_t& height) -> void {
         if (!in_bounds(col, row, width, height)) {
             std::println("[LOG] skipped point out of bounds");
         } else {
-            buff[static_cast<std::size_t>(row) * width + static_cast<std::size_t>(col)] =
-            MFB_RGB(color._r, color._g, color._b);
+            buff[static_cast<std::size_t>(row) * width +
+            static_cast<std::size_t>(col)] = MFB_RGB(color._r,
+            color._g, color._b);
         }
 
         err += 2 * std::abs(b.y - a.y);
@@ -123,8 +130,8 @@ const std::size_t& width, const std::size_t& height) -> void {
 }
 
 /*
- * @brief Helper function that builds two edge vectors from a common origin @c a to compute 2D
- * cross-product for triangle rasterization. 
+ * @brief Helper function that builds two edge vectors from a common origin @c
+ * a to compute 2D cross-product for triangle rasterization.
  *
  * @param a First triangle vertex point (screen-space pixels).
  * @param b Second triangle vertex point (screen-space pixels).
@@ -148,7 +155,8 @@ auto get_determinant(const point& a, const point& b, const point& c) -> int {
  * @param a      First triangle vertex point (screen-space pixels).
  * @param b      Second triangle vertex point (screen-space pixels).
  * @param c      Third triangle vertex point (screen-space pixels).
- * @param buff   Flat pixel buffer of size @p width * @p height, modified in place.
+ * @param buff   Flat pixel buffer of size @p width * @p height, modified
+ *               in place.
  * @param color  RGB color to paint the triangle.
  * @param width  Total pixel width of MiniFB window.
  * @param height Total pixel height of MiniFB window.
@@ -165,7 +173,8 @@ auto get_determinant(const point& a, const point& b, const point& c) -> int {
  * @endcode
  */
 export auto triangle(point a, point b, point c,std::vector<std::uint32_t>& buff,
-const rgb_color& color, const std::size_t& width, const std::size_t& height) -> void {
+const rgb_color& color, const std::size_t& width, const std::size_t& height) ->
+void {
     if (get_determinant(a, b, c) == 0) return;
     if (get_determinant(a, b, c) < 0) std::swap(b, c);
 
@@ -187,8 +196,9 @@ const rgb_color& color, const std::size_t& width, const std::size_t& height) -> 
             const auto bounds_c = get_determinant(a, b, p);
 
             if (bounds_a >= 0 && bounds_b >= 0 && bounds_c >= 0) {
-                buff[static_cast<std::size_t>(y) * width + static_cast<std::size_t>(x)] =
-                MFB_RGB(color._r, color._g, color._b);
+                buff[static_cast<std::size_t>(y) * width +
+                static_cast<std::size_t>(x)] = MFB_RGB(color._r, color._g,
+                color._b);
             }
         }
     }
