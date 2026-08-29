@@ -21,9 +21,9 @@ import obj_v0;
 import render_v0;
 
 /** @brief Horizontal resolution of the framebuffer and window, in pixels. */
-const static std::size_t WIDTH = 1920;
+const static std::size_t WIDTH = 1080;
 /** @brief Vertical resolution of the framebuffer and window, in pixels. */
-const static std::size_t HEIGHT = 1080;
+const static std::size_t HEIGHT = 720;
 /** @brief Amount of triangles to benchmark during draw operations */
 const static std::size_t TRIANGLE_QUANT = 100;
 
@@ -37,7 +37,6 @@ const static std::size_t TRIANGLE_QUANT = 100;
  * @return 0 on clean exit, 1 on argument or window-creation error.
  */
 auto main(int argc, const char* argv[]) -> int {
-
     if (argc < 2) {
         std::println("[ERR] Please include file path for obj file");
         return 1;
@@ -66,6 +65,7 @@ auto main(int argc, const char* argv[]) -> int {
     };
 
     std::vector<std::uint32_t> buffer(static_cast<size_t>(WIDTH * HEIGHT));
+    mfb_canvas canvas{WIDTH, HEIGHT, buffer};
     mfb_update_state state;
 
     std::random_device rd;
@@ -93,7 +93,7 @@ auto main(int argc, const char* argv[]) -> int {
         rgb_color v_color{};
 
         // Draw triangle
-        triangle(v1, v2, v3, buffer, v_color, WIDTH, HEIGHT);
+        canvas.triangle(v1, v2, v3, v_color);
     }
 
     auto draw_stop = std::chrono::high_resolution_clock::now();
@@ -103,7 +103,8 @@ auto main(int argc, const char* argv[]) -> int {
     draw_duration.count());
 
     while (mfb_wait_sync(window)) {
-        state = mfb_update_ex(window, buffer.data(), WIDTH, HEIGHT);
+        state = mfb_update_ex(window, canvas.buffer().data(), canvas.width(),
+        canvas.height());
         if (state != MFB_STATE_OK) break;
     }
 
