@@ -79,11 +79,31 @@ public:
     mfb_canvas(std::size_t w, std::size_t h, std::vector<std::uint32_t> b) :
     _width(std::move(w)), _height(std::move(h)), _buffer(std::move(b)) {}
 
+    /**
+    * @brief Getter for width of canvas buffer
+    * @return Reference to _width
+    */
     constexpr auto width() -> std::size_t& { return _width; }
+    /**
+    * @brief Getter for height of canvas buffer
+    * @return Reference to _height
+    */
     constexpr auto height() -> std::size_t& { return _height; }
+    /**
+    * @brief Getter for canvas buffer data
+    * @brief Reference to _buffer
+    */
     constexpr auto buffer() -> std::vector<std::uint32_t>& { return _buffer; }
 
-    constexpr auto point_in_bounds(int x, int y) -> bool;
+    /**
+    * @brief Verifies point is within bounds of canvas @c _width and @c _height
+    *
+    * @param x X-coordinate of point
+    * @param y Y-coordinate of point
+    *
+    * @return
+    */
+    constexpr auto point_in_bounds(const int& x, const int& y) -> bool;
 
     /**
     * @brief Draws an anti-aliasing-free straight line into a MiniFB pixel
@@ -95,7 +115,6 @@ public:
     *
     * @note @p a and @p b are taken by value; the algorithm may swap their
     *       coordinates internally without affecting the caller's variables.
-    *
     */
     auto line(point a, point b, const rgb_color& color) -> void;
 
@@ -108,6 +127,8 @@ public:
     * @param c      Third triangle vertex point (screen-space pixels).
     * @param color  RGB color to paint the triangle.
     *
+    * @note @p a, @p b, and @p c are taken by value; the algorithm may swap
+    * their coordinates internally without affecting the caller's variables.
     */
     auto triangle(point a, point b, point c, const rgb_color& color) -> void;
 
@@ -117,7 +138,7 @@ private:
     std::vector<std::uint32_t> _buffer;
 };
 
-constexpr auto mfb_canvas::point_in_bounds(int x, int y) -> bool {
+constexpr auto mfb_canvas::point_in_bounds(const int& x, const int& y) -> bool {
     return x >= 0 && y >= 0 && static_cast<std::size_t>(x) < _width &&
     static_cast<std::size_t>(y) < _height;
 }
