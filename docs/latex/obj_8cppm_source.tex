@@ -1,0 +1,266 @@
+\doxysection{obj.\+cppm}
+\hypertarget{obj_8cppm_source}{}\label{obj_8cppm_source}\index{modules/obj/obj.cppm@{modules/obj/obj.cppm}}
+\doxymbox{\hyperlink{obj_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{import}\ std;}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{export}\ \textcolor{keyword}{module}\ \doxymbox{\hyperlink{module__obj}{obj}};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{export}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}}\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structobj_1_1__vertex}{\_vertex}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordtype}{float}\ x\{\},\ y\{\},\ z\{\},\ w\{\ 1.f\ \};\ \};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{\_texture\_coordinate}}\ \ \ \ \ \ \{\ \textcolor{keywordtype}{float}\ u\{\},\ v\{\},\ w\{\};\ \};}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structobj_1_1__vertex__normal}{\_vertex\_normal}}\ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordtype}{float}\ x\{\},\ y\{\},\ z\{\};\ \};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{\_parameter\_space\_vertex}}\ \ \{\ \textcolor{keywordtype}{float}\ u\{\},\ v\{\},\ w\{\};\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structobj_1_1__face__vertex}{\_face\_vertex}}\ \ \ \ \ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordtype}{int}\ v\{\},\ vt\{\},\ vn\{\};\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{using\ \ }\doxymbox{\hyperlink{classobj_a940edd8c51f24e2993978f345938f10f}{\_face}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_face\_vertex>;}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{using\ \ }\doxymbox{\hyperlink{classobj_a1a101c51cc09e34e382745e6ab50be1a}{\_line\_vertex}}\ \ \ \ \ \ \ \ \ \ \ \ \ =\ int;}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{using\ \ }\doxymbox{\hyperlink{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98}{\_line}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_line\_vertex>;}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\_vertices}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_vertex>;}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\_texture\_coordinates}}\ \ \ \ \ \ =\ std::vector<\_texture\_coordinate>;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\_vertex\_normals}}\ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_vertex\_normal>;}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\_parameter\_space\_vertices}}\ =\ std::vector<\_parameter\_space\_vertex>;}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\_faces}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_face>;}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{using\ }\doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\_lines}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ std::vector<\_line>;}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}}(\doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\_vertices}}\ v\ =\ \{\},\ \_texture\_coordinates\ vt\ =\ \{\},}
+\DoxyCodeLine{00119\ \ \ \ \ \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\_vertex\_normals}}\ vn\ =\ \{\},\ \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\_parameter\_space\_vertices}}\ vp\ =\ \{\},\ \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\_faces}}\ f\ =\ \{\},}
+\DoxyCodeLine{00120\ \ \ \ \ \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\_lines}}\ l\ =\ \{\})\ :\ v\_(std::move(v)),\ vt\_(std::move(vt)),\ vn\_(std::move(vn)),}
+\DoxyCodeLine{00121\ \ \ \ \ vp\_(std::move(vp)),\ f\_(std::move(f)),\ l\_(std::move(l))\ \{\}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a708bc8a07323962b0d5e6434d956d6de}{vertices}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\_vertices}}\&\ \{\ \textcolor{keywordflow}{return}\ v\_;\ \}}
+\DoxyCodeLine{00132\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_abcbdb1a4838b6b51c411c0d02ecf56cb}{vertices}}()\ const\ noexcept\ -\/>\ const\ \doxymbox{\hyperlink{classobj_a92955dded15b830b7a5259a481f2b8a0}{\_vertices}}\&\ \{\ \textcolor{keywordflow}{return}\ v\_;\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a774ae0a43035653196e0b6cbd43717cb}{texture\_coordinates}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\_texture\_coordinates}}\&\ \{\ \textcolor{keywordflow}{return}\ vt\_;\ \}}
+\DoxyCodeLine{00144\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a55b2f862b89c191b3ba8be8138805693}{texture\_coordinates}}()\ const\ noexcept\ -\/>\ const\ \doxymbox{\hyperlink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\_texture\_coordinates}}\&\ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordflow}{return}\ vt\_;\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a923d0daff44ddeac530ef42a9ab2771a}{vertex\_normals}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\_vertex\_normals}}\&\ \{\ \textcolor{keywordflow}{return}\ vn\_;\ \}}
+\DoxyCodeLine{00157\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a7d413ad603cbe28e309551e84852a493}{vertex\_normals}}()\ const\ noexcept\ -\/>\ const\ \doxymbox{\hyperlink{classobj_a1176800623ebc9d142aae489b2d961c2}{\_vertex\_normals}}\&\ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{return}\ vn\_;\ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a83b4a52727211fb83e549408d8920161}{parameter\_space\_vertices}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\_parameter\_space\_vertices}}\&\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordflow}{return}\ vp\_;\ \}}
+\DoxyCodeLine{00172\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a518698b4fd482a08552e8d2d6ac8413e}{parameter\_space\_vertices}}()\ const\ noexcept\ -\/>\ const}
+\DoxyCodeLine{00174\ \ \ \ \ \doxymbox{\hyperlink{classobj_a4980a8cdae03e3c903d56a911fa1bd12}{\_parameter\_space\_vertices}}\&\ \{\ \textcolor{keywordflow}{return}\ vp\_;\ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_ae0ffcd2f8ca4fc54aed87cd4a5402054}{faces}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\_faces}}\&\ \{\ \textcolor{keywordflow}{return}\ f\_;\ \}}
+\DoxyCodeLine{00185\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a8c23aca14ff1f057d5cf5b4662e59663}{faces}}()\ const\ noexcept\ -\/>\ const\ \doxymbox{\hyperlink{classobj_ac91cd5e0a093942e15456b0f60265c0c}{\_faces}}\&\ \{\ \textcolor{keywordflow}{return}\ f\_;\ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a2f171c463dce333ada0431dfe1058961}{lines}}()\ noexcept\ -\/>\ \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\_lines}}\&\ \{\ \textcolor{keywordflow}{return}\ l\_;\ \}}
+\DoxyCodeLine{00197\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_add5036c5cd685e15a6281c57993ed338}{lines}}()\ const\ noexcept\ -\/>\ const\ \doxymbox{\hyperlink{classobj_afd721cdabd549bdd05511bc61391aeae}{\_lines}}\&\ \{\ \textcolor{keywordflow}{return}\ l\_;\ \}}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keyword}{auto}\ read(\textcolor{keyword}{const}\ std::string\&\ file\_name)\ -\/>\ void;}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00237\ \ \ \ \ [[nodiscard]]}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{auto}\ format\_output()\ const\ -\/>\ std::\textcolor{keywordtype}{string};}
+\DoxyCodeLine{00244\ \ \ \ \ auto\ print()\ const\ -\/>\ \textcolor{keywordtype}{void};}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00262\ \ \ \ \ auto\ memory\_out()\ const\ -\/>\ \textcolor{keywordtype}{void};}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ private:}
+\DoxyCodeLine{00265\ \ \ \ \ \_vertices\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ v\_;}
+\DoxyCodeLine{00266\ \ \ \ \ \_texture\_coordinates\ \ \ \ \ \ vt\_;}
+\DoxyCodeLine{00267\ \ \ \ \ \_vertex\_normals\ \ \ \ \ \ \ \ \ \ \ vn\_;}
+\DoxyCodeLine{00268\ \ \ \ \ \_parameter\_space\_vertices\ vp\_;}
+\DoxyCodeLine{00269\ \ \ \ \ \_faces\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f\_;}
+\DoxyCodeLine{00270\ \ \ \ \ \_lines\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l\_;}
+\DoxyCodeLine{00271\ \};}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ auto\ \doxymbox{\hyperlink{classobj_a03c3704a351856bc5ed8afb066107e3e}{obj}}::\doxymbox{\hyperlink{classobj_a243badc3a0a0a6b3612951a03f8e4952}{read}}(const\ std::\textcolor{keywordtype}{string}\&\ file\_name)\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ std::ifstream\ file(file\_name);}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())\ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}[ERR]\ Could\ not\ open\ file"{}});}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ std::string\ buf\{\ std::istreambuf\_iterator<char>(file),}
+\DoxyCodeLine{00278\ \ \ \ \ std::istreambuf\_iterator<char>()\ \};}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ p\ \ \ =\ buf.data();}
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ end\ =\ p\ +\ buf.size();}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keyword}{auto}\ skip\_ws\ =\ [](\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ p,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ end)\ \textcolor{keyword}{noexcept}\ -\/>\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end\ \&\&\ (*p\ ==\ \textcolor{charliteral}{'\ '}\ ||\ *p\ ==\ \textcolor{charliteral}{'\(\backslash\)t'}))\ ++p;}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{00286\ \ \ \ \ \};}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keyword}{auto}\ skip\_line\ =\ [](\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ p,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ end)\ \textcolor{keyword}{noexcept}\ -\/>}
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)n'})\ ++p;}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p\ <\ end\ ?\ p\ +\ 1\ :\ p;}
+\DoxyCodeLine{00292\ \ \ \ \ \};}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keyword}{auto}\ read\_float\ =\ [\&](\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ p,\ \textcolor{keywordtype}{float}\&\ out)\ \textcolor{keyword}{noexcept}\ -\/>\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [ptr,\ \_]\ =\ std::from\_chars(p,\ end,\ out);}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr;}
+\DoxyCodeLine{00298\ \ \ \ \ \};}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keyword}{auto}\ read\_face\_token\ =\ [\&](\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ p,\ \doxymbox{\hyperlink{structobj_1_1__face__vertex}{\_face\_vertex}}\&\ fv)\ \textcolor{keyword}{noexcept}\ -\/>}
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [p1,\ \_1]\ =\ std::from\_chars(p,\ end,\ fv.v);\ p\ =\ p1;}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\ <\ end\ \&\&\ *p\ ==\ \textcolor{charliteral}{'/'})\ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ ++p;}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\ <\ end\ \&\&\ *p\ !=\ \textcolor{charliteral}{'/'})\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [p2,\ \_2]\ =\ std::from\_chars(p,\ end,\ fv.vt);}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ p2;}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\ <\ end\ \&\&\ *p\ ==\ \textcolor{charliteral}{'/'})\ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++p;\ \textcolor{keyword}{auto}\ [p3,\ \_3]\ =\ std::from\_chars(p,\ end,\ fv.vn);}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ p3;}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p;}
+\DoxyCodeLine{00317\ \ \ \ \ \};}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end)\ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\ >=\ end)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (*p\ ==\ \textcolor{charliteral}{'\#'}\ ||\ *p\ ==\ \textcolor{charliteral}{'\(\backslash\)n'}\ ||\ *p\ ==\ \textcolor{charliteral}{'\(\backslash\)r'})\ \{}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ skip\_line(p,\ end);}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ tok\ =\ p;}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\ '}\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)t'}\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)n'}\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)r'})}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ ++p;}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\_view\ kw\{\ tok,\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(p\ -\/\ tok)\ \};}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}v"{}})\ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structobj_1_1__vertex}{\_vertex}}\ v\{\};}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ v.x);}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ v.y);}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ v.z);}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ v.w);}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ v\_.push\_back(v);}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}vt"{}})\ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{\_texture\_coordinate}}\ vt\{\};}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vt.u);}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vt.v);}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vt.w);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ vt\_.push\_back(vt);}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}vn"{}})\ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structobj_1_1__vertex__normal}{\_vertex\_normal}}\ vn\{\};}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vn.x);}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vn.y);}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vn.z);}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ vn\_.push\_back(vn);}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}vp"{}})\ \{}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{\_parameter\_space\_vertex}}\ vp\{\};}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vp.u);}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vp.v);}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_float(p,\ vp.w);}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ vp\_.push\_back(vp);}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}f"{}})\ \{}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classobj_a940edd8c51f24e2993978f345938f10f}{\_face}}\ f\{\};}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)n'}\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)r'})\ \{}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structobj_1_1__face__vertex}{\_face\_vertex}}\ fv\{\};}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ read\_face\_token(p,\ fv);}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ f.push\_back(fv);}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ f\_.push\_back(std::move(f));}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (kw\ ==\ \textcolor{stringliteral}{"{}l"{}})\ \{}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98}{\_line}}\ l\{\};}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (p\ <\ end\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)n'}\ \&\&\ *p\ !=\ \textcolor{charliteral}{'\(\backslash\)r'})\ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classobj_a1a101c51cc09e34e382745e6ab50be1a}{\_line\_vertex}}\ lv\{\};}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ [ptr,\ \_]\ =\ std::from\_chars(p,\ end,\ lv);}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ ptr;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ l.push\_back(lv);}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\ =\ skip\_ws(p,\ end);}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \ \ \ \ l\_.push\_back(std::move(l));}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ p\ =\ skip\_line(p,\ end);}
+\DoxyCodeLine{00381\ \ \ \ \ \}}
+\DoxyCodeLine{00382\ \}}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a6dbd86e83e5564c9a471601d0269b147}{obj::format\_output}}()\ const\ -\/>\ std::\textcolor{keywordtype}{string}\ \{}
+\DoxyCodeLine{00385\ \ \ \ \ std::string\ out;}
+\DoxyCodeLine{00386\ \ \ \ \ out.reserve(4096);}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ v\ :\ v\_)\ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (v.w\ !=\ 0.f)\ \{}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex:\ \{\{\ x:\ \{\},\ y:\ \{\},\ z:\ \{\},\ w:\ \{\}\ \}\}\(\backslash\)n"{}},\ v.x,\ v.y,\ v.z,\ v.w);}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex:\ \{\{\ x:\ \{\},\ y:\ \{\},\ z:\ \{\}\ \}\}\(\backslash\)n"{}},\ v.x,\ v.y,\ v.z);}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00394\ \ \ \ \ \}}
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ vt\ :\ vt\_)\ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (vt.v\ !=\ 0.f\ \&\&\ vt.w\ !=\ 0.f)\ \{}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex\ Texture:\ \{\{\ u:\ \{\},\ v:\ \{\},\ w:\ \{\}\ \}\}\(\backslash\)n"{}},}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \ \ \ \ vt.u,\ vt.v,\ vt.w);}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (vt.v\ !=\ 0.f)\ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex\ Texture:\ \{\{\ u:\ \{\},\ v:\ \{\}\ \}\}\(\backslash\)n"{}},}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ vt.u,\ vt.v);}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex\ Texture:\ \{\{\ u:\ \{\}\ \}\}\(\backslash\)n"{}},\ vt.u);}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00405\ \ \ \ \ \}}
+\DoxyCodeLine{00406\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ vn\ :\ vn\_)}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Vertex\ Normal:\ \{\{\ x:\ \{\},\ y:\ \{\},\ z:\ \{\}\ \}\}\(\backslash\)n"{}},}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ vn.x,\ vn.y,\ vn.z);}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ vp\ :\ vp\_)\ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (vp.v\ !=\ 0.f\ \&\&\ vp.w\ !=\ 0.f)\ \{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Parameter\ Space\ Vertex:\ \{\{\ u:\ \{\},\ v:\ \{\},\ w:\ \{\}\ \}\}\(\backslash\)n"{}},\ vp.u,\ vp.v,\ vp.w);}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (vp.v\ !=\ 0.f)\ \{}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Parameter\ Space\ Vertex:\ \{\{\ u:\ \{\},\ v:\ \{\}\ \}\}\(\backslash\)n"{}},}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \ \ \ \ vp.u,\ vp.v);}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}Parameter\ Space\ Vertex:\ \{\{\ u:\ \{\}\ \}\}\(\backslash\)n"{}},\ vp.u);}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00419\ \ \ \ \ \}}
+\DoxyCodeLine{00420\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ f\ :\ f\_)\ \{}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ out\ +=\ \textcolor{stringliteral}{"{}Face:\ \{"{}};}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ fv\ :\ f)\ \{}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fv.vt\ !=\ 0\ \&\&\ fv.vn\ !=\ 0)\ \{}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}\ [\{\},\ \{\},\ \{\}]"{}},\ fv.v,\ fv.vt,\ fv.vn);}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (fv.vt\ !=\ 0)\ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}\ [\{\},\ \{\}]"{}},\ fv.v,\ fv.vt);}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\ +=\ std::format(\textcolor{stringliteral}{"{}\ [\{\}]"{}},\ fv.v);}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ out\ +=\ \textcolor{stringliteral}{"{}\ \}\(\backslash\)n"{}};}
+\DoxyCodeLine{00432\ \ \ \ \ \}}
+\DoxyCodeLine{00433\ }
+\DoxyCodeLine{00434\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ l\ :\ l\_)\ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ out\ +=\ \textcolor{stringliteral}{"{}Line:\ \{\ "{}};}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ lv\ :\ l)\ out\ +=\ std::format(\textcolor{stringliteral}{"{}\{\},\ "{}},\ lv);}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ out\ +=\ \textcolor{stringliteral}{"{}\}\(\backslash\)n"{}};}
+\DoxyCodeLine{00438\ \ \ \ \ \}}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \ \ \ \ \textcolor{keywordflow}{return}\ out;}
+\DoxyCodeLine{00441\ \}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_a4630138bb706c2ff2e1a4187e26c1932}{obj::print}}()\ const\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00444\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\{\}"{}},\ \doxymbox{\hyperlink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\_output}}());}
+\DoxyCodeLine{00445\ \}}
+\DoxyCodeLine{00446\ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{obj::memory\_out}}()\ const\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \textcolor{keyword}{const}\ std::size\_t\ total\ =\ this-\/>\doxymbox{\hyperlink{classobj_a708bc8a07323962b0d5e6434d956d6de}{vertices}}().capacity()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structobj_1_1__vertex}{obj::\_vertex}})}
+\DoxyCodeLine{00448\ \ \ \ \ +\ this-\/>\doxymbox{\hyperlink{classobj_a774ae0a43035653196e0b6cbd43717cb}{texture\_coordinates}}().capacity()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structobj_1_1__texture__coordinate}{obj::\_texture\_coordinate}})}
+\DoxyCodeLine{00449\ \ \ \ \ +\ this-\/>\doxymbox{\hyperlink{classobj_a923d0daff44ddeac530ef42a9ab2771a}{vertex\_normals}}().capacity()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structobj_1_1__vertex__normal}{obj::\_vertex\_normal}})}
+\DoxyCodeLine{00450\ \ \ \ \ +\ this-\/>\doxymbox{\hyperlink{classobj_a83b4a52727211fb83e549408d8920161}{parameter\_space\_vertices}}().capacity()\ *}
+\DoxyCodeLine{00451\ \ \ \ \ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structobj_1_1__parameter__space__vertex}{obj::\_parameter\_space\_vertex}})}
+\DoxyCodeLine{00452\ \ \ \ \ +\ this-\/>\doxymbox{\hyperlink{classobj_ae0ffcd2f8ca4fc54aed87cd4a5402054}{faces}}().capacity()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classobj_a940edd8c51f24e2993978f345938f10f}{obj::\_face}})}
+\DoxyCodeLine{00453\ \ \ \ \ +\ this-\/>\doxymbox{\hyperlink{classobj_a2f171c463dce333ada0431dfe1058961}{lines}}().capacity()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classobj_a0b5cd1f4d747dee1fec29928ee3e1b98}{obj::\_line}});}
+\DoxyCodeLine{00454\ \ \ \ \ std::println(\textcolor{stringliteral}{"{}[LOG]\ Memory\ allocated:\ \{\}\ bytes\ (\string~\{\}\ MB)"{}},\ total,\ total}
+\DoxyCodeLine{00455\ \ \ \ \ /\ 1024\ /\ 1024);}
+\DoxyCodeLine{00456\ \ \}}
+
+\end{DoxyCode}

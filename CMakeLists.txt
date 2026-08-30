@@ -43,11 +43,11 @@ target_compile_features(renderer PUBLIC cxx_std_23)
 
 target_sources(renderer
     PUBLIC FILE_SET CXX_MODULES FILES
-    modules/obj/obj_v0.cppm
+    modules/obj/obj.cppm
 )
 target_sources(renderer
     PUBLIC FILE_SET CXX_MODULES FILES
-    modules/render/render_v0.cppm
+    modules/render/render.cppm
 )
 
 target_link_libraries(renderer PRIVATE minifb)

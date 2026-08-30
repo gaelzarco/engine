@@ -1,23 +1,54 @@
-\chapter{CXX23 Game Engine }
-\hypertarget{index}{}\label{index}\index{CXX23 Game Engine@{CXX23 Game Engine}}
+\chapter{C++23 3D Renderer }
+\hypertarget{index}{}\label{index}\index{C++23 3D Renderer@{C++23 3D Renderer}}
 \hypertarget{index_intro}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{index_intro}
-A lightweight C++23 software rasterizer built to view .OBJ models.\hypertarget{index_modules}{}\doxysection{\texorpdfstring{Modules}{Modules}}\label{index_modules}
+A C++23 3D renderer built with Mini\+FB as single dependency. Targets Unix environments.\hypertarget{index_features}{}\doxysection{\texorpdfstring{Features}{Features}}\label{index_features}
+
+\begin{DoxyItemize}
+\item Window rendering with \href{https://github.com/nicowillis/minifb}{\texttt{Mini\+FB}}
+\item OBJ file parser built from scratch via named module ({\ttfamily import \doxylink{classobj}{obj}})
+\item 3D rendering pipeline built from scratch via named module ({\ttfamily import render})
+\end{DoxyItemize}\hypertarget{index_requirements}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{index_requirements}
+
+\begin{DoxyItemize}
+\item C++23
+\item Clang 22+
+\item CMake 3.\+30+
+\item Ninja
+\end{DoxyItemize}\hypertarget{index_modules}{}\doxysection{\texorpdfstring{Modules}{Modules}}\label{index_modules}
 
 \begin{DoxyTable}{2}{}{}{1}
 \SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Module  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Description  \\
-{\ttfamily obj\+\_\+v0\+\_\+3}  &Wavefront OBJ parser and in-\/memory representation  \\
-{\ttfamily render\+\_\+v0}  &2D Bresenham line rasterizer  \\
+{\ttfamily obj}  &Wavefront OBJ parser and representation built from scratch  \\
+{\ttfamily render}  &3D rendering pipeline built from scratch  \\
 \end{DoxyTable}
-\hypertarget{index_usage}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{index_usage}
-
+\hypertarget{index_build}{}\doxysection{\texorpdfstring{Building}{Building}}\label{index_build}
+Requires Clang 22+ and CMake 3.\+30+ with Ninja. 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{./rasterizer\ <path/to/model.obj>}
+\DoxyCodeLine{cmake\ -\/B\ build\ -\/G\ Ninja}
+\DoxyCodeLine{ln\ -\/sf\ build/compile\_commands.json\ .}
+\DoxyCodeLine{cmake\ -\/-\/build\ build}
 
 \end{DoxyCode}
-\hypertarget{index_build}{}\doxysection{\texorpdfstring{Building}{Building}}\label{index_build}
+ Or run {\ttfamily chmod +x ./\+build.sh} on root directory, then {\ttfamily ./\+build.sh}\hypertarget{index_usage}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{index_usage}
 
 \begin{DoxyCode}{0}
-\DoxyCodeLine{cmake\ -\/B\ build\ \&\&\ cmake\ -\/-\/build\ build}
+\DoxyCodeLine{./build/renderer\ ./assets/<asset>}
+
+\end{DoxyCode}
+
+
+Or programmatically: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{obj\_\ model;}
+\DoxyCodeLine{model.read(\textcolor{stringliteral}{"{}./assets/<asset>"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{const}\ std::size\_t\ WIDTH\ =\ 1920;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ std::size\_t\ HEIGHT\ =\ 1080;}
+\DoxyCodeLine{\textcolor{keyword}{const}\ std::vector<std::uint32\_t>\ buffer(\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(WIDTH\ *\ }
+\DoxyCodeLine{HEIGHT)\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\doxymbox{\hyperlink{classmfb__canvas}{mfb\_canvas}}\ canvas(WIDTH,\ HEIGHT,\ buffer);}
+\DoxyCodeLine{\doxymbox{\hyperlink{classmfb__canvas}{mfb\_canvas}}.render(model);}
 
 \end{DoxyCode}
  

@@ -1,4 +1,4 @@
 var dir_0cbfc855c3e52c6304316700bcdc01cc =
 [
-    [ "obj_v0.cppm", "obj__v0_8cppm_source.html", null ]
+    [ "obj.cppm", "obj_8cppm.html", "obj_8cppm" ]
 ];

@@ -17,8 +17,8 @@
 #include "modules/minifb/include/MiniFB_cpp.h"
 
 import std;
-import obj_v0;
-import render_v0;
+import obj;
+import render;
 
 /** @brief Horizontal resolution of the framebuffer and window, in pixels. */
 const static std::size_t WIDTH = 1080;

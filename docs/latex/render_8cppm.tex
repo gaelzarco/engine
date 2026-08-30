@@ -1,0 +1,57 @@
+\doxysection{modules/\+render/\+render.cppm File Reference}
+\hypertarget{render_8cppm}{}\label{render_8cppm}\index{modules/render/render.cppm@{modules/render/render.cppm}}
+
+
+C++23 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer.  
+
+
+{\ttfamily \+\#include "{}../\+minifb/\+include/\+\+Mini\+FB\+\_\+cpp.\+h"{}}\newline
+{\ttfamily \+\#include $<$algorithm$>$}\newline
+{\ttfamily \+\#include $<$print$>$}\newline
+{\ttfamily import std;}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}}
+\begin{DoxyCompactList}\small\item\em An RGB colour value for use with a Mini\+FB pixel buffer. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structpoint}{point}}
+\begin{DoxyCompactList}\small\item\em A 2D integer screen-\/space coordinate. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classmfb__canvas}{mfb\+\_\+canvas}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\+\_\+determinant}} (const \doxymbox{\hyperlink{structpoint}{point}} \&a, const \doxymbox{\hyperlink{structpoint}{point}} \&b, const \doxymbox{\hyperlink{structpoint}{point}} \&c) -\/$>$ int
+\begin{DoxyCompactList}\small\item\em Helper function that builds two edge vectors from a common origin {\ttfamily a} to compute 2D cross-\/product for triangle rasterization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+C++23 module providing primitive 2D rendering utilities for a Mini\+FB pixel buffer. 
+
+
+
+\label{render_8cppm_doc-func-members}
+\Hypertarget{render_8cppm_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}\index{render.cppm@{render.cppm}!get\_determinant@{get\_determinant}}
+\index{get\_determinant@{get\_determinant}!render.cppm@{render.cppm}}
+\doxysubsubsection{\texorpdfstring{get\_determinant()}{get\_determinant()}}
+{\footnotesize\ttfamily \label{render_8cppm_a443df1c7176bb87b0cd75127da564c1b} 
+auto get\+\_\+determinant (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{structpoint}{point}} \&}]{a}{, }\item[{const \doxymbox{\hyperlink{structpoint}{point}} \&}]{b}{, }\item[{const \doxymbox{\hyperlink{structpoint}{point}} \&}]{c}{}\end{DoxyParamCaption}) -\/$>$ int\hspace{0.3cm}{\ttfamily [export]}}
+
+
+
+Helper function that builds two edge vectors from a common origin {\ttfamily a} to compute 2D cross-\/product for triangle rasterization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First triangle vertex point (screen-\/space pixels). \\
+\hline
+{\em b} & Second triangle vertex point (screen-\/space pixels). \\
+\hline
+{\em c} & Third triangle vertex point (screen-\/space pixels).\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Determinant value 
+\end{DoxyReturn}

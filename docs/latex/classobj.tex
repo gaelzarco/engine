@@ -90,10 +90,10 @@ auto \doxymbox{\hyperlink{classobj_aa2ec83bc4e4ef053ad37a4da935c747e}{memory\+\_
 \doxysubsection{Detailed Description}
 Represents a parsed Wavefront OBJ file. 
 
-Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-\/performance parser using {\ttfamily std::\+from\+\_\+chars} for zero-\/allocation numeric conversion.
+Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-\/performance parser using {\ttfamily std::\+from\+\_\+chars}.
 
 \begin{DoxyNote}{Note}
-Exported from C++23 module {\ttfamily obj\+\_\+v0\+\_\+3}.
+Exported from C++23 module {\ttfamily obj}.
 \end{DoxyNote}
 \begin{DoxyParagraph}{Example}
 
@@ -220,7 +220,9 @@ auto obj::\+memory\+\_\+out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})
 
 Logs the total heap memory reserved by all internal geometry containers. 
 
-Reports the sum of {\ttfamily capacity()} \texorpdfstring{$\ast$}{*} sizeof(element) across all six containers. Output is written to standard output in the form: 
+Reports the sum of {\ttfamily capacity()} \texorpdfstring{$\ast$}{*} sizeof(element) across all six containers.
+
+Output is written to standard output in the form: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{[LOG]\ Memory\ allocated:\ <bytes>\ bytes\ (\string~<MB>\ MB)}
 
@@ -266,7 +268,7 @@ auto obj::\+print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/
 
 Prints the formatted geometry to standard output. 
 
-Equivalent to {\ttfamily std::\+print}("{}\{\}"{}, \doxylink{classobj_a6dbd86e83e5564c9a471601d0269b147}{format\+\_\+output()}). \Hypertarget{classobj_a243badc3a0a0a6b3612951a03f8e4952}\index{obj@{obj}!read@{read}}
+Equivalent to {\ttfamily std::\+print}("{}\{\}"{}, format\+\_\+output()). \Hypertarget{classobj_a243badc3a0a0a6b3612951a03f8e4952}\index{obj@{obj}!read@{read}}
 \index{read@{read}!obj@{obj}}
 \doxysubsubsection{\texorpdfstring{read()}{read()}}
 {\footnotesize\ttfamily \label{classobj_a243badc3a0a0a6b3612951a03f8e4952} 
@@ -276,7 +278,9 @@ auto obj::\+read (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{file\+
 
 Parses a Wavefront OBJ file and populates the model\textquotesingle{}s geometry data. 
 
-Reads the entire file into a buffer and performs a single-\/pass parse using {\ttfamily std::\+from\+\_\+chars} for locale-\/independent, allocation-\/free numeric conversion. Recognised keywords: {\ttfamily v}, {\ttfamily vt}, {\ttfamily vn}, {\ttfamily vp}, {\ttfamily f}, {\ttfamily l}. Comment lines ({\ttfamily \#}) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.
+Reads the entire file into a buffer and performs a single-\/pass parse using {\ttfamily std::\+from\+\_\+chars}.
+
+Recognised keywords: {\ttfamily v}, {\ttfamily vt}, {\ttfamily vn}, {\ttfamily vp}, {\ttfamily f}, {\ttfamily l}. Comment lines ({\ttfamily \#}) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.
 
 Face vertex tokens support all three OBJ index formats:
 \begin{DoxyItemize}
@@ -297,7 +301,7 @@ Face vertex tokens support all three OBJ index formats:
 \hline
 \end{DoxyExceptions}
 \begin{DoxyNote}{Note}
-Appends parsed data to any geometry already stored in the object. Call on a default-\/constructed instance to parse a single file cleanly. 
+Appends parsed data to any geometry already stored in the object. Call on a default-\/constructed instance to parse a single file. 
 \end{DoxyNote}
 \Hypertarget{classobj_a55b2f862b89c191b3ba8be8138805693}\index{obj@{obj}!texture\_coordinates@{texture\_coordinates}}
 \index{texture\_coordinates@{texture\_coordinates}!obj@{obj}}
@@ -310,7 +314,7 @@ auto obj::\+texture\+\_\+coordinates (\begin{DoxyParamCaption}{}{}\end{DoxyParam
 Returns a read-\/only reference to the texture coordinate list. 
 
 \begin{DoxyReturn}{Returns}
-Const reference to the internal {\ttfamily \doxylink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} container. 
+Const reference to internal {\ttfamily \doxylink{classobj_a126a58a72c4717b11b6a905dd7cfe4a6}{\+\_\+texture\+\_\+coordinates}} container. 
 \end{DoxyReturn}
 \Hypertarget{classobj_a774ae0a43035653196e0b6cbd43717cb}\index{obj@{obj}!texture\_coordinates@{texture\_coordinates}}
 \index{texture\_coordinates@{texture\_coordinates}!obj@{obj}}
@@ -381,4 +385,4 @@ Reference to the internal {\ttfamily \doxylink{classobj_a92955dded15b830b7a5259a
 
 The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
 \item 
-modules/\+obj/obj\+\_\+v0.\+cppm\end{DoxyCompactItemize}
+modules/\+obj/\doxymbox{\hyperlink{obj_8cppm}{obj.\+cppm}}\end{DoxyCompactItemize}

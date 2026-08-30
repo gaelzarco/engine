@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['texture_5fcoordinates_0',['texture_coordinates',['../classobj.html#a774ae0a43035653196e0b6cbd43717cb',1,'obj::texture_coordinates() noexcept -&gt; _texture_coordinates &amp;'],['../classobj.html#a55b2f862b89c191b3ba8be8138805693',1,'obj::texture_coordinates() const noexcept -&gt; const _texture_coordinates &amp;']]]
+  ['parameter_5fspace_5fvertices_0',['parameter_space_vertices',['../classobj.html#a83b4a52727211fb83e549408d8920161',1,'obj::parameter_space_vertices() noexcept -&gt; _parameter_space_vertices &amp;'],['../classobj.html#a518698b4fd482a08552e8d2d6ac8413e',1,'obj::parameter_space_vertices() const noexcept -&gt; const _parameter_space_vertices &amp;']]],
+  ['point_1',['point',['../structpoint.html',1,'']]],
+  ['point_5fin_5fbounds_2',['point_in_bounds',['../classmfb__canvas.html#a8ddead12f5008b03a4a3a2f293d240a4',1,'mfb_canvas']]],
+  ['print_3',['print',['../classobj.html#a4630138bb706c2ff2e1a4187e26c1932',1,'obj']]]
 ];

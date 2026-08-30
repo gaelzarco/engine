@@ -1,14 +1,13 @@
 /**
- * @file obj_v0_3.cppm
+ * @file obj.cppm
  * @brief C++20 module providing a parser and in-memory representation for the
  * Wavefront OBJ format.
- * @version 0.3
  */
 module;
 
 import std;
 
-export module obj_v0;
+export module obj;
 
 /**
  * @class obj
@@ -19,7 +18,7 @@ export module obj_v0;
  * faces, and lines. Provides a high-performance parser using @c
  * std::from_chars.
  *
- * @note Exported from C++23 module @c obj_v0_3.
+ * @note Exported from C++23 module @c obj.
  *
  * @par Example
  * @code

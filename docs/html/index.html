@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CXX23 GAME ENGINE: CXX23 Game Engine</title>
+<title>CXX23_renderer: C++23 3D Renderer</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">CXX23 GAME ENGINE
+   <div id="projectname">CXX23_renderer
    </div>
   </td>
  </tr>
@@ -108,28 +108,57 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">CXX23 Game Engine </div></div>
+  <div class="headertitle"><div class="title">C++23 3D Renderer </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="intro"></a>
 Overview</h1>
-<p>A lightweight C++23 software rasterizer built to view .OBJ models.</p>
+<p>A C++23 3D renderer built with MiniFB as single dependency. Targets Unix environments.</p>
+<h1 class="doxsection"><a class="anchor" id="features"></a>
+Features</h1>
+<ul>
+<li>Window rendering with <a href="https://github.com/nicowillis/minifb">MiniFB</a></li>
+<li>OBJ file parser built from scratch via named module (<span class="tt">import <a class="el" href="classobj.html" title="Represents a parsed Wavefront OBJ file.">obj</a></span>)</li>
+<li>3D rendering pipeline built from scratch via named module (<span class="tt">import render</span>)</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="requirements"></a>
+Requirements</h1>
+<ul>
+<li>C++23</li>
+<li>Clang 22+</li>
+<li>CMake 3.30+</li>
+<li>Ninja</li>
+</ul>
 <h1 class="doxsection"><a class="anchor" id="modules"></a>
 Modules</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Module  </th><th class="markdownTableHeadNone">Description  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><code>obj_v0_3</code>  </td><td class="markdownTableBodyNone">Wavefront OBJ parser and in-memory representation  </td></tr>
+<td class="markdownTableBodyNone"><code>obj</code>  </td><td class="markdownTableBodyNone">Wavefront OBJ parser and representation built from scratch  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><code>render_v0</code>  </td><td class="markdownTableBodyNone">2D Bresenham line rasterizer  </td></tr>
+<td class="markdownTableBodyNone"><code>render</code>  </td><td class="markdownTableBodyNone">3D rendering pipeline built from scratch  </td></tr>
 </table>
+<h1 class="doxsection"><a class="anchor" id="build"></a>
+Building</h1>
+<p>Requires Clang 22+ and CMake 3.30+ with Ninja. </p><div class="fragment"><div class="line">cmake -B build -G Ninja</div>
+<div class="line">ln -sf build/compile_commands.json .</div>
+<div class="line">cmake --build build</div>
+</div><!-- fragment --><p> Or run <span class="tt">chmod +x ./build.sh</span> on root directory, then <span class="tt">./build.sh</span></p>
 <h1 class="doxsection"><a class="anchor" id="usage"></a>
 Usage</h1>
-<div class="fragment"><div class="line">./rasterizer &lt;path/to/model.obj&gt;</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="build"></a>
-Building</h1>
-<div class="fragment"><div class="line">cmake -B build &amp;&amp; cmake --build build</div>
+<div class="fragment"><div class="line">./build/renderer ./assets/&lt;asset&gt;</div>
+</div><!-- fragment --><p>Or programmatically: </p><div class="fragment"><div class="line">obj_ model;</div>
+<div class="line">model.read(<span class="stringliteral">&quot;./assets/&lt;asset&gt;&quot;</span>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">const</span> std::size_t WIDTH = 1920;</div>
+<div class="line"><span class="keyword">const</span> std::size_t HEIGHT = 1080;</div>
+<div class="line"><span class="keyword">const</span> std::vector&lt;std::uint32_t&gt; buffer(<span class="keyword">static_cast&lt;</span>std::size_t<span class="keyword">&gt;</span>(WIDTH * </div>
+<div class="line">HEIGHT)};</div>
+<div class="line"> </div>
+<div class="line"><a class="code hl_class" href="classmfb__canvas.html">mfb_canvas</a> canvas(WIDTH, HEIGHT, buffer);</div>
+<div class="line"><a class="code hl_class" href="classmfb__canvas.html">mfb_canvas</a>.render(model);</div>
+<div class="ttc" id="aclassmfb__canvas_html"><div class="ttname"><a href="classmfb__canvas.html">mfb_canvas</a></div><div class="ttdef"><b>Definition</b> render.cppm:79</div></div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

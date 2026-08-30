@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cxx23_20game_20engine_0',['CXX23 Game Engine',['../index.html',1,'']]]
+  ['3d_20renderer_0',['C++23 3D Renderer',['../index.html',1,'']]]
 ];

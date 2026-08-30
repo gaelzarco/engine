@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.18.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>CXX23 GAME ENGINE: obj Class Reference</title>
+<title>CXX23_renderer: obj Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="codefolding.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">CXX23 GAME ENGINE
+   <div id="projectname">CXX23_renderer
    </div>
   </td>
  </tr>
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('classobj.html'
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">obj Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__obj__v0.html">obj_v0</a></div></div></div>
+  <div class="headertitle"><div class="title">obj Class Reference<span class="mlabels"><span class="mlabel export">export</span></span><div class="ingroups">module <a class="el" href="module__obj.html">obj</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -197,16 +197,16 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a parsed Wavefront OBJ file. </p>
-<p>Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-performance parser using <code>std::from_chars</code> for zero-allocation numeric conversion.</p>
-<dl class="section note"><dt>Note</dt><dd>Exported from C++23 module <code>obj_v0_3</code>.</dd></dl>
+<p>Stores all geometric data defined by the OBJ specification, including vertices, texture coordinates, vertex normals, parameter space vertices, faces, and lines. Provides a high-performance parser using <code>std::from_chars</code>.</p>
+<dl class="section note"><dt>Note</dt><dd>Exported from C++23 module <code>obj</code>.</dd></dl>
 <dl class="section user"><dt>Example</dt><dd><div class="fragment"><div class="line"><a class="code hl_function" href="#a03c3704a351856bc5ed8afb066107e3e">obj</a> model;</div>
 <div class="line">model.<a class="code hl_function" href="#a243badc3a0a0a6b3612951a03f8e4952">read</a>(<span class="stringliteral">&quot;mesh.obj&quot;</span>);</div>
 <div class="line">model.<a class="code hl_function" href="#a4630138bb706c2ff2e1a4187e26c1932">print</a>();</div>
 <div class="line">model.<a class="code hl_function" href="#aa2ec83bc4e4ef053ad37a4da935c747e">memory_out</a>();</div>
-<div class="ttc" id="aclassobj_html_a03c3704a351856bc5ed8afb066107e3e"><div class="ttname"><a href="#a03c3704a351856bc5ed8afb066107e3e">obj::obj</a></div><div class="ttdeci">obj(_vertices v={}, _texture_coordinates vt={}, _vertex_normals vn={}, _parameter_space_vertices vp={}, _faces f={}, _lines l={})</div><div class="ttdoc">Constructs an obj with optionally pre-populated geometry data.</div><div class="ttdef"><b>Definition</b> obj_v0.cppm:117</div></div>
-<div class="ttc" id="aclassobj_html_a243badc3a0a0a6b3612951a03f8e4952"><div class="ttname"><a href="#a243badc3a0a0a6b3612951a03f8e4952">obj::read</a></div><div class="ttdeci">auto read(const std::string &amp;file_name) -&gt; void</div><div class="ttdoc">Parses a Wavefront OBJ file and populates the model&#39;s geometry data.</div><div class="ttdef"><b>Definition</b> obj_v0.cppm:259</div></div>
-<div class="ttc" id="aclassobj_html_a4630138bb706c2ff2e1a4187e26c1932"><div class="ttname"><a href="#a4630138bb706c2ff2e1a4187e26c1932">obj::print</a></div><div class="ttdeci">auto print() const -&gt; void</div><div class="ttdoc">Prints the formatted geometry to standard output.</div><div class="ttdef"><b>Definition</b> obj_v0.cppm:411</div></div>
-<div class="ttc" id="aclassobj_html_aa2ec83bc4e4ef053ad37a4da935c747e"><div class="ttname"><a href="#aa2ec83bc4e4ef053ad37a4da935c747e">obj::memory_out</a></div><div class="ttdeci">auto memory_out() const -&gt; void</div><div class="ttdoc">Logs the total heap memory reserved by all internal geometry containers.</div><div class="ttdef"><b>Definition</b> obj_v0.cppm:414</div></div>
+<div class="ttc" id="aclassobj_html_a03c3704a351856bc5ed8afb066107e3e"><div class="ttname"><a href="#a03c3704a351856bc5ed8afb066107e3e">obj::obj</a></div><div class="ttdeci">obj(_vertices v={}, _texture_coordinates vt={}, _vertex_normals vn={}, _parameter_space_vertices vp={}, _faces f={}, _lines l={})</div><div class="ttdoc">Constructs an obj with optionally pre-populated geometry data.</div><div class="ttdef"><b>Definition</b> obj.cppm:118</div></div>
+<div class="ttc" id="aclassobj_html_a243badc3a0a0a6b3612951a03f8e4952"><div class="ttname"><a href="#a243badc3a0a0a6b3612951a03f8e4952">obj::read</a></div><div class="ttdeci">auto read(const std::string &amp;file_name) -&gt; void</div><div class="ttdoc">Parses a Wavefront OBJ file and populates the model&#39;s geometry data.</div><div class="ttdef"><b>Definition</b> obj.cppm:273</div></div>
+<div class="ttc" id="aclassobj_html_a4630138bb706c2ff2e1a4187e26c1932"><div class="ttname"><a href="#a4630138bb706c2ff2e1a4187e26c1932">obj::print</a></div><div class="ttdeci">auto print() const -&gt; void</div><div class="ttdoc">Prints the formatted geometry to standard output.</div><div class="ttdef"><b>Definition</b> obj.cppm:443</div></div>
+<div class="ttc" id="aclassobj_html_aa2ec83bc4e4ef053ad37a4da935c747e"><div class="ttname"><a href="#aa2ec83bc4e4ef053ad37a4da935c747e">obj::memory_out</a></div><div class="ttdeci">auto memory_out() const -&gt; void</div><div class="ttdoc">Logs the total heap memory reserved by all internal geometry containers.</div><div class="ttdef"><b>Definition</b> obj.cppm:446</div></div>
 </div><!-- fragment --> </dd></dl>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a03c3704a351856bc5ed8afb066107e3e" name="a03c3704a351856bc5ed8afb066107e3e"></a>
@@ -430,7 +430,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Logs the total heap memory reserved by all internal geometry containers. </p>
-<p>Reports the sum of <code>capacity()</code> * sizeof(element) across all six containers. Output is written to standard output in the form: </p><div class="fragment"><div class="line">[LOG] Memory allocated: &lt;bytes&gt; bytes (~&lt;MB&gt; MB)</div>
+<p>Reports the sum of <code>capacity()</code> * sizeof(element) across all six containers.</p>
+<p>Output is written to standard output in the form: </p><div class="fragment"><div class="line">[LOG] Memory allocated: &lt;bytes&gt; bytes (~&lt;MB&gt; MB)</div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>Reports reserved (capacity) memory, not the memory occupied by currently stored elements (size). Values may therefore exceed the memory strictly required to hold the parsed geometry. </dd></dl>
 
 </div>
@@ -507,7 +508,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Prints the formatted geometry to standard output. </p>
-<p>Equivalent to <code>std::print</code>("{}", <a class="el" href="#a6dbd86e83e5564c9a471601d0269b147" title="Formats all stored geometry as a human-readable string.">format_output()</a>). </p>
+<p>Equivalent to <code>std::print</code>("{}", format_output()). </p>
 
 </div>
 </div>
@@ -527,7 +528,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Parses a Wavefront OBJ file and populates the model's geometry data. </p>
-<p>Reads the entire file into a buffer and performs a single-pass parse using <code>std::from_chars</code> for locale-independent, allocation-free numeric conversion. Recognised keywords: <code>v</code>, <code>vt</code>, <code>vn</code>, <code>vp</code>, <code>f</code>, <code>l</code>. Comment lines (<code>#</code>) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.</p>
+<p>Reads the entire file into a buffer and performs a single-pass parse using <code>std::from_chars</code>.</p>
+<p>Recognised keywords: <code>v</code>, <code>vt</code>, <code>vn</code>, <code>vp</code>, <code>f</code>, <code>l</code>. Comment lines (<code>#</code>) and blank lines are skipped. Unrecognised keywords are silently ignored and the remainder of the line is consumed.</p>
 <p>Face vertex tokens support all three OBJ index formats:</p><ul>
 <li><code>v</code> </li>
 <li><code>v/vt</code> </li>
@@ -546,7 +548,7 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section note"><dt>Note</dt><dd>Appends parsed data to any geometry already stored in the object. Call on a default-constructed instance to parse a single file cleanly. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Appends parsed data to any geometry already stored in the object. Call on a default-constructed instance to parse a single file. </dd></dl>
 
 </div>
 </div>
@@ -574,7 +576,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns a read-only reference to the texture coordinate list. </p>
-<dl class="section return"><dt>Returns</dt><dd>Const reference to the internal <code><a class="el" href="#a126a58a72c4717b11b6a905dd7cfe4a6" title="Collection of all texture coordinates in the model.">_texture_coordinates</a></code> container. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Const reference to internal <code><a class="el" href="#a126a58a72c4717b11b6a905dd7cfe4a6" title="Collection of all texture coordinates in the model.">_texture_coordinates</a></code> container. </dd></dl>
 
 </div>
 </div>
@@ -719,7 +721,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>modules/obj/<a class="el" href="obj__v0_8cppm_source.html">obj_v0.cppm</a></li>
+<li>modules/obj/<a class="el" href="obj_8cppm_source.html">obj.cppm</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

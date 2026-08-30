@@ -24,11 +24,8 @@
 */
 var NAVTREE =
 [
-  [ "CXX23 GAME ENGINE", "index.html", [
-    [ "Overview", "index.html#intro", null ],
-    [ "Modules", "index.html#modules", null ],
-    [ "Usage", "index.html#usage", null ],
-    [ "Building", "index.html#build", null ],
+  [ "CXX23_renderer", "index.html", [
+    [ "C++23 3D Renderer", "index.html", "index" ],
     [ "Modules", "modules.html", [
       [ "Modules List", "modules.html", "modules_dup" ]
     ] ],

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['obj_0',['obj',['../classobj.html',1,'']]]
+  ['mfb_5fcanvas_0',['mfb_canvas',['../classmfb__canvas.html',1,'']]]
 ];

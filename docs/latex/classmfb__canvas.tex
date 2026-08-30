@@ -1,0 +1,132 @@
+\doxysection{mfb\+\_\+canvas Class Reference}
+\hypertarget{classmfb__canvas}{}\label{classmfb__canvas}\index{mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classmfb__canvas_a412b525d4d56c0fe33eda95955191a72}\label{classmfb__canvas_a412b525d4d56c0fe33eda95955191a72} 
+{\bfseries mfb\+\_\+canvas} (std::\+size\+\_\+t w, std::\+size\+\_\+t h, std::\+vector$<$ std::\+uint32\+\_\+t $>$ b)
+\item 
+constexpr auto \doxymbox{\hyperlink{classmfb__canvas_a8f7bbbf756e7f9db0754dc5de60f5b09}{width}} () -\/$>$ std::\+size\+\_\+t \&
+\begin{DoxyCompactList}\small\item\em Getter for width of canvas buffer. \end{DoxyCompactList}\item 
+constexpr auto \doxymbox{\hyperlink{classmfb__canvas_a52cdef75cadc4ddbbdbae07ef48a23bd}{height}} () -\/$>$ std::\+size\+\_\+t \&
+\begin{DoxyCompactList}\small\item\em Getter for height of canvas buffer. \end{DoxyCompactList}\item 
+constexpr auto \doxymbox{\hyperlink{classmfb__canvas_a47b4eb7e0945700af1696a05e6cfeace}{buffer}} () -\/$>$ std::\+vector$<$ std::\+uint32\+\_\+t $>$ \&
+\begin{DoxyCompactList}\small\item\em Getter for canvas buffer data. \end{DoxyCompactList}\item 
+constexpr auto \doxymbox{\hyperlink{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}{point\+\_\+in\+\_\+bounds}} (const int \&x, const int \&y) -\/$>$ bool
+\begin{DoxyCompactList}\small\item\em Verifies point is within bounds of canvas {\ttfamily \+\_\+width} and {\ttfamily \+\_\+height}. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmfb__canvas_a694e5b0245102334c102d3b46d42debf}{line}} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&color) -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer with bounds checking. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classmfb__canvas_a524990c8b5f2cd0b3a803f478a45c7c2}{triangle}} (\doxymbox{\hyperlink{structpoint}{point}} a, \doxymbox{\hyperlink{structpoint}{point}} b, \doxymbox{\hyperlink{structpoint}{point}} c, const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&color) -\/$>$ void
+\begin{DoxyCompactList}\small\item\em Rasterizes triangle within Mini\+FB pixel buffer using provided color and points. Utilizes bounding box algorithm to fill in triangle. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{classmfb__canvas_doc-func-members}
+\Hypertarget{classmfb__canvas_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classmfb__canvas_a47b4eb7e0945700af1696a05e6cfeace}\index{mfb\_canvas@{mfb\_canvas}!buffer@{buffer}}
+\index{buffer@{buffer}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{buffer()}{buffer()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a47b4eb7e0945700af1696a05e6cfeace} 
+auto mfb\+\_\+canvas::\+buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ std::\+vector$<$ std::\+uint32\+\_\+t $>$ \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Getter for canvas buffer data. 
+
+Reference to \+\_\+buffer \Hypertarget{classmfb__canvas_a52cdef75cadc4ddbbdbae07ef48a23bd}\index{mfb\_canvas@{mfb\_canvas}!height@{height}}
+\index{height@{height}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{height()}{height()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a52cdef75cadc4ddbbdbae07ef48a23bd} 
+auto mfb\+\_\+canvas::\+height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ std::\+size\+\_\+t \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Getter for height of canvas buffer. 
+
+\begin{DoxyReturn}{Returns}
+Reference to \+\_\+height 
+\end{DoxyReturn}
+\Hypertarget{classmfb__canvas_a694e5b0245102334c102d3b46d42debf}\index{mfb\_canvas@{mfb\_canvas}!line@{line}}
+\index{line@{line}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{line()}{line()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a694e5b0245102334c102d3b46d42debf} 
+auto mfb\+\_\+canvas::\+line (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{a}{, }\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{b}{, }\item[{const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&}]{color}{}\end{DoxyParamCaption}) -\/$>$ void}
+
+
+
+Draws an anti-\/aliasing-\/free straight line into a Mini\+FB pixel buffer with bounds checking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Start point of the line (screen-\/space pixels). \\
+\hline
+{\em b} & End point of the line (screen-\/space pixels). \\
+\hline
+{\em color} & RGB colour to paint the line with.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+{\ttfamily a} and {\ttfamily b} are taken by value; the algorithm may swap their coordinates internally without affecting the caller\textquotesingle{}s variables. 
+\end{DoxyNote}
+\Hypertarget{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}\index{mfb\_canvas@{mfb\_canvas}!point\_in\_bounds@{point\_in\_bounds}}
+\index{point\_in\_bounds@{point\_in\_bounds}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{point\_in\_bounds()}{point\_in\_bounds()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4} 
+auto mfb\+\_\+canvas::\+point\+\_\+in\+\_\+bounds (\begin{DoxyParamCaption}\item[{const int \&}]{x}{, }\item[{const int \&}]{y}{}\end{DoxyParamCaption}) -\/$>$ bool\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+Verifies point is within bounds of canvas {\ttfamily \+\_\+width} and {\ttfamily \+\_\+height}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/coordinate of point \\
+\hline
+{\em y} & Y-\/coordinate of point\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{classmfb__canvas_a524990c8b5f2cd0b3a803f478a45c7c2}\index{mfb\_canvas@{mfb\_canvas}!triangle@{triangle}}
+\index{triangle@{triangle}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{triangle()}{triangle()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a524990c8b5f2cd0b3a803f478a45c7c2} 
+auto mfb\+\_\+canvas::\+triangle (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{a}{, }\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{b}{, }\item[{\doxymbox{\hyperlink{structpoint}{point}}}]{c}{, }\item[{const \doxymbox{\hyperlink{structrgb__color}{rgb\+\_\+color}} \&}]{color}{}\end{DoxyParamCaption}) -\/$>$ void}
+
+
+
+Rasterizes triangle within Mini\+FB pixel buffer using provided color and points. Utilizes bounding box algorithm to fill in triangle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First triangle vertex point (screen-\/space pixels). \\
+\hline
+{\em b} & Second triangle vertex point (screen-\/space pixels). \\
+\hline
+{\em c} & Third triangle vertex point (screen-\/space pixels). \\
+\hline
+{\em color} & RGB color to paint the triangle.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+{\ttfamily a}, {\ttfamily b}, and {\ttfamily c} are taken by value; the algorithm may swap their coordinates internally without affecting the caller\textquotesingle{}s variables. 
+\end{DoxyNote}
+\Hypertarget{classmfb__canvas_a8f7bbbf756e7f9db0754dc5de60f5b09}\index{mfb\_canvas@{mfb\_canvas}!width@{width}}
+\index{width@{width}!mfb\_canvas@{mfb\_canvas}}
+\doxysubsubsection{\texorpdfstring{width()}{width()}}
+{\footnotesize\ttfamily \label{classmfb__canvas_a8f7bbbf756e7f9db0754dc5de60f5b09} 
+auto mfb\+\_\+canvas::\+width (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) -\/$>$ std::\+size\+\_\+t \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Getter for width of canvas buffer. 
+
+\begin{DoxyReturn}{Returns}
+Reference to \+\_\+width 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+\item 
+modules/\+render/\doxymbox{\hyperlink{render_8cppm}{render.\+cppm}}\end{DoxyCompactItemize}

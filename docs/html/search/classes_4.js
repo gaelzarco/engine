@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['obj_0',['obj',['../classobj.html',1,'']]],
-  ['obj_5f_1',['obj_',['../classobj__.html',1,'']]]
+  ['rgb_5fcolor_0',['rgb_color',['../structrgb__color.html',1,'']]]
 ];

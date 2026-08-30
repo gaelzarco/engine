@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['parameter_5fspace_5fvertices_0',['parameter_space_vertices',['../classobj.html#a83b4a52727211fb83e549408d8920161',1,'obj::parameter_space_vertices() noexcept -&gt; _parameter_space_vertices &amp;'],['../classobj.html#a518698b4fd482a08552e8d2d6ac8413e',1,'obj::parameter_space_vertices() const noexcept -&gt; const _parameter_space_vertices &amp;']]],
-  ['print_1',['print',['../classobj.html#a4630138bb706c2ff2e1a4187e26c1932',1,'obj']]]
+  ['line_0',['line',['../classmfb__canvas.html#a694e5b0245102334c102d3b46d42debf',1,'mfb_canvas']]],
+  ['lines_1',['lines',['../classobj.html#a2f171c463dce333ada0431dfe1058961',1,'obj::lines() noexcept -&gt; _lines &amp;'],['../classobj.html#add5036c5cd685e15a6281c57993ed338',1,'obj::lines() const noexcept -&gt; const _lines &amp;']]]
 ];

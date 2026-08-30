@@ -1,17 +1,19 @@
 /**
- * @file render_v0.cppm
+ * @file render.cppm
  * @brief C++23 module providing primitive 2D rendering utilities for a MiniFB
  * pixel buffer.
- * @version 0.0
  */
 
 module;
+
 #include "../minifb/include/MiniFB_cpp.h"
 #include <algorithm>
 #include <print>
-export module render_v0;
 
 import std;
+
+export module render;
+
 
 /**
  * @struct rgb_color
@@ -54,7 +56,7 @@ export struct rgb_color {
  */
 export struct point { int x, y{}; };
 
-/*
+/**
  * @brief Helper function that builds two edge vectors from a common origin @c
  * a to compute 2D cross-product for triangle rasterization.
  *

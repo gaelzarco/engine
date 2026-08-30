@@ -1,0 +1,139 @@
+\doxysection{render.\+cppm}
+\hypertarget{render_8cppm_source}{}\label{render_8cppm_source}\index{modules/render/render.cppm@{modules/render/render.cppm}}
+\doxymbox{\hyperlink{render_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{module};}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}../minifb/include/MiniFB\_cpp.h"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <print>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{import}\ std;}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{export}\ \textcolor{keyword}{module}\ \doxymbox{\hyperlink{module__render}{render}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }rgb\_color\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{using\ }color\_t\ =\ uint8\_t;}
+\DoxyCodeLine{00034\ \ \ \ \ rgb\_color(color\_t\ r\ =\ 0,\ color\_t\ g\ =\ 0,\ color\_t\ b\ =\ 0)\ :\ \_r(r),\ \_g(g),}
+\DoxyCodeLine{00035\ \ \ \ \ \_b(b)\ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (r\ ==\ 0\ \&\&\ g\ ==\ 0\ \&\ b\ ==\ 0)\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ std::random\_device\ rd;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ std::mt19937\ rng(rd());}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ std::uniform\_int\_distribution<int>\ rgb\_rng(0,\ 255);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \_r\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \_g\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \_b\ =\ rgb\_rng(rng);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ color\_t\ \_r;}
+\DoxyCodeLine{00047\ \ \ \ \ color\_t\ \_g;}
+\DoxyCodeLine{00048\ \ \ \ \ color\_t\ \_b;}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structpoint}{point}}\ \{\ \textcolor{keywordtype}{int}\ x,\ y\{\};\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{export}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ a,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ b,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\&\ c)\ -\/>}
+\DoxyCodeLine{00070\ int\ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ ab\ =\ \{b.x\ -\/\ a.x,\ b.y\ -\/\ a.y\};}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ ac\ =\ \{c.x\ -\/\ a.x,\ c.y\ -\/\ a.y\};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ result\ =\ ab.y\ *\ ac.x\ -\/\ ab.x\ *\ ac.y;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{export}\ \textcolor{keyword}{class\ }mfb\_canvas\ \{}
+\DoxyCodeLine{00080\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00081\ \ \ \ \ mfb\_canvas(std::size\_t\ w,\ std::size\_t\ h,\ std::vector<std::uint32\_t>\ b)\ :}
+\DoxyCodeLine{00082\ \ \ \ \ \_width(std::move(w)),\ \_height(std::move(h)),\ \_buffer(std::move(b))\ \{\}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a8f7bbbf756e7f9db0754dc5de60f5b09}{width}}()\ -\/>\ std::size\_t\&\ \{\ \textcolor{keywordflow}{return}\ \_width;\ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a52cdef75cadc4ddbbdbae07ef48a23bd}{height}}()\ -\/>\ std::size\_t\&\ \{\ \textcolor{keywordflow}{return}\ \_height;\ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a47b4eb7e0945700af1696a05e6cfeace}{buffer}}()\ -\/>\ std::vector<std::uint32\_t>\&\ \{\ \textcolor{keywordflow}{return}\ \_buffer;\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}{point\_in\_bounds}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ y)\ -\/>\ bool;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a694e5b0245102334c102d3b46d42debf}{line}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color)\ -\/>\ void;}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a524990c8b5f2cd0b3a803f478a45c7c2}{triangle}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ \doxymbox{\hyperlink{structpoint}{point}}\ c,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color)\ -\/>\ void;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00138\ \ \ \ \ std::size\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_width;}
+\DoxyCodeLine{00139\ \ \ \ \ std::size\_t\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_height;}
+\DoxyCodeLine{00140\ \ \ \ \ std::vector<std::uint32\_t>\ \_buffer;}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}{mfb\_canvas::point\_in\_bounds}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ x,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\&\ y)\ -\/>\ \textcolor{keywordtype}{bool}\ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordflow}{return}\ x\ >=\ 0\ \&\&\ y\ >=\ 0\ \&\&\ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(x)\ <\ \_width\ \&\&}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(y)\ <\ \_height;}
+\DoxyCodeLine{00146\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a694e5b0245102334c102d3b46d42debf}{mfb\_canvas::line}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color)\ -\/>\ \textcolor{keywordtype}{void}\ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ steep\ =\ std::abs(a.x\ -\/\ b.x)\ <\ std::abs(a.y\ -\/\ b.y);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{if}\ (steep)\ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ std::swap(a.x,\ a.y);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ std::swap(b.x,\ b.y);}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordflow}{if}\ (a.x\ >\ b.x)\ std::swap(a,\ b);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{int}\ y\ =\ a.y;}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{int}\ err\ =\ 0;}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ x\{a.x\};\ x\ <=\ b.x;\ x++)\ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ col\ =\ steep\ ?\ y\ :\ x;}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ row\ =\ steep\ ?\ x\ :\ y;}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}{point\_in\_bounds}}(col,\ row))\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ std::println(\textcolor{stringliteral}{"{}[LOG]\ skipped\ point\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \_buffer[\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(row)\ *\ \_width\ +}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(col)]\ =\ MFB\_RGB(color.\_r,}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ color.\_g,\ color.\_b);}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ err\ +=\ 2\ *\ std::abs(b.y\ -\/\ a.y);}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (err\ >\ b.x\ -\/\ a.x)\ \{}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ y\ +=\ b.y\ >\ a.y\ ?\ 1\ :\ -\/1;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ err\ -\/=\ 2\ *\ (b.x\ -\/\ a.x);}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+\DoxyCodeLine{00179\ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classmfb__canvas_a524990c8b5f2cd0b3a803f478a45c7c2}{mfb\_canvas::triangle}}(\doxymbox{\hyperlink{structpoint}{point}}\ a,\ \doxymbox{\hyperlink{structpoint}{point}}\ b,\ \doxymbox{\hyperlink{structpoint}{point}}\ c,\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structrgb__color}{rgb\_color}}\&\ color)\ -\/>}
+\DoxyCodeLine{00182\ void\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(a,\ b,\ c)\ ==\ 0)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(a,\ b,\ c)\ <\ 0)\ std::swap(b,\ c);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{comment}{//\ Create\ triangle\ bounding\ box}}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ xmin\ =\ std::min(\{a.x,\ b.x,\ c.x\});}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ymin\ =\ std::min(\{a.y,\ b.y,\ c.y\});}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ xmax\ =\ std::max(\{a.x,\ b.x,\ c.x\});}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ ymax\ =\ std::max(\{a.y,\ b.y,\ c.y\});}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ y\{ymin\};\ y\ <=\ ymax;\ ++y)\ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ x\{xmin\};\ x\ <=\ xmax;\ ++x)\ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classmfb__canvas_a8ddead12f5008b03a4a3a2f293d240a4}{point\_in\_bounds}}(x,\ y))\ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structpoint}{point}}\ p\{x,\ y\};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_a\ =\ \doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(b,\ c,\ p);}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_b\ =\ \doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(c,\ a,\ p);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ bounds\_c\ =\ \doxymbox{\hyperlink{render_8cppm_a443df1c7176bb87b0cd75127da564c1b}{get\_determinant}}(a,\ b,\ p);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (bounds\_a\ >=\ 0\ \&\&\ bounds\_b\ >=\ 0\ \&\&\ bounds\_c\ >=\ 0)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \_buffer[\textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(y)\ *\ \_width\ +}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}std::size\_t\textcolor{keyword}{>}(x)]\ =\ MFB\_RGB(color.\_r,\ color.\_g,}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ color.\_b);}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+\DoxyCodeLine{00210\ \}}
+
+\end{DoxyCode}

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['vertex_5fnormals_0',['vertex_normals',['../classobj.html#a923d0daff44ddeac530ef42a9ab2771a',1,'obj::vertex_normals() noexcept -&gt; _vertex_normals &amp;'],['../classobj.html#a7d413ad603cbe28e309551e84852a493',1,'obj::vertex_normals() const noexcept -&gt; const _vertex_normals &amp;']]],
-  ['vertices_1',['vertices',['../classobj.html#a708bc8a07323962b0d5e6434d956d6de',1,'obj::vertices() noexcept -&gt; _vertices &amp;'],['../classobj.html#abcbdb1a4838b6b51c411c0d02ecf56cb',1,'obj::vertices() const noexcept -&gt; const _vertices &amp;']]]
+  ['parameter_5fspace_5fvertices_0',['parameter_space_vertices',['../classobj.html#a83b4a52727211fb83e549408d8920161',1,'obj::parameter_space_vertices() noexcept -&gt; _parameter_space_vertices &amp;'],['../classobj.html#a518698b4fd482a08552e8d2d6ac8413e',1,'obj::parameter_space_vertices() const noexcept -&gt; const _parameter_space_vertices &amp;']]],
+  ['point_5fin_5fbounds_1',['point_in_bounds',['../classmfb__canvas.html#a8ddead12f5008b03a4a3a2f293d240a4',1,'mfb_canvas']]],
+  ['print_2',['print',['../classobj.html#a4630138bb706c2ff2e1a4187e26c1932',1,'obj']]]
 ];

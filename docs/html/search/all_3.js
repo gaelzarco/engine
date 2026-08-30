@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['engine_0',['CXX23 Game Engine',['../index.html',1,'']]]
+  ['buffer_0',['buffer',['../classmfb__canvas.html#a47b4eb7e0945700af1696a05e6cfeace',1,'mfb_canvas']]],
+  ['building_1',['Building',['../index.html#build',1,'']]]
 ];

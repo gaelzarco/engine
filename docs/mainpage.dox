@@ -1,23 +1,52 @@
 /**
- * @mainpage CXX23 Game Engine
+ * @mainpage C++23 3D Renderer
  *
  * @section intro Overview
- * A lightweight C++23 software rasterizer built to view .OBJ models.
+ * A C++23 3D renderer built with MiniFB as single dependency. Targets Unix
+ * environments.
+ * 
+ * @section features Features
+ * - Window rendering with [MiniFB](https://github.com/nicowillis/minifb)
+ * - OBJ file parser built from scratch via named module (`import obj`) 
+ * - 3D rendering pipeline built from scratch via named module (`import render`)
+ * 
+ * @section requirements Requirements
+ * - C++23
+ * - Clang 22+
+ * - CMake 3.30+
+ * - Ninja
  *
  * @section modules Modules
- * | Module        | Description                                      |
- * |---------------|--------------------------------------------------|
- * | @c obj_v0_3   | Wavefront OBJ parser and in-memory representation |
- * | @c render_v0  | 2D Bresenham line rasterizer                     |
+ * | Module        | Description                                                  |
+ * |---------------|--------------------------------------------------------------|
+ * | @c obj        | Wavefront OBJ parser and representation built from scratch   |
+ * | @c render     | 3D rendering pipeline built from scratch                     |
+ * 
+ * @section build Building
+ * Requires Clang 22+ and CMake 3.30+ with Ninja.
+ * @code
+ * cmake -B build -G Ninja
+ * ln -sf build/compile_commands.json .
+ * cmake --build build
+ * @endcode
+ * Or run `chmod +x ./build.sh` on root directory, then `./build.sh`
  *
  * @section usage Usage
  * @code
- * ./rasterizer <path/to/model.obj>
+ * ./build/renderer ./assets/<asset>
  * @endcode
  *
- * @section build Building
+ * Or programmatically:
  * @code
- * cmake -B build && cmake --build build
+ * obj_ model;
+ * model.read("./assets/<asset>");
+ * 
+ * const std::size_t WIDTH = 1920;
+ * const std::size_t HEIGHT = 1080;
+ * const std::vector<std::uint32_t> buffer(static_cast<std::size_t>(WIDTH * 
+ * HEIGHT)};
+ * 
+ * mfb_canvas canvas(WIDTH, HEIGHT, buffer);
+ * mfb_canvas.render(model);
  * @endcode
- *
  */
